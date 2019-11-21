@@ -1,0 +1,10 @@
+parameters:
+    env(SENTRY_DSN): null
+
+sentry:
+    dsn: "%env(SENTRY_DSN)%"
+    options:
+        environment: '%kernel.environment%'
+        excluded_exceptions:
+            - 'Symfony\Component\HttpKernel\Exception\HttpExceptionInterface'
+            - 'Symfony\Component\Security\Core\Exception\AccessDeniedException'

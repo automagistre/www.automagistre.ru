@@ -1,0 +1,28 @@
+framework:
+    secret:          "%env(APP_SECRET)%"
+    form:            ~
+    csrf_protection: ~
+    trusted_hosts:   ~
+    session:
+        handler_id: session.handler.memcached
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: '%kernel.debug%'
+
+services:
+    session.memcached:
+        class: Memcached
+        public: true
+        calls:
+            - [ addServer, [ '%env(SESSION_MEMCACHED_HOST)%', '%env(SESSION_MEMCACHED_PORT)%' ]]
+    session.handler.memcached:
+        class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
+        arguments: [ '@session.memcached' ]
+
+parameters:
+    env(APP_SECRET): '%env(file:APP_SECRET_FILE)%%'
+    env(APP_SECRET_FILE): /run/secrets/app_secret
+    env(SESSION_MEMCACHED_HOST): 'memcached'
+    env(SESSION_MEMCACHED_PORT): '11211'

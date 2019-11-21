@@ -1,0 +1,18 @@
+parameters:
+    locale: ru
+
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src'
+    App\Controller\:
+        resource: '../src/Controller'
+        tags:
+            - { name: controller.service_arguments }
+
+    App\Router\ListeningRouterDecorator:
+        decorates: router

@@ -1,0 +1,157 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+clone:
+    depth: 1
+
+steps:
+    -   name: build base
+        image: docker:19.03.5
+        volumes:
+            -   name: docker.sock
+                path: /var/run/docker.sock
+        commands:
+            - docker build -t "automagistre/www-app:base" --target base .
+
+    -   name: push base
+        image: docker:19.03.5
+        volumes:
+            -   name: docker.sock
+                path: /var/run/docker.sock
+        commands:
+            - docker login --username "$USERNAME" --password "$PASSWORD"
+            - docker push automagistre/www-app:base
+        environment:
+            USERNAME:
+                from_secret: HUB_USER
+            PASSWORD:
+                from_secret: HUB_TOKEN
+        when:
+            branch: [ master ]
+        depends_on:
+            - build base
+
+    -   name: install
+        image: automagistre/www-app:base
+        commands:
+            - composer install --no-interaction --no-progress --classmap-authoritative
+        environment:
+            APP_ENV: test
+            APP_DEBUG: '1'
+        depends_on:
+            - build base
+
+    -   name: php-cs-fixer
+        image: automagistre/www-app:base
+        commands:
+            - vendor/bin/php-cs-fixer fix --dry-run --diff-format udiff --using-cache=no
+        when:
+            branch:
+                exclude: [ master ]
+        depends_on:
+            - install
+
+    -   name: blank end line
+        image: automagistre/www-app:base
+        commands:
+            - >-
+                find .
+                -not -path "./public/*"
+                -not -path "./.idea/*"
+                -not -path "./var/*"
+                -not -path "./vendor/*"
+                -type f -exec grep -Iq . {} \; -and -print0
+                | xargs -0 -L1 bash -c 'test -z "$(tail -c 1 "$0")"
+                || (echo "No new line at end of $0" && exit 1)'
+                || exit 1
+        when:
+            branch:
+                exclude: [ master ]
+        depends_on:
+            - install
+
+    -   name:  symfony requirements
+        image: automagistre/www-app:base
+        commands:
+            - vendor/bin/requirements-checker
+        when:
+            branch:
+                exclude: [ master ]
+        depends_on:
+            - install
+
+    -   name:  symfony security
+        image: automagistre/www-app:base
+        commands:
+            - vendor/bin/security-checker security:check $APP_DIR/composer.lock
+        when:
+            branch:
+                exclude: [ master ]
+        depends_on:
+            - install
+
+    -   name:  phpstan
+        image: automagistre/www-app:base
+        commands:
+            - vendor/bin/phpstan analyse --configuration phpstan.neon --no-progress --memory-limit=-1
+        depends_on:
+            - install
+
+    -   name:  psalm
+        image: automagistre/app:base
+        commands:
+            - vendor/bin/psalm --show-info=false --no-progress
+        when:
+            event: [ push ]
+        depends_on:
+            - install
+
+    -   name:  phpunit
+        image: automagistre/www-app:base
+        commands:
+            - vendor/bin/paratest --processes=$(grep -c ^processor /proc/cpuinfo || 4)
+        environment:
+            MYSQL_PASSWORD: 'db'
+        depends_on:
+            - install
+
+    -   name: build
+        image: docker:19.03.5
+        volumes:
+            -   name: docker.sock
+                path: /var/run/docker.sock
+        commands:
+            - >-
+                docker build -t "automagistre/www-app:${DRONE_BUILD_NUMBER}"
+                --build-arg APP_ENV="prod"
+                --build-arg APP_DEBUG="0"
+                --target app
+                .
+            - >-
+                docker build -t "automagistre/www-nginx:${DRONE_BUILD_NUMBER}"
+                --build-arg APP_ENV="prod"
+                --build-arg APP_DEBUG="0"
+                --target nginx
+                .
+        depends_on:
+            - build base
+
+    -   name: deploy
+        image: docker/compose:1.25.0-alpine
+        volumes:
+            -   name: docker.sock
+                path: /var/run/docker.sock
+        commands:
+            - docker-compose --file docker-compose.prod.yml config | docker stack deploy --prune --with-registry-auth --compose-file - www
+        when:
+            branch: [ master ]
+        depends_on:
+            - build
+            - phpunit
+
+volumes:
+    -   name: docker.sock
+        host:
+            path: /var/run/docker.sock

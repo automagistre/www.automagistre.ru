@@ -1,0 +1,19 @@
+# git
+.git
+
+# Symfony
+var
+public/bundles
+.env
+.env.*
+
+# Composer
+vendor
+
+# Node
+/node_modules
+/public/assets
+
+# Docker
+docker-compose.*
+Dockerfile

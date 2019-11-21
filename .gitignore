@@ -1,0 +1,16 @@
+# Dev
+/.idea/
+/docker-compose.override.yml
+/config/routes/dev/test.yaml
+/src/Command/TestCommand.php
+/src/Controller/TestController.php
+/templates/test.html.twig
+
+# Symfony
+.env
+/var/
+/vendor/
+
+# Node
+/node_modules
+/public/assets

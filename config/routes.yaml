@@ -1,0 +1,28 @@
+_service:
+    resource: '../src/Controller/Service'
+    type: annotation
+    prefix: /service/{brand}
+    requirements:
+        brand: "nissan|toyota|infinity|lexus"
+
+_shop:
+    resource: '../src/Controller/Shop'
+    type: annotation
+    name_prefix: shop_
+    prefix: /shop
+
+_blog:
+    resource: '../src/Controller/BlogController.php'
+    type: annotation
+    name_prefix: blog_
+    prefix: /blog
+
+_garage:
+    resource: '../src/Controller/GarageController.php'
+    type: annotation
+    name_prefix: garage_
+    prefix: /garage
+
+_switcher:
+    resource: '../src/Controller/SwitchController.php'
+    type: annotation
