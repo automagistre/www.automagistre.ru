@@ -47,7 +47,7 @@ services:
     memcached:
         image: memcached:1.5.20-alpine
         networks:
-            - automagistre
+            - www
         healthcheck:
             test: nc -z 127.0.0.1 11211
             interval: 5s
