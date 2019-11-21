@@ -102,6 +102,10 @@ WORKDIR /usr/local/app/public
 
 RUN apk add --no-cache gzip curl
 
+COPY --from=app /usr/local/app/public/fonts fonts
+COPY --from=app /usr/local/app/public/images images
+COPY --from=app /usr/local/app/public/img img
+COPY --from=app /usr/local/app/public/video video
 COPY --from=node /usr/local/app/public/assets assets
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
