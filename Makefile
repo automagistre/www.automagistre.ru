@@ -25,12 +25,11 @@ define putenv
 endef
 
 init:
-	cp -n .env.dist .env || true
-	cp -n docker-compose.override.yml.dist docker-compose.override.yml || true
-	cp -n contrib/* ./ || true
-	cp -n -r contrib/* ./ || true
-	$(call putenv,UID,$(shell id -u))
-	$(call putenv,GID,$(shell id -g))
+	@cp -n .env.dist .env || true
+	@cp -n docker-compose.override.yml.dist docker-compose.override.yml || true
+	@cp -n -r contrib/* ./ || true
+	@$(call putenv,UID,$(shell id -u))
+	@$(call putenv,GID,$(shell id -g))
 
 docker-hosts-updater:
 	docker pull grachev/docker-hosts-updater
@@ -42,7 +41,7 @@ pull:
 	docker-compose pull --ignore-pull-failures
 do-up: pull composer
 	docker-compose up --detach --remove-orphans --no-build
-up: do-up permissions
+up: init do-up permissions
 	@$(notify)
 cli: app-cli
 down:
