@@ -32,7 +32,7 @@
     "jquery-viewport-checker": "^1.8.8",
     "jquery.maskedinput": "github:digitalbush/jquery.maskedinput",
     "jquery.scroolly": "0.0.3",
-    "lazysizes": "^4.0.0-rc3",
+    "lazysizes": "^5.1.2",
     "malihu-custom-scrollbar-plugin": "^3.1.5",
     "noty": "^3.2.0-beta",
     "odometer": "github:hubspot/odometer",
