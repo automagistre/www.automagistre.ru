@@ -19,7 +19,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-uglifyjs": "^0.6.2",
-    "run-sequence": "^1.1.2"
+    "run-sequence": "^2.2.1"
   },
   "dependencies": {
     "bootstrap-datepicker": "^1.7.1",
