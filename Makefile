@@ -25,8 +25,6 @@ define putenv
 endef
 
 init:
-	@cp -n .env.dist .env || true
-	@cp -n docker-compose.override.yml.dist docker-compose.override.yml || true
 	@cp -n -r contrib/* ./ || true
 	@$(call putenv,UID,$(shell id -u))
 	@$(call putenv,GID,$(shell id -g))
