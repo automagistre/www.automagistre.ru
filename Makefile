@@ -24,10 +24,8 @@ define putenv
 	@echo "$1=$2" >> .env
 endef
 
-init:
-	@cp -n -r contrib/* ./ || true
-	@$(call putenv,UID,$(shell id -u))
-	@$(call putenv,GID,$(shell id -g))
+contrib:
+	@cp -n -r contrib/.env contrib/* ./ || true
 
 docker-hosts-updater:
 	docker pull grachev/docker-hosts-updater
@@ -39,7 +37,7 @@ pull:
 	docker-compose pull --ignore-pull-failures
 do-up: pull composer
 	docker-compose up --detach --remove-orphans --no-build
-up: init do-up permissions
+up: contrib do-up permissions
 	@$(notify)
 cli: app-cli
 down:
