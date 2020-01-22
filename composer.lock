@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4c55b62e6e25e15c9ca4d0c56da8b5b5",
+    "content-hash": "872ee8ec71df1a16f4997a7b3bfef9b6",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -5950,24 +5950,23 @@
         },
         {
             "name": "composer/semver",
-            "version": "1.5.0",
+            "version": "1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e"
+                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
-                "reference": "46d9139568ccb8d9e7cdd4539cab7347568a5e2e",
+                "url": "https://api.github.com/repos/composer/semver/zipball/c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
+                "reference": "c6bea70230ef4dd483e6bbcab6005f682ed3a8de",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.5 || ^5.0.5",
-                "phpunit/phpunit-mock-objects": "2.3.0 || ^3.0"
+                "phpunit/phpunit": "^4.5 || ^5.0.5"
             },
             "type": "library",
             "extra": {
@@ -6008,7 +6007,7 @@
                 "validation",
                 "versioning"
             ],
-            "time": "2019-03-19T17:25:45+00:00"
+            "time": "2020-01-13T12:06:48+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -7902,28 +7901,28 @@
         },
         {
             "name": "psalm/plugin-phpunit",
-            "version": "0.7",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/psalm/phpunit-psalm-plugin.git",
-                "reference": "69aaf6be9f3edecf0158d08dc073f9867e890387"
+                "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/psalm/phpunit-psalm-plugin/zipball/69aaf6be9f3edecf0158d08dc073f9867e890387",
-                "reference": "69aaf6be9f3edecf0158d08dc073f9867e890387",
+                "url": "https://api.github.com/repos/psalm/phpunit-psalm-plugin/zipball/021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
+                "reference": "021eb5a8c1c735f820a6bfb93b7a63f1d1c2c012",
                 "shasum": ""
             },
             "require": {
                 "composer/semver": "^1.4",
                 "ocramius/package-versions": "^1.3",
                 "phpunit/phpunit": "^6.0 || ^7.0 || ^8.0",
-                "vimeo/psalm": "^3.2.11 || ^3.3 || dev-master"
+                "vimeo/psalm": "^3.6.2 || dev-master"
             },
             "require-dev": {
                 "codeception/base": "^2.5",
                 "squizlabs/php_codesniffer": "^3.3.1",
-                "weirdan/codeception-psalm-module": "^0.2.1"
+                "weirdan/codeception-psalm-module": "^0.2.2"
             },
             "type": "psalm-plugin",
             "extra": {
@@ -7955,7 +7954,7 @@
                 }
             ],
             "description": "Psalm plugin for PHPUnit",
-            "time": "2019-07-10T21:05:07+00:00"
+            "time": "2020-01-10T00:31:44+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
