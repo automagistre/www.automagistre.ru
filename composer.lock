@@ -3355,16 +3355,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v5.0.0",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "1a700ae25f25f1f7b2201da020184bff5a8912c0"
+                "reference": "2b3694976f02ed6a7894d8a772c9d55cee5d9677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/1a700ae25f25f1f7b2201da020184bff5a8912c0",
-                "reference": "1a700ae25f25f1f7b2201da020184bff5a8912c0",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/2b3694976f02ed6a7894d8a772c9d55cee5d9677",
+                "reference": "2b3694976f02ed6a7894d8a772c9d55cee5d9677",
                 "shasum": ""
             },
             "require": {
@@ -3426,7 +3426,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/mailer",
@@ -3801,7 +3801,7 @@
         },
         {
             "name": "symfony/polyfill-intl-icu",
-            "version": "v1.13.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-intl-icu.git",
