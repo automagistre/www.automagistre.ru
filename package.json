@@ -1,32 +1,30 @@
 {
   "name": "automagistre",
   "version": "1.0.0",
-  "description": "Project description ------------------",
-  "main": "index.js",
+  "description": "Frontend for automagisre.ru",
+  "main": "./assets/js/main.js",
+  "repository": "github:automagistre/www.automagistre.ru",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
-    "browser-sync": "^2.17.5",
+    "babel": "^6.23.0",
+    "browser-sync": "^2.26.7",
     "del": "^5.1.0",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^3.1.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-csso": "^2.0.0",
-    "gulp-htmlmin": "^4.0.0",
-    "gulp-less": "^3.1.0",
-    "gulp-notify": "^3.0.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-uglifyjs": "^0.6.2",
-    "run-sequence": "^2.2.1"
+    "jshint": "^2.10.3",
+    "run-sequence": "^2.2.1",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
   },
   "dependencies": {
+    "ajv": "^6.11.0",
     "bootstrap-datepicker": "^1.7.1",
     "fotorama": "^4.6.4",
     "gsap": "^1.19.1",
-    "gulp-rcs": "^1.1.0",
-    "jquery": "^2.2.4",
+    "jquery": "^3.4.1",
     "jquery-scrollify": "^1.0.17",
     "jquery-validation": "^1.16.0",
     "jquery-viewport-checker": "^1.8.8",
@@ -42,7 +40,7 @@
     "velocity-animate": "^1.5.0",
     "zoom.js": "github:fat/zoom.js"
   },
-  "author": "MW",
+  "author": "Sidorov Kirill",
   "license": "proprietary",
   "homepage": "----------------------------------------"
 }
