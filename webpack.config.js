@@ -46,7 +46,20 @@ module.exports = {
             exclude: /(node_modules|bower_components)/
         },{
             test: /\.css$/,
-            use: [MiniCssExtractPlugin.loader, "css-loader"]
+            use: [
+                "style-loader",
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: "css-loader",
+                    options: { sourceMap: true }
+                },{
+                    loader: "postcss-loader",
+                    options: {
+                        sourceMap: true,
+                        config: { path: 'postcss.config.js'}
+                    }
+                },
+            ]
         },{
             test: /\.less$/,
             use: [
@@ -55,6 +68,12 @@ module.exports = {
                 {
                     loader: "css-loader",
                     options: { sourceMap: true }
+                },{
+                    loader: "postcss-loader",
+                    options: {
+                        sourceMap: true,
+                        config: { path: 'assets/js/postcss.config.js'}
+                    }
                 },{
                     loader: "less-loader",
                     options: { sourceMap: true }
