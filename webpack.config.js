@@ -10,12 +10,13 @@ const PATHS = {
 };
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: NODE_ENV,
     entry: {
         main: PATHS.src + '/js/main',
-        styles: PATHS.src + 'less/main'
+        styles: PATHS.src + '/less/main'
     },
     output: {
         filename: '[name].min.js',
@@ -41,9 +42,25 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            use: 'babel-loader',
+            loader: 'babel-loader',
             exclude: /(node_modules|bower_components)/
-        },
+        },{
+            test: /\.css$/,
+            use: [MiniCssExtractPlugin.loader, "css-loader"]
+        },{
+            test: /\.less$/,
+            use: [
+                'style-loader',
+                MiniCssExtractPlugin.loader,
+                {
+                    loader: 'css-loader',
+                    options: { sourceMap: true }
+                },{
+                    loader: 'less-loader',
+                    options: { sourceMap: true }
+                }
+            ]
+        }
         ]
     },
     watch: true,
@@ -56,5 +73,8 @@ module.exports = {
         new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(NODE_ENV)
             }),
+        new MiniCssExtractPlugin({
+            filename: '[name].mini.css'
+        })
     ],
 };
