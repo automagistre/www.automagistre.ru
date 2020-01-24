@@ -1,16 +1,29 @@
 'use strict';
 
-const NODE_ENV = process.env.NODE_ENV || 'development';
-const path = require('path');
 const webpack = require('webpack');
+const path = require('path');
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const PATHS = {
+    src: path.resolve(__dirname) + '/assets',
+    dist: path.resolve(__dirname) + '/public/assets'
+};
+
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    entry: './assets/js/main.js',
     mode: NODE_ENV,
+    entry: {
+        main: PATHS.src + '/js/main',
+        styles: PATHS.src + 'less/main'
+    },
     output: {
-        filename: 'main.min.js',
-        path: path.resolve(__dirname, './public/assets')
+        filename: '[name].min.js',
+        path: PATHS.dist,
+        library: '[name]'
+    },
+    resolve: {
+        "extensions": ['.js', '.less']
     },
     optimization: {
         minimizer:[
@@ -28,9 +41,10 @@ module.exports = {
     module: {
         rules: [{
             test: /\.js$/,
-            loader: 'babel-loader',
+            use: 'babel-loader',
             exclude: /(node_modules|bower_components)/
-        }]
+        },
+        ]
     },
     watch: true,
     watchOptions: {
@@ -41,6 +55,6 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
                 NODE_ENV: JSON.stringify(NODE_ENV)
-            })
+            }),
     ],
 };
