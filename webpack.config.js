@@ -5,8 +5,8 @@ const path = require("path");
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PATHS = {
-    src: path.resolve(__dirname) + "/assets",
-    dist: path.resolve(__dirname) + "/public/assets"
+    src: path.resolve(__dirname) + "/assets/",
+    dist: path.resolve(__dirname) + "/public/assets/"
 };
 
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -19,7 +19,7 @@ module.exports = {
         styles: PATHS.src + "/less/main"
     },
     output: {
-        filename: "[name].min.js",
+        filename: "[name].min.[ext]",
         path: PATHS.dist,
         library: "[name]"
     },
@@ -64,23 +64,30 @@ module.exports = {
             test: /\.less$/,
             use: [
                 "style-loader",
-                MiniCssExtractPlugin.loader,
                 {
+                    loader: MiniCssExtractPlugin.loader,
+
+                },{
                     loader: "css-loader",
                     options: { sourceMap: true }
                 },{
                     loader: "postcss-loader",
                     options: {
                         sourceMap: true,
-                        config: { path: 'assets/js/postcss.config.js'}
+                        config: { path: 'postcss.config.js'}
                     }
                 },{
                     loader: "less-loader",
-                    options: { sourceMap: true }
+                    options: { sourceMap: true, relativeUrls: true }
                 }
             ]
-        }
-        ]
+        },{
+            test: /\.(png|jpg|gif|svg)$/,
+            loader: "file-loader",
+            options: {
+                name: "[name].[ext]"
+            }
+        }]
     },
     watch: true,
     watchOptions: {
