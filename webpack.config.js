@@ -19,9 +19,10 @@ module.exports = {
         styles: PATHS.src + "/less/main"
     },
     output: {
-        filename: "[name].min.[ext]",
+        filename: "[name].min.js",
         path: PATHS.dist,
-        library: "[name]"
+        library: "[name]",
+        publicPath: "/"
     },
     resolve: {
         "extensions": [".js", ".less"]
@@ -67,7 +68,8 @@ module.exports = {
                 {
                     loader: MiniCssExtractPlugin.loader,
 
-                },{
+                },
+                {
                     loader: "css-loader",
                     options: { sourceMap: true }
                 },{
@@ -78,11 +80,19 @@ module.exports = {
                     }
                 },{
                     loader: "less-loader",
-                    options: { sourceMap: true, relativeUrls: true }
+                    options: {
+                        sourceMap: true,
+                    }
                 }
             ]
         },{
             test: /\.(png|jpg|gif|svg)$/,
+            loader: "file-loader",
+            options: {
+                name: "[name].[ext]"
+            }
+        },{
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
             loader: "file-loader",
             options: {
                 name: "[name].[ext]"
