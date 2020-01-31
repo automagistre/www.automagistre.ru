@@ -4200,16 +4200,16 @@
         },
         {
             "name": "symfony/property-info",
-            "version": "v5.0.1",
+            "version": "v5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/property-info.git",
-                "reference": "f0bf8d7360e47261ceec67d9338a0c6257f59878"
+                "reference": "8c2e9d22806acd5522691074e215bb0b04926877"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-info/zipball/f0bf8d7360e47261ceec67d9338a0c6257f59878",
-                "reference": "f0bf8d7360e47261ceec67d9338a0c6257f59878",
+                "url": "https://api.github.com/repos/symfony/property-info/zipball/8c2e9d22806acd5522691074e215bb0b04926877",
+                "reference": "8c2e9d22806acd5522691074e215bb0b04926877",
                 "shasum": ""
             },
             "require": {
@@ -4272,7 +4272,7 @@
                 "type",
                 "validator"
             ],
-            "time": "2019-11-18T17:27:11+00:00"
+            "time": "2020-01-04T14:08:26+00:00"
         },
         {
             "name": "symfony/routing",
