@@ -100,7 +100,7 @@ module.exports = {
             }
         }]
     },
-    watch: true,
+    watch: NODE_ENV === "development" ,
     watchOptions: {
         aggregateTimeout: 100
     },
