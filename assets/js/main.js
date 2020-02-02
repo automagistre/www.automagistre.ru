@@ -1,3 +1,6 @@
+import $ from 'jquery'
+
+alert('Я работаю');
 var $W = $(window),
     $D = $(document),
     $B = $('body'),
@@ -5,15 +8,10 @@ var $W = $(window),
     isMobileView;
 
 function mobChecker(maxWinWidth) {
-  if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent) ||
       window.matchMedia('(max-width: ' + maxWinWidth + 'px)').matches ||
-      $D.width() < maxWinWidth) {
-    return true;
-  }
-  else {
-    return false;
-  }
+      $D.width() < maxWinWidth;
 }
 
 isMobileView = mobChecker(1024);
@@ -1071,7 +1069,7 @@ $D.ready(function() {
 
     if ($thisKind.hasClass('is-active')) return false;
 
-    thisIdex = $thisKind.index();
+    let thisIdex = $thisKind.index();
     $kinds.removeClass('is-active');
     $thisKind.addClass('is-active');
 

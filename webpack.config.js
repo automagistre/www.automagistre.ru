@@ -6,7 +6,8 @@ const path = require("path");
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PATHS = {
     src: path.resolve(__dirname) + "/assets/",
-    dist: path.resolve(__dirname) + "/public/assets/"
+    dist: path.resolve(__dirname) + "/public/",
+    assets: 'assets/'
 };
 
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
@@ -16,10 +17,10 @@ module.exports = {
     mode: NODE_ENV,
     entry: {
         main: PATHS.src + "/js/main",
-        styles: PATHS.src + "/less/main"
+        styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: "[name].min.js",
+        filename: PATHS.assets + "[name].min.js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -89,13 +90,13 @@ module.exports = {
             test: /\.(png|jpg|gif|svg)$/,
             loader: "file-loader",
             options: {
-                name: "[name].[ext]"
+                name: "[path][name].[ext]"
             }
         },{
             test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
             loader: "file-loader",
             options: {
-                name: "[name].[ext]"
+                name: "[path][name].[ext]"
             }
         }]
     },
@@ -110,7 +111,7 @@ module.exports = {
                 NODE_ENV: JSON.stringify(NODE_ENV)
             }),
         new MiniCssExtractPlugin({
-            filename: "[name].mini.css"
+            filename: PATHS.assets + "[name].min.css"
         })
     ],
 };
