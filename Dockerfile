@@ -14,10 +14,13 @@ FROM node-base as node
 COPY package.json package-lock.json ${APP_DIR}/
 RUN npm install
 
-COPY gulpfile.js ${APP_DIR}
+COPY webpack.config.js ${APP_DIR}
+COPY postcss.config.js ${APP_DIR}
+COPY .babelrc ${APP_DIR}
 COPY assets ${APP_DIR}/assets
 
-RUN gulp build:main-script build:scripts build:less
+RUN NODE_ENV=production webpack
+
 
 #
 # PHP-FPM
