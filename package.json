@@ -42,7 +42,7 @@
     "ajv": "^6.11.0",
     "bootstrap-datepicker": "^1.7.1",
     "fotorama": "^4.6.4",
-    "gsap": "^1.19.1",
+    "gsap": "^3.1.1",
     "jquery": "^3.4.1",
     "jquery-scrollify": "^1.0.17",
     "jquery-validation": "^1.16.0",
