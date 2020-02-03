@@ -1,4 +1,4 @@
-FROM node:10.13.0-alpine as node-base
+FROM node:13.7.0-alpine as node-base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
@@ -14,10 +14,13 @@ FROM node-base as node
 COPY package.json package-lock.json ${APP_DIR}/
 RUN npm install
 
-COPY gulpfile.js ${APP_DIR}
+COPY webpack.config.js ${APP_DIR}
+COPY postcss.config.js ${APP_DIR}
+COPY .babelrc ${APP_DIR}
 COPY assets ${APP_DIR}/assets
 
-RUN gulp build:main-script build:scripts build:less
+RUN NODE_ENV=production webpack
+
 
 #
 # PHP-FPM
