@@ -12,7 +12,7 @@ RUN apk add --no-cache git
 FROM node-base as node
 
 COPY package.json package-lock.json ${APP_DIR}/
-RUN npm install
+RUN npm install --no-audit
 
 COPY webpack.config.js ${APP_DIR}
 COPY postcss.config.js ${APP_DIR}
