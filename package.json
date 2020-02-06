@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "ajv": "^6.11.0",
+    "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.7.1",
     "fotorama": "^4.6.4",
     "gsap": "^1.19.1",
