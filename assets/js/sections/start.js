@@ -1,8 +1,9 @@
-import $ from "jquery";
+import $ from 'jquery'
 import 'slick-carousel'
 
 const $secStartSlider = $('#sec-start-slider');
-if ($secStartSlider.length) {
+
+if ($secStartSlider) {
     $secStartSlider.slick({
         arrows: true,
         dots: false,
@@ -20,16 +21,19 @@ if ($secStartSlider.length) {
     });
 }
 
-$('.js-set-start-slide').click(function() {
-    let $btn = $(this),
-        slideNum = +$btn.data('slide');
-    $secStartSlider.slick('slickGoTo', slideNum, false);
-});
+document.querySelectorAll('.js-set-start-slide').
+         forEach(el => el.addEventListener('click', () => {
+                                    $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
+}));
 
-$('.js-sec-start-slider-freeze').click(function() {
-    $('#sec-start-select').addClass('is-frozen');
-});
+document.querySelectorAll('.js-sec-start-slider-freeze').
+         forEach(el => el.addEventListener('click', () =>{
+                                    document.querySelector('#sec-start-select').
+                                             classList.add('is-frozen');
+}));
 
-$('.js-sec-start-slider-unfreeze').click(function() {
-    $('#sec-start-select').removeClass('is-frozen');
-});
+document.querySelectorAll('.js-sec-start-slider-unfreeze').
+         forEach(el => el.addEventListener('click', () =>{
+                                   document.querySelector('#sec-start-select').
+                                            classList.remove('is-frozen')
+}));
