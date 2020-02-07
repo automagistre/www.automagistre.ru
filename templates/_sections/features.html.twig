@@ -1,0 +1,66 @@
+{% set features = [
+    {
+        'title': 'Гарантия на работы и запчасти',
+        'note': '1 год гарантии на работы <br> 1 год гарантии на оригинальные запчасти
+                        <br> 2 месяца гарантии на неоригинальные зачасти',
+        'icon': 'icon-f_piston',
+    },{
+        'title': 'Работаем на сверхзвуковой скорости',
+        'note': 'Наши специалисты знают все особенности профильных марок и выполняют работы без максимально
+                        возиожной скоростью',
+        'icon': 'icon-f_mechanic'
+    },{
+        'title': 'Без очередей и за один приезд',
+        'note': 'Мы работаем строго по записи, что гарантирует отсутствие очередей.
+                    Постоянное наличие востребованных запчастей позволяет провести ремонт за один приезд',
+        'icon': 'icon-f_heart'
+    },{
+        'title': '100% <br> гарантия ремонта',
+        'note': 'Если мы не смогли починить - вы ничего не оплачиваете. Оплата только за результат',
+        'icon': 'icon-f_star'
+    },{
+        'title': 'Не обязываем к ремонту',
+        'note': 'Вы сами решаете когда и как производить ремонт, мы только рекомендуем и консультируем',
+        'icon': 'icon-f_keys'
+    },{
+        'title': 'Не предлагаем ненужных услуг',
+        'note': 'Никаких навязываний услуг и товаров. Наши рекомендации всего лишь рекомендации, решение принимаете вы',
+        'icon': 'icon-f_growth'
+    },{
+        'title': 'Качественная консультация специалистов',
+        'note': 'Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем',
+        'icon': 'icon-f_inform'
+    },{
+        'title': 'Наблюдайте за работой',
+        'note': 'Свободный доступ в ремзону позволяет наблюдать за ходом ремонта',
+        'icon': 'icon-f_binocul'
+    }
+]%}
+
+<section class="sec-features js-sec-scroll">
+    <div class="sec-features__back" id="sec-features-back">
+        <div class="sec-features__parr-lt">
+            <img class="sec-features__parr-img sec-features__lt-img_min" src="{{ asset('img/sec-features/lt-img_min.png') }}" alt="Авторемонт">
+            <img class="sec-features__parr-img sec-features__lt-img_big" src="{{ asset('img/sec-features/lt-img_big.png') }}" alt="Авторемонт">
+            <img class="sec-features__parr-img sec-features__lt-img_blur" src="{{ asset('img/sec-features/lt-img_blur.png') }}" alt="Авторемонт">
+        </div>
+        <div class="sec-features__parr-rt">
+            <img class="sec-features__parr-img sec-features__rt-img_min" src="{{ asset('img/sec-features/rt-img_min.png') }}" alt="Авторемонт">
+            <img class="sec-features__parr-img sec-features__rt-img_big" src="{{ asset('img/sec-features/rt-img_big.png') }}" alt="Авторемонт">
+            <img class="sec-features__parr-img sec-features__rt-img_blur" src="{{ asset('img/sec-features/rt-img_blur.png') }}" alt="Авторемонт">
+        </div>
+    </div>
+    <div class="sec-features__front">
+        <div class="container">
+            <ul class="sec-features__list">
+                {% for feature in features %}
+                    <li class="feature sec-features__item">
+                        <i class="feature__icon {{ feature.icon }}"></i>
+                        <h3 class="feature__title">{{ feature.title | raw }}</h3>
+                        <div class="feature__note">{{ feature.note | raw }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section><!-- END sec-features -->

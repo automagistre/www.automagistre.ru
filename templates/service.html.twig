@@ -1,116 +1,50 @@
 {% extends 'layout.html.twig' %}
 
+{#Panels data#}
+{% set panels = [{
+    'num': '01',
+    'class': 'sec-intro__testing',
+    'title': 'Диагностика',
+    'note': 'Полная диагностика автомобиля по 85 пунктам. Наша задача обеспечить вашу безопасность
+                        и исправность автомобиля, поэтому диагностика в нашем ТехЦентре бесплатная',
+    'path': path('diagnostics', {'type': 'free'})
+    },{
+    'num': '02',
+    'class': 'sec-intro__service',
+    'title': 'Техническое <br> обслуживание',
+    'note': 'Своевременное Техническое обслуживание(ТО) с использованием качественных расходных материалов
+                        залог долгой и беспроблемной эксплуатации автомобиля.',
+    'path': path('maintenance')
+    },{
+    'num': '03',
+    'class': 'sec-intro__repair',
+    'title': 'Ремонт',
+    'note': 'Качественный, профессиональный ремонт любой сложности с использованием запчастей проверенных брендов.',
+    'path': path('repair')
+}] %}
+
 {% block content %}
+    <main class="site-main">
     <section class="sec-intro has-panels js-sec-scroll">
         <div class="sec-intro__panels">
-            <div class="panel sec-intro__panel sec-intro__testing">
-                <div class="panel__back"></div>
-                <div class="panel__info">
-                    <div class="panel__num">01</div>
-                    <h2 class="panel__title">Диагностика</h2>
-                    <div class="panel__note">
-                        Полная диагностика автомобиля по 85 пунктам. Наша задача обеспечить вашу безопасность
-                        и исправность автомобиля, поэтому диагностика в нашем ТехЦентре бесплатная
-                    </div>
-                    <div class="panel__more">
-                        <a class="panel__btn panel__btn_red" href="{{ path('diagnostics', {'type': 'free'}) }}">Подробнее</a>
-                        <!--a class="panel__btn panel__btn_clear" href="#">Записаться</a-->
-                    </div>
-                </div>
-            </div>
-            <div class="panel sec-intro__panel sec-intro__service">
-                <div class="panel__back"></div>
-                <div class="panel__info">
-                    <div class="panel__num">02</div>
-                    <h2 class="panel__title">Техническое <br> обслуживание</h2>
-                    <div class="panel__note">
-                        Своевременное Техническое обслуживание(ТО) с использованием качественных расходных материалов
-                        залог долгой и беспроблемной эксплуатации автомобиля.
-                    </div>
-                    <div class="panel__more">
-                        <a class="panel__btn panel__btn_red" href="{{ path('maintenance') }}">Подробнее</a>
-                        <!--a class="panel__btn panel__btn_clear" href="#">Записаться</a-->
+            {% for panel in panels %}
+                <div class="panel sec-intro__panel {{ panel.class }}">
+                    <div class="panel__back"></div>
+                    <div class="panel__info">
+                        <div class="panel__num">{{ panel.num }}</div>
+                        <h2 class="panel__title">{{ panel.title | raw }}</h2>
+                        <div class="panel__note">{{ panel.note | raw }}</div>
+                        <div class="panel__more">
+                            <a class="panel__btn panel__btn_red" href="{{ panel.path }}">Подробнее</a>
+                            <!--a class="panel__btn panel__btn_clear" href="#">Записаться</a-->
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel sec-intro__panel sec-intro__repair">
-                <div class="panel__back"></div>
-                <div class="panel__info">
-                    <div class="panel__num">03</div>
-                    <h2 class="panel__title">Ремонт</h2>
-                    <div class="panel__note">
-                        Качественный, профессиональный ремонт любой сложности с использованием запчастей проверенных брендов.
-                    </div>
-                    <div class="panel__more">
-                        <a class="panel__btn panel__btn_red" href="{{ path('repair') }}">Подробнее</a>
-                        <!--a class="panel__btn panel__btn_clear" href="#">Записаться</a-->
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </section><!-- END sec-intro -->
 
-    <section class="sec-features js-sec-scroll">
-        <div class="sec-features__back" id="sec-features-back">
-            <div class="sec-features__parr-lt">
-                <img class="sec-features__parr-img sec-features__lt-img_min" src="{{ asset('img/sec-features/lt-img_min.png') }}" alt="Авторемонт">
-                <img class="sec-features__parr-img sec-features__lt-img_big" src="{{ asset('img/sec-features/lt-img_big.png') }}" alt="Авторемонт">
-                <img class="sec-features__parr-img sec-features__lt-img_blur" src="{{ asset('img/sec-features/lt-img_blur.png') }}" alt="Авторемонт">
-            </div>
-            <div class="sec-features__parr-rt">
-                <img class="sec-features__parr-img sec-features__rt-img_min" src="{{ asset('img/sec-features/rt-img_min.png') }}" alt="Авторемонт">
-                <img class="sec-features__parr-img sec-features__rt-img_big" src="{{ asset('img/sec-features/rt-img_big.png') }}" alt="Авторемонт">
-                <img class="sec-features__parr-img sec-features__rt-img_blur" src="{{ asset('img/sec-features/rt-img_blur.png') }}" alt="Авторемонт">
-            </div>
-        </div>
-        <div class="sec-features__front">
-            <div class="container">
-                <ul class="sec-features__list">
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_piston"></i>
-                        <h3 class="feature__title">Гарантия на работы и&nbsp;запчасти</h3>
-                        <div class="feature__note">1 год гарантии на работы <br> 1 год гарантии на оригинальные запчасти
-                        <br> 2 месяца гарантии на неоригинальные зачасти</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_mechanic"></i>
-                        <h3 class="feature__title">Работаем на&nbsp;сверхзвуковой скорости</h3>
-                        <div class="feature__note">Наши специалисты знают все особенности профильных марок и выполняют работы без максимально возиожной скоростью</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_heart"></i>
-                        <h3 class="feature__title">Без очередей и за&nbsp;один приезд</h3>
-                        <div class="feature__note">Мы работаем строго по записи, что гарантирует отсутствие очередей. Постоянное наличие востребованных запчастей позволяет провести ремонт за один приезд</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_star"></i>
-                        <h3 class="feature__title">100% <br> гарантия ремонта</h3>
-                        <div class="feature__note">Если мы не смогли починить - вы ничего не оплачиваете. Оплата только за результат</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_keys"></i>
-                        <h3 class="feature__title">Не обязываем к&nbsp;ремонту</h3>
-                        <div class="feature__note">Вы сами решаете когда и как производить ремонт, мы только рекомендуем и консультируем</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_growth"></i>
-                        <h3 class="feature__title">Не предлагаем ненужных услуг</h3>
-                        <div class="feature__note">Никаких навязываний услуг и товаров. Наши рекомендации всего лишь рекомендации, решение принимаете вы</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_inform"></i>
-                        <h3 class="feature__title">Качественная консультация специалистов</h3>
-                        <div class="feature__note">Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем</div>
-                    </li>
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon icon-f_binocul"></i>
-                        <h3 class="feature__title">Наблюдайте за&nbsp;работой</h3>
-                        <div class="feature__note">Свободный доступ в ремзону позволяет наблюдать за ходом ремонта</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section><!-- END sec-features -->
+    {{ include('./_sections/features.html.twig')  }}
 
     <section class="sec-gallery js-sec-scroll">
         <div class="sec-gallery__row js-scroll-x">
@@ -591,4 +525,5 @@
             </div>
         </div>
     </section><!-- END sec-map -->
+    </main>
 {% endblock %}
