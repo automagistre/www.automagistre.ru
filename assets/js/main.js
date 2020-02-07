@@ -1,4 +1,4 @@
-import './sections/start'
+import './service'
 
 const BODY = document.body;
 
