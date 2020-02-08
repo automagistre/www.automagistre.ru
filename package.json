@@ -45,7 +45,7 @@
     "fotorama": "^4.6.4",
     "gsap": "^1.19.1",
     "jquery": "^3.4.1",
-    "jquery-scrollify": "^1.0.17",
+    "jquery-scrollify": "^1.0.20",
     "jquery-validation": "^1.16.0",
     "jquery-viewport-checker": "^1.8.8",
     "jquery.maskedinput": "github:digitalbush/jquery.maskedinput",
