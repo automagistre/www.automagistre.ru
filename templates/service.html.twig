@@ -45,80 +45,8 @@
     </section><!-- END sec-intro -->
 
     {{ include('./_sections/features.html.twig')  }}
-
     {{ include('./_sections/gallery.html.twig') }}
-
-    <section class="sec-services js-sec-scroll">
-        <div class="sec-services__front">
-            <div class="container">
-                <h2 class="sec-services__title">Наши услуги</h2>
-                <div class="sec-services__row">
-                    <div class="sec-services__col-lt">
-                        <div class="sec-services__count" id="services-count">01</div>
-                        <div class="sec-services__picts">
-                            <img class="sec-services__img js-services-img" src="{{ asset('images/sec-services/service_01.png') }}" alt="Компьютерная диагностика">
-                            <img class="sec-services__img js-services-img is-active" src="{{ asset('images/sec-services/service_02.png') }}" alt="Бесплатная диагностика">
-                            <img class="sec-services__img js-services-img" src="{{ asset('images/sec-services/service_03.png') }}" alt="Техническое обслуживание">
-                            <img class="sec-services__img js-services-img" src="{{ asset('images/sec-services/service_04.png') }}" alt="Ремонт">
-                        </div>
-                    </div>
-                    <div class="sec-services__col-rt">
-                        <ul class="sec-services__menu" id="services-menu">
-                            <li class="sec-services__kind js-services-kind" data-kind="01">
-                                <h4 class="sec-services__kind-title">
-                                    <a class="sec-services__kind-btn js-services-btn">Компьютерная диагностика</a>
-                                </h4>
-                                <div class="sec-services__kind-text">
-                                    Компьютерная диагностика бывает двух видов: целевая и профилактическая. Профилактическая компьютерная диагностика авто должна производиться не реже чем раз в год. Она позволит выявить неисправность еще до ее проявления. Специальная программа считывает данные и показатели со всех реле и датчиков и выводит коды всех ошибок, которые позволят произвести ремонт, ведь даже обычное окисление контакта может привести к неисправности автомобиля.
-
-                                    Целевая компьютерная диагностика автомобиля производится в случае появления неисправностей. Она является более углубленной и максимально точно позволяет определить причину неисправности.
-                                </div>
-                                <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ path('diagnostics', {'type': 'comp'}) }}">Подробнее</a>
-                            </li>
-                            <li class="sec-services__kind js-services-kind is-active" data-kind="02">
-                                <h4 class="sec-services__kind-title">
-                                    <a class="sec-services__kind-btn js-services-btn">Бесплатная диагностика</a>
-                                </h4>
-                                <div class="sec-services__kind-text">
-                                    Главное правило техцентра «АвтоМагистр» - прежде чем начать работы над автомобилем
-                                    необходимо произвести диагностику, прописанную в фирменном сертификате качества.
-                                    Нам необходимо получить полную картину проблему автомобиля, чтобы минимизировать
-                                    стоимость комплексного решения найденных проблем. Поэтому диагностика в нашем сервисе всегда бесплатна.
-                                    Всегда после диагностики индивидуально составляется план и бюджет будущего ремонта.
-                                    Благодаря предварительному изучению проблем стоимость ремонта может снизиться в несколько раз
-                                </div>
-                                <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ path('diagnostics', {'type': 'free'}) }}">Подробнее</a>
-                            </li>
-                            <li class="sec-services__kind js-services-kind" data-kind="03">
-                                <h4 class="sec-services__kind-title">
-                                    <a class="sec-services__kind-btn js-services-btn">Техническое обслуживание</a>
-                                </h4>
-                                <div class="sec-services__kind-text">
-                                    Своевременное и регулярное Техническое обслуживание(ТО) с использование качественных расходных материалов является залогом исправности автомобиля.
-                                    Техцентр "Автомагистр" предлагает комплексное качественное обслуживание японских и корейских автомобилей.
-                                    Мы используем только проверенные бренды поставщиков и производителей запчастей.
-                                    Так же в ТО обязательно входит фирменная бесплатная диагностика автомобиля.
-                                </div>
-                                <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ path('maintenance') }}">Подробнее</a>
-                            </li>
-                            <li class="sec-services__kind js-services-kind" data-kind="04">
-                                <h4 class="sec-services__kind-title">
-                                    <a class="sec-services__kind-btn js-services-btn">Авторемонт</a>
-                                </h4>
-                                <div class="sec-services__kind-text">
-                                    Сервисный центр «Автомагистр» окажет помощь в проведении автомобильного
-                                    ремонта любой сложности, за проведение которого придётся заплатить совсем
-                                    недорого. Понимая все особенности профильных марок, мы экономим ваши деньги, а благодаря специально подобранному складу запчастей экономим
-                                    ваше время.
-                                </div>
-                                <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ path('repair') }}">Подробнее</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><!-- END sec-services -->
+    {{ include('./_sections/services.html.twig') }}
 
     <section class="sec-work js-sec-scroll">
         <div class="sec-work__front">
