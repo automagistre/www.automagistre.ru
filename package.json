@@ -58,7 +58,7 @@
     "salvattore": "^1.0.9",
     "slick-carousel": "^1.6.0",
     "velocity-animate": "^1.5.0",
-    "zoom.js": "github:fat/zoom.js"
+    "zooming": "^2.1.1"
   },
   "author": "Sidorov Kirill",
   "license": "proprietary",
