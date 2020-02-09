@@ -5,7 +5,7 @@ import {mobChecker} from "../lib";
 import '../sections/start'
 import '../sections/features'
 import '../sections/gallery'
-
+import '../sections/services'
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
 

@@ -1,3 +1,4 @@
+{% set initActiveNum = '02' %}
 {% set secData = [
     {
         'num': '01',
@@ -44,7 +45,8 @@
                  а благодаря специально подобранному складу запчастей экономим
                  ваше время.'
     }
-] %}
+]%}
+
 
 <section class="sec-services js-sec-scroll">
     <div class="sec-services__front">
@@ -52,10 +54,13 @@
             <h2 class="sec-services__title">Наши услуги</h2>
             <div class="sec-services__row">
                 <div class="sec-services__col-lt">
-                    <div class="sec-services__count" id="services-count">01</div>
+                    <div class="sec-services__count" id="services-count">{{ initActiveNum }}</div>
                     <div class="sec-services__picts">
                         {% for block in secData %}
-                            <img class="sec-services__img js-services-img {{ block.active|default(false) ? 'is-active' : '' }}" src="{{ block.img }}" alt="{{ block.title }}">
+                            <img class="sec-services__img js-services-img {{ block.active|default(false) ? 'is-active' : '' }}"
+                                 src="{{ block.img }}"
+                                 alt="{{ block.title }}"
+                                 data-kind="{{ block.num }}">
                         {% endfor %}
                     </div>
                 </div>
