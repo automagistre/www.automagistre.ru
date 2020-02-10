@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7203248d1aefba744f935826c9349b5b",
+    "content-hash": "c3a97668f945fce9ec03bc30bd4e2fad",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -5865,16 +5865,16 @@
         },
         {
             "name": "brianium/paratest",
-            "version": "3.1.2",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paratestphp/paratest.git",
-                "reference": "be62103b00485442ed2909b69854d6c7ec4614ed"
+                "reference": "2a06a82742fa303b59179fb8d6037dfb9897b9b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/be62103b00485442ed2909b69854d6c7ec4614ed",
-                "reference": "be62103b00485442ed2909b69854d6c7ec4614ed",
+                "url": "https://api.github.com/repos/paratestphp/paratest/zipball/2a06a82742fa303b59179fb8d6037dfb9897b9b2",
+                "reference": "2a06a82742fa303b59179fb8d6037dfb9897b9b2",
                 "shasum": ""
             },
             "require": {
@@ -5884,9 +5884,9 @@
                 "ext-reflection": "*",
                 "ext-simplexml": "*",
                 "php": "^7.1",
-                "phpunit/php-code-coverage": "^6.1.4|^7.0.2",
-                "phpunit/php-timer": "^2.0",
-                "phpunit/phpunit": "^7.5.8|^8.0",
+                "phpunit/php-code-coverage": "^6.1.4|^7.0.2|^8.0",
+                "phpunit/php-timer": "^2.0|^3.0",
+                "phpunit/phpunit": "^7.5.8|^8.0|^9.0",
                 "symfony/console": "^3.4||^4.0||^5.0",
                 "symfony/process": "^3.4||^4.0||^5.0"
             },
@@ -5925,7 +5925,7 @@
                 "phpunit",
                 "testing"
             ],
-            "time": "2019-12-27T20:54:56+00:00"
+            "time": "2020-02-07T22:07:07+00:00"
         },
         {
             "name": "composer/semver",
