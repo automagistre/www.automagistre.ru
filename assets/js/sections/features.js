@@ -1,4 +1,4 @@
-import {mobChecker} from "../lib";
+import {mobChecker, startParallax} from "../lib";
 import TweenLite from "gsap/TweenLite";
 import CSSPlugin from "gsap/TweenMax"
 
@@ -13,22 +13,17 @@ const featuresParr = () => {
         rtBig: document.querySelector('.sec-features__rt-img_big'),
         rtBlur: document.querySelector('.sec-features__rt-img_blur'),
     };
-    const winScroll = window.scrollY,
-        winHeight = window.innerHeight;
-    let secTop = features.offsetTop || 0,
-        startLevel, stopLevel, thisOffset;
 
-    startLevel = secTop - winHeight;
-    stopLevel = secTop + winHeight;
-    if (winScroll < startLevel || winScroll > stopLevel) return;
-    thisOffset = winScroll - startLevel;
+    let thisOffset = startParallax(features);
+    if (thisOffset) {
+        TweenLite.to(SEC_FEAT.ltMin,  2, {y: thisOffset / 8, force3D: true, delay: 0.1});
+        TweenLite.to(SEC_FEAT.ltBig,  2, {y: thisOffset / 5, force3D: true, delay: 0.1});
+        TweenLite.to(SEC_FEAT.ltBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
+        TweenLite.to(SEC_FEAT.rtMin,  2, {y: thisOffset / 7, force3D: true, delay: 0.1});
+        TweenLite.to(SEC_FEAT.rtBig,  2, {y: thisOffset / 3, force3D: true, delay: 0.1});
+        TweenLite.to(SEC_FEAT.rtBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
+    }
 
-    TweenLite.to(SEC_FEAT.ltMin,  2, {y: thisOffset / 8, force3D: true, delay: 0.1});
-    TweenLite.to(SEC_FEAT.ltBig,  2, {y: thisOffset / 5, force3D: true, delay: 0.1});
-    TweenLite.to(SEC_FEAT.ltBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
-    TweenLite.to(SEC_FEAT.rtMin,  2, {y: thisOffset / 7, force3D: true, delay: 0.1});
-    TweenLite.to(SEC_FEAT.rtBig,  2, {y: thisOffset / 3, force3D: true, delay: 0.1});
-    TweenLite.to(SEC_FEAT.rtBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
 };
 
 if (!mobChecker(1024) && features) {

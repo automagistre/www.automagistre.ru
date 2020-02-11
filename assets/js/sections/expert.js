@@ -1,4 +1,4 @@
-import {mobChecker} from "../lib";
+import {mobChecker, startParallax} from "../lib";
 import TweenLite from "gsap/TweenLite";
 import CSSPlugin from "gsap/TweenMax"
 
@@ -20,20 +20,14 @@ const secExpert = [
 ];
 
 const expertParr = () => {
-    const winScroll = window.scrollY,
-          winHeight = window.innerHeight;
-    let secTop = expert.getBoundingClientRect().top + pageYOffset,
-        startLevel, stopLevel, thisOffset;
-    startLevel = secTop - winHeight;
-    stopLevel = secTop + winHeight;
-    if (winScroll < startLevel || winScroll > stopLevel) return;
-    thisOffset = winScroll - startLevel;
-    for (let [sprite, pos] of secExpert) {
-        TweenLite.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+    let thisOffset = startParallax(expert);
+    if (thisOffset) {
+        for (let [sprite, pos] of secExpert) {
+            TweenLite.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+        }
     }
 };
 
 if (!mobChecker(1024) && expert) {
-    console.log('Нот мобаил')
     document.addEventListener('scroll', expertParr);
 }

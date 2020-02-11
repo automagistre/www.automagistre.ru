@@ -6,6 +6,17 @@ export const mobChecker = (maxWinWidth) =>
         window.matchMedia('(max-width: ' + maxWinWidth + 'px)').matches ||
         document.body.clientWidth < maxWinWidth;
 
+export const startParallax = element => {
+    const winScroll = window.scrollY,
+          winHeight = window.innerHeight;
+    let secTop = element.getBoundingClientRect().top + pageYOffset,
+        startLevel, stopLevel;
+    startLevel = secTop - winHeight;
+    stopLevel = secTop + winHeight;
+    if (winScroll < startLevel || winScroll > stopLevel) return false;
+    return  winScroll - startLevel;
+};
+
 export const odometer = className => {
     const odBlock = document.getElementsByClassName(className)[0];
     const startOdometer = () =>{
