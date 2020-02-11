@@ -1,6 +1,8 @@
 import {mobChecker, startParallax} from "../lib";
 import TweenLite from "gsap/TweenLite";
 import CSSPlugin from "gsap/TweenMax"
+import $ from "jquery";
+import 'slick-carousel';
 
 const expert = document.querySelector('#sec-expert-back');
 const secExpert = [
@@ -30,4 +32,27 @@ const expertParr = () => {
 
 if (!mobChecker(1024) && expert) {
     document.addEventListener('scroll', expertParr);
+}
+
+const changeSlide = event => {
+  const target = event.currentTarget;
+    $secExpertSlider.slick('slickGoTo', +target.dataset.num - 1, false);
+};
+
+const $secExpertSlider = $('#sec-expert-slider'),
+      expertBtn = document.querySelectorAll('.js-expert-btn');
+if ($secExpertSlider.length) {
+    $secExpertSlider.slick({
+        arrows: true,
+        dots: true,
+        infinite: true,
+        speed: 800,
+        autoplay: false,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
+        nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
+    });
+
+    expertBtn.forEach(btn => btn.addEventListener('click', changeSlide));
 }
