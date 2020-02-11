@@ -3,29 +3,25 @@ import TweenLite from "gsap/TweenLite";
 import CSSPlugin from "gsap/TweenMax"
 
 const features = document.querySelector('#sec-features-back');
+const secFeatures = [
+    [features.querySelector('.sec-features__lt-img_min'), 8],
+    [features.querySelector('.sec-features__lt-img_big'), 5],
+    [features.querySelector('.sec-features__lt-img_blur'), 2],
+    [features.querySelector('.sec-features__rt-img_min'), 7],
+    [features.querySelector('.sec-features__rt-img_big'), 3],
+    [features.querySelector('.sec-features__rt-img_blur'), 2],
+];
 
 const featuresParr = () => {
-    const SEC_FEAT = {
-        ltMin: document.querySelector('.sec-features__lt-img_min'),
-        ltBig: document.querySelector('.sec-features__lt-img_big'),
-        ltBlur: document.querySelector('.sec-features__lt-img_blur'),
-        rtMin: document.querySelector('.sec-features__rt-img_min'),
-        rtBig: document.querySelector('.sec-features__rt-img_big'),
-        rtBlur: document.querySelector('.sec-features__rt-img_blur'),
-    };
-
     let thisOffset = startParallax(features);
     if (thisOffset) {
-        TweenLite.to(SEC_FEAT.ltMin,  2, {y: thisOffset / 8, force3D: true, delay: 0.1});
-        TweenLite.to(SEC_FEAT.ltBig,  2, {y: thisOffset / 5, force3D: true, delay: 0.1});
-        TweenLite.to(SEC_FEAT.ltBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
-        TweenLite.to(SEC_FEAT.rtMin,  2, {y: thisOffset / 7, force3D: true, delay: 0.1});
-        TweenLite.to(SEC_FEAT.rtBig,  2, {y: thisOffset / 3, force3D: true, delay: 0.1});
-        TweenLite.to(SEC_FEAT.rtBlur, 2, {y: thisOffset / 2, force3D: true, delay: 0.1});
+        for( let [sprite, pos] of secFeatures) {
+            TweenLite.to(sprite,  2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+        }
     }
-
 };
 
 if (!mobChecker(1024) && features) {
     document.addEventListener('scroll', featuresParr)
 }
+
