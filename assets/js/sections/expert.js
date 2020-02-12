@@ -2,27 +2,29 @@ import {mobChecker, startParallax} from "../lib";
 import TweenLite from "gsap/TweenLite";
 import CSSPlugin from "gsap/TweenMax"
 import $ from "jquery";
-import 'slick-carousel';
+import "slick-carousel";
+import 'modal-video/js/jquery-modal-video';
+import 'modal-video/css/modal-video.min.css';
 
-const expert = document.querySelector('#sec-expert-back');
+const expertBack = document.querySelector('#sec-expert-back');
 const secExpert = [
-    [expert.querySelector('.sec-expert__lt-img_01'), 14],
-    [expert.querySelector('.sec-expert__lt-img_02'), 12],
-    [expert.querySelector('.sec-expert__lt-img_03'), 10],
-    [expert.querySelector('.sec-expert__lt-img_04'), 8],
-    [expert.querySelector('.sec-expert__lt-img_05'), 6],
-    [expert.querySelector('.sec-expert__lt-img_06'), 4],
-    [expert.querySelector('.sec-expert__lt-img_07'), 2],
-    [expert.querySelector('.sec-expert__rt-img_01'), 12],
-    [expert.querySelector('.sec-expert__rt-img_02'), 10],
-    [expert.querySelector('.sec-expert__rt-img_03'), 8],
-    [expert.querySelector('.sec-expert__rt-img_04'), 6],
-    [expert.querySelector('.sec-expert__rt-img_05'), 4],
-    [expert.querySelector('.sec-expert__rt-img_06'), 2],
+    [expertBack.querySelector('.sec-expert__lt-img_01'), 14],
+    [expertBack.querySelector('.sec-expert__lt-img_02'), 12],
+    [expertBack.querySelector('.sec-expert__lt-img_03'), 10],
+    [expertBack.querySelector('.sec-expert__lt-img_04'), 8],
+    [expertBack.querySelector('.sec-expert__lt-img_05'), 6],
+    [expertBack.querySelector('.sec-expert__lt-img_06'), 4],
+    [expertBack.querySelector('.sec-expert__lt-img_07'), 2],
+    [expertBack.querySelector('.sec-expert__rt-img_01'), 12],
+    [expertBack.querySelector('.sec-expert__rt-img_02'), 10],
+    [expertBack.querySelector('.sec-expert__rt-img_03'), 8],
+    [expertBack.querySelector('.sec-expert__rt-img_04'), 6],
+    [expertBack.querySelector('.sec-expert__rt-img_05'), 4],
+    [expertBack.querySelector('.sec-expert__rt-img_06'), 2],
 ];
 
 const expertParr = () => {
-    let thisOffset = startParallax(expert);
+    let thisOffset = startParallax(expertBack);
     if (thisOffset) {
         for (let [sprite, pos] of secExpert) {
             TweenLite.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
@@ -30,7 +32,7 @@ const expertParr = () => {
     }
 };
 
-if (!mobChecker(1024) && expert) {
+if (!mobChecker(1024) && expertBack) {
     document.addEventListener('scroll', expertParr);
 }
 
@@ -56,3 +58,12 @@ if ($secExpertSlider.length) {
 
     expertBtn.forEach(btn => btn.addEventListener('click', changeSlide));
 }
+
+const modalVideoOptions = {
+    'channel': 'youtube',
+    'autoplay': 1,
+    'controls': 0,
+    'enablejsapi': 1,
+    'showinfo': 0,
+    'nocookie': true,};
+$('.js-expert-video').modalVideo(modalVideoOptions);

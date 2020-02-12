@@ -3,27 +3,27 @@
         'num': '01',
         'title': 'Тормозной суппорт. Устройство и обслуживание',
         'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
-        'youtubeID': 'LHizW4PLw2Q',
+        'youtubeID': 'KmnypHJRxYs',
     },{
         'num': '02',
         'title': 'Система охлаждения двигателя',
         'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
-        'youtubeID': 'LHizW4PLw2Q',
+        'youtubeID': 'KmnypHJRxYs',
     },{
         'num': '03',
         'title': 'Ремонт ГБЦ',
         'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
-        'youtubeID': 'LHizW4PLw2Q',
+        'youtubeID': 'KmnypHJRxYs',
     },{
         'num': '04',
         'title': 'Какое-то видео',
         'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
-        'youtubeID': 'LHizW4PLw2Q',
+        'youtubeID': 'KmnypHJRxYs',
     },{
         'num': '05',
         'title': 'Устройстве АКПП',
         'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
-        'youtubeID': 'LHizW4PLw2Q',
+        'youtubeID': 'KmnypHJRxYs',
     }
 ] %}
 
@@ -56,14 +56,11 @@
                         <h4 class="sec-expert__subtitle"><span>{{ video.title }}</span></h4>
                         <div class="sec-expert__row">
                             <div class="sec-expert__col-lt">
-{#                                <a class="sec-expert__video js-show-popup" data-pop="pop-video-{{ video.num }}" role="button">#}
-{#                                    <img class="sec-expert__video-img" src="{{ video.preview }}" alt="video">#}
-{#                                </a>#}
                                 <div class="video-unit sec-expert__video">
                                   <div class="video-unit__screen">
-                                    <div class="video-unit__poster js-youtube-init" data-youtube="{{ video.youtubeID }}">
-                                      <img class="video-unit__img" src="{{ video.preview }}" alt="Youtube video">
-                                      <a class="video-unit__start" role="button"></a>
+                                    <div class="video-unit__poster js-youtube-init">
+                                      <img class="video-unit__img" src="{{ video.preview }}" alt="{{ video.title}}">
+                                      <a class="video-unit__start js-expert-video" data-video-id="{{ video.youtubeID }}" role="button"></a>
                                     </div>
                                   </div>
                                 </div>
