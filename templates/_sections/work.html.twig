@@ -1,0 +1,169 @@
+{% set works = [
+    {
+        'key': '01',
+        'isActive': true,
+        'title': 'Обслуживание(TO)',
+        'icon': 'service',
+        'images': [
+            {
+                'title': 'Замена масел и фильтров',
+                'small': asset('images/sec-work/to_1_440x320.jpg'),
+                'smallImgTitle': 'Замена масла',
+                'big': asset('images/sec-work/to_1_700x480.jpg'),
+                'bigImgTitle': 'Замена фильтров'
+            },{
+                'title': 'Замена приводного ремня',
+                'small': asset('images/sec-work/to_2_440x320.jpg'),
+                'smallImgTitle': 'Замена приводного ремня',
+                'big': asset('images/sec-work/to_2_700x480.jpg') ,
+                'bigImgTitle': 'Замена приводного ремня'
+            },{
+                'title': 'Диагностика автомобиля',
+                'small': asset('images/sec-work/to_3_440x320.jpg'),
+                'smallImgTitle': 'Диагностика подвески',
+                'big': asset('images/sec-work/to_3_700x480.jpg'),
+                'bigImgTitle': 'Компьютерная диагностика'
+            }]
+    },{
+        'key': '02',
+        'title': 'Подвеска',
+        'icon': 'suspend',
+        'images': [
+            {
+                'title': 'Ремонт подвески',
+                'small': asset('images/sec-work/suspension_1_440x320.jpg'),
+                'smallImgTitle': 'Ремонт подвески',
+                'big': asset('images/sec-work/suspension_1_700x480.jpg'),
+                'bigImgTitle': 'Ремонт подвески'
+            },{
+                'title': 'Замена рычагов',
+                'small': asset('images/sec-work/suspension_2_440x320.jpg'),
+                'smallImgTitle': 'Замена рычагов',
+                'big': asset('images/sec-work/suspension_2_700x480.jpg'),
+                'bigImgTitle': 'Замена рычагов'
+            }]
+    },{
+        'key': '03',
+        'title': 'Тормозная система',
+        'icon': 'braking',
+        'images': [
+            {
+                'title': 'Переборка суппортов',
+                'small': asset('images/sec-work/brake_1_440x320.jpg'),
+                'smallImgTitle': 'Переборка суппортов',
+                'big': asset('images/sec-work/brake_1_700x480.jpg'),
+                'bigImgTitle': 'Переборка суппортов'
+            },{
+                'title': 'Замена тормозных колодок и дисков',
+                'small': asset('images/sec-work/brake_2_440x320.jpg'),
+                'smallImgTitle': 'Замена колодок',
+                'big': asset('images/sec-work/brake_2_700x480.jpg'),
+                'bigImgTitle': 'Замена дисков'
+            }],
+    },{
+        'key': '04',
+        'title': 'Двигатель',
+        'icon': 'engine',
+        'images': [
+            {
+                'title': 'Замена цепи ГРМ',
+                'small': asset('images/sec-work/engine_1_440x320.jpg'),
+                'smallImgTitle': 'Замена цепи ГРМ',
+                'big': asset('images/sec-work/engine_1_700x480.jpg'),
+                'bigImgTitle': 'Замена цепи ГРМ'
+            },{
+                'title': 'Ремонт Двигателя',
+                'small': asset('images/sec-work/engine_2_440x320.jpg'),
+                'smallImgTitle': 'Ремонт Двигателя',
+                'big': asset('images/sec-work/engine_2_700x480.jpg'),
+                'bigImgTitle': 'Ремонт Двигателя'
+            },{
+                'title': 'Регулировка клапанов',
+                'small': asset('images/sec-work/engine_3_440x320.jpg'),
+                'smallImgTitle': 'Регулировка клапанов',
+                'big': asset('images/sec-work/engine_3_700x480.jpg'),
+                'bigImgTitle': 'Регулировка клапанов'
+            }]
+    },{
+        'key': '05',
+        'title': 'Управление',
+        'icon': 'control',
+        'images': [
+            {
+                'title': 'Замена пыльника рулевой тяги',
+                'small': asset('images/sec-work/steering_1_440x320.jpg'),
+                'smallImgTitle': 'Замена пыльника',
+                'big': asset('images/sec-work/steering_1_700x480.jpg'),
+                'bigImgTitle': 'Замена пыльника'
+            },{
+                'title': 'Замена рулевых тяг и наконечников',
+                'small': asset('images/sec-work/steering_2_440x320.jpg'),
+                'smallImgTitle': 'Замена рулевой тяги',
+                'big': asset('images/sec-work/steering_2_700x480.jpg'),
+                'bigImgTitle': 'Замена рулевых наконечников'
+            }]
+    },{
+        'key': '06',
+        'title': 'Коробка передач',
+        'icon': 'starter',
+        'images': [
+            {
+                'title': 'Обслуживание Вариатора',
+                'small': asset('images/sec-work/cvt_1_440x320.jpg'),
+                'smallImgTitle': 'Обслуживание Вариатора',
+                'big': asset('images/sec-work/cvt_1_700x480.jpg'),
+                'bigImgTitle': 'Обслуживание Вариатора'
+            },{
+                'title': 'Замена фильтра АКПП',
+                'small': asset('images/sec-work/cvt_2_440x320.jpg'),
+                'smallImgTitle': 'Замена фильтра АКПП',
+                'big': asset('images/sec-work/cvt_2_700x480.jpg'),
+                'bigImgTitle': 'Замена фильтра АКПП'
+            },{
+                'title': 'Замена масла Вариатора',
+                'small': asset('images/sec-work/cvt_3_440x320.jpg'),
+                'smallImgTitle': 'Замена масла Вариатора',
+                'big': asset('images/sec-work/cvt_3_700x480.jpg'),
+                'bigImgTitle': 'Замена масла Вариатора'
+            }]
+    }]
+%}
+
+<section class="sec-work js-sec-scroll">
+    <div class="sec-work__front">
+        <div class="container sec-work__wrap">
+            <h2 class="sec-work__title">Наши работы</h2>
+            <div class="sec-work__row">
+                <div class="sec-work__col-lt">
+                    <ul class="sec-work__menu">
+                        {% for work in works %}
+                            <li class="sec-work__menu-item">
+                                <a class="sec-work__btn sec-work__btn_{{ work.icon }} js-work-filter {{work.isActive|default(false) ? 'is-active' : ''}}"
+                                   data-key="{{work.key}}" role="button">
+                                    <span>{{ work.title }}</span></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="sec-work__col-rt">
+                    <div class="sec-work__slider" id="sec-work-slider">
+                        {% for work in works %}
+                            {% for image in work.images %}
+                                <div class="sec-work__slide js-type-{{ work.key }}">
+                                    <div class="sec-work__slide-back">
+                                        <img class="sec-work__slide-min" src="{{ image.small }}" alt="{{ image.smallImgTitle }}">
+                                    </div>
+                                    <div class="sec-work__slide-front">
+                                        <img class="sec-work__slide-big" src="{{ image.big }}" alt="{{ image.bigImgTitle }}">
+                                        <div class="sec-work__slide-note"><span>{{ image.title }}</span></div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    <div class="sec-work__count" id="sec-work-count">01</div>
+                </div><!-- END sec-work__col-rt -->
+            </div><!-- END sec-work__row -->
+        </div><!-- END sec-work__wrap -->
+    </div><!-- END sec-work__front -->
+</section><!-- END sec-work -->

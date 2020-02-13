@@ -36,7 +36,7 @@ docker-hosts-updater:
 pull:
 	docker-compose pull --ignore-pull-failures
 do-up: pull composer
-	docker-compose up --detach --remove-orphans --no-build
+	docker-compose up --detach --remove-orphans
 up: contrib do-up permissions
 	@$(notify)
 cli: app-cli

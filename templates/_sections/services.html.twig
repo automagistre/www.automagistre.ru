@@ -1,0 +1,83 @@
+{% set initActiveNum = '02' %}
+{% set secData = [
+    {
+        'num': '01',
+        'title': 'Компьютерная диагностика',
+        'img': asset('images/sec-services/service_01.png'),
+        'path': path('diagnostics', {'type': 'comp'}),
+        'text': 'Компьютерная диагностика бывает двух видов: целевая и профилактическая. Профилактическая
+                 компьютерная диагностика авто должна производиться не реже чем раз в год. Она позволит
+                 выявить неисправность еще до ее проявления. Специальная программа считывает данные и
+                 показатели со всех реле и датчиков и выводит коды всех ошибок, которые позволят произвести
+                 ремонт, ведь даже обычное окисление контакта может привести к неисправности автомобиля.
+                 Целевая компьютерная диагностика автомобиля производится в случае появления неисправностей.
+                 Она является более углубленной и максимально точно позволяет определить причину неисправности.'
+    },{
+        'num': '02',
+        'active': true,
+        'title': 'Бесплатная диагностика',
+        'img': asset('images/sec-services/service_02.png'),
+        'path': path('diagnostics', {'type': 'free'}),
+        'text': 'Главное правило техцентра «АвтоМагистр» - прежде чем начать работы над автомобилем
+                 необходимо произвести диагностику, прописанную в фирменном сертификате качества.
+                 Нам необходимо получить полную картину проблему автомобиля, чтобы минимизировать
+                 стоимость комплексного решения найденных проблем. Поэтому диагностика в нашем сервисе всегда бесплатна.
+                 Всегда после диагностики индивидуально составляется план и бюджет будущего ремонта.
+                 Благодаря предварительному изучению проблем стоимость ремонта может снизиться в несколько раз'
+    },{
+        'num': '03',
+        'title': 'Техническое обслуживание',
+        'img': asset('images/sec-services/service_03.png'),
+        'path': path('maintenance') ,
+        'text': 'Своевременное и регулярное Техническое обслуживание(ТО) с использование качественных расходных
+                 материалов является залогом исправности автомобиля.
+                 Техцентр "Автомагистр" предлагает комплексное качественное обслуживание японских и корейских автомобилей.
+                 Мы используем только проверенные бренды поставщиков и производителей запчастей.
+                 Так же в ТО обязательно входит фирменная бесплатная диагностика автомобиля.'
+    },{
+        'num': '04',
+        'title': 'Авторемонт',
+        'img': asset('images/sec-services/service_04.png'),
+        'path': path('repair') ,
+        'text': 'Сервисный центр «Автомагистр» окажет помощь в проведении автомобильного
+                 ремонта любой сложности, за проведение которого придётся заплатить совсем
+                 недорого. Понимая все особенности профильных марок, мы экономим ваши деньги,
+                 а благодаря специально подобранному складу запчастей экономим
+                 ваше время.'
+    }
+]%}
+
+
+<section class="sec-services js-sec-scroll">
+    <div class="sec-services__front">
+        <div class="container">
+            <h2 class="sec-services__title">Наши услуги</h2>
+            <div class="sec-services__row">
+                <div class="sec-services__col-lt">
+                    <div class="sec-services__count" id="services-count">{{ initActiveNum }}</div>
+                    <div class="sec-services__picts">
+                        {% for block in secData %}
+                            <img class="sec-services__img js-services-img {{ block.active|default(false) ? 'is-active' : '' }}"
+                                 src="{{ block.img }}"
+                                 alt="{{ block.title }}"
+                                 data-kind="{{ block.num }}">
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="sec-services__col-rt">
+                    <ul class="sec-services__menu" id="services-menu">
+                        {% for block in secData %}
+                            <li class="sec-services__kind js-services-kind {{ block.active|default(false) ? 'is-active' : '' }}" data-kind="{{ block.num }}">
+                                <h4 class="sec-services__kind-title">
+                                    <a class="sec-services__kind-btn js-services-btn">{{ block.title }}</a>
+                                </h4>
+                                <div class="sec-services__kind-text">{{ block.text }}</div>
+                                <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ block.path }}">Подробнее</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- END sec-services -->

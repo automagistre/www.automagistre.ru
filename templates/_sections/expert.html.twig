@@ -1,0 +1,84 @@
+{% set videos = [
+    {
+        'num': '01',
+        'title': 'Тормозной суппорт. Устройство и обслуживание',
+        'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
+        'youtubeID': 'KmnypHJRxYs',
+    },{
+        'num': '02',
+        'title': 'Система охлаждения двигателя',
+        'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
+        'youtubeID': 'KmnypHJRxYs',
+    },{
+        'num': '03',
+        'title': 'Ремонт ГБЦ',
+        'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
+        'youtubeID': 'KmnypHJRxYs',
+    },{
+        'num': '04',
+        'title': 'Какое-то видео',
+        'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
+        'youtubeID': 'KmnypHJRxYs',
+    },{
+        'num': '05',
+        'title': 'Устройстве АКПП',
+        'preview': asset('images/sec-expert/poster_01_760x460.jpg'),
+        'youtubeID': 'KmnypHJRxYs',
+    }
+] %}
+
+<section class="sec-expert js-sec-scroll">
+    <div class="sec-expert__back" id="sec-expert-back">
+        <div class="sec-expert__parr-lt">
+            <img class="sec-expert__parr-img sec-expert__lt-img_01" src="{{ asset('img/sec-expert/lt-img_01.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_02" src="{{ asset('img/sec-expert/lt-img_02.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_03" src="{{ asset('img/sec-expert/lt-img_03.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_04" src="{{ asset('img/sec-expert/lt-img_04.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_05" src="{{ asset('img/sec-expert/lt-img_05.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_06" src="{{ asset('img/sec-expert/lt-img_06.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__lt-img_07" src="{{ asset('img/sec-expert/lt-img_07.png') }}" alt="Авторемонт">
+        </div>
+        <div class="sec-expert__parr-rt">
+            <img class="sec-expert__parr-img sec-expert__rt-img_01" src="{{ asset('img/sec-expert/rt-img_01.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__rt-img_02" src="{{ asset('img/sec-expert/rt-img_02.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__rt-img_03" src="{{ asset('img/sec-expert/rt-img_03.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__rt-img_04" src="{{ asset('img/sec-expert/rt-img_04.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__rt-img_05" src="{{ asset('img/sec-expert/rt-img_05.png') }}" alt="Авторемонт">
+            <img class="sec-expert__parr-img sec-expert__rt-img_06" src="{{ asset('img/sec-expert/rt-img_06.png') }}" alt="Авторемонт">
+        </div>
+    </div>
+    <div class="sec-expert__front">
+        <h2 class="sec-expert__title">Убедитесь в нашей экспертности сами</h2>
+        <div class="sec-expert__slider" id="sec-expert-slider">
+            {% for video in videos %}
+                <div class="sec-expert__slide">
+                    <div class="container">
+                        <h4 class="sec-expert__subtitle"><span>{{ video.title }}</span></h4>
+                        <div class="sec-expert__row">
+                            <div class="sec-expert__col-lt">
+                                <div class="video-unit sec-expert__video">
+                                  <div class="video-unit__screen">
+                                    <div class="video-unit__poster js-youtube-init">
+                                      <img class="video-unit__img" src="{{ video.preview }}" alt="{{ video.title}}">
+                                      <a class="video-unit__start js-expert-video" data-video-id="{{ video.youtubeID }}" role="button"></a>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="sec-expert__col-rt">
+                                <nav class="sec-expert__nav">
+                                    {% for videoNav in videos %}
+                                        {% if videoNav != video %}
+                                            <a class="sec-expert__btn js-expert-btn" data-num="{{ videoNav.num }}">{{ videoNav.title }}</a>
+                                        {% endif %}
+                                    {% endfor %}
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- END sec-expert__slide -->
+            {% endfor %}
+        </div><!-- END sec-expert__slider -->
+        <img class="sec-expert__worker" src="{{ asset('images/sec-expert/worker.png') }}" alt="Авторемонтник">
+    </div><!-- END sec-expert__front -->
+</section><!-- END sec-expert -->

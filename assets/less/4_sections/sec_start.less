@@ -52,7 +52,7 @@
     top: 55px;
     left: 80px;
     transition: all .3s;
-    transform: translateX(-100px);
+    transform: translateX( -100px );
     opacity: 0;
   }
 
@@ -82,7 +82,7 @@
       transition: box-shadow .6s;
 
       &:hover {
-        box-shadow: 0 0 40px -20px rgba(0, 0, 0, .5);
+        box-shadow: 0 0 40px -20px rgba(0,0,0,.5);
       }
     }
 
@@ -165,19 +165,20 @@
 
         &-next {
           opacity: 0;
-          transform: translateX(200px) rotate(360deg);
+          transform: translateX( 200px ) rotate( 360deg );
         }
 
         &-prev {
           opacity: 0;
-          transform: translateX(-200px) rotate(-360deg);
+          transform: translateX( -200px ) rotate( -360deg );
         }
       }
 
       .sec-start__slide {
+        position: static;
 
         &-logo {
-          transform: translateY(-100px);
+          transform: translateY( -100px );
           opacity: 0;
         }
 
@@ -200,18 +201,18 @@
         &-car {
           animation: none;
           transition: all 1s;
-          transform: translateX(-250px);
+          transform: translateX( -250px );
         }
 
         &-wheel {
           transition: transform 1s;
-          transform: rotate(500deg);
+          transform: rotate( 500deg );
         }
       }
 
       .sec-start__nav {
         transition: all 1s;
-        transform: translateY(150px);
+        transform: translateY( 150px );
         opacity: 0;
       }
 
@@ -250,7 +251,6 @@
   }
 
   &__slide {
-    position: relative;
     overflow: hidden;
 
     &-logo {
@@ -262,8 +262,8 @@
       background-repeat: no-repeat;
       background-position: 50% 30%;
       opacity: 0;
-      transition: all 1.5s cubic-bezier(.24, .1, .08, 1.2);
-      transform: translateY(100px);
+      transition: all 1.5s cubic-bezier(.24,.1,.08,1.2);
+      transform: translateY( 100px );
     }
 
     &-car {
@@ -271,8 +271,8 @@
       left: 50%;
       top: 50%;
       margin-top: -100px;
-      transition: all 1.5s cubic-bezier(.24, .1, .08, 1.2);
-      transform: translateX(-100%);
+      transition: all 1.5s cubic-bezier(.24,.1,.08,1.2);
+      transform: translateX( -100% );
     }
 
     &-wheel {
@@ -282,7 +282,7 @@
       background: no-repeat 0 0 url("@{img-dir}sec-start/wheel.png");
       background-size: 100% 100%;
       transform-origin: 50% 50%;
-      transition: all 1.5s cubic-bezier(.24, .1, .08, 1.2);
+      transition: all 1.5s cubic-bezier(.24,.1,.08,1.2);
     }
 
     &-btm {
@@ -303,7 +303,7 @@
 
       opacity: 0;
       visibility: hidden;
-      transform: translateX(500px);
+      transform: translateX( 500px );
       transition: all 1s;
     }
   }
@@ -322,29 +322,15 @@
   }
 
   .sec-start__slide-wheel {
-    transform: rotate(720deg);
+    transform: rotate( 720deg );
   }
 }
 
-.icon-nis {
-  background-image: url("@{img-dir}sec-start/icon_nis.png")
-}
-
-.icon-lex {
-  background-image: url("@{img-dir}sec-start/icon_lex.png")
-}
-
-.icon-toy {
-  background-image: url("@{img-dir}sec-start/icon_toy.png")
-}
-
-.icon-inf {
-  background-image: url("@{img-dir}sec-start/icon_inf.png")
-}
-
-.icon-all {
-  background-image: url("@{img-dir}sec-start/icon_all-brands.png")
-}
+.icon-nis { background-image: url("@{img-dir}sec-start/icon_nis.png") }
+.icon-lex { background-image: url("@{img-dir}sec-start/icon_lex.png") }
+.icon-toy { background-image: url("@{img-dir}sec-start/icon_toy.png") }
+.icon-inf { background-image: url("@{img-dir}sec-start/icon_inf.png") }
+.icon-all { background-image: url("@{img-dir}sec-start/icon_all-brands.png") }
 
 .st-nis {
 
@@ -446,6 +432,7 @@
   }
 }
 
+
 /* ---------- ADAPTIVE < 1620 ------------------------------------------------*/
 @media (max-width: 1620px) {
   .sec-start {
@@ -491,6 +478,7 @@
   }
 }
 
+
 /* ---------- ADAPTIVE < 1024 ------------------------------------------------*/
 @media (max-width: 1024px) {
   .sec-start {
@@ -515,7 +503,7 @@
       }
     }
 
-    &__nav {
+    &__nav{
 
       &-link {
         width: 140px;
@@ -610,6 +598,7 @@
     }
   }
 }
+
 
 /* ---------- ADAPTIVE < 760 -------------------------------------------------*/
 @media (max-width: 760px) {
@@ -746,6 +735,7 @@
   }
 }
 
+
 /* ---------- ADAPTIVE < 540 -------------------------------------------------*/
 @media (max-width: 540px) {
   .sec-start {
@@ -799,8 +789,9 @@
   }
 }
 
+
 /* ---------- ADAPTIVE < 540 -------------------------------------------------*/
-@media (max-width: 540px) and (orientation: portrait) {
+@media (max-width: 540px) and (orientation : portrait) {
   .sec-start {
 
     &__slider {

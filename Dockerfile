@@ -1,4 +1,4 @@
-FROM node:13.7.0-alpine as node-base
+FROM node:13.8.0-alpine as node-base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
@@ -12,17 +12,20 @@ RUN apk add --no-cache git
 FROM node-base as node
 
 COPY package.json package-lock.json ${APP_DIR}/
-RUN npm install
+RUN npm install --no-audit
 
-COPY gulpfile.js ${APP_DIR}
+COPY webpack.config.js ${APP_DIR}
+COPY postcss.config.js ${APP_DIR}
+COPY .babelrc ${APP_DIR}
 COPY assets ${APP_DIR}/assets
 
-RUN gulp build:main-script build:scripts build:less
+RUN NODE_ENV=production webpack
+
 
 #
 # PHP-FPM
 #
-FROM composer:1.9.2 as composer
+FROM composer:1.9.3 as composer
 FROM php:7.3.14-fpm-stretch as base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
