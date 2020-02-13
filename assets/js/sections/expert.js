@@ -1,6 +1,5 @@
 import {mobChecker, startParallax} from "../lib";
-import TweenLite from "gsap/TweenLite";
-import CSSPlugin from "gsap/TweenMax"
+import TweenMax from "gsap/TweenMax";
 import $ from "jquery";
 import "slick-carousel";
 import 'modal-video/js/jquery-modal-video';
@@ -27,7 +26,7 @@ const expertParr = () => {
     let thisOffset = startParallax(expertBack);
     if (thisOffset) {
         for (let [sprite, pos] of secExpert) {
-            TweenLite.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+            TweenMax.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
         }
     }
 };

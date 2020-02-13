@@ -51,7 +51,7 @@ module.exports = {
             test: /\.css$/,
             use: [
                 "style-loader",
-                // MiniCssExtractPlugin.loader,
+                MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
                     options: { sourceMap: true, modules: true }
@@ -67,10 +67,10 @@ module.exports = {
             test: /\.less$/,
             use: [
                 "style-loader",
-                // {
-                //     loader: MiniCssExtractPlugin.loader,
-                //
-                // },
+                {
+                    loader: MiniCssExtractPlugin.loader,
+
+                },
                 {
                     loader: "css-loader",
                     options: { sourceMap: true }
