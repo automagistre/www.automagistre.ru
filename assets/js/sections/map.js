@@ -1,4 +1,4 @@
-import './YMap.less'
+import '../../less/2_plugins/YMap.less'
 import {script} from "../lib";
 
 async function createMap(sectionID) {
