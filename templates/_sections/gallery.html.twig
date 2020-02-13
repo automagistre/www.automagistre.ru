@@ -1,0 +1,65 @@
+{% set odometer = {
+    "years": "now" | date("Y") - 2009,
+    "works": 32384,
+    "cars": 7387
+} %}
+
+<section class="sec-gallery js-sec-scroll">
+    <div class="sec-gallery__row js-scroll-x">
+        <div class="sec-gallery__col">
+            <div class="sec-gallery__cell-100">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_01.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+            <div class="sec-gallery__text sec-gallery__text_top-rt">
+                <h2 class="sec-gallery__title">Наш автосервис</h2>
+                <div class="sec-gallery__note">
+                    Сервисный центр «Автомагистр» окажет помощь в проведении автомобильного
+                    ремонта любой сложности, за проведение которого придётся заплатить
+                    совсем недорого. Понимая, как трудно найти качественный автосервис в
+                    Москве, мы готовы взяться за любую модель, но отдаем предпочтение
+                    японским и корейским автомобилям.
+                </div>
+            </div>
+        </div>
+        <div class="sec-gallery__col">
+            <div class="sec-gallery__cell-50">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_02.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+            <div class="sec-gallery__cell-50">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_03.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+            <div class="sec-gallery__text sec-gallery__text_btm-rt">
+                <ul class="facts sec-gallery__facts">
+                    <li class="facts__item">
+                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.years }}>{{  odometer.years - 9 }}</div>
+                        <div class="facts__txt">Лет опыта</div>
+                    </li>
+                    <li class="facts__item">
+                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.works }}>{{ odometer.works - odometer.works % 100 - 350}}</div>
+                        <div class="facts__txt">Выполненных заказов</div>
+                    </li>
+                    <li class="facts__item">
+                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.cars }}>{{ odometer.cars - odometer.cars % 100 - 350 }}</div>
+                        <div class="facts__txt">Машин отремонтировано</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="sec-gallery__col">
+            <div class="sec-gallery__cell-33">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_04.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+            <div class="sec-gallery__cell-67">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_05.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+        </div>
+        <div class="sec-gallery__col">
+            <div class="sec-gallery__cell-50">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_02.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+            <div class="sec-gallery__cell-50">
+                <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_03.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
+            </div>
+        </div>
+    </div>
+</section><!-- END sec-gallery -->

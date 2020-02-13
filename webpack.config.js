@@ -1,5 +1,6 @@
 "use strict";
 
+
 const webpack = require("webpack");
 const path = require("path");
 
@@ -16,7 +17,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: NODE_ENV,
     entry: {
-        main: PATHS.src + "/js/main",
+        main: ['babel-polyfill', PATHS.src + "/js/main"],
         styles: PATHS.src + "/less/main",
     },
     output: {
@@ -50,15 +51,15 @@ module.exports = {
             test: /\.css$/,
             use: [
                 "style-loader",
-                MiniCssExtractPlugin.loader,
+                // MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
-                    options: { sourceMap: true }
+                    options: { sourceMap: true, modules: true }
                 },{
                     loader: "postcss-loader",
                     options: {
                         sourceMap: true,
-                        config: { path: 'postcss.config.js'}
+                        config: { path: require.resolve('./postcss.config.js')}
                     }
                 },
             ]
@@ -66,10 +67,10 @@ module.exports = {
             test: /\.less$/,
             use: [
                 "style-loader",
-                {
-                    loader: MiniCssExtractPlugin.loader,
-
-                },
+                // {
+                //     loader: MiniCssExtractPlugin.loader,
+                //
+                // },
                 {
                     loader: "css-loader",
                     options: { sourceMap: true }
@@ -112,6 +113,6 @@ module.exports = {
             }),
         new MiniCssExtractPlugin({
             filename: PATHS.assets + "[name].min.css"
-        })
+            }),
     ],
 };
