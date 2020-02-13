@@ -10,4 +10,3 @@ isMobileView = mobChecker(1024);
 setTimeout(function() {
     BODY.classList.remove('no-start-animations');
 }, 500);
-
