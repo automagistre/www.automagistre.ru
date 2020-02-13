@@ -1,5 +1,6 @@
 "use strict";
 
+
 const webpack = require("webpack");
 const path = require("path");
 
@@ -16,7 +17,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     mode: NODE_ENV,
     entry: {
-        main: PATHS.src + "/js/main",
+        main: ['babel-polyfill', PATHS.src + "/js/main"],
         styles: PATHS.src + "/less/main",
     },
     output: {

@@ -19,6 +19,7 @@
     "@babel/preset-env": "^7.8.3",
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.26.0",
     "browser-sync": "^2.26.7",
     "css-loader": "^3.4.2",
@@ -60,6 +61,7 @@
     "salvattore": "^1.0.9",
     "slick-carousel": "^1.8.1",
     "velocity-animate": "^1.5.0",
+    "ymaps": "^0.2.1",
     "zooming": "^2.1.1"
   },
   "author": "Sidorov Kirill",
