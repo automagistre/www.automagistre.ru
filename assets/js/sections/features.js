@@ -1,6 +1,5 @@
 import {mobChecker, startParallax} from "../lib";
-import TweenLite from "gsap/TweenLite";
-import CSSPlugin from "gsap/TweenMax"
+import TweenMax from "gsap/TweenMax";
 
 const features = document.querySelector('#sec-features-back');
 const secFeatures = [
@@ -16,7 +15,7 @@ const featuresParr = () => {
     let thisOffset = startParallax(features);
     if (thisOffset) {
         for( let [sprite, pos] of secFeatures) {
-            TweenLite.to(sprite,  2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+            TweenMax.to(sprite,  2, {y: thisOffset / pos, force3D: true, delay: 0.1});
         }
     }
 };
