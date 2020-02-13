@@ -8,6 +8,7 @@ import '../sections/gallery'
 import '../sections/services'
 import '../sections/work'
 import '../sections/expert'
+import '../sections/faq'
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');

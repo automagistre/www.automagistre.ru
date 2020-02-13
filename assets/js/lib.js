@@ -35,3 +35,18 @@ export const odometer = className => {
     };
     document.addEventListener('scroll', startOdometer);
 };
+
+export const initTabs = (tabsID, bodyID) => {
+    const changeTab = event => {
+        const secID = event.currentTarget.dataset.tab;
+        tabsBtns.forEach(btn => btn.classList.remove('is-active'));
+        event.currentTarget.classList.add('is-active');
+        bodyItems.forEach(item => item.classList.remove('is-active'));
+        bodySec.querySelector(`#${secID}`).classList.add('is-active');
+    };
+    const tabSec = document.querySelector(`#${tabsID}`),
+          bodySec = document.querySelector(`#${bodyID}`);
+    const tabsBtns = tabSec.querySelectorAll('.js-tabs-btn'),
+          bodyItems = bodySec.querySelectorAll('.js-tabs-item');
+    tabsBtns.forEach(btn => btn.addEventListener('click', changeTab))
+};
