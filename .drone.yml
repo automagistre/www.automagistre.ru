@@ -72,6 +72,7 @@ steps:
                 -not -path "./.idea/*"
                 -not -path "./var/*"
                 -not -path "./vendor/*"
+                -not -path "./node_modules/*"
                 -type f -exec grep -Iq . {} \; -and -print0
                 | xargs -0 -L1 bash -c 'test -z "$(tail -c 1 "$0")"
                 || (echo "No new line at end of $0" && exit 1)'
