@@ -3,7 +3,7 @@ import TweenMax from "gsap/TweenMax";
 import $ from "jquery";
 import "slick-carousel";
 import 'modal-video/js/jquery-modal-video';
-import 'modal-video/css/modal-video.min.css';
+import '../../less/2_plugins/modal-video.min';
 
 const expertBack = document.querySelector('#sec-expert-back');
 const secExpert = [

@@ -1,8 +1,12 @@
 "use strict";
 
-
 const webpack = require("webpack");
 const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PATHS = {
@@ -11,9 +15,6 @@ const PATHS = {
     assets: 'assets/'
 };
 
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -21,7 +22,7 @@ module.exports = {
         styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: PATHS.assets + "[name].min.js",
+        filename: PATHS.assets + "[name].[hash].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -50,7 +51,6 @@ module.exports = {
         },{
             test: /\.css$/,
             use: [
-                "style-loader",
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
@@ -59,18 +59,14 @@ module.exports = {
                     loader: "postcss-loader",
                     options: {
                         sourceMap: true,
-                        config: { path: require.resolve('./postcss.config.js')}
+                        config: { path: 'postcss.config.js'}
                     }
                 },
             ]
         },{
             test: /\.less$/,
             use: [
-                "style-loader",
-                {
-                    loader: MiniCssExtractPlugin.loader,
-
-                },
+                MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
                     options: { sourceMap: true }
@@ -109,10 +105,21 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-                NODE_ENV: JSON.stringify(NODE_ENV)
-            }),
+            NODE_ENV: JSON.stringify(NODE_ENV)
+        }),
         new MiniCssExtractPlugin({
-            filename: PATHS.assets + "[name].min.css"
-            }),
+            filename: PATHS.assets + "[name].[hash].css"
+        }),
+        new CleanWebpackPlugin({
+            dry: false,
+            verbose: false,
+            cleanStaleWebpackAssets: false,
+            cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
+        }),
+        new CopyWebpackPlugin([
+            {from: PATHS.src + 'images', to: PATHS.dist + 'images'},
+            {from: PATHS.src + 'img', to: PATHS.dist + 'img'}
+        ]),
+        new ManifestPlugin()
     ],
 };
