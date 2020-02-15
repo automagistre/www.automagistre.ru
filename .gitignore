@@ -15,3 +15,6 @@
 /node_modules
 /public/assets
 /assets/js/main.old.js
+/public/img
+/public/images
+/public/manifest.json

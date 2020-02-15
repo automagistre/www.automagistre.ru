@@ -46,19 +46,5 @@ $(window).on('load', ()=> {
         });
     }
     if ($scroll_Y.length) initScroll_Y($scroll_Y);
-    $.scrollify({
-        section: '.js-sec-scroll',
-        sectionName: 'section-name',
-        easing: 'easeOutExpo',
-        scrollSpeed: 1100,
-        offset: 0,
-        scrollbars: true,
-        standardScrollElements: '',
-        setHeights: false,
-        overflowScroll: true,
-        updateHash: true,
-        touchScroll: true,
-    });
-    if (mobChecker(1024)) $.scrollify.disable();
     $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());
 });
