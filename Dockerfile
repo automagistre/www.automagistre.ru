@@ -9,10 +9,10 @@ WORKDIR ${APP_DIR}
 
 RUN apk add --no-cache git
 
-FROM node-base as node
-
 COPY package.json package-lock.json ${APP_DIR}/
 RUN npm install --no-audit
+
+FROM node-base as node
 
 COPY webpack.config.js ${APP_DIR}
 COPY postcss.config.js ${APP_DIR}

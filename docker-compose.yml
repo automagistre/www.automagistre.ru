@@ -10,9 +10,7 @@ services:
             - ./etc/nginx.conf:/etc/nginx/nginx.conf
 
     node:
-        build:
-            context: .
-            target: node-base
+        image: automagistre/www-node:base
         command: /bin/true
         volumes:
             - ./:/usr/local/app
