@@ -11,10 +11,9 @@ services:
 
     node:
         image: automagistre/www-node:base
-        command: /bin/true
+        command: webpack --watch
         volumes:
             - ./:/usr/local/app
-        user: ${UID}:${GID}
 
     app:
         image: automagistre/www-app:base
