@@ -13,6 +13,7 @@ steps:
             -   name: docker.sock
                 path: /var/run/docker.sock
         commands:
+            - docker build -t "automagistre/www-node:base" --target node-base .
             - docker build -t "automagistre/www-app:base" --target base .
 
     -   name: push base
@@ -23,6 +24,7 @@ steps:
         commands:
             - docker login --username "$USERNAME" --password "$PASSWORD"
             - docker push automagistre/www-app:base
+            - docker push automagistre/www-node:base
         environment:
             USERNAME:
                 from_secret: HUB_USER
@@ -40,6 +42,16 @@ steps:
         environment:
             APP_ENV: test
             APP_DEBUG: '1'
+        depends_on:
+            - build base
+
+    -   name: install assets
+        image: automagistre/www-node:base
+        commands:
+            - npm install --no-audit
+            - webpack
+        environment:
+            NODE_ENV: production
         depends_on:
             - build base
 
@@ -116,6 +128,7 @@ steps:
             MYSQL_PASSWORD: 'db'
         depends_on:
             - install
+            - install assets
 
     -   name: build
         image: docker:19.03.5
