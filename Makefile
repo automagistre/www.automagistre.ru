@@ -35,7 +35,7 @@ docker-hosts-updater:
 ###> ALIASES ###
 pull:
 	docker-compose pull --ignore-pull-failures
-do-up: pull composer
+do-up: pull composer npm
 	docker-compose up --detach --remove-orphans
 up: contrib do-up permissions
 	@$(notify)
@@ -103,7 +103,7 @@ memcached-restart:
 ###< MEMCACHED ###
 
 ###> NODE ###
-node-install:
+npm:
 	docker-compose run --rm node npm install
 node-cli:
 	docker-compose run --rm node sh
