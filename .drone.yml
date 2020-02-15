@@ -49,6 +49,10 @@ steps:
         image: automagistre/www-node:base
         commands:
             - npm install --no-audit
+            - pwd
+            - ls node_modules/
+            - ls node_modules/.bin
+            - echo $PATH
             - node_modules/.bin/webpack
         environment:
             NODE_ENV: production
