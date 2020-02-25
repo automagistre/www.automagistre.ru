@@ -27,6 +27,11 @@ if (document.querySelector('section.sec-faq')){
     })
 }
 
+if (document.querySelector('section.sec-work')){
+    require.ensure([], require => {
+        require('../sections/work').default();
+    })
+}
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
