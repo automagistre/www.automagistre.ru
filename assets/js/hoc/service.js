@@ -4,7 +4,6 @@ import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
 import '../sections/services'
-import '../sections/map'
 
 
 if(document.querySelector('section.sec-expert')) {
@@ -36,6 +35,13 @@ if (document.querySelector('section.sec-gallery')){
         require('../sections/gallery').default();
     })
 }
+
+if (document.querySelector('section.sec-map')){
+    require.ensure([], require => {
+        require('../sections/map').default();
+    })
+}
+
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
