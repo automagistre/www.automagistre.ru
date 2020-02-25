@@ -3,6 +3,10 @@ import 'malihu-custom-scrollbar-plugin';
 import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
+import Header from '../ui/Header';
+
+const header = new Header();
+header.init();
 
 
 if (document.querySelector('section.sec-start')){
