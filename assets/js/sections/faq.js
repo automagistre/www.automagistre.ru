@@ -1,3 +1,9 @@
 import {initTabs} from "../lib";
 
-initTabs('sec-faq-tabs', 'sec-faq-body');
+const faqSec = () => {
+  const tabs = 'sec-faq-tabs',
+        body = 'sec-faq-body';
+  initTabs(tabs, body);
+};
+
+export default faqSec;

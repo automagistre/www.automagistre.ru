@@ -19,21 +19,22 @@ if ($secStartSlider) {
             {breakpoint: 768, settings: {arrows: false}},
         ],
     });
+    document.querySelectorAll('.js-set-start-slide').
+        forEach(el => el.addEventListener('click', () => {
+            $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
+        }));
+
+    document.querySelectorAll('.js-sec-start-slider-freeze').
+        forEach(el => el.addEventListener('click', () =>{
+            document.querySelector('#sec-start-select').
+                classList.add('is-frozen');
+        }));
+
+    document.querySelectorAll('.js-sec-start-slider-unfreeze').
+        forEach(el => el.addEventListener('click', () =>{
+            document.querySelector('#sec-start-select').
+                classList.remove('is-frozen')
+        }));
 }
 
-document.querySelectorAll('.js-set-start-slide').
-         forEach(el => el.addEventListener('click', () => {
-                                    $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
-}));
 
-document.querySelectorAll('.js-sec-start-slider-freeze').
-         forEach(el => el.addEventListener('click', () =>{
-                                    document.querySelector('#sec-start-select').
-                                             classList.add('is-frozen');
-}));
-
-document.querySelectorAll('.js-sec-start-slider-unfreeze').
-         forEach(el => el.addEventListener('click', () =>{
-                                   document.querySelector('#sec-start-select').
-                                            classList.remove('is-frozen')
-}));

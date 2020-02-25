@@ -38,8 +38,10 @@ const slickOptions = {
     slidesToScroll: 1,
 };
 
-$secWorkSlider.slick(slickOptions);
-secWorkFilter('js-type-01', '01'); // Init slider
-workFilterBtn.forEach(element => element.addEventListener('click', changeSlide));
+if (document.querySelector('section.sec-work')) {
+    $secWorkSlider.slick(slickOptions);
+    secWorkFilter('js-type-01', '01'); // Init slider
+    workFilterBtn.forEach(element => element.addEventListener('click', changeSlide));
+}
 
 
