@@ -5,7 +5,6 @@ import {mobChecker} from "../lib";
 import '../sections/start'
 import '../sections/gallery'
 import '../sections/services'
-import '../sections/work'
 import '../sections/map'
 
 
