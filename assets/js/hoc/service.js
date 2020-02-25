@@ -7,9 +7,22 @@ import '../sections/features'
 import '../sections/gallery'
 import '../sections/services'
 import '../sections/work'
-import '../sections/expert'
+
 import '../sections/faq'
 import '../sections/map'
+
+
+if(document.querySelector('section.sec-expert')) {
+    require.ensure([], require => {
+       require('../sections/expert').default();
+    })
+}
+
+if(document.querySelector('section.sec-features')) {
+    require.ensure([], require => {
+        require('../sections/features').default();
+    })
+}
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
