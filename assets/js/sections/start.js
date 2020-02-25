@@ -1,10 +1,11 @@
 import $ from 'jquery'
 import 'slick-carousel'
 
-const $secStartSlider = $('#sec-start-slider');
 
-if ($secStartSlider) {
-    $secStartSlider.slick({
+
+const initSlickSlider = () => {
+    const $secStartSlider = $('#sec-start-slider');
+    const slickOptions = {
         arrows: true,
         dots: false,
         infinite: true,
@@ -16,14 +17,21 @@ if ($secStartSlider) {
         prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
         nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
         responsive: [
-            {breakpoint: 768, settings: {arrows: false}},
-        ],
-    });
-    document.querySelectorAll('.js-set-start-slide').
-        forEach(el => el.addEventListener('click', () => {
-            $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
-        }));
+            {breakpoint: 768, settings: {arrows: false}}
+        ]};
+    if ($secStartSlider) {
+        $secStartSlider.slick(slickOptions);
+        document.querySelectorAll('.js-set-start-slide').
+            forEach(el => el.addEventListener('click', () => {
+                $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
+            }));
+    } else {
+        throw new Error('Fail init SlickSlider on startSec');
+    }
+};
 
+const startSec = () => {
+    initSlickSlider();
     document.querySelectorAll('.js-sec-start-slider-freeze').
         forEach(el => el.addEventListener('click', () =>{
             document.querySelector('#sec-start-select').
@@ -35,6 +43,6 @@ if ($secStartSlider) {
             document.querySelector('#sec-start-select').
                 classList.remove('is-frozen')
         }));
-}
+};
 
-
+export default startSec;

@@ -3,8 +3,13 @@ import 'malihu-custom-scrollbar-plugin';
 import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
-import '../sections/services'
 
+
+if (document.querySelector('section.sec-start')){
+    require.ensure([], require => {
+        require('../sections/start').default();
+    })
+}
 
 if(document.querySelector('section.sec-expert')) {
     require.ensure([], require => {
@@ -42,6 +47,11 @@ if (document.querySelector('section.sec-map')){
     })
 }
 
+if (document.querySelector('section.sec-services')){
+    require.ensure([], require => {
+        require('../sections/services').default();
+    })
+}
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
