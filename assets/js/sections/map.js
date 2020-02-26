@@ -1,4 +1,3 @@
-import '../../less/2_plugins/YMap.less'
 import {script} from "../lib";
 
 async function createMap(sectionID) {
@@ -31,4 +30,11 @@ async function createMap(sectionID) {
     });
 }
 
-createMap('section-map');
+const mapSec = () => {
+  require.ensure([], require => require('../../less/2_plugins/YMap.less'));
+  createMap('section-map').then();
+};
+
+export default mapSec;
+
+

@@ -1,4 +1,3 @@
-
 const toggleService = (e) => {
     const newActiveService = e.currentTarget;
     if (newActiveService.classList.contains('is-active')) return false;
@@ -24,5 +23,8 @@ const toggleService = (e) => {
     }
 };
 
-document.querySelectorAll(".js-services-kind").forEach( service => service.addEventListener('click', toggleService));
+const servicesSec = () => {
+    document.querySelectorAll(".js-services-kind").forEach( service => service.addEventListener('click', toggleService));
+};
 
+export default servicesSec;
