@@ -4,10 +4,13 @@ import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
 import Header from '../ui/Header';
+import ScrollToTop from '../ui/ScrollToTop';
 
 const header = new Header();
-header.init();
+const scrollToTop = new ScrollToTop();
 
+header.init();
+scrollToTop.init();
 
 if (document.querySelector('section.sec-start')){
     require.ensure([], require => {

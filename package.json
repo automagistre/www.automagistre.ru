@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "ajv": "^6.11.0",
+    "animated-scroll-to": "^2.0.5",
     "bootstrap": "^4.4.1",
     "bootstrap-datepicker": "^1.7.1",
     "fotorama": "^4.6.4",
