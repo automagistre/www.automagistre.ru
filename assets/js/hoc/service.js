@@ -5,60 +5,16 @@ import {mobChecker} from "../lib";
 import '../sections/start'
 import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
+import initSections from './initSections';
 
 const header = new Header();
 const scrollToTop = new ScrollToTop();
 
 header.init();
+initSections();
 scrollToTop.init();
 
-if (document.querySelector('section.sec-start')){
-    require.ensure([], require => {
-        require('../sections/start').default();
-    })
-}
 
-if(document.querySelector('section.sec-expert')) {
-    require.ensure([], require => {
-       require('../sections/expert').default();
-    })
-}
-
-if(document.querySelector('section.sec-features')) {
-    require.ensure([], require => {
-        require('../sections/features').default();
-    })
-}
-
-if (document.querySelector('section.sec-faq')){
-    require.ensure([], require => {
-        require('../sections/faq').default();
-    })
-}
-
-if (document.querySelector('section.sec-work')){
-    require.ensure([], require => {
-        require('../sections/work').default();
-    })
-}
-
-if (document.querySelector('section.sec-gallery')){
-    require.ensure([], require => {
-        require('../sections/gallery').default();
-    })
-}
-
-if (document.querySelector('section.sec-map')){
-    require.ensure([], require => {
-        require('../sections/map').default();
-    })
-}
-
-if (document.querySelector('section.sec-services')){
-    require.ensure([], require => {
-        require('../sections/services').default();
-    })
-}
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
