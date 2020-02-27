@@ -8,12 +8,9 @@ import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
 
 new Header();
-const scrollToTop = new ScrollToTop();
+new ScrollToTop();
 
 initSections();
-scrollToTop.init();
-
-
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
