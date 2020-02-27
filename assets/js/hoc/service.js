@@ -3,13 +3,18 @@ import 'malihu-custom-scrollbar-plugin';
 import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
-import '../sections/features'
-import '../sections/gallery'
-import '../sections/services'
-import '../sections/work'
-import '../sections/expert'
-import '../sections/faq'
-import '../sections/map'
+import Header from '../ui/Header';
+import ScrollToTop from '../ui/ScrollToTop';
+import initSections from './initSections';
+
+const header = new Header();
+const scrollToTop = new ScrollToTop();
+
+header.init();
+initSections();
+scrollToTop.init();
+
+
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');

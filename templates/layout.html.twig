@@ -25,7 +25,7 @@
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon-152x152.png') }}" sizes="152x152"/>
     <!-- Styles ================================================================================== -->
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
-    <link rel="stylesheet" href="{{ asset('main.css') }}"/><!-- Main styles from .js -->
+{#    <link rel="stylesheet" href="{{ asset('main.css') }}"/><!-- Main styles from .js -->#}
     <!--link rel="stylesheet" href="css/modify.css"/--><!-- Fast dev additions -->
 </head>
 
@@ -214,7 +214,6 @@
                         </div>
                     </div><!-- END container -->
                 </div>
-                <a class="scroll-top js-scroll-top" title="Вверх" role="button"></a>
             </footer><!-- END site-footer -->
         {% endblock %}
 
@@ -224,7 +223,7 @@
 </div><!-- END site-wrapper -->
 
 <!-- SCRIPTS =============================================================== -->
-
+<script src="{{ asset('vendors.js') }}"></script>
 <script src="{{ asset('main.js') }}"></script>
 
 </body>

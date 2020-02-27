@@ -42,6 +42,16 @@ module.exports = {
                 parallel: true,
             })
         ],
+        splitChunks: {
+            cacheGroups: {
+                vendors: {
+                    name: 'vendors',
+                    test: /node_modules/,
+                    chunks: 'all',
+                    enforce: true,
+                }
+            }
+        }
     },
     module: {
         rules: [{
@@ -117,8 +127,8 @@ module.exports = {
             cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
         }),
         new CopyWebpackPlugin([
-            {from: PATHS.src + 'images', to: PATHS.dist + 'images'},
-            {from: PATHS.src + 'img', to: PATHS.dist + 'img'}
+            {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
+            {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
         ]),
         new ManifestPlugin()
     ],
