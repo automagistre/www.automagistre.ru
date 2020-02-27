@@ -7,10 +7,9 @@ import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
 
-const header = new Header();
+new Header();
 const scrollToTop = new ScrollToTop();
 
-header.init();
 initSections();
 scrollToTop.init();
 
