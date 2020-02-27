@@ -46,4 +46,10 @@ export default function initSections() {
       require('../sections/services').default();
     })
   }
+
+  if (document.querySelector('section.sec-experience')){
+    require.ensure([], require => {
+      require('../sections/experience').default();
+    })
+  }
 }
