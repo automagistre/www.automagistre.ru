@@ -6,11 +6,19 @@ import '../sections/start'
 import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
+import animateScrollTo from 'animated-scroll-to';
 
 new Header();
 new ScrollToTop();
 
 initSections();
+
+const goToButtons = document.querySelectorAll('[data-scrollTo]');
+goToButtons.forEach(btn => {
+    const scrollTarget = document.querySelector(btn.dataset.scrollto);
+    if (scrollTarget)
+        btn.addEventListener('click', ()=>animateScrollTo(scrollTarget))
+});
 
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
