@@ -51,34 +51,7 @@
             </div>
         </section><!-- END sec-intro -->
 
-        <section class="sec-partners">
-            <div class="container">
-                <h2 class="sec-partners__title">Наши корпоративные клиенты</h2>
-                <div class="sec-partners__slider sec-partners-slider">
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/vges.jpg') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/spec_stoy.png') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/cktek.png') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/master-gard.png') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/medic.png') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/noop_ru_rs.png') }}" alt="Авто партнер">
-                    </div>
-                    <div class="sec-partners__slide">
-                        <img class="sec-partners__logo" src="{{ asset('img/sec-partners/rusteck.png') }}" alt="Авто партнер">
-                    </div>
-                </div>
-            </div><!-- END container -->
-        </section><!-- END sec-partners -->
+        {{ include('_sections/partners.html.twig') }}
 
         {{ include('_sections/experience.html.twig') }}
 
