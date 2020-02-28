@@ -58,4 +58,10 @@ export default function initSections() {
       require('../sections/master').default();
     })
   }
+
+  if (document.querySelector('section.sec-partners')){
+    require.ensure([], require => {
+      require('../sections/partners').default();
+    })
+  }
 }
