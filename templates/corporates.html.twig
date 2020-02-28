@@ -1,5 +1,25 @@
 {% extends 'layout.html.twig' %}
 
+{% set features = [
+    {
+        "icon": "icon-f_suspension",
+        "title": "Ремонт <br> день в день",
+        "note": "Оперативно поставим необходимые запчасти и проведем необходимый ремонт"
+    },{
+        "icon": "icon-f_success",
+        "title": "Оперативно, <br> без очереди",
+        "note": "Корпоративные машины обслуживаются без очереди"
+    },{
+        "icon": "icon-f_speed",
+        "title": "Обработаем большие заказы",
+        "note": "Высокая производительность цеха позволяет производить ремонтные работы в больших объемах"
+    },{
+        "icon": "icon-f_star",
+        "title": "100% <br> гарантия ремонта",
+        "note": "У нас строгая гарантийная безусловная политика. Вам не нужно ничего доказывать и собирать документы"
+    }
+] %}
+
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">
@@ -26,26 +46,13 @@
                         </button>
                     {{ form_end(form) }}
                     <ul class="sec-intro__features">
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_suspension"></i>
-                            <h3 class="feature__title">Ремонт <br> день в день</h3>
-                            <div class="feature__note">Оперативно поставим необходимые запчасти и проведем необходимый ремонт</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_success"></i>
-                            <h3 class="feature__title">Оперативно, <br> без очереди</h3>
-                            <div class="feature__note">Корпоративные машины обслуживаются без очереди</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_speed"></i>
-                            <h3 class="feature__title">Обработаем большие заказы</h3>
-                            <div class="feature__note">Высокая производительность цеха позволяет производить ремонтные работы в больших объемах</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_star"></i>
-                            <h3 class="feature__title">100% <br> гарантия ремонта</h3>
-                            <div class="feature__note">У нас строгая гарантийная безусловная политика. Вам не нужно ничего доказывать и собирать документы</div>
-                        </li>
+                        {% for feature in features %}
+                            <li class="feature sec-intro__feature">
+                                <i class="feature__icon {{ feature.icon }}"></i>
+                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
+                                <div class="feature__note">{{ feature.note | raw }}</div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
