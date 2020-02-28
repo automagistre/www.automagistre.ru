@@ -64,4 +64,10 @@ export default function initSections() {
       require('../sections/partners').default();
     })
   }
+
+  if (document.querySelector('section.sec-happen')){
+    require.ensure([], require => {
+      require('../sections/happen').default();
+    })
+  }
 }
