@@ -1,22 +1,49 @@
+{% set clubs = [
+    {
+        "name": "club-fx.ru",
+        "logo": asset('img/sec-partners/clubs/club_fx.png')
+    },{
+        "name": "my-infiniti.ru",
+        "logo": asset('img/sec-partners/clubs/my_infiniti.png')
+    },{
+        "name": "almera-classic.ru",
+        "logo": asset('img/sec-partners/clubs/almera_classic.png')
+    },{
+        "name": "clubmurano.ru",
+        "logo": asset('img/sec-partners/clubs/club_murano.png')
+    },{
+        "name": "clubqashqai.ru",
+        "logo": asset('img/sec-partners/clubs/club_qashgai.png')
+    },{
+        "name": "club-tiida.ru",
+        "logo": asset('img/sec-partners/clubs/club_tiida.png')
+    },{
+        "name": "march-club.ru",
+        "logo": asset('img/sec-partners/clubs/march_club.png')
+    },{
+        "name": "maxima-qx.ru",
+        "logo": asset('img/sec-partners/clubs/maxima_qx.jpg')
+    },{
+        "name": "nissan-note.info",
+        "logo": asset('img/sec-partners/clubs/nissan_note.gif')
+    },{
+        "name": "primera-club.ru",
+        "logo": asset('img/sec-partners/clubs/primera_club.png')
+    },{
+        "name": "x-trail-club.ru",
+        "logo": asset('img/sec-partners/clubs/x_trail_club.jpg')
+    }
+] %}
+
 <section class="sec-partners">
     <div class="container">
         <h2 class="sec-partners__title">Нам доверяют основные клубы Nissan Москвы</h2>
         <div class="sec-partners__slider" id="sec-partners-slider">
-            <div class="sec-partners__slide">
-                <img class="sec-partners__logo" src="{{ asset('img/sec-partners/uncompressed/partner_01.png') }}" alt="Авто партнер">
-            </div>
-            <div class="sec-partners__slide">
-                <img class="sec-partners__logo" src="{{ asset('img/sec-partners/uncompressed/partner_02.png') }}" alt="Авто партнер">
-            </div>
-            <div class="sec-partners__slide">
-                <img class="sec-partners__logo" src="{{ asset('img/sec-partners/uncompressed/partner_03.png') }}" alt="Авто партнер">
-            </div>
-            <div class="sec-partners__slide">
-                <img class="sec-partners__logo" src="{{ asset('img/sec-partners/uncompressed/partner_04.png') }}" alt="Авто партнер">
-            </div>
-            <div class="sec-partners__slide">
-                <img class="sec-partners__logo" src="{{ asset('img/sec-partners/uncompressed/partner_05.png') }}" alt="Авто партнер">
-            </div>
+            {% for club in clubs %}
+                <div class="sec-partners__slide">
+                    <img class="sec-partners__logo" src="{{ club.logo }}" alt="{{ club.name }}">
+                </div>
+            {% endfor %}
         </div>
     </div><!-- END container -->
 </section><!-- END sec-partners -->
