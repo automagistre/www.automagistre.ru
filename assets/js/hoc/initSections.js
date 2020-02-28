@@ -52,4 +52,10 @@ export default function initSections() {
       require('../sections/experience').default();
     })
   }
+
+  if (document.querySelector('section.sec-master')){
+    require.ensure([], require => {
+      require('../sections/master').default();
+    })
+  }
 }
