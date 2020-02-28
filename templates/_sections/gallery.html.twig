@@ -1,8 +1,4 @@
-{% set odometer = {
-    "years": "now" | date("Y") - 2009,
-    "works": 32384,
-    "cars": 7387
-} %}
+{% from '_sections/chunks/odometer.twig' import odometer %} }}
 
 <section class="sec-gallery js-sec-scroll">
     <div class="sec-gallery__row js-scroll-x">
@@ -29,20 +25,9 @@
                 <img class="sec-gallery__img" src="{{ asset('images/sec-gallery/work_03.jpg') }}" data-action="zoom" alt="Автосервис АвтоМагистр">
             </div>
             <div class="sec-gallery__text sec-gallery__text_btm-rt">
-                <ul class="facts sec-gallery__facts">
-                    <li class="facts__item">
-                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.years }}>{{  odometer.years - 9 }}</div>
-                        <div class="facts__txt">Лет опыта</div>
-                    </li>
-                    <li class="facts__item">
-                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.works }}>{{ odometer.works - odometer.works % 100 - 350}}</div>
-                        <div class="facts__txt">Выполненных заказов</div>
-                    </li>
-                    <li class="facts__item">
-                        <div class="facts__val js-odometer is-hidden" data-value={{ odometer.cars }}>{{ odometer.cars - odometer.cars % 100 - 350 }}</div>
-                        <div class="facts__txt">Машин отремонтировано</div>
-                    </li>
-                </ul>
+
+                {{ odometer('sec-gallery__facts') }}
+
             </div>
         </div>
         <div class="sec-gallery__col">

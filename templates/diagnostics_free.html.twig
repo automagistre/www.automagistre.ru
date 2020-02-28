@@ -1,5 +1,25 @@
 {% extends 'layout.html.twig' %}
 
+{% set features = [
+    {
+        "icon": "icon-f_suspension",
+        "title": "Не обязываем <br> к ремонту",
+        "note": "Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.",
+    },{
+        "icon": "icon-f_speed",
+        "title": "Управимся <br> за 40 минут",
+        "note": "Фирменная диагностика более чем по 70 пунктам в кротчайшие сроки",
+    },{
+        "icon": "icon-f_piggy",
+        "title": "Цены неизменны <br> год за годом",
+        "note": "Цены на работы действительны в течение года",
+    },{
+        "icon": "icon-f_binocul",
+        "title": "Наблюдайте <br> за работой",
+        "note": "У нас свободный доступ в ремзону, все найденные недостатки будут продемонстрированы. Но не забывайте про технику безопасности",
+    }
+] %}
+
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
 {% block content %}
@@ -28,32 +48,19 @@
                         </button>
                     {{ form_end(form) }}
                     <ul class="sec-intro__features">
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_suspension"></i>
-                            <h3 class="feature__title">Не обязываем <br> к ремонту</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_speed"></i>
-                            <h3 class="feature__title">Управимся <br> за 40 минут</h3>
-                            <div class="feature__note">Фирменная диагностика более чем по 70 пунктам в кротчайшие сроки</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_piggy"></i>
-                            <h3 class="feature__title">Цены неизменны <br> год за годом</h3>
-                            <div class="feature__note">Цены на работы действительны в течение года</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_binocul"></i>
-                            <h3 class="feature__title">Наблюдайте <br> за работой</h3>
-                            <div class="feature__note">У нас свободный доступ в ремзону, все найденные недостатки будут продемонстрированы. Но не забывайте про технику безопасности</div>
-                        </li>
+                        {% for feature in features %}
+                            <li class="feature sec-intro__feature">
+                                <i class="feature__icon {{ feature.icon }}"></i>
+                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
+                                <div class="feature__note">{{ feature.note | raw }}</div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
         </section><!-- END sec-intro -->
 
-        {{ include('_sections/features2.html.twig') }}
+        {{ include('_sections/features_diag_free.html.twig') }}
 
         {{ include('_sections/experience.html.twig') }}
 

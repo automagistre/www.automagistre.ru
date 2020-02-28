@@ -46,4 +46,28 @@ export default function initSections() {
       require('../sections/services').default();
     })
   }
+
+  if (document.querySelector('section.sec-experience')){
+    require.ensure([], require => {
+      require('../sections/experience').default();
+    })
+  }
+
+  if (document.querySelector('section.sec-master')){
+    require.ensure([], require => {
+      require('../sections/master').default();
+    })
+  }
+
+  if (document.querySelector('section.sec-partners')){
+    require.ensure([], require => {
+      require('../sections/partners').default();
+    })
+  }
+
+  if (document.querySelector('section.sec-happen')){
+    require.ensure([], require => {
+      require('../sections/happen').default();
+    })
+  }
 }
