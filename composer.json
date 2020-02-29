@@ -32,13 +32,11 @@
         "symfony/mailer": "^5.0",
         "symfony/monolog-bundle": "^3.3",
         "symfony/security-bundle": "^5.0",
-        "symfony/serializer-pack": "^1.0",
         "symfony/templating": "^5.0",
         "symfony/translation": "^5.0",
         "symfony/twig-bundle": "^5.0",
         "symfony/validator": "^5.0",
-        "symfony/yaml": "^5.0",
-        "twig/extensions": "^1.5"
+        "symfony/yaml": "^5.0"
     },
     "require-dev": {
         "brianium/paratest": "^4.0",
