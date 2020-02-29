@@ -28,10 +28,6 @@ final class BrandListener implements EventSubscriberInterface
     public function onKernelRequest(RequestEvent $event): void
     {
         $request = $event->getRequest();
-
-        if (!$request->hasSession()) {
-            return;
-        }
         $session = $request->getSession();
 
         $brand = $request->attributes->get('brand');

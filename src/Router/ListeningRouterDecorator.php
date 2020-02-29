@@ -36,6 +36,8 @@ final class ListeningRouterDecorator implements RouterInterface, RequestMatcherI
 
     /**
      * {@inheritdoc}
+     *
+     * @param array<mixed, mixed> $parameters
      */
     public function generate(string $name, array $parameters = [], int $referenceType = self::ABSOLUTE_PATH): string
     {
@@ -96,7 +98,7 @@ final class ListeningRouterDecorator implements RouterInterface, RequestMatcherI
     /**
      * {@inheritdoc}
      */
-    public function warmUp($cacheDir): void
+    public function warmUp(string $cacheDir): void
     {
         if ($this->router instanceof WarmableInterface) {
             $this->router->warmUp($cacheDir);

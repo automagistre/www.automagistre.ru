@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace App\Router;
 
-use LogicException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouterInterface;
@@ -36,12 +34,9 @@ final class BrandRoutesListener implements EventSubscriberInterface
         ];
     }
 
-    public function onRouterPreGenerate(GenericEvent $event): void
+    public function onRouterPreGenerate(RoutePreGenerate $event): void
     {
         $router = $event->getSubject();
-        if (!$router instanceof RouterInterface) {
-            throw new LogicException(\sprintf('"%s" required.', RouterInterface::class));
-        }
 
         ['name' => $name, 'parameters' => $parameters, 'referenceType' => $referenceType] = $event->getArguments();
 

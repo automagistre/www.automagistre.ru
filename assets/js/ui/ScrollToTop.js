@@ -3,7 +3,7 @@ import animateScrollTo from 'animated-scroll-to'
 class ScrollToTop {
   visible = false;
 
-  init() {
+  constructor() {
     let scrollButton = document.createElement('a');
     scrollButton.className = 'scroll-top';
     scrollButton.title = 'Вверх';

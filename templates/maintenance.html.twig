@@ -2,6 +2,26 @@
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
+{% set features = [
+    {
+        "icon": "icon-f_star",
+        "title": "100% <br> гарантия ремонта",
+        "note": "Если мы не смогли починить - вы ничего не оплачиваете. Оплата только за результат"
+    },{
+        "icon": "icon-f_speed",
+        "title": "Управимся <br> за 40 минут",
+        "note": "Фирменная диагностика более чем по 70 пунктам в кротчайшие сроки"
+    },{
+        "icon": "icon-f_search",
+        "title": "Общая <br> диагностика",
+        "note": "Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем"
+    },{
+        "icon": "icon-f_binocul",
+        "title": "Наблюдайте <br> за работой",
+        "note": "Свободный доступ в ремзону позволяет наблюдать за ходом ремонта"
+    }
+] %}
+
 {% block content %}
     <main class="site-main">
 
@@ -10,28 +30,15 @@
             <div class="sec-intro__front">
                 <div class="container">
                     <h1 class="sec-intro__title">Техническое обслуживание <br> {{ brand }} в Москве</h1>
-                    <a class="btn sec-intro__btn js-scroll-to" data-scroll="#costing" role="button">К калькулятору</a>
+                    <a class="btn sec-intro__btn js-scroll-to" data-scrollto="#costing" role="button">К калькулятору</a>
                     <ul class="sec-intro__features">
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_star"></i>
-                            <h3 class="feature__title">Используем только качественное</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_speed"></i>
-                            <h3 class="feature__title">Управимся <br> за 29 минут</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_search"></i>
-                            <h3 class="feature__title">Дополнительные <br> услуги</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_binocul"></i>
-                            <h3 class="feature__title">Наблюдайте <br> за работой</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
+                        {% for feature in features %}
+                            <li class="feature sec-intro__feature">
+                                <i class="feature__icon {{ feature.icon }}"></i>
+                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
+                                <div class="feature__note">{{ feature.note | raw }}</div>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

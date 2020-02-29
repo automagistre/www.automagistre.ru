@@ -5,15 +5,3 @@ twig:
         - '%kernel.project_dir%/templates'
     form_themes:
         - 'bootstrap_3_layout.html.twig'
-
-services:
-    _defaults:
-        public: false
-        autowire: true
-        autoconfigure: true
-
-    #Twig\Extensions\ArrayExtension: ~
-    #Twig\Extensions\DateExtension: ~
-    Twig\Extensions\IntlExtension: ~
-    #Twig\Extensions\TextExtension: ~
-    Twig\Extension\StringLoaderExtension: ~

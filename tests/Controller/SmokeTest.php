@@ -26,6 +26,9 @@ final class SmokeTest extends WebTestCase
         static::assertSame($statusCode, $response->getStatusCode());
     }
 
+    /**
+     * @return Generator<array>
+     */
     public function pagesProvider(): Generator
     {
         yield ['/', 200];
@@ -44,6 +47,9 @@ final class SmokeTest extends WebTestCase
         }
     }
 
+    /**
+     * @return Generator<array>
+     */
     private function servicesPages(): Generator
     {
         yield ['/repair', 200];

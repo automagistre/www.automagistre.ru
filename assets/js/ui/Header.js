@@ -2,33 +2,47 @@ class Header {
   lastScrollY = 0;
   navBarHeight = 0;
   isScrolled = false;
-  navDown = true;
+  isVisible = true;
+  isInit = false;
 
-  init()  {
-    document.addEventListener('scroll', ()=> this.__toggleHeader());
-    this.header = document.getElementById('header-line');
-    this.navBarHeight = this.header.offsetHeight
+  constructor()  {
+    const header = document.getElementById('header-line');
+    if (header) {
+      this.header = header;
+      this.navBarHeight = header.offsetHeight;
+      document.addEventListener('scroll', ()=> this._toggleHeader());
+      this.isInit = true
+    }
   };
 
-  __update(newState) {
-    newState();
-    const headerClasses = this.header.classList;
-    headerClasses.toggle('is-scrolled', this.isScrolled);
-    headerClasses.toggle('nav-up', !this.navDown);
-    headerClasses.toggle('nav-down', this.navDown);
-  };
+  scrolledColor(isScrolled) {
+    this.isScrolled = isScrolled;
+    this.header.classList.toggle('is-scrolled', this.isScrolled);
+  }
 
-  __toggleHeader() {
+  hide() {
+    this.isVisible = true;
+    this.header.classList.remove('nav-down');
+    this.header.classList.add('nav-up');
+  }
+
+  show() {
+    this.isVisible = false;
+    this.header.classList.remove('nav-up');
+    this.header.classList.add('nav-down');
+  }
+
+  _toggleHeader() {
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop,
         delta = 5;
     if (Math.abs(this.lastScrollY - currentScroll) <= delta) return;
-    this.__update(()=> this.isScrolled = currentScroll > 150);
+    this.scrolledColor(currentScroll > 150);
     if (currentScroll > this.lastScrollY && currentScroll > this.navBarHeight * 5) {
-      this.__update(()=> this.navDown = false);
+      this.hide();
     } else {
-      if (currentScroll + window.innerHeight  <= document.body.scrollHeight) this.__update(()=> this.navDown = true);
+      if (currentScroll + window.innerHeight  <= document.body.scrollHeight) this.show();
     }
-    if (currentScroll + window.innerHeight + 5 >= document.body.scrollHeight) this.__update(()=> this.navDown = true);
+    if (currentScroll + window.innerHeight + 5 >= document.body.scrollHeight) this.show();
     this.lastScrollY = currentScroll
   };
 }
