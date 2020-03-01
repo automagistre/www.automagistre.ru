@@ -59,7 +59,7 @@ final class FaqController extends AbstractController
             ]);
         }
 
-        return $this->render('faq.html.twig', [
+        return $this->render('_sections/faq.html.twig', [
             'form' => $form->createView(),
             'scroll' => $request->query->getBoolean('scroll'),
         ]);
