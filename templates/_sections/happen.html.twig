@@ -1,4 +1,5 @@
 {% from '_sections/chunks/odometer.twig' import odometer %}
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
 
 <section class="sec-happen">
     <div class="sec-happen__back" style="background-image: url({{ asset('img/backgrounds/bg_sec-happen_01.jpg') }})"></div>
@@ -10,19 +11,11 @@
                     <div class="sec-happen__lead">
                         Запишитесь на бесплатную консультацию <br> и наши специалисты выяснят в чем проблема!
                     </div>
-                    <form class="subscribe sec-happen__form">
-                        <input class="subscribe__name" type="text" placeholder="Имя">
-                        <input class="subscribe__numb js-phone-mask" type="text" placeholder="Телефон">
-                        <input class="subscribe__date js-datepicker-limited" type="text" readonly placeholder="Выберите дату">
-                        <div class="subscribe__agree">
-                            <label class="subscribe__check"><input type="checkbox" checked><span></span></label>
-                            <div class="subscribe__hint">
-                                <span>Lorem ipsum dolor sit amet, consec tetur adipisi cing elit. At, exerci tati onem.</span>
-                            </div>
-                        </div>
-                        <a class="btn subscribe__btn" role="button">Записаться</a>
-                    </form>
+
+                    {{ formSubscribe('sec-happen__form') }}
+
                     {{ odometer('sec-happen__facts') }}
+
                 </div>
                 <div class="sec-happen__col-rt">
                     <img class="sec-happen__img" src="{{ asset('img/sec-happen/happen-man.png') }}" alt="Автомагистр помощь">

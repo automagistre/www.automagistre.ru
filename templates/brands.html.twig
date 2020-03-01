@@ -1,5 +1,5 @@
 {% extends 'layout.html.twig' %}
-
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">
@@ -9,24 +9,9 @@
                     <h1 class="sec-intro__title">АВТОСЕРВИС ЯПОНСКИХ И КОРЕЙСКИХ <br> МАШИН В МОСКВе</h1>
                     <div class="sec-intro__lead">ЗАПИШИТЕСЬ НА БЕСПЛАТНУЮ ДИАГНОСТИКУ <br> И МЫ РЕШИМ ВАШУ ПРОБЛЕМУ
                     </div>
-                    {{ form_start(form, {'attr': {'class': 'subscribe sec-intro__form'}}) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'subscribe__name', 'placeholder': 'Имя'}}) }}
-                    {{ form_widget(form.telephone, {'attr': {'class': 'subscribe__numb js-phone-mask', 'placeholder': 'Телефон'}}) }}
-                    {{ form_widget(form.date, {'attr': {'class': 'subscribe__date js-datepicker-limited', 'placeholder': 'Выберите дату'}}) }}
-                        <div class="subscribe__agree">
-                            <label class="subscribe__check">
-                                {{ form_widget(form.checkbox) }}
-                                <span></span>
-                            </label>
-                            <div class="subscribe__hint">
-                                <span>Я принимаю условия передачи информации и условия политики конфиденциальности</span>
-                            </div>
-                        </div>
-                        <button class="btn subscribe__btn" type="submit">
-                            Записаться
-                            <i class="btn__icon-rt icon_arrow-rt"></i>
-                        </button>
-                    {{ form_end(form) }}
+
+                    {{ formSubscribe('sec-intro__form') }}
+
                     <ul class="sec-intro__features">
                         <li class="feature sec-intro__feature">
                             <i class="feature__icon icon-f_suspension"></i>

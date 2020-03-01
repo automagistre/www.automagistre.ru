@@ -1,0 +1,31 @@
+{% macro formSmall(class) %}
+    <form class="form {{ class }}">
+        <h3 class="form__title">Мы готовы помочь</h3>
+        <div class="form__lead">Если у вас остались вопросы, задайте их прямо сейчас:</div>
+        <div class="form__line">
+            <input class="form__input" type="text" placeholder="Имя">
+        </div>
+        <div class="form__line">
+            <input class="form__input" type="text" placeholder="E-mail">
+        </div>
+        <div class="form__line">
+            <textarea class="form__text" placeholder="Ваш вопрос"></textarea>
+        </div>
+        <div class="form__line">
+            <button class="btn btn_arrow-rt">Заказать</button>
+        </div>
+    </form>
+{% endmacro %}
+
+{% macro formSubscribe(class) %}
+    <form class="subscribe {{ class }}">
+        <input class="subscribe__name" type="text" placeholder="Имя">
+        <input class="subscribe__numb js-phone-mask" type="text" placeholder="Телефон">
+        <input class="subscribe__date js-datepicker-limited" type="text" readonly placeholder="Выберите дату">
+        <div class="subscribe__agree">
+            <label class="subscribe__check"><input type="checkbox" checked><span></span></label>
+            <div class="subscribe__hint"><span>Я принимаю условия передачи информации и условия политики конфиденциальности</span></div>
+        </div>
+        <a class="btn subscribe__btn" role="button">Записаться <i class="btn__icon-rt icon_arrow-rt"></i></a>
+    </form>
+{% endmacro %}

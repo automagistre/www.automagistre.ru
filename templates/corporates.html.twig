@@ -1,4 +1,5 @@
 {% extends 'layout.html.twig' %}
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
 
 {% set features = [
     {
@@ -28,23 +29,9 @@
                 <div class="container">
                     <h1 class="sec-intro__title">АВТОСЕРВИС <br> ДЛЯ БИЗНЕСА В МОСКВЕ</h1>
                     <div class="sec-intro__lead">РЕМОНТИРУЕМ АВТОМОБИЛИ <br> СО СКОРОСТЬЮ ПИТ-СТОП ФОРМУЛЫ 1</div>
-                    {{ form_start(form, {'attr': {'class': 'subscribe sec-intro__form sec-intro__form_slim'}}) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'subscribe__name', 'placeholder': 'Имя'}}) }}
-                    {{ form_widget(form.telephone, {'attr': {'class': 'subscribe__numb js-phone-mask', 'placeholder': 'Телефон'}}) }}
-                        <div class="subscribe__agree">
-                            <label class="subscribe__check">
-                                {{ form_widget(form.checkbox) }}
-                                <span></span>
-                            </label>
-                            <div class="subscribe__hint">
-                                <span>Я принимаю условия передачи информации и условия политики конфиденциальности</span>
-                            </div>
-                        </div>
-                        <button class="btn subscribe__btn" type="submit">
-                            Записаться
-                            <i class="btn__icon-rt icon_arrow-rt"></i>
-                        </button>
-                    {{ form_end(form) }}
+
+                    {{ formSubscribe('sec-intro__form') }}
+
                     <ul class="sec-intro__features">
                         {% for feature in features %}
                             <li class="feature sec-intro__feature">
