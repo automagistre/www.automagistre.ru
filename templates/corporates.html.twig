@@ -1,25 +1,9 @@
 {% extends 'layout.html.twig' %}
 {% from '_sections/chunks/forms.twig' import formSubscribe %}
 
-{% set features = [
-    {
-        "icon": "icon-f_suspension",
-        "title": "Ремонт <br> день в день",
-        "note": "Оперативно поставим необходимые запчасти и проведем необходимый ремонт"
-    },{
-        "icon": "icon-f_success",
-        "title": "Оперативно, <br> без очереди",
-        "note": "Корпоративные машины обслуживаются без очереди"
-    },{
-        "icon": "icon-f_speed",
-        "title": "Обработаем большие заказы",
-        "note": "Высокая производительность цеха позволяет производить ремонтные работы в больших объемах"
-    },{
-        "icon": "icon-f_star",
-        "title": "100% <br> гарантия ремонта",
-        "note": "У нас строгая гарантийная безусловная политика. Вам не нужно ничего доказывать и собирать документы"
-    }
-] %}
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['suspension', 'success', 'speed', 'star'] %}
+
 
 {% block content %}
     <main class="site-main">
@@ -32,15 +16,8 @@
 
                     {{ formSubscribe('sec-intro__form') }}
 
-                    <ul class="sec-intro__features">
-                        {% for feature in features %}
-                            <li class="feature sec-intro__feature">
-                                <i class="feature__icon {{ feature.icon }}"></i>
-                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
-                                <div class="feature__note">{{ feature.note | raw }}</div>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    {{ renderFeatures(features, "sec-intro__features") }}
+
                 </div>
             </div>
         </section><!-- END sec-intro -->
