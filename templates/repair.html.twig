@@ -244,7 +244,7 @@
 
         {{ include('_sections/clubs.html.twig') }}
 
-        {{ render(controller('App\\Controller\\Service\\FaqController::__invoke', {'brand': app.request.attributes.get('brand')}, {'scroll': true})) }}
+        {{ include('_sections/faq.html.twig') }}
 
         {{ include('_sections/map.html.twig') }}
     </main><!-- END site-main -->
