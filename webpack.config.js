@@ -114,6 +114,11 @@ module.exports = {
     devtool: NODE_ENV === "development" ? "inline-cheap-module-source-map" : false,
 
     plugins: [
+        new webpack.ProvidePlugin({
+            "$":"jquery",
+            "jQuery":"jquery",
+            "window.jQuery":"jquery"
+        }),
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
