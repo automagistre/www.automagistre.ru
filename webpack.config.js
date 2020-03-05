@@ -15,6 +15,8 @@ const PATHS = {
     assets: 'assets/'
 };
 
+const idDev = NODE_ENV === "development";
+
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -22,13 +24,13 @@ module.exports = {
         styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: PATHS.assets + "[name].[hash].js",
+        filename: PATHS.assets + "[name].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
     },
     resolve: {
-        "extensions": [".js", ".less"]
+        "extensions": [".js", ".less", ".css"]
     },
     optimization: {
         minimizer:[
@@ -64,8 +66,8 @@ module.exports = {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
-                    options: { sourceMap: true, modules: true }
-                },{
+                },
+                {
                     loader: "postcss-loader",
                     options: {
                         sourceMap: true,
@@ -79,7 +81,6 @@ module.exports = {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
-                    options: { sourceMap: true }
                 },{
                     loader: "postcss-loader",
                     options: {
@@ -123,18 +124,21 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new MiniCssExtractPlugin({
-            filename: PATHS.assets + "[name].[hash].css"
+            filename: PATHS.assets + '[name].css',
+            // chunkFilename: PATHS.assets + idDev ? '[id].css' : '[id].[hash].css',
+            esModule: true,
         }),
         new CleanWebpackPlugin({
             dry: false,
             verbose: false,
-            cleanStaleWebpackAssets: false,
+            cleanStaleWebpackAssets: true,
+            protectWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
         }),
-        new CopyWebpackPlugin([
-            {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
-            {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
-        ]),
+        // new CopyWebpackPlugin([
+        //     {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
+        //     {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
+        // ]),
         new ManifestPlugin()
     ],
 };
