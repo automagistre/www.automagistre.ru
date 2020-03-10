@@ -49,9 +49,8 @@ const FORM_CONTROLS_TEMPLATE = {
   },
   calendar: {
     value: '',
-    valid: true,
     isTouched: false,
-    isValid: true,
+    isValid: false,
     validation: {
       required: true,
     }
@@ -90,18 +89,31 @@ class Form {
     this.controlModifier(control, controlName, event);
     control.isValid = this.validateControl(control.value, control.validation);
     formControls[controlName] = control;
-
-    this.formControls[controlName] = control;
-
+    this.formControls[controlName] = {...control};
     this.isValid = this.validateForm(formControls);
+    this.controlChangeColor();
   };
+
+  controlChangeColor() {
+    for (let controlName in this.formControls) {
+      let control = this.formControls[controlName];
+      if (control.isTouched) {
+        control.node.classList.toggle('input-valid', control.isValid);
+        control.node.classList.toggle('input-error', !control.isValid);
+      }
+    }
+  }
 
   async send() {
     console.log(this);
     if (this.isValid) {
       // this.preparationData()
     } else {
-      console.log('Invalid Form');
+      for (let controlName in this.formControls) {
+        this.formControls[controlName].isTouched = true;
+      }
+      this.controlChangeColor();
+      console.error('Invalid Form');
       return false;
     }
     try {
@@ -131,9 +143,11 @@ export class SubscribeForm extends Form {
         DEFAULT_OPTIONS;
 
     for (let controlName in formControls) {
-      let $control = $el.querySelector(`[data-formcontrol=${controlName}]`);
+      const $control = $el.querySelector(`[data-formcontrol=${controlName}]`);
       if ($control) {
-        this.formControls[controlName] = formControls[controlName];
+        formControls[controlName].node  = controlName === 'license' ? $control.parentElement :
+                                                                      $control;
+        this.formControls[controlName] = {...formControls[controlName]};
         switch (controlName) {
           case 'name':
             this._activateNameInput($control);
@@ -156,7 +170,7 @@ export class SubscribeForm extends Form {
       }
     }
 
-    let $button = $el.querySelector('a[data-formcontrol=submit]');
+    const $button = $el.querySelector('a[data-formcontrol=submit]');
     if ($button){
       $button.addEventListener('click', ()=>this.send())
     }
@@ -197,7 +211,6 @@ export class SubscribeForm extends Form {
       isValid = /\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/.test(value) && isValid
     }
     if (validation.checked) {
-      console.log(value);
       isValid = value === validation.checked
     }
     return isValid;
@@ -244,17 +257,12 @@ export class SubscribeForm extends Form {
   }
 
   _activeCalendarInput($control) {
-    const onChangeHandler = (selectedDate) => {
-      this.onChangeHandler(selectedDate[0], 'calendar')
-    };
     const options = {
       locale: Russian,
-      altInput: true,
-      altFormat: "j F Y",
-      dateFormat: 'Y-m-d',
+      dateFormat: 'j F Y',
       minDate: "today",
       position: 'below',
-      onClose: onChangeHandler
+      onClose: selectedDate => this.onChangeHandler(selectedDate[0], 'calendar')
     };
     flatpickr($control, options)
   }

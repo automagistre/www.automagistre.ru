@@ -11,3 +11,4 @@ const faqSec = () => {
 };
 
 export default faqSec;
+
