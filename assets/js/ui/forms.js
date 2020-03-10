@@ -24,7 +24,6 @@ const FORM_CONTROLS_TEMPLATE = {
   },
   email:{
     value:'',
-    valid:false,
     isTouched:false,
     isValid: false,
     validation: {
@@ -98,6 +97,7 @@ class Form {
   };
 
   async send() {
+    console.log(this);
     if (this.isValid) {
       // this.preparationData()
     } else {
@@ -123,6 +123,7 @@ export class SubscribeForm extends Form {
       phone: FORM_CONTROLS_TEMPLATE.phone,
       license: FORM_CONTROLS_TEMPLATE.license,
       calendar: FORM_CONTROLS_TEMPLATE.calendar,
+      email: FORM_CONTROLS_TEMPLATE.email,
       text: FORM_CONTROLS_TEMPLATE.text
     };
     const formControls = options ?
@@ -130,7 +131,7 @@ export class SubscribeForm extends Form {
         DEFAULT_OPTIONS;
 
     for (let controlName in formControls) {
-      let $control = $el.querySelector(`input[data-formcontrol=${controlName}]`);
+      let $control = $el.querySelector(`[data-formcontrol=${controlName}]`);
       if ($control) {
         this.formControls[controlName] = formControls[controlName];
         switch (controlName) {
@@ -144,7 +145,13 @@ export class SubscribeForm extends Form {
             this._activeLicenseInput($control);
             break;
           case 'calendar':
-            this._activeCalendarInput($control)
+            this._activeCalendarInput($control);
+            break;
+          case 'email':
+            this._activeEmailInput($control);
+            break;
+          case 'text':
+            this._activeTextInput($control);
         }
       }
     }
@@ -160,7 +167,6 @@ export class SubscribeForm extends Form {
       control.value = event.target.value.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
       event.target.value = control.value;
     }
-
     if (controlName === 'license') {
       control.value = event.target.checked;
     }
@@ -169,6 +175,13 @@ export class SubscribeForm extends Form {
     }
     if (controlName === 'calendar') {
       control.value = event;
+    }
+    if (controlName === 'text') {
+      control.value = event.target.value;
+    }
+    if (controlName === 'email') {
+      control.value = event.target.value.toLowerCase();
+      event.target.value = control.value
     }
   }
 
@@ -198,6 +211,16 @@ export class SubscribeForm extends Form {
   _activeLicenseInput($control) {
     $control.addEventListener('click',
         e => this.onChangeHandler(e, 'license'));
+  }
+
+  _activeTextInput($control) {
+    $control.addEventListener('keyup',
+        e => this.onChangeHandler(e, 'text'));
+  }
+
+  _activeEmailInput($control) {
+    $control.addEventListener('keyup',
+        e => this.onChangeHandler(e, 'email'));
   }
 
   _activatePhoneInput($control) {

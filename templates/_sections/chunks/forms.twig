@@ -3,16 +3,16 @@
         <h3 class="form__title">Мы готовы помочь</h3>
         <div class="form__lead">Если у вас остались вопросы, задайте их прямо сейчас:</div>
         <div class="form__line">
-            <input class="form__input" type="text" placeholder="Имя">
+            <input class="form__input" type="text"  data-formcontrol="name" placeholder="Имя">
         </div>
         <div class="form__line">
-            <input class="form__input" type="text" placeholder="E-mail">
+            <input class="form__input" type="text" data-formcontrol="email" placeholder="E-mail">
         </div>
         <div class="form__line">
-            <textarea class="form__text" placeholder="Ваш вопрос"></textarea>
+            <textarea class="form__text"  data-formcontrol="text" placeholder="Ваш вопрос"></textarea>
         </div>
         <div class="form__line">
-            <button class="btn btn_arrow-rt">Заказать</button>
+            <a class="btn btn_arrow-rt" data-formcontrol="submit" >Заказать</a>
         </div>
     </form>
 {% endmacro %}
