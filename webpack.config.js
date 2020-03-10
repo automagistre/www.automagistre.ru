@@ -24,7 +24,7 @@ module.exports = {
         styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: PATHS.assets + "[name].js",
+        filename: PATHS.assets + "[name].[hash].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -124,21 +124,21 @@ module.exports = {
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new MiniCssExtractPlugin({
-            filename: PATHS.assets + '[name].css',
-            // chunkFilename: PATHS.assets + idDev ? '[id].css' : '[id].[hash].css',
+            filename: PATHS.assets + '[name].[hash].css',
+            chunkFilename: PATHS.assets + '[id].[hash].css',
             esModule: true,
         }),
         new CleanWebpackPlugin({
             dry: false,
             verbose: false,
-            cleanStaleWebpackAssets: true,
+            cleanStaleWebpackAssets: false,
             protectWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
         }),
-        // new CopyWebpackPlugin([
-        //     {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
-        //     {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
-        // ]),
+        new CopyWebpackPlugin([
+            {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
+            {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
+        ]),
         new ManifestPlugin()
     ],
 };
