@@ -1,55 +1,17 @@
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+
 {% set features = [
-    {
-        'title': 'Гарантия на работы и запчасти',
-        'note': '1 год гарантии на работы <br> 1 год гарантии на оригинальные запчасти
-                        <br> 2 месяца гарантии на неоригинальные зачасти',
-        'icon': 'icon-f_piston',
-    },{
-        'title': 'Работаем на сверхзвуковой скорости',
-        'note': 'Наши специалисты знают все особенности профильных марок и выполняют работы без максимально
-                        возиожной скоростью',
-        'icon': 'icon-f_mechanic'
-    },{
-        'title': 'Без очередей и за один приезд',
-        'note': 'Мы работаем строго по записи, что гарантирует отсутствие очередей.
-                    Постоянное наличие востребованных запчастей позволяет провести ремонт за один приезд',
-        'icon': 'icon-f_heart'
-    },{
-        'title': '100% <br> гарантия ремонта',
-        'note': 'Если мы не смогли починить - вы ничего не оплачиваете. Оплата только за результат',
-        'icon': 'icon-f_star'
-    },{
-        'title': 'Не обязываем к ремонту',
-        'note': 'Вы сами решаете когда и как производить ремонт, мы только рекомендуем и консультируем',
-        'icon': 'icon-f_keys'
-    },{
-        'title': 'Не предлагаем ненужных услуг',
-        'note': 'Никаких навязываний услуг и товаров. Наши рекомендации всего лишь рекомендации, решение принимаете вы',
-        'icon': 'icon-f_growth'
-    },{
-        'title': 'Качественная консультация специалистов',
-        'note': 'Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем',
-        'icon': 'icon-f_inform'
-    },{
-        'title': 'Наблюдайте за работой',
-        'note': 'Свободный доступ в ремзону позволяет наблюдать за ходом ремонта',
-        'icon': 'icon-f_binocul'
-    }
-]%}
+                   'piston', 'mechanic', 'heart', 'star',
+                   'keys', 'growth', 'inform', 'binocul'
+] %}
 
 <section class="sec-features js-sec-scroll">
     {{ include('_sections/chunks/features_back.html.twig') }}>
     <div class="sec-features__front">
         <div class="container">
-            <ul class="sec-features__list">
-                {% for feature in features %}
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon {{ feature.icon }}"></i>
-                        <h3 class="feature__title">{{ feature.title | raw }}</h3>
-                        <div class="feature__note">{{ feature.note | raw }}</div>
-                    </li>
-                {% endfor %}
-            </ul>
+
+            {{ renderFeatures(features, "sec-features__list") }}
+
         </div>
     </div>
 </section><!-- END sec-features -->

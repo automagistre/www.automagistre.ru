@@ -49,8 +49,7 @@
     {{ include('_sections/services.html.twig') }}
     {{ include('_sections/work.html.twig') }}
     {{ include('_sections/expert.html.twig') }}
-
-    {{ render(controller('App\\Controller\\Service\\FaqController::__invoke', {'brand': app.request.attributes.get('brand')}, {'scroll': true})) }}
+    {{ include('_sections/faq.html.twig') }}
 
     <section class="sec-map js-sec-scroll">
         <div class="sec-map__back js-map-here"

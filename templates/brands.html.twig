@@ -1,4 +1,8 @@
 {% extends 'layout.html.twig' %}
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
+
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['suspension', 'speed', 'piggy', 'binocul'] %}
 
 {% block content %}
     <main class="site-main">
@@ -9,46 +13,11 @@
                     <h1 class="sec-intro__title">АВТОСЕРВИС ЯПОНСКИХ И КОРЕЙСКИХ <br> МАШИН В МОСКВе</h1>
                     <div class="sec-intro__lead">ЗАПИШИТЕСЬ НА БЕСПЛАТНУЮ ДИАГНОСТИКУ <br> И МЫ РЕШИМ ВАШУ ПРОБЛЕМУ
                     </div>
-                    {{ form_start(form, {'attr': {'class': 'subscribe sec-intro__form'}}) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'subscribe__name', 'placeholder': 'Имя'}}) }}
-                    {{ form_widget(form.telephone, {'attr': {'class': 'subscribe__numb js-phone-mask', 'placeholder': 'Телефон'}}) }}
-                    {{ form_widget(form.date, {'attr': {'class': 'subscribe__date js-datepicker-limited', 'placeholder': 'Выберите дату'}}) }}
-                        <div class="subscribe__agree">
-                            <label class="subscribe__check">
-                                {{ form_widget(form.checkbox) }}
-                                <span></span>
-                            </label>
-                            <div class="subscribe__hint">
-                                <span>Я принимаю условия передачи информации и условия политики конфиденциальности</span>
-                            </div>
-                        </div>
-                        <button class="btn subscribe__btn" type="submit">
-                            Записаться
-                            <i class="btn__icon-rt icon_arrow-rt"></i>
-                        </button>
-                    {{ form_end(form) }}
-                    <ul class="sec-intro__features">
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_suspension"></i>
-                            <h3 class="feature__title">Не обязываем <br> к ремонту</h3>
-                            <div class="feature__note">Полностью бесплатная диагностика и калькуляция работ. А когда и где ремонтировать - решать вам.</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_speed"></i>
-                            <h3 class="feature__title">Управимся <br> за 40 минут</h3>
-                            <div class="feature__note">Фирменная диагностика более чем по 70 пунктам в кротчайшие сроки</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_piggy"></i>
-                            <h3 class="feature__title">Цены неизменны <br> год за годом</h3>
-                            <div class="feature__note">Цены на работы действительны в течение года</div>
-                        </li>
-                        <li class="feature sec-intro__feature">
-                            <i class="feature__icon icon-f_binocul"></i>
-                            <h3 class="feature__title">Наблюдайте <br> за работой</h3>
-                            <div class="feature__note">У нас свободный доступ в ремзону, все найденные недостатки будут продемонстрированы. Но не забывайте про технику безопасности</div>
-                        </li>
-                    </ul>
+
+                    {{ formSubscribe('sec-intro__form') }}
+
+                    {{ renderFeatures(features, "sec-intro__features") }}
+
                 </div>
             </div>
         </section><!-- END sec-intro -->
@@ -63,7 +32,7 @@
 
         {{ include('_sections/clubs.html.twig') }}
 
-        {{ render(controller('App\\Controller\\Service\\FaqController::__invoke', {'brand': app.request.attributes.get('brand')}, {'scroll': true})) }}
+        {{ include('_sections/faq.html.twig') }}
 
         {{ include('_sections/map.html.twig') }}
     </main><!-- END site-main -->

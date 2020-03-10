@@ -1,38 +1,10 @@
 {% set diagFreePrice = 600 %}
-{% set data = [
-    {
-        "icon": "icon-f_chassis",
-        "title": "Ходовая <br> часть",
-        "note": "Очень важно регулярно следить за состоянием ходовой части автомобиля, своевременный ремонт подвески делает вождение автомобиля безопасным"
-    },{
-        "icon": "icon-f_fuel",
-        "title": "Топливная <br> система",
-        "note": "Своевременное обслуживание топливной системы избавит вас от дополнительных трат"
-    },{
-        "icon": "icon-f_alarm",
-        "title": "Электронные <br>автомобильные системы",
-        "note": "Диагностика электронных систем проводится с помощью современного оборудования опытными мастерами. Дадим подробный ответ по вашей проблеме"
-    },{
-        "icon": "icon-f_snow",
-        "title": "Кондиционер",
-        "note": "Исправная система кондиционирование 90% комфорта автомобиля в жаркое время года"
-    },{
-        "icon": "icon-f_search",
-        "title": "Общая <br> диагностика",
-        "note": "Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем"
-    },{
-        "icon": "icon-f_painting",
-        "title": "Лакокрасочные покрытия",
-        "note": "Ухоженный автомобиль всегда красив, независимо от возраста"
-    },{
-        "icon": "icon-f_motor",
-        "title": "Двигатель",
-        "note": "Двигатель - сердце автомобиля. Мы расскажем, как не довести до остановки сердца"
-    },{
-        "icon": "icon-f_transmision",
-        "title": "АКПП, МКПП, <br> CVT",
-        "note": "Своевременное и квалифицированное обслуживание трансмиссии продлевает срок службы в несколько раз"
-    }
+
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+
+{% set features = [
+    'chassis', 'fuel', 'alarm', 'snow',
+    'search', 'painting', 'motor', 'transmision'
 ] %}
 
 <section class="sec-features">
@@ -40,15 +12,9 @@
     <div class="sec-features__front">
         <div class="container">
             <h2 class="sec-features__title">Проводим комплексную диагностику автомобиля более чем по 70 пунктам</h2>
-            <ul class="sec-features__list">
-                {% for feature in data %}
-                    <li class="feature sec-features__item">
-                        <i class="feature__icon {{ feature.icon }}"></i>
-                        <h3 class="feature__title">{{ feature.title | raw }}</h3>
-                        <div class="feature__note">{{ feature.note | raw }}</div>
-                    </li>
-                {% endfor %}
-            </ul>
+
+            {{ renderFeatures(features, "sec-features__list") }}
+
             <div class="sec-features__get">
                 <button class="btn" data-scrollTo="main">Записаться на бесплатную диагностику</button>
             </div>
