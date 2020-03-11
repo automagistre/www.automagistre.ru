@@ -1,24 +1,9 @@
 {% extends 'layout.html.twig' %}
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
 
-{% set features = [
-    {
-        "icon": "icon-f_suspension",
-        "title": "Ремонт <br> день в день",
-        "note": "Оперативно поставим необходимые запчасти и проведем необходимый ремонт"
-    },{
-        "icon": "icon-f_success",
-        "title": "Оперативно, <br> без очереди",
-        "note": "Корпоративные машины обслуживаются без очереди"
-    },{
-        "icon": "icon-f_speed",
-        "title": "Обработаем большие заказы",
-        "note": "Высокая производительность цеха позволяет производить ремонтные работы в больших объемах"
-    },{
-        "icon": "icon-f_star",
-        "title": "100% <br> гарантия ремонта",
-        "note": "У нас строгая гарантийная безусловная политика. Вам не нужно ничего доказывать и собирать документы"
-    }
-] %}
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['suspension', 'success', 'speed', 'star'] %}
+
 
 {% block content %}
     <main class="site-main">
@@ -28,32 +13,11 @@
                 <div class="container">
                     <h1 class="sec-intro__title">АВТОСЕРВИС <br> ДЛЯ БИЗНЕСА В МОСКВЕ</h1>
                     <div class="sec-intro__lead">РЕМОНТИРУЕМ АВТОМОБИЛИ <br> СО СКОРОСТЬЮ ПИТ-СТОП ФОРМУЛЫ 1</div>
-                    {{ form_start(form, {'attr': {'class': 'subscribe sec-intro__form sec-intro__form_slim'}}) }}
-                    {{ form_widget(form.name, {'attr': {'class': 'subscribe__name', 'placeholder': 'Имя'}}) }}
-                    {{ form_widget(form.telephone, {'attr': {'class': 'subscribe__numb js-phone-mask', 'placeholder': 'Телефон'}}) }}
-                        <div class="subscribe__agree">
-                            <label class="subscribe__check">
-                                {{ form_widget(form.checkbox) }}
-                                <span></span>
-                            </label>
-                            <div class="subscribe__hint">
-                                <span>Я принимаю условия передачи информации и условия политики конфиденциальности</span>
-                            </div>
-                        </div>
-                        <button class="btn subscribe__btn" type="submit">
-                            Записаться
-                            <i class="btn__icon-rt icon_arrow-rt"></i>
-                        </button>
-                    {{ form_end(form) }}
-                    <ul class="sec-intro__features">
-                        {% for feature in features %}
-                            <li class="feature sec-intro__feature">
-                                <i class="feature__icon {{ feature.icon }}"></i>
-                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
-                                <div class="feature__note">{{ feature.note | raw }}</div>
-                            </li>
-                        {% endfor %}
-                    </ul>
+
+                    {{ formSubscribe('sec-intro__form', ['name', 'phone', 'license']) }}
+
+                    {{ renderFeatures(features, "sec-intro__features") }}
+
                 </div>
             </div>
         </section><!-- END sec-intro -->
@@ -66,7 +30,7 @@
 
         {{ include('_sections/clubs.html.twig') }}
 
-        {{ render(controller('App\\Controller\\Service\\FaqController::__invoke', {'brand': app.request.attributes.get('brand')}, {'scroll': true})) }}
+        {{ include('_sections/faq.html.twig') }}
 
     </main><!-- END site-main -->
 {% endblock %}

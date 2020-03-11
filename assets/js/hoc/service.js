@@ -7,11 +7,18 @@ import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
+import {SubscribeForm} from '../ui/forms';
+
 
 new Header();
 new ScrollToTop();
 
 initSections();
+
+const $forms = document.querySelectorAll('form.subscribe');
+if ($forms){
+    $forms.forEach( $form => new SubscribeForm($form))
+}
 
 const goToButtons = document.querySelectorAll('[data-scrollTo]');
 goToButtons.forEach(btn => {

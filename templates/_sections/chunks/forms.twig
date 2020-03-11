@@ -1,0 +1,42 @@
+{% macro formSmall(class) %}
+    <form class="form {{ class }}">
+        <h3 class="form__title">Мы готовы помочь</h3>
+        <div class="form__lead">Если у вас остались вопросы, задайте их прямо сейчас:</div>
+        <div class="form__line">
+            <input class="form__input" type="text"  data-formcontrol="name" placeholder="Имя">
+        </div>
+        <div class="form__line">
+            <input class="form__input" type="text" data-formcontrol="email" placeholder="E-mail">
+        </div>
+        <div class="form__line">
+            <textarea class="form__text"  data-formcontrol="text" placeholder="Ваш вопрос"></textarea>
+        </div>
+        <div class="form__line">
+            <a class="btn btn_arrow-rt" data-formcontrol="submit" >Заказать</a>
+        </div>
+    </form>
+{% endmacro %}
+
+{% macro formSubscribe(class, inputs=['name', 'phone', 'calendar', 'license']) %}
+    {% set isSlim = inputs|length < 4 %}
+    <form class="subscribe {{ class }} {{ isSlim ? "#{class}_slim" }}">
+        {% if 'name' in inputs %}
+            <input class="subscribe__name" type="text" data-formcontrol="name" placeholder="Имя">
+        {% endif %}
+        {% if 'phone' in inputs %}
+            <input class="subscribe__numb" type="tel" data-formcontrol="phone" placeholder="Телефон">
+        {% endif %}
+        {% if 'calendar' in inputs %}
+            <input class="subscribe__date" type="text" data-formcontrol="calendar"  placeholder="Выберите дату" id="calendar">
+        {% endif %}
+        {% if 'license' in inputs %}
+            <div class="subscribe__agree">
+                <label class="subscribe__check">
+                    <input class="js-license" data-formcontrol="license" type="checkbox" checked><span></span>
+                </label>
+                <div class="subscribe__hint"><span>Я принимаю условия передачи информации и условия политики конфиденциальности</span></div>
+            </div>
+        {% endif %}
+        <a class="btn subscribe__btn"  data-formcontrol="submit" role="button">Записаться <i class="btn__icon-rt icon_arrow-rt"></i></a>
+    </form>
+{% endmacro %}

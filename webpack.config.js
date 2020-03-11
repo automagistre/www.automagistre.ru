@@ -15,6 +15,8 @@ const PATHS = {
     assets: 'assets/'
 };
 
+const idDev = NODE_ENV === "development";
+
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -28,7 +30,7 @@ module.exports = {
         publicPath: "/"
     },
     resolve: {
-        "extensions": [".js", ".less"]
+        "extensions": [".js", ".less", ".css"]
     },
     optimization: {
         minimizer:[
@@ -64,8 +66,8 @@ module.exports = {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
-                    options: { sourceMap: true, modules: true }
-                },{
+                },
+                {
                     loader: "postcss-loader",
                     options: {
                         sourceMap: true,
@@ -79,7 +81,6 @@ module.exports = {
                 MiniCssExtractPlugin.loader,
                 {
                     loader: "css-loader",
-                    options: { sourceMap: true }
                 },{
                     loader: "postcss-loader",
                     options: {
@@ -114,16 +115,24 @@ module.exports = {
     devtool: NODE_ENV === "development" ? "inline-cheap-module-source-map" : false,
 
     plugins: [
+        new webpack.ProvidePlugin({
+            "$":"jquery",
+            "jQuery":"jquery",
+            "window.jQuery":"jquery"
+        }),
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
         new MiniCssExtractPlugin({
-            filename: PATHS.assets + "[name].[hash].css"
+            filename: PATHS.assets + '[name].[hash].css',
+            chunkFilename: PATHS.assets + '[id].[hash].css',
+            esModule: true,
         }),
         new CleanWebpackPlugin({
             dry: false,
             verbose: false,
             cleanStaleWebpackAssets: false,
+            protectWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
         }),
         new CopyWebpackPlugin([

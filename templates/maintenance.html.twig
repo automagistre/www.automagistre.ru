@@ -2,25 +2,9 @@
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
-{% set features = [
-    {
-        "icon": "icon-f_star",
-        "title": "100% <br> гарантия ремонта",
-        "note": "Если мы не смогли починить - вы ничего не оплачиваете. Оплата только за результат"
-    },{
-        "icon": "icon-f_speed",
-        "title": "Управимся <br> за 40 минут",
-        "note": "Фирменная диагностика более чем по 70 пунктам в кротчайшие сроки"
-    },{
-        "icon": "icon-f_search",
-        "title": "Общая <br> диагностика",
-        "note": "Наши специалисты подробно объяснят из-за чего произошла поломка и как её избежать в будущем"
-    },{
-        "icon": "icon-f_binocul",
-        "title": "Наблюдайте <br> за работой",
-        "note": "Свободный доступ в ремзону позволяет наблюдать за ходом ремонта"
-    }
-] %}
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['star', 'speed', 'search', 'binocul'] %}
+
 
 {% block content %}
     <main class="site-main">
@@ -31,18 +15,12 @@
                 <div class="container">
                     <h1 class="sec-intro__title">Техническое обслуживание <br> {{ brand }} в Москве</h1>
                     <a class="btn sec-intro__btn js-scroll-to" data-scrollto="#costing" role="button">К калькулятору</a>
-                    <ul class="sec-intro__features">
-                        {% for feature in features %}
-                            <li class="feature sec-intro__feature">
-                                <i class="feature__icon {{ feature.icon }}"></i>
-                                <h3 class="feature__title">{{ feature.title | raw }}</h3>
-                                <div class="feature__note">{{ feature.note | raw }}</div>
-                            </li>
-                        {% endfor %}
-                    </ul>
+
+                    {{ renderFeatures(features, "sec-intro__features") }}
+
                 </div>
             </div>
-        </section><!-- END sec-intro -->
+        </section>
 
         <section class="sec-costing" id="costing">
             <div class="container">
@@ -479,7 +457,7 @@
 
         {{ include('_sections/clubs.html.twig') }}
 
-        {{ render(controller('App\\Controller\\Service\\FaqController::__invoke', {'brand': app.request.attributes.get('brand')}, {'scroll': true})) }}
+        {{ include('_sections/faq.html.twig') }}
 
         {{ include('_sections/map.html.twig') }}
 
