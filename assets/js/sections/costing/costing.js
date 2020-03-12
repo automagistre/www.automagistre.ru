@@ -19,17 +19,50 @@ const initSlick = $el => {
 
 
 const costingSec = () => {
-  const $costingSlick = $('#costing-steps');
-  const $costingSteps = document.querySelector('section.sec-costing')
-                                .querySelectorAll('.js-cg-step');
+  const $costingSection =  document.querySelector('section.sec-costing'),
+        $costingSlick = $('#costing-steps'),
+        $costingSteps = $costingSection.querySelectorAll('.js-cg-step'),
+        $costingSvg = $costingSection.querySelector('#cs-stage');
+  let currentStep = 1;
 
   initSlick($costingSlick);
-  const changeStep = step => {
-     console.log(step)
-     $costingSlick.slick('slickGoTo', step - 1, false)
+
+  const animateSteps = nextStep => {
+    const classesMap = {
+      '1 to 2': {
+        add: ['step_02'],
+        remove: ['step_01-back']},
+      '2 to 3': {
+        add: ['step_03'],
+        remove: ['step_02', 'step_02-back']},
+      '3 to 4': {
+        add: ['step_04'],
+        remove: ['step_03'] },
+      '2 to 1': {
+        add: ['step_01-back'],
+        remove: ['step_02', 'step_02-back']},
+      '3 to 2': {
+        add: ['step_02-back'],
+        remove: ['step_03']},
+      '4 to 1': {
+        add: [],
+        remove: ['step_04']},
+    };
+    let stepClasses = `${currentStep} to ${nextStep}`;
+    if (classesMap.hasOwnProperty(stepClasses)) {
+      $costingSvg.classList.remove(...classesMap[stepClasses].remove);
+      $costingSvg.classList.add(...classesMap[stepClasses].add);
+    }
+    currentStep = nextStep;
   };
+
+  const changeStep = nextStep => {
+     animateSteps(nextStep);
+     $costingSlick.slick('slickGoTo', nextStep - 1, false)
+  };
+
   $costingSteps.forEach($el => {
-    $el.addEventListener('click', e => changeStep(+e.target.dataset.step))
+    $el.addEventListener('click', el => changeStep(+el.target.dataset.step))
   })
 };
 
