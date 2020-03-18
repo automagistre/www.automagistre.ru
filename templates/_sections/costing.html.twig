@@ -82,25 +82,15 @@
                 <div class="costing__step costing__step_01" id="costing-step_01">
                     <div class="container">
                         <div class="costing__step-wrap">
-                            <div class="costing__row">
+                            <div class="costing__row" >
                                 <div class="costing__col-car">
-                                    <div class="cg-car costing__unit">
-                                        <div class="cg-car__name">Altima купе</div>
-                                        <div class="cg-car__pict">
-                                            <img class="cg-car__img" src="{{ asset('images/costing/altima.jpg') }}" alt="Altima купе">
-                                        </div>
-                                        <ul class="cg-car__data">
-                                            <li>CL32</li>
-                                            <li>2006 - н.в</li>
-                                        </ul>
+                                    <div class="cg-car costing__unit" id="costing-step_01_model">
                                     </div>
                                 </div>
                                 <div class="costing__col-set">
                                     <div class="cg-set costing__unit">
                                         <h4 class="costing__title cg-set__title">Выберите комплектацию:</h4>
-                                        <div class="cg-set__list">
-                                            <label class="cg-set__radio"><input type="radio" name="test" value="1"><span>1,5/1,8 MT 2WD</span></label>
-                                            <label class="cg-set__radio"><input type="radio" name="test" value="2"><span>1,5/1,8 AT 2WD</span></label>
+                                        <div class="cg-set__list" id="costing-step_01_model_equipments">
                                         </div>
                                     </div>
                                 </div>
@@ -110,20 +100,7 @@
                                     <div class="cg-run costing__unit">
                                         <h4 class="costing__title cg-run__title">Какой у вас пробег?</h4>
                                         <ul class="cg-run__line" id="costing-run-line">
-                                            <li class="cg-run__step js-run-step is-before" data-range="15">15к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="30">30к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="45">45к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="60">60к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="75">75к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="90">90к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="105">105к</li>
-                                            <li class="cg-run__step js-run-step is-before" data-range="120">120к</li>
-                                            <li class="cg-run__step js-run-step is-active" data-range="135">135к</li>
-                                            <li class="cg-run__step js-run-step" data-range="150">150к</li>
-                                            <li class="cg-run__step js-run-step" data-range="165">165к</li>
-                                            <li class="cg-run__step js-run-step" data-range="180">180к</li>
-                                            <li class="cg-run__step js-run-step" data-range="195">195к</li>
-                                            <li class="cg-run__step js-run-step" data-range="210">210к</li>
+
                                         </ul>
                                         <input class="cg-run__info" id="costing-run-info" type="hidden">
                                     </div>

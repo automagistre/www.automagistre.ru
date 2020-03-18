@@ -1,5 +1,7 @@
 import $ from 'jquery'
 import 'slick-carousel'
+import Calculator from '../../ui/Calculator/Calculator';
+import {carModel} from '../../ui/model'
 
 const initSlick = $el => {
   const slickOptions = {
@@ -63,7 +65,8 @@ const costingSec = () => {
 
   $costingSteps.forEach($el => {
     $el.addEventListener('click', el => changeStep(+el.target.dataset.step))
-  })
+  });
+  const calculator = new Calculator($costingSection, carModel)
 };
 
 export default costingSec;
