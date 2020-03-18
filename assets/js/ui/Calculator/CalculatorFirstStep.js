@@ -1,3 +1,5 @@
+import CalculatorSecondStep from './CalculatorSecondStep';
+
 const renderModel = ($el, carModel) => {
   const blockHTML = `
                           <div class="cg-car__name">${carModel.manufacture} ${carModel.name}</div>
@@ -70,6 +72,8 @@ class CalculatorFirstStep {
       child.classList.toggle('is-before', childRange < range);
       child.classList.toggle('is-active', childRange === range);
     }
+    const $secondStep = document.querySelector('#costing-step_02');
+    const secondStep = new CalculatorSecondStep($secondStep, this.equipment, this.range)
   }
 
   renderMileage() {

@@ -10,115 +10,111 @@ export const carModel = {
     100500: {
       name: '1,5/1,8 MT 2WD',
       mileageRepeat: 15,
-      works: [
-        {
-          id: 1,
-          name:'Замена масла',
+      works: {
+        1: {
+          name: 'Замена масла',
           price: 500,
           repeat: 15,
           recommendation: false,
-          parts: [
-            {
-              id:4,
+          parts: {
+            4: {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
               count: 4.5,
               price: 600
             },
-            {
-              id:5,
+            5: {
               name: 'Фильтр',
               manufacture: 'Nissan',
               count: 1,
               price: 400
             },
-          ]
+          }
         },
-        {
-          id: 2,
-          name:'Замена масла АКПП',
+        2: {
+          name: 'Замена масла АКПП',
           price: 500,
           repeat: 60,
           recommendation: false,
-          parts: [
-            {
-              id:4,
+          parts: {
+            4: {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
               count: 4.5,
               price: 600
             },
-            {
-              id:7,
+            7: {
               name: 'Фильтр',
               manufacture: 'Nissan',
               count: 1,
               price: 400
-            },
-          ]
+            }
+          }
         },
-        {
-          id: 3,
-          name:'Диагностика',
+        3: {
+          name: 'Диагностика',
           price: 500,
           repeat: 45,
           recommendation: false,
-          parts: [ ]
+          parts: {}
         },
-        {
-          id: 8,
-          name:'Замена масла',
+        8: {
+          name: 'Замена масла',
           price: 500,
           repeat: 60,
           recommendation: true,
-          parts: [
-            {
-              id:4,
+          note: "Нужно менять и все, питух!",
+          parts: {
+            4: {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
               count: 4.5,
               price: 600
             },
-            {
-              id:5,
+            5: {
               name: 'Фильтр',
               manufacture: 'Nissan',
               count: 1,
               price: 400
             },
-          ]
-        }
-      ],
+
+          }
+        },
+        9: {
+          name: 'Диагностика',
+          price: 500,
+          repeat: 45,
+          recommendation: true,
+          parts: {}
+        },
+      }
     },
 
     100501: {
       name: '7.0T MT 2WD',
       mileageRepeat: 10,
-      works: [
-        {
-          id: 1,
-          name:'Замена масла',
+      works: {
+        1: {
+          name: 'Замена масла',
           price: 500,
           repeat: 10,
           recommendation: false,
-          parts: [
-            {
-              id:4,
+          parts: {
+            4: {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
               count: 4.5,
               price: 600
             },
-            {
-              id:5,
+            5: {
               name: 'Фильтр',
               manufacture: 'Nissan',
               count: 1,
               price: 405
             },
-          ]
+          }
         },
-      ]
+      }
     }
   }
 };
