@@ -57,10 +57,15 @@ class CalculatorFirstStep {
     }
   }
 
+  onChangeEquipment() { }
+
+  onChangeMileage() { }
+
   equipmentChange(e) {
     this.equipment = this.carModel.equipments[e.target.value];
     this.range = 0;
-    this.renderMileage()
+    this.renderMileage();
+    this.onChangeEquipment();
   }
 
   mileageChange(e) {
@@ -72,8 +77,7 @@ class CalculatorFirstStep {
       child.classList.toggle('is-before', childRange < range);
       child.classList.toggle('is-active', childRange === range);
     }
-    const $secondStep = document.querySelector('#costing-step_02');
-    const secondStep = new CalculatorSecondStep($secondStep, this.equipment, this.range)
+    this.onChangeMileage()
   }
 
   renderMileage() {
