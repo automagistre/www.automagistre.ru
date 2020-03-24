@@ -16,17 +16,19 @@ export const carModel = {
           price: 500,
           repeat: 15,
           recommendation: false,
+          // note: 'Нужно менять каждый день',
           parts: {
             4: {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
+              unit: 'л',
               count: 4.5,
               price: 600
             },
             5: {
               name: 'Фильтр',
               manufacture: 'Nissan',
-              count: 1,
+              count: 2,
               price: 400
             },
           }
@@ -38,14 +40,16 @@ export const carModel = {
           recommendation: false,
           parts: {
             4: {
-              name: 'Масло ДВС',
+              name: 'Масло АКПП',
               manufacture: 'Nissan',
+              unit: 'л',
               count: 4.5,
               price: 600
             },
             7: {
-              name: 'Фильтр',
+              name: 'Фильтр АКПП',
               manufacture: 'Nissan',
+              unit: 'шт',
               count: 1,
               price: 400
             }
@@ -59,21 +63,23 @@ export const carModel = {
           parts: {}
         },
         8: {
-          name: 'Замена масла',
+          name: 'Замена масла рек',
           price: 500,
           repeat: 60,
           recommendation: true,
           note: "Нужно менять и все, питух!",
           parts: {
             4: {
-              name: 'Масло ДВС',
+              name: 'Масло ДВС РЕК',
               manufacture: 'Nissan',
+              unit: 'л',
               count: 4.5,
               price: 600
             },
             5: {
-              name: 'Фильтр',
+              name: 'Фильтр РЕК',
               manufacture: 'Nissan',
+              unit: 'шт',
               count: 1,
               price: 400
             },
@@ -104,12 +110,14 @@ export const carModel = {
               name: 'Масло ДВС',
               manufacture: 'Nissan',
               count: 4.5,
+              unit: 'л',
               price: 600
             },
             5: {
               name: 'Фильтр',
               manufacture: 'Nissan',
               count: 1,
+              unit: 'шт',
               price: 405
             },
           }
