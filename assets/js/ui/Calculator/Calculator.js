@@ -6,21 +6,24 @@ class Calculator {
 
   constructor($el, carModel) {
     const $firstStep = $el.querySelector('#costing-step_01'),
-          $secondStep = document.querySelector('#costing-step_02');
+          $secondStep = $el.querySelector('#costing-step_02');
     this.model = carModel;
     const firstStep =  new CalculatorFirstStep($firstStep, this.model);
     const secondStep = new CalculatorSecondStep($secondStep);
-
-    firstStep.onChangeEquipment = function() {
+    firstStep.onChangeEquipment = () => {
       secondStep.clear();
     };
-    firstStep.onChangeMileage = function() {
+
+    firstStep.onChangeMileage = () => {
       const equipment =  firstStep.equipment,
             range = firstStep.range;
       secondStep.clear();
-      secondStep.render(equipment, range)
+      secondStep.render(equipment, range);
+      this.equipmentName = equipment.name;
     };
-
+  }
+  changeStep () {
+    console.log()
   }
 }
 
