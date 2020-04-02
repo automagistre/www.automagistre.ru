@@ -164,10 +164,12 @@
                                     <div class="cg-order costing__unit">
                                         <div class="cg-order__head">
                                             <h4 class="costing__title cg-order__title">Выберите удобную дату:</h4>
-                                            <div class="cg-order__date" id="cg-order-date"></div>
+                                            <div class="cg-order__date" id="cg-order-date" ></div>
                                         </div>
                                         <div class="cg-order__body">
-                                            <div class="cg-calendar js-cg-datepicker"></div>
+                                            <div class="cg-calendar js-cg-datepicker" >
+                                                <div data-formcontrol="calendar"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,17 +182,17 @@
                                         </div>
                                         <div class="cg-order__body">
                                             <div class="cg-order__line cg-order__line_name">
-                                                <input class="cg-order__input" type="text" placeholder="Ваше имя и отчество">
+                                                <input class="cg-order__input" data-formcontrol="name" type="text" placeholder="Ваше имя и отчество">
                                             </div>
                                             <div class="cg-order__line cg-order__line_phon">
-                                                <input class="cg-order__input cg-order__input_phone" type="text" placeholder="Телефон">
+                                                <input class="cg-order__input cg-order__input_phone" data-formcontrol="phone" type="tel" placeholder="Телефон">
                                             </div>
                                             <div class="cg-order__line cg-order__line_chat">
-                                                <input class="cg-order__input cg-order__input_info" type="text" placeholder="Дополнительная информация">
+                                                <input class="cg-order__input cg-order__input_info" data-formcontrol="text" type="text" placeholder="Дополнительная информация">
                                             </div>
                                             <div class="cg-order__line">
                                                 <label class="cg-order__check">
-                                                    <input type="checkbox">
+                                                    <input type="checkbox" data-formcontrol="license">
                                                     <span>
                           Я принимаю <a href="#" target="_blank">условия передачи информации</a>
                           и согласен с <a href="#" target="_blank">правилами оферты</a>
@@ -204,7 +206,7 @@
                         </div>
                         <div class="costing__step-btm costing__step-btm_sb">
                             <a class="btn costing__btn js-cg-step" data-step="2" role="button">Назад</a>
-                            <a class="btn costing__btn js-cg-step" data-step="4" role="button">Записаться на обслуживание</a>
+                            <a class="btn costing__btn js-cg-step" data-step="4" role="button" data-formcontrol="submit">Записаться на обслуживание</a>
                         </div>
                     </div><!-- END container -->
                 </div><!-- END costing__step_03 -->

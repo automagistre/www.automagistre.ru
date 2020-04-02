@@ -1,12 +1,14 @@
 import CalculatorFirstStep from './CalculatorFirstStep';
 import CalculatorSecondStep from './CalculatorSecondStep';
+import {CalculatorForm, SubscribeForm} from '../forms';
 
 class Calculator {
   isValid = false;
 
   constructor($el, carModel) {
     const $firstStep = $el.querySelector('#costing-step_01'),
-          $secondStep = $el.querySelector('#costing-step_02');
+          $secondStep = $el.querySelector('#costing-step_02'),
+          $thirdStep = $el.querySelector('#costing-step_03');
     this.model = carModel;
     const firstStep =  new CalculatorFirstStep($firstStep, this.model);
     const secondStep = new CalculatorSecondStep($secondStep);
@@ -21,10 +23,9 @@ class Calculator {
       secondStep.render(equipment, range);
       this.equipmentName = equipment.name;
     };
+    const form = new CalculatorForm($el)
   }
-  changeStep () {
-    console.log()
-  }
+
 }
 
 export default Calculator;
