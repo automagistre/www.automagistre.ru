@@ -42,8 +42,11 @@ class Form {
     }
   }
 
+  clear() {
+    Object.values(this.formInputs).forEach(input => input.clear());
+  }
+
   async send() {
-    console.log(this);
     if (this.isValid) {
       // this.preparationData()
     } else {
@@ -56,11 +59,9 @@ class Form {
     }
     try {
       await setTimeout(() => {
-        console.log("data send");
-        Object.values(this.formInputs).forEach(input => input.clear());
+        this.clear();
         this.validateForm();
         this.inputChangeColor(true);
-        console.log(this);
       }, 3000);
       return true;
     } catch (e) {
