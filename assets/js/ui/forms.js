@@ -9,12 +9,13 @@ class Form {
   isValid = false;
   formInputs = {};
 
-  validateForm(inputs) {
+  validateForm() {
     let isValid = true;
+    const inputs = {...this.formInputs};
     for (let input of Object.values(inputs)) {
       isValid = input.isValid && isValid;
     }
-    return isValid
+    this.isValid = isValid
   };
 
   preparationData() {
@@ -22,12 +23,17 @@ class Form {
   }
 
   onChangeHandler () {
-    const formInputs = {...this.formInputs};
-    this.isValid = this.validateForm(formInputs);
+    this.validateForm();
     this.inputChangeColor();
   };
 
-  inputChangeColor() {
+  inputChangeColor(removeColors=false) {
+    if (removeColors) {
+      for (let input of Object.values(this.formInputs)) {
+        input.$inputElement.classList.remove('input-valid');
+        input.$inputElement.classList.remove('input-error');
+      }
+    }
     for (let input of Object.values(this.formInputs)) {
       if (input.isTouched) {
         input.$inputElement.classList.toggle('input-valid', input.isValid);
@@ -49,7 +55,13 @@ class Form {
       return false;
     }
     try {
-      await setTimeout(() => console.log("data send"), 3000);
+      await setTimeout(() => {
+        console.log("data send");
+        Object.values(this.formInputs).forEach(input => input.clear());
+        this.validateForm();
+        this.inputChangeColor(true);
+        console.log(this);
+      }, 3000);
       return true;
     } catch (e) {
       console.log('Data send error', e)
@@ -62,7 +74,7 @@ class FormInputs {
   name = undefined;
   _valid = false;
   _touched = false;
-  _value = undefined;
+  _value = '';
 
   constructor($input, callback = function() {
     throw new Error("You must set onChange callback")
@@ -108,6 +120,11 @@ class FormInputs {
   }
 
   updateInputValue() {};
+
+  clear() {
+    this._touched = false;
+    this.updateInputValue();
+  }
 }
 
 
@@ -130,6 +147,12 @@ class NameInput extends FormInputs {
   updateInputValue() {
     this.$inputElement.value = this.value
   }
+
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
+  }
 }
 
 
@@ -148,6 +171,12 @@ class TextInput extends FormInputs {
   updateInputValue() {
     this.$inputElement.value = this.value
   }
+
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
+  }
 }
 
 
@@ -165,6 +194,11 @@ class EmailInput extends FormInputs{
 
   updateInputValue() {
     this.$inputElement.value = this.value
+  }
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
   }
 }
 
@@ -187,6 +221,12 @@ class LicenseInput extends FormInputs {
   updateInputValue() {
     this.$valueElement.checked = this.value;
   }
+
+  clear() {
+    this._value = true;
+    this._valid = true;
+    super.clear();
+  }
 }
 
 
@@ -197,18 +237,23 @@ class PhoneInput extends FormInputs {
     this._value = '';
 
     const phonePattern = '+{7}(000)000-00-00';
-    const phoneMask = new IMask($input, {
+    this.phoneMask = new IMask($input, {
       mask: phonePattern,
       lazy: true,
       placeholderChar: '_'
     });
-    $input.addEventListener('keyup', () => this.value = phoneMask.value);
+    $input.addEventListener('keyup', () => this.value = this.phoneMask.value);
   }
 
   _validator(value) {
     return /\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/.test(value)
   }
 
+  clear() {
+    this.phoneMask.value = '';
+    this._valid = false;
+    super.clear();
+  }
 }
 
 
