@@ -66,7 +66,7 @@ const costingSec = () => {
   $costingSteps.forEach($el => {
     $el.addEventListener('click', el => changeStep(+el.target.dataset.step))
   });
-  const calculator = new Calculator($costingSection, carModel)
+  const calculator = new Calculator($costingSection, carModel.equipments)
 };
 
 export default costingSec;

@@ -30,7 +30,7 @@ class Equipment {
   }
 
   set name(value) {
-    throw new Error('Read only property "name"')
+    throw new Error('Read only property "name". Can`t set value:' + value)
   }
 
   get range(){
@@ -38,7 +38,7 @@ class Equipment {
   }
 
   set range(value) {
-    throw new Error('Read only property "range"')
+    throw new Error('Read only property "range". Can`t set value:' + value)
   }
 
   get works(){
@@ -46,7 +46,7 @@ class Equipment {
   }
 
   set works(value) {
-    throw new Error('Read only property "works"')
+    throw new Error('Read only property "works". Can`t set value:' + value)
   }
 
   get node() {
@@ -58,7 +58,7 @@ class Equipment {
   }
 
   set node(value) {
-    throw new Error('Read only property "works"')
+    throw new Error('Read only property "works". Can`t set value:' + value)
   }
 
   render(){
