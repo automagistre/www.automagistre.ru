@@ -1,16 +1,14 @@
-import CalculatorSecondStep from './CalculatorSecondStep';
-
 const renderModel = ($el, carModel) => {
   const blockHTML = `
-                          <div class="cg-car__name">${carModel.manufacture} ${carModel.name}</div>
-                              <div class="cg-car__pict">
-                                  <img class="cg-car__img" src="${carModel.img}" alt="${carModel.manufacture} ${carModel.name}">
-                              </div>
-                              <ul class="cg-car__data">
-                                  <li>${carModel.model}</li>
-                                  <li>${+carModel.startYear} - ${carModel.stopYear || "н.в"}</li>
-                              </ul>
-                          </div>`;
+    <div class="cg-car__name">${carModel.manufacture} ${carModel.name}</div>
+        <div class="cg-car__pict">
+            <img class="cg-car__img" src="${carModel.img}" alt="${carModel.manufacture} ${carModel.name}">
+        </div>
+        <ul class="cg-car__data">
+            <li>${carModel.model}</li>
+            <li>${+carModel.startYear} - ${carModel.stopYear || "н.в"}</li>
+        </ul>
+    </div>`;
   const carBlock = $el.querySelector('#costing-step_01_model');
   // При нажатии на этот элемент появляется выбор тачки
   if ( carBlock) {
@@ -18,41 +16,85 @@ const renderModel = ($el, carModel) => {
   }
 };
 
+class Equipment {
+
+  _node = undefined;
+
+  constructor(id, equipment) {
+    this.id = id;
+    this._equipment = equipment;
+  }
+
+  get name() {
+    return this._equipment.name || '';
+  }
+
+  set name(value) {
+    throw new Error('Read only property "name"')
+  }
+
+  get range(){
+    return this._equipment.mileageRepeat
+  }
+
+  set range(value) {
+    throw new Error('Read only property "range"')
+  }
+
+  get works(){
+    return this._equipment.works
+  }
+
+  set works(value) {
+    throw new Error('Read only property "works"')
+  }
+
+  get node() {
+    if (this._node) {
+      return this._node
+    } else {
+      throw new Error("Node element is undefined")
+    }
+  }
+
+  set node(value) {
+    throw new Error('Read only property "works"')
+  }
+
+  render(){
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<label class="cg-set__radio">
+                                <input type="radio" name="equipment" value="${this.id}">
+                                <span>${this.name}</span>
+                        </label>`;
+    this._node = wrapper.querySelector('input');
+    this._node.addEventListener('click', () => this.onClick());
+    return wrapper.firstChild
+  }
+
+  onClick() { }
+}
 
 
 class CalculatorFirstStep {
   equipment = undefined;
   range = 0;
 
-  constructor($el, carModel) {
-    this.carModel = carModel;
-    this.StepBlock = $el;
-    renderModel($el, carModel);
-    this.renderEquipments($el, carModel);
-    this.renderMileage($el, carModel);
+  constructor(node, equipments) {
+    this.StepNode = node;
+    // renderModel(node, carModel);
+    this.renderEquipments(node, equipments);
   }
 
-  renderEquipments($el, carModel) {
-    const $equipmentsBlock = $el.querySelector('#costing-step_01_model_equipments');
-    if ($equipmentsBlock) {
-      for (let equipmentId in carModel.equipments) {
-        const equipment = carModel.equipments[equipmentId];
-        const $equipmentWrapper = document.createElement('label');
-        const $equipment = document.createElement('input');
-        const $equipmentName = document.createElement('span');
+  renderEquipments(node, equipments) {
+    const equipmentsNode = node.querySelector('#costing-step_01_model_equipments');
+    if (equipmentsNode) {
+      for (let [entityID, entity] of Object.entries(equipments)) {
+        const equipment = new Equipment(entityID, entity),
+              node = equipment.render();
+        equipment.onClick = () => this.equipmentChange(equipment);
 
-        $equipmentWrapper.className = 'cg-set__radio';
-        $equipmentName.innerHTML = equipment.name;
-
-        $equipment.type = 'radio';
-        $equipment.name = 'equipment';
-        $equipment.value = equipmentId;
-        $equipmentWrapper.append($equipment);
-        $equipmentWrapper.append($equipmentName);
-        $equipmentsBlock.append($equipmentWrapper);
-
-        const equipmentOnChange = (e) => this.equipmentChange(e);
-        $equipment.addEventListener('click', equipmentOnChange)
+        equipmentsNode.append(node);
       }
     }
   }
@@ -61,8 +103,8 @@ class CalculatorFirstStep {
 
   onChangeMileage() { }
 
-  equipmentChange(e) {
-    this.equipment = this.carModel.equipments[e.target.value];
+  equipmentChange(equipment) {
+    this.equipment = equipment;
     this.range = 0;
     this.renderMileage();
     this.onChangeEquipment();
@@ -70,9 +112,9 @@ class CalculatorFirstStep {
 
   mileageChange(e) {
     const range = +e.target.dataset.range,
-          $mileageBlock = e.target.parentElement;
+          mileageNode = e.target.parentElement;
     this.range = range;
-    for (let child of $mileageBlock.childNodes) {
+    for (let child of mileageNode.childNodes) {
       const childRange = +child.dataset.range;
       child.classList.toggle('is-before', childRange < range);
       child.classList.toggle('is-active', childRange === range);
@@ -80,23 +122,28 @@ class CalculatorFirstStep {
     this.onChangeMileage()
   }
 
-  renderMileage() {
-    const maxLen = 17;
-    const $mileageBlock = this.StepBlock.querySelector('#costing-run-line');
-    while ($mileageBlock.firstChild) {
-      $mileageBlock.removeChild($mileageBlock.firstChild);
+  clearMileage() {
+    const mileageNode = this.StepNode.querySelector('#costing-run-line');
+    while (mileageNode.firstChild) {
+      mileageNode.removeChild(mileageNode.firstChild);
     }
+  }
+
+  renderMileage() {
+    this.clearMileage();
+
+    const maxLen = 17,
+          mileageNode = this.StepNode.querySelector('#costing-run-line'),
+          mileageOnChange = (e) => this.mileageChange(e);
     if (this.equipment) {
       for (let i = 2; i <= maxLen; i++) {
-        const $mileage = document.createElement('li');
-        const range = i * this.equipment.mileageRepeat;
-        $mileage.className = 'cg-run__step';
-        $mileage.dataset.range = range;
-        $mileage.innerHTML = range + 'к';
-        $mileageBlock.append($mileage);
-
-        const mileageOnChange = (e) => this.mileageChange(e);
-        $mileage.addEventListener('click', mileageOnChange)
+        const wrapper = document.createElement('div'),
+              range = i * this.equipment.range;
+        wrapper.innerHTML = `<li class="cg-run__step" data-range="${range}">
+                                ${range + 'к'}
+                             </li>`;
+        wrapper.firstChild.addEventListener('click', mileageOnChange);
+        mileageNode.append(wrapper.firstChild);
       }
     }
   }
