@@ -15,8 +15,8 @@ export const carModel = {
           name: 'Замена масла',
           price: 500,
           repeat: 15,
-          recommendation: false,
-          // note: 'Нужно менять каждый день',
+          type: 'work',
+          note: 'Нужно менять каждый день',
           parts: {
             4: {
               name: 'Масло ДВС',
@@ -37,7 +37,7 @@ export const carModel = {
           name: 'Замена масла АКПП',
           price: 500,
           repeat: 60,
-          recommendation: false,
+          type: 'work',
           parts: {
             4: {
               name: 'Масло АКПП',
@@ -59,14 +59,14 @@ export const carModel = {
           name: 'Диагностика',
           price: 500,
           repeat: 45,
-          recommendation: false,
+          type: 'work',
           parts: {}
         },
         8: {
           name: 'Замена масла рек',
           price: 500,
           repeat: 60,
-          recommendation: true,
+          type: 'recommendation',
           note: "Нужно менять и все, питух!",
           parts: {
             4: {
@@ -90,7 +90,7 @@ export const carModel = {
           name: 'Диагностика',
           price: 500,
           repeat: 45,
-          recommendation: true,
+          type: 'recommendation',
           parts: {}
         },
       }
@@ -104,7 +104,7 @@ export const carModel = {
           name: 'Замена масла',
           price: 500,
           repeat: 10,
-          recommendation: false,
+          type: 'work',
           parts: {
             4: {
               name: 'Масло ДВС',
