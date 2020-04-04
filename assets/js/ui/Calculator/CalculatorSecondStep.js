@@ -1,11 +1,13 @@
 import Work from './Work';
 import Part from './Part';
+import CalculatorSteps from './CalculatorSteps';
 
-class CalculatorSecondStep {
+class CalculatorSecondStep extends CalculatorSteps {
   _works = [];
   range = undefined;
 
   constructor(node, equipment) {
+    super();
     this._node = node;
     this.equipment = equipment;
     this.worksNode = node.querySelector('#costing-step_02_works');
@@ -135,6 +137,15 @@ class CalculatorSecondStep {
     this._works = [];
     this._renderTotalPrices();
   }
+
+  showInvalidSelections(){
+    const worksNode = this._node.querySelector('.costing__col-half').firstElementChild;
+    console.log(worksNode);
+    if (this.totalPrice === 0) {
+      this.highlightNode(worksNode).then(() => {});
+    }
+  }
+
 }
 
 export default CalculatorSecondStep;

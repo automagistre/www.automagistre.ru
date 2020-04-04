@@ -32,6 +32,7 @@ class Calculator {
     this.steps[1] = firstStep;
     this.steps[2] = secondStep;
     this.steps[3] = thirdStep;
+    this.steps[4] = {isValid: true};
   }
 
 }
