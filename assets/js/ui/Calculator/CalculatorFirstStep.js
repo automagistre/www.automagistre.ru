@@ -81,9 +81,12 @@ class CalculatorFirstStep {
   range = 0;
 
   constructor(node, equipments) {
-    this.StepNode = node;
-    // renderModel(node, carModel);
+    this._node = node;
     this.renderEquipments(node, equipments);
+  }
+
+  get isValid() {
+    return this.equipment && this.range > 0;
   }
 
   renderEquipments(node, equipments) {
@@ -123,7 +126,7 @@ class CalculatorFirstStep {
   }
 
   clearMileage() {
-    const mileageNode = this.StepNode.querySelector('#costing-run-line');
+    const mileageNode = this._node.querySelector('#costing-run-line');
     while (mileageNode.firstChild) {
       mileageNode.removeChild(mileageNode.firstChild);
     }
@@ -133,7 +136,7 @@ class CalculatorFirstStep {
     this.clearMileage();
 
     const maxLen = 17,
-          mileageNode = this.StepNode.querySelector('#costing-run-line'),
+          mileageNode = this._node.querySelector('#costing-run-line'),
           mileageOnChange = (e) => this.mileageChange(e);
     if (this.equipment) {
       for (let i = 2; i <= maxLen; i++) {
@@ -146,6 +149,22 @@ class CalculatorFirstStep {
         mileageNode.append(wrapper.firstChild);
       }
     }
+  }
+
+  showInvalidSelections() {
+    const equipmentUnitNode = this._node.querySelector('.costing__col-set').firstElementChild,
+          mileageUnitNode = this._node.querySelector('.costing__col-run').firstElementChild;
+    async function highlightNode(node) {
+      node.classList.add('input-error');
+      await setTimeout(() => node.classList.remove('input-error'), 800);
+    }
+    if (!this.equipment) {
+      highlightNode(equipmentUnitNode).then(() => {});
+    }
+    if (this.range === 0) {
+      highlightNode(mileageUnitNode).then(() => {});
+    }
+
   }
 }
 

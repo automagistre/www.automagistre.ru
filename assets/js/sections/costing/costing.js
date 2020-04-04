@@ -3,7 +3,7 @@ import 'slick-carousel'
 import Calculator from '../../ui/Calculator/Calculator';
 import {carModel} from '../../ui/model'
 
-const initSlick = $el => {
+const initSlick = node => {
   const slickOptions = {
     arrows: false,
     dots: false,
@@ -16,18 +16,18 @@ const initSlick = $el => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  $el.slick(slickOptions)
+  node.slick(slickOptions)
 };
 
 
 const costingSec = () => {
-  const $costingSection =  document.querySelector('section.sec-costing'),
-        $costingSlick = $('#costing-steps'),
-        $costingSteps = $costingSection.querySelectorAll('.js-cg-step'),
-        $costingSvg = $costingSection.querySelector('#cs-stage');
+  const costingSectionNode =  document.querySelector('section.sec-costing'),
+        costingSlickNode = $('#costing-steps'),
+        costingStepsNode = costingSectionNode.querySelectorAll('.js-cg-step'),
+        costingSvgNode = costingSectionNode.querySelector('#cs-stage');
   let currentStep = 1;
 
-  initSlick($costingSlick);
+  initSlick(costingSlickNode);
 
   const animateSteps = nextStep => {
     const classesMap = {
@@ -52,21 +52,28 @@ const costingSec = () => {
     };
     let stepClasses = `${currentStep} to ${nextStep}`;
     if (classesMap.hasOwnProperty(stepClasses)) {
-      $costingSvg.classList.remove(...classesMap[stepClasses].remove);
-      $costingSvg.classList.add(...classesMap[stepClasses].add);
+      costingSvgNode.classList.remove(...classesMap[stepClasses].remove);
+      costingSvgNode.classList.add(...classesMap[stepClasses].add);
     }
     currentStep = nextStep;
   };
 
   const changeStep = nextStep => {
-     animateSteps(nextStep);
-     $costingSlick.slick('slickGoTo', nextStep - 1, false)
+    const currentStep = calculator.steps[calculator.currentStep];
+
+    if (currentStep.isValid || nextStep < currentStep) {
+      costingSlickNode.slick('slickGoTo', nextStep - 1, false);
+      calculator.currentStep = nextStep;
+      animateSteps(nextStep);
+    } else {
+      currentStep.showInvalidSelections();
+    }
   };
 
-  $costingSteps.forEach($el => {
-    $el.addEventListener('click', el => changeStep(+el.target.dataset.step))
+  costingStepsNode.forEach(node => {
+    node.addEventListener('click', el => changeStep(+el.target.dataset.step))
   });
-  const calculator = new Calculator($costingSection, carModel.equipments)
+  const calculator = new Calculator(costingSectionNode, carModel.equipments)
 };
 
 export default costingSec;

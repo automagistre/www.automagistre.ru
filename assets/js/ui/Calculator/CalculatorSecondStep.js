@@ -154,6 +154,10 @@ class CalculatorSecondStep {
     this.totalNode = node.querySelector('#costing-step_02_total');
   }
 
+  get isValid() {
+    return Boolean(this.totalPrice);
+  }
+
   get worksPrice() {
     return this._calculateTotalsPrices('work');
   }
