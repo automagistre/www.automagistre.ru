@@ -1,6 +1,6 @@
 import CalculatorFirstStep from './CalculatorFirstStep';
 import CalculatorSecondStep from './CalculatorSecondStep';
-import {CalculatorForm, SubscribeForm} from '../forms';
+import CalculatorThirdStep from './CalculatorThirdStep';
 
 class Calculator {
   isValid = false;
@@ -15,6 +15,7 @@ class Calculator {
     this.model = carModel;
     const firstStep =  new CalculatorFirstStep(firstStepNode, this.model);
     const secondStep = new CalculatorSecondStep(secondStepNode);
+    const thirdStep = new CalculatorThirdStep(thirdStepNode);
 
     firstStep.onChangeEquipment = () => {
       secondStep.clear();
@@ -30,6 +31,7 @@ class Calculator {
 
     this.steps[1] = firstStep;
     this.steps[2] = secondStep;
+    this.steps[3] = thirdStep;
   }
 
 }
