@@ -42,6 +42,20 @@ class Form {
     }
   }
 
+  getInputsStatus() {
+    const status = { };
+
+    for (let [inputName, input] of Object.entries(this.formInputs)) {
+      status[inputName] = {
+        value: input.value,
+        isValid: input.isValid,
+        isTouched: input.isTouched,
+        isRequired: input.isRequired
+      }
+    }
+    return status;
+  };
+
   clear() {
     Object.values(this.formInputs).forEach(input => input.clear());
   }
@@ -76,6 +90,7 @@ class FormInputs {
   _valid = false;
   _touched = false;
   _value = '';
+  isRequired = true;
 
   constructor($input, callback = function() {
     throw new Error("You must set onChange callback")
@@ -85,11 +100,11 @@ class FormInputs {
   }
 
   set isValid(value) {
-    throw new Error('Read only property')
+    throw new Error('Read only property, cant set "isValid":' + value )
   }
 
   get isValid() {
-    return this._valid
+    return this._valid || !this.isRequired;
   }
 
   set isTouched(value) {
@@ -123,7 +138,7 @@ class FormInputs {
   updateInputValue() {};
 
   clear() {
-    this._touched = false;
+    this.isTouched = false;
     this.updateInputValue();
   }
 }
@@ -276,6 +291,12 @@ class CalendarInput extends FormInputs {
   _validator(value) {
      return value !== '';
   }
+
+  getFormattedDate(format) {
+    const selectedDate = new Date(this.value);
+    return this._calendar.formatDate(selectedDate, format)
+  }
+
 }
 
 class CalendarInlineInput extends CalendarInput {
@@ -331,11 +352,10 @@ export class CalculatorForm extends SubscribeForm {
     super(node);
     const calendarInlineNode = node.querySelector('[data-formcontrol=calendar-inline]');
     const self = this;
+    this.formInputs['text'].isRequired = false;
     this.formInputs['calendar'] = new CalendarInlineInput(calendarInlineNode, function() {
-      const selectedDate = new Date(this.value);
-      inputNode.innerHTML = this._calendar.formatDate(selectedDate, 'd-m-y');
+      inputNode.innerHTML = this.getFormattedDate('d.m.y');
       self.onChangeHandler();
     });
-    console.log(this);
   }
 }
