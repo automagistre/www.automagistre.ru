@@ -58,13 +58,13 @@ const costingSec = () => {
     currentStep = nextStep;
   };
 
-  const changeStep = nextStep => {
-    const currentStep = calculator.steps[calculator.currentStep];
-
-    if (currentStep.isValid || nextStep < currentStep) {
-      costingSlickNode.slick('slickGoTo', nextStep - 1, false);
-      calculator.currentStep = nextStep;
-      animateSteps(nextStep);
+  const changeStep = nextStepNumber => {
+    const currentStepNumber = calculator.currentStep,
+          currentStep = calculator.steps[currentStepNumber];
+    if (currentStep.isValid || nextStepNumber < currentStepNumber) {
+      costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false);
+      calculator.currentStep = nextStepNumber;
+      animateSteps(nextStepNumber);
     } else {
       currentStep.showInvalidSelections();
     }
