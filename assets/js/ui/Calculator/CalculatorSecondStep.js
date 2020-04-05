@@ -7,8 +7,7 @@ class CalculatorSecondStep extends CalculatorSteps {
   range = undefined;
 
   constructor(node, equipment) {
-    super();
-    this._node = node;
+    super(node);
     this.equipment = equipment;
     this.worksNode = node.querySelector('#costing-step_02_works');
     this.recommendationsNode = node.querySelector('#costing-step_02_recommendations');
@@ -61,7 +60,10 @@ class CalculatorSecondStep extends CalculatorSteps {
     const worksNode = this.worksNode,
           recommendationsNode = this.recommendationsNode,
           works = this.equipment.works;
-    const onChange = () => this._renderTotalPrices();
+    const onChange = () => {
+      this._renderTotalPrices();
+      this.onChange()
+    };
 
     if (works) {
       for (let [workID, work] of Object.entries(works)) {
@@ -73,7 +75,6 @@ class CalculatorSecondStep extends CalculatorSteps {
           const parent = workEntity.type === 'work' ? worksNode : recommendationsNode,
                 workNode = workEntity.render();
 
-          workEntity.isSelected = isSelect;
           this.addWork(workEntity);
           parent.append(workNode);
 
@@ -86,10 +87,10 @@ class CalculatorSecondStep extends CalculatorSteps {
               partEntity.onChange = onChange;
 
               const partNode = partEntity.render();
-              partEntity.isSelected = isSelect;
               workEntity.addPart(partEntity);
               partsNode.append(partNode);
             }
+            workEntity.isSelected = isSelect;
             workNode.append(partsNode);
           }
         }
@@ -97,8 +98,6 @@ class CalculatorSecondStep extends CalculatorSteps {
     }
     this._renderTotalPrices();
   }
-
-  onChange() {}
 
   _calculateTotalsPrices(type) {
     let total = 0;

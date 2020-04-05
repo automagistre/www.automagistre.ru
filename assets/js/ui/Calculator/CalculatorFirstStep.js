@@ -1,31 +1,13 @@
 import CalculatorSteps from './CalculatorSteps';
 import Equipment from './Equipment';
 
-const renderModel = ($el, carModel) => {
-  const blockHTML = `
-    <div class="cg-car__name">${carModel.manufacture} ${carModel.name}</div>
-        <div class="cg-car__pict">
-            <img class="cg-car__img" src="${carModel.img}" alt="${carModel.manufacture} ${carModel.name}">
-        </div>
-        <ul class="cg-car__data">
-            <li>${carModel.model}</li>
-            <li>${+carModel.startYear} - ${carModel.stopYear || "н.в"}</li>
-        </ul>
-    </div>`;
-  const carBlock = $el.querySelector('#costing-step_01_model');
-  // При нажатии на этот элемент появляется выбор тачки
-  if ( carBlock) {
-    carBlock.innerHTML = blockHTML;
-  }
-};
 
 class CalculatorFirstStep extends CalculatorSteps {
   equipment = undefined;
   range = 0;
 
   constructor(node, equipments) {
-    super(node, equipments);
-    this._node = node;
+    super(node);
     this.renderEquipments(node, equipments);
   }
 

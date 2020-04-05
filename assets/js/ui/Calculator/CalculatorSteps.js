@@ -1,5 +1,6 @@
 class CalculatorSteps {
-  constructor() {
+  constructor(node) {
+    this._node = node;
   }
 
   get isValid() {
@@ -16,6 +17,8 @@ class CalculatorSteps {
   }
 
   showInvalidSelections() {}
+
+  onChange() {}
 
 }
 

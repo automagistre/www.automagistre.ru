@@ -29,6 +29,10 @@ class Calculator {
       this.equipmentName = equipment.name;
     };
 
+    secondStep.onChange = () =>{
+      thirdStep.totalPrice = secondStep.totalPrice;
+    };
+
     this.steps[1] = firstStep;
     this.steps[2] = secondStep;
     this.steps[3] = thirdStep;

@@ -208,7 +208,7 @@ class LicenseInput extends FormInputs {
   constructor($input, callback) {
     super($input, callback);
     this.name = 'license';
-    this._value = true;
+    this._value = $input.checked;
     this._valid = true;
 
     $input.addEventListener('click', e => this.value = e.target.checked);
@@ -262,19 +262,40 @@ class CalendarInput extends FormInputs {
   constructor($input, callback) {
     super($input, callback);
     this.name = 'calendar';
-    this.value = '';
+    this._value = '';
     const options = {
       locale: Russian,
       dateFormat: 'j F Y',
       minDate: "today",
       position: 'below',
-      onClose: selectedDate => this.value = selectedDate
+      onChange: selectedDate => this.value = selectedDate
     };
-    new Flatpickr($input, options)
+    this._calendar = new Flatpickr($input, options)
   }
 
   _validator(value) {
      return value !== '';
+  }
+}
+
+class CalendarInlineInput extends CalendarInput {
+  constructor(inputNode, callback) {
+    super(inputNode, callback);
+    this.name = 'calendar-inline';
+    this._value = '';
+    const options ={
+      locale: Russian,
+      dateFormat: 'j F Y',
+      minDate: "today",
+      position: 'below',
+      inline: true,
+      defaultDate: this._value,
+      onChange: selectedDate => this.value = selectedDate
+    };
+    this._calendar = new Flatpickr(inputNode, options)
+  }
+  _validator(value) {
+    return Boolean(value);
   }
 }
 
@@ -306,7 +327,15 @@ export class SubscribeForm extends Form {
 
 
 export class CalculatorForm extends SubscribeForm {
-  constructor($el) {
-    super($el);
+  constructor(node, inputNode) {
+    super(node);
+    const calendarInlineNode = node.querySelector('[data-formcontrol=calendar-inline]');
+    const self = this;
+    this.formInputs['calendar'] = new CalendarInlineInput(calendarInlineNode, function() {
+      const selectedDate = new Date(this.value);
+      inputNode.innerHTML = this._calendar.formatDate(selectedDate, 'd-m-y');
+      self.onChangeHandler();
+    });
+    console.log(this);
   }
 }
