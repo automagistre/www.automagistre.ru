@@ -46,6 +46,8 @@ const costingSec = () => {
         costingSvgNode = costingSectionNode.querySelector('#cs-stage');
   let currentStep = 1;
 
+  let calculator = new Calculator(costingSectionNode, carModel.equipments);
+
   initSlick(costingSlickNode);
 
   const animateSteps = nextStep => {
@@ -87,12 +89,16 @@ const costingSec = () => {
     } else {
       currentStep.showInvalidSelections();
     }
+    if (currentStepNumber === 4 && nextStepNumber === 1) {
+      calculator.destroy();
+      calculator = new Calculator(costingSectionNode, carModel.equipments)
+    }
   };
 
   costingStepsNode.forEach(node => {
     node.addEventListener('click', el => changeStep(+el.target.dataset.step))
   });
-  const calculator = new Calculator(costingSectionNode, carModel.equipments)
+
 };
 
 export default costingSec;

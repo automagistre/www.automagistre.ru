@@ -12,7 +12,7 @@ class Calculator {
           secondStepNode = node.querySelector('#costing-step_02'),
           thirdStepNode = node.querySelector('#costing-step_03');
 
-    this.model = carModel;
+    this.model = {...carModel};
     const firstStep =  new CalculatorFirstStep(firstStepNode, this.model);
     const secondStep = new CalculatorSecondStep(secondStepNode);
     const thirdStep = new CalculatorThirdStep(thirdStepNode);
@@ -26,7 +26,6 @@ class Calculator {
             range = firstStep.range;
       secondStep.clear();
       secondStep.render(equipment, range);
-      this.equipmentName = equipment.name;
     };
 
     secondStep.onChange = () =>{
@@ -36,7 +35,21 @@ class Calculator {
     this.steps[1] = firstStep;
     this.steps[2] = secondStep;
     this.steps[3] = thirdStep;
-    this.steps[4] = {isValid: true};
+    this.steps[4] = {isValid: true,
+    clear: function() {
+        console.log('4')
+    }};
+    console.log(this)
+  }
+
+  destroy() {
+    for (let step of Object.values(this.steps)) {
+      step.clear();
+    }
+    this.steps = undefined;
+    this.currentStep = undefined;
+    this.isValid = false;
+    this.isDestroyed = true;
   }
 
 }

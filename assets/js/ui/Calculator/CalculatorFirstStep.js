@@ -8,15 +8,19 @@ class CalculatorFirstStep extends CalculatorSteps {
 
   constructor(node, equipments) {
     super(node);
-    this.renderEquipments(node, equipments);
+
+    this.equipmentsNode = node.querySelector('#costing-step_01_model_equipments')
+    this.mileageNode = node.querySelector('#costing-run-line')
+
+    this.renderEquipments(equipments);
   }
 
   get isValid() {
     return this.equipment && this.range > 0;
   }
 
-  renderEquipments(node, equipments) {
-    const equipmentsNode = node.querySelector('#costing-step_01_model_equipments');
+  renderEquipments(equipments) {
+    const equipmentsNode = this.equipmentsNode;
     if (equipmentsNode) {
       for (let [entityID, entity] of Object.entries(equipments)) {
         const equipment = new Equipment(entityID, entity),
@@ -25,6 +29,13 @@ class CalculatorFirstStep extends CalculatorSteps {
 
         equipmentsNode.append(node);
       }
+    }
+  }
+
+  clearEquipment() {
+    const equipmentsNode = this.equipmentsNode;
+    while (equipmentsNode.firstChild) {
+      equipmentsNode.removeChild(equipmentsNode.firstChild);
     }
   }
 
@@ -52,7 +63,7 @@ class CalculatorFirstStep extends CalculatorSteps {
   }
 
   clearMileage() {
-    const mileageNode = this._node.querySelector('#costing-run-line');
+    const mileageNode = this.mileageNode;
     while (mileageNode.firstChild) {
       mileageNode.removeChild(mileageNode.firstChild);
     }
@@ -62,7 +73,7 @@ class CalculatorFirstStep extends CalculatorSteps {
     this.clearMileage();
 
     const maxLen = 17,
-          mileageNode = this._node.querySelector('#costing-run-line'),
+          mileageNode = this.mileageNode,
           mileageOnChange = (e) => this.mileageChange(e);
     if (this.equipment) {
       for (let i = 2; i <= maxLen; i++) {
@@ -87,6 +98,11 @@ class CalculatorFirstStep extends CalculatorSteps {
     if (this.range === 0) {
       this.highlightNode(mileageUnitNode).then(() => {});
     }
+  }
+
+  clear() {
+    this.clearMileage();
+    this.clearEquipment()
   }
 }
 

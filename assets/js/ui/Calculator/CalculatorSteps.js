@@ -20,6 +20,8 @@ class CalculatorSteps {
 
   onChange() {}
 
+  clear() {}
+
 }
 
 export default CalculatorSteps;
