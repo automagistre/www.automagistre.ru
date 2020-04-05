@@ -25,8 +25,6 @@ class Part extends CalcItem {
     this._node.disabled = value;
   }
 
-  onChange() {}
-
 }
 
 export default Part;

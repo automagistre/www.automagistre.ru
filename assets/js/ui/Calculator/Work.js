@@ -42,9 +42,6 @@ class Work extends CalcItem {
   get totalPrice() {
     return this.isSelected ? +this._item.price : 0;
   }
-
-
-  onChange() {}
 }
 
 export default Work;

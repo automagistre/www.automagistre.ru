@@ -64,6 +64,8 @@ class CalcItem {
     this._node.addEventListener('click', e => this.isSelected = e.target.checked);
     return wrapper.firstChild;
   }
+
+  onChange() {}
 }
 
 export default CalcItem;
