@@ -9,6 +9,7 @@ class calculatorThirdStep extends CalculatorSteps {
     super(node);
     const inputNode = node.querySelector('#cg-order-date');
     this._form = new CalculatorForm(node, inputNode);
+    this._form.onChange = () => this.onChange();
     this._totalPriceNode = node.querySelector('.cg-order__cost');
   }
 
@@ -20,11 +21,14 @@ class calculatorThirdStep extends CalculatorSteps {
     this._totalPrice = value;
     this._totalPriceNode.innerHTML = value.toString()
     .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + '<i class="icon-rub">a</i>';
-    this.onChange();
   }
 
   get isValid() {
     return this._form.isValid;
+  }
+
+  getFormStatus() {
+    return this._form.getInputsStatus();
   }
 
   showInvalidSelections() {

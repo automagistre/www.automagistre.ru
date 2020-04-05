@@ -19,12 +19,13 @@ class Form {
   };
 
   preparationData() {
-    throw "Subclass must implement abstract method";
+    // throw "Subclass must implement abstract method";
   }
 
-  onChangeHandler () {
+  onChangeHandler() {
     this.validateForm();
     this.inputChangeColor();
+    this.onChange()
   };
 
   inputChangeColor(removeColors=false) {
@@ -62,7 +63,7 @@ class Form {
 
   async send() {
     if (this.isValid) {
-      // this.preparationData()
+      this.preparationData()
     } else {
       for (let inputName in this.formInputs) {
         this.formInputs[inputName].isTouched = true;
@@ -82,6 +83,8 @@ class Form {
       console.log('Data send error', e)
     }
   }
+
+  onChange() {}
 }
 
 
@@ -283,7 +286,7 @@ class CalendarInput extends FormInputs {
       dateFormat: 'j F Y',
       minDate: "today",
       position: 'below',
-      onChange: selectedDate => this.value = selectedDate
+      onChange: selectedDate => this.value = selectedDate[0]
     };
     this._calendar = new Flatpickr($input, options)
   }
@@ -293,8 +296,7 @@ class CalendarInput extends FormInputs {
   }
 
   getFormattedDate(format) {
-    const selectedDate = new Date(this.value);
-    return this._calendar.formatDate(selectedDate, format)
+    return this._calendar.formatDate(this.value, format)
   }
 
 }
@@ -311,7 +313,7 @@ class CalendarInlineInput extends CalendarInput {
       position: 'below',
       inline: true,
       defaultDate: this._value,
-      onChange: selectedDate => this.value = selectedDate
+      onChange: selectedDate => this.value = selectedDate[0]
     };
     this._calendar = new Flatpickr(inputNode, options)
   }

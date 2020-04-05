@@ -39,7 +39,8 @@ class Calculator {
     };
 
     thirdStep.onChange = () => {
-
+      const formStatus = thirdStep.getFormStatus();
+      console.log(formStatus);
     };
 
     this.steps[1] = firstStep;
