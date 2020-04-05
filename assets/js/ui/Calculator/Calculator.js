@@ -1,6 +1,7 @@
 import CalculatorFirstStep from './CalculatorFirstStep';
 import CalculatorSecondStep from './CalculatorSecondStep';
 import CalculatorThirdStep from './CalculatorThirdStep';
+import CalculatorFourthStep from './CalculatorFourthStep';
 
 class Calculator {
   isValid = false;
@@ -10,12 +11,15 @@ class Calculator {
   constructor(node, carModel) {
     const firstStepNode = node.querySelector('#costing-step_01'),
           secondStepNode = node.querySelector('#costing-step_02'),
-          thirdStepNode = node.querySelector('#costing-step_03');
+          thirdStepNode = node.querySelector('#costing-step_03'),
+          fourthStepNode = node.querySelector('#costing-step_04');
+
 
     this.model = {...carModel};
-    const firstStep =  new CalculatorFirstStep(firstStepNode, this.model);
-    const secondStep = new CalculatorSecondStep(secondStepNode);
-    const thirdStep = new CalculatorThirdStep(thirdStepNode);
+    const firstStep =  new CalculatorFirstStep(firstStepNode, this.model),
+          secondStep = new CalculatorSecondStep(secondStepNode),
+          thirdStep = new CalculatorThirdStep(thirdStepNode),
+          fourthStep = new CalculatorFourthStep(fourthStepNode);
 
     firstStep.onChangeEquipment = () => {
       secondStep.clear();
@@ -28,18 +32,20 @@ class Calculator {
       secondStep.render(equipment, range);
     };
 
-    secondStep.onChange = () =>{
-      thirdStep.totalPrice = secondStep.totalPrice;
+    secondStep.onChange = () => {
+      const totalPrice = secondStep.totalPrice;
+      thirdStep.totalPrice = totalPrice;
+      fourthStep.totalPrice = totalPrice;
+    };
+
+    thirdStep.onChange = () => {
+
     };
 
     this.steps[1] = firstStep;
     this.steps[2] = secondStep;
     this.steps[3] = thirdStep;
-    this.steps[4] = {isValid: true,
-    clear: function() {
-        console.log('4')
-    }};
-    console.log(this)
+    this.steps[4] = fourthStep;
   }
 
   destroy() {
