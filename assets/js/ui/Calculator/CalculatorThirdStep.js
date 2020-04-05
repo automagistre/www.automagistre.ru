@@ -19,7 +19,7 @@ class calculatorThirdStep extends CalculatorSteps {
   set totalPrice(value) {
     this._totalPrice = value;
     this._totalPriceNode.innerHTML = value.toString()
-    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + '<i class="icon-rub">a</i>'
+    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + '<i class="icon-rub">a</i>';
     this.onChange();
   }
 
@@ -29,8 +29,15 @@ class calculatorThirdStep extends CalculatorSteps {
 
   showInvalidSelections() {
     const calendarUnitNode = this._node.querySelector('.js-costing_calendar_unit'),
-          formUnitNode = this._node.querySelector('.js-costing_calendar_unit');
-
+          formUnitNode = this._node.querySelector('.js-costing_form_unit'),
+          formStatus = this._form.getInputsStatus();
+    if (!formStatus['calendar'].isValid) {
+      console.log(formStatus['calendar'].isValid);
+      this.highlightNode(calendarUnitNode).then(() => {})
+    }
+    if (!formStatus['name'].isValid || !formStatus['phone'].isValid || !formStatus['license'].isValid) {
+      this.highlightNode(formUnitNode).then(() => {})
+    }
   }
 
 }
