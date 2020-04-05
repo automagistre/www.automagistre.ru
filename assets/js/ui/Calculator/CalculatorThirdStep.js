@@ -5,6 +5,13 @@ class calculatorThirdStep extends CalculatorSteps {
 
   _totalPrice = 0;
 
+  constructor(node) {
+    super(node);
+    const inputNode = node.querySelector('#cg-order-date');
+    this._form = new CalculatorForm(node, inputNode);
+    this._totalPriceNode = node.querySelector('.cg-order__cost');
+  }
+
   get totalPrice() {
     return this._totalPrice;
   }
@@ -16,16 +23,16 @@ class calculatorThirdStep extends CalculatorSteps {
     this.onChange();
   }
 
-  constructor(node) {
-    super(node);
-    const inputNode = node.querySelector('#cg-order-date');
-    this._form = new CalculatorForm(node, inputNode);
-    this._totalPriceNode = node.querySelector('.cg-order__cost');
-  }
-
   get isValid() {
     return this._form.isValid;
   }
+
+  showInvalidSelections() {
+    const calendarUnitNode = this._node.querySelector('.js-costing_calendar_unit'),
+          formUnitNode = this._node.querySelector('.js-costing_calendar_unit');
+
+  }
+
 }
 
 export default calculatorThirdStep;

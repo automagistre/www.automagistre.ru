@@ -138,8 +138,7 @@ class CalculatorSecondStep extends CalculatorSteps {
   }
 
   showInvalidSelections(){
-    const worksNode = this._node.querySelector('.costing__col-half').firstElementChild;
-    console.log(worksNode);
+    const worksNode = this._node.querySelector('.js-costing_works_unit');
     if (this.totalPrice === 0) {
       this.highlightNode(worksNode).then(() => {});
     }
