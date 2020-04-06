@@ -46,7 +46,7 @@ const costingSec = () => {
         costingSvgNode = costingSectionNode.querySelector('#cs-stage');
   let currentStep = 1;
 
-  let calculator = new Calculator(costingSectionNode, carModel.equipments);
+  let calculator = new Calculator(costingSectionNode, carModel);
 
   initSlick(costingSlickNode);
 
@@ -84,14 +84,14 @@ const costingSec = () => {
           currentStep = calculator.steps[currentStepNumber];
     if (currentStep.isValid || nextStepNumber < currentStepNumber) {
       costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false);
-      calculator.currentStep = nextStepNumber;
+      calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1;
       animateSteps(nextStepNumber);
     } else {
       currentStep.showInvalidSelections();
     }
     if (currentStepNumber === 4 && nextStepNumber === 1) {
       calculator.destroy();
-      calculator = new Calculator(costingSectionNode, carModel.equipments)
+      calculator = new Calculator(costingSectionNode, carModel)
     }
   };
 

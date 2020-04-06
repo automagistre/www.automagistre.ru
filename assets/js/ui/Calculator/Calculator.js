@@ -16,7 +16,8 @@ class Calculator {
 
 
     this.model = {...carModel};
-    const firstStep =  new CalculatorFirstStep(firstStepNode, this.model),
+    console.log(this.model)
+    const firstStep =  new CalculatorFirstStep(firstStepNode, this.model.equipments),
           secondStep = new CalculatorSecondStep(secondStepNode),
           thirdStep = new CalculatorThirdStep(thirdStepNode),
           fourthStep = new CalculatorFourthStep(fourthStepNode);
@@ -40,7 +41,14 @@ class Calculator {
 
     thirdStep.onChange = () => {
       const formStatus = thirdStep.getFormStatus();
-      console.log(formStatus);
+      fourthStep.date = formStatus['calendar'].value;
+      fourthStep.name = formStatus['name'].value;
+    };
+
+    fourthStep.car = {
+      manufacture: this.model.manufacture,
+      name: this.model.name,
+      model: this.model.model
     };
 
     this.steps[1] = firstStep;

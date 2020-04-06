@@ -11,8 +11,9 @@ class CalculatorFourthStep extends CalculatorSteps {
   }
 
   set car(value) {
+    const modelStr = `${value.manufacture} ${value.name}(${value.model})`;
     this._car = value;
-    this._cgStatusCarNode.innerHTML = value;
+    this._cgStatusCarNode.innerHTML = modelStr;
   }
 
   get car() {
@@ -30,7 +31,12 @@ class CalculatorFourthStep extends CalculatorSteps {
 
   set date(value) {
     this._date = value;
-    this._cgStatusDateNode.innerHTML = value;
+    const d = new Date(value);
+    const ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
+    const mo = new Intl.DateTimeFormat('ru', { month: 'long' }).format(d);
+    const da = new Intl.DateTimeFormat('ru', { day: '2-digit' }).format(d);
+
+    this._cgStatusDateNode.innerHTML = `${da} ${mo} ${ye}`;
   }
 
   get date() {
@@ -39,7 +45,8 @@ class CalculatorFourthStep extends CalculatorSteps {
 
   set totalPrice(value) {
     this._totalPrice = value;
-    this._cgStatusTotalNode.innerHTML = value;
+    this._cgStatusTotalNode.innerHTML = value.toString()
+    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + '<i class="icon-rub">a</i>';;
   }
 
   get totalPrice() {
@@ -49,7 +56,7 @@ class CalculatorFourthStep extends CalculatorSteps {
   clear() {
     this.car = '';
     this.name = '';
-    this.date = '';
+    this.date = new Date();
     this.total = '';
   }
 
