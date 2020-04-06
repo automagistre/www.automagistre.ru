@@ -3,6 +3,7 @@ import IMask from 'imask';
 import Flatpickr from 'flatpickr';
 import '../../less/2_plugins/flatpickr_light.css'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
+import SuccessFeedBackPopup from './SuccessFeedBackPopup';
 
 
 class Form {
@@ -62,6 +63,10 @@ class Form {
   }
 
   async send() {
+    const serverImitation = () => new Promise(resolve => {
+      setTimeout(() => {console.log('получено');
+        resolve('OK')}, 2000);
+    });
     if (this.isValid) {
       this.preparationData()
     } else {
@@ -73,12 +78,14 @@ class Form {
       return false;
     }
     try {
-      await setTimeout(() => {
-        this.clear();
-        this.validateForm();
-        this.inputChangeColor(true);
-      }, 3000);
-      return true;
+      const popup = new SuccessFeedBackPopup();
+      await serverImitation();
+      this.clear();
+      this.validateForm();
+      this.inputChangeColor(true);
+      popup.message = 'Мы получили ваше сообщение';
+      popup.open();
+      setTimeout(()=> popup.close(), 3000);
     } catch (e) {
       console.log('Data send error', e)
     }
