@@ -70,4 +70,10 @@ export default function initSections() {
       require('../sections/happen').default();
     })
   }
+
+  if (document.querySelector('section.sec-costing')){
+    require.ensure([], require => {
+      require('../sections/costing/costing').default();
+    })
+  }
 }

@@ -25,9 +25,17 @@
 .flatpickr-calendar.open,
 .flatpickr-calendar.inline {
   opacity: 1;
+
   /*max-height: 640px;*/
   visibility: visible;
 }
+
+.flatpickr-calendar.inline {
+  margin-top: 0;
+  border: none;
+  box-shadow: none;
+}
+
 .flatpickr-calendar.open {
   display: inline-block;
   z-index: 99999;
@@ -143,6 +151,12 @@
       -ms-flex: 1;
           flex: 1;
 }
+
+.inline .flatpickr-months .flatpickr-month {
+  padding: 0;
+  height: 40px;
+}
+
 .flatpickr-months .flatpickr-prev-month,
 .flatpickr-months .flatpickr-next-month {
   text-decoration: none;
@@ -155,6 +169,17 @@
   color: #5a6171;
   fill: #5a6171;
 }
+
+.inline .flatpickr-prev-month,
+.inline .flatpickr-next-month {
+  height: auto;
+  padding: 10px 30px;
+  z-index: 3;
+  background-color: #F0F1F3;
+  border-radius: 20px;
+  line-height: 100%;
+}
+
 .flatpickr-months .flatpickr-prev-month.flatpickr-disabled,
 .flatpickr-months .flatpickr-next-month.flatpickr-disabled {
   display: none;
@@ -448,6 +473,9 @@ span.flatpickr-weekday {
 .flatpickr-days:focus {
   outline: 0;
 }
+.inline .flatpickr-days {
+  width: 100%;
+}
 .dayContainer {
   margin: 0 0 20px 0;
   padding: 0;
@@ -477,10 +505,15 @@ span.flatpickr-weekday {
   -webkit-box-shadow: -1px 0 0 #eceef1;
           box-shadow: -1px 0 0 #eceef1;
 }
+.inline .dayContainer {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
 .flatpickr-day {
   background: none;
   border: 1px solid transparent;
-  border-radius: 5px;
+  border-radius: 4px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   color: #484848;
@@ -502,6 +535,12 @@ span.flatpickr-weekday {
           justify-content: center;
   text-align: center;
 }
+.inline .flatpickr-day {
+  height: 36px;
+  line-height: 36px;
+  max-width: 100%;
+}
+
 .flatpickr-day.inRange,
 .flatpickr-day.prevMonthDay.inRange,
 .flatpickr-day.nextMonthDay.inRange,
@@ -641,6 +680,13 @@ span.flatpickr-weekday {
   background: #fff;
   border-radius: 0 0 20px 20px;
 }
+
+.inline .flatpickr-innerContainer {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+}
+
 .flatpickr-rContainer {
   display: inline-block;
 

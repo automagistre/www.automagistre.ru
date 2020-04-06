@@ -1,269 +1,363 @@
 import isEmail from 'is-email'
 import IMask from 'imask';
-import flatpickr from 'flatpickr';
+import Flatpickr from 'flatpickr';
 import '../../less/2_plugins/flatpickr_light.css'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
 
 
-const FORM_CONTROLS_TEMPLATE = {
-  name: {
-    value: '',
-    isTouched:false,
-    isValid: false,
-    validation: {
-      required:true,
-    }
-  },
-  text: {
-    value: '',
-    isTouched:false,
-    isValid: false,
-    validation: {
-      required:true,
-    }
-  },
-  email:{
-    value:'',
-    isTouched:false,
-    isValid: false,
-    validation: {
-      required: true,
-      email: true
-    }
-  },
-  phone: {
-    value: '',
-    isTouched:false,
-    isValid: false,
-    validation: {
-      required: true,
-      phone: true
-    }
-  },
-  license:{
-    value: true,
-    isValid: true,
-    validation: {
-      checked: true,
-    }
-  },
-  calendar: {
-    value: '',
-    isTouched: false,
-    isValid: false,
-    validation: {
-      required: true,
-    }
-  }
-};
-
 class Form {
   isValid = false;
-  formControls = {};
+  formInputs = {};
 
-  validateForm = (controls) => {
+  validateForm() {
     let isValid = true;
-    for (let control in controls) {
-      try { isValid = isValid && this.formControls[control].isValid; }
-      catch (e) { console.error('Invalid property', control); }
+    const inputs = {...this.formInputs};
+    for (let input of Object.values(inputs)) {
+      isValid = input.isValid && isValid;
     }
-    return isValid
-  };
-
-  controlModifier(control, controlName, event) {
-    throw "Subclass must implement abstract method";
-  };
-
-  validateControl(value, validation){
-    throw "Subclass must implement abstract method";
+    this.isValid = isValid
   };
 
   preparationData() {
-    throw "Subclass must implement abstract method";
+    // throw "Subclass must implement abstract method";
   }
 
-  onChangeHandler = (event, controlName) => {
-    let formControls = {...this.formControls};
-    let control = {...formControls[controlName]};
-    control.isTouched = true;
-    this.controlModifier(control, controlName, event);
-    control.isValid = this.validateControl(control.value, control.validation);
-    formControls[controlName] = control;
-    this.formControls[controlName] = {...control};
-    this.isValid = this.validateForm(formControls);
-    this.controlChangeColor();
+  onChangeHandler() {
+    this.validateForm();
+    this.inputChangeColor();
+    this.onChange()
   };
 
-  controlChangeColor() {
-    for (let controlName in this.formControls) {
-      let control = this.formControls[controlName];
-      if (control.isTouched) {
-        control.node.classList.toggle('input-valid', control.isValid);
-        control.node.classList.toggle('input-error', !control.isValid);
+  inputChangeColor(removeColors=false) {
+    if (removeColors) {
+      for (let input of Object.values(this.formInputs)) {
+        input.$inputElement.classList.remove('input-valid');
+        input.$inputElement.classList.remove('input-error');
+      }
+    }
+    for (let input of Object.values(this.formInputs)) {
+      if (input.isTouched) {
+        input.$inputElement.classList.toggle('input-valid', input.isValid);
+        input.$inputElement.classList.toggle('input-error', !input.isValid);
       }
     }
   }
 
-  async send() {
-    console.log(this);
-    if (this.isValid) {
-      // this.preparationData()
-    } else {
-      for (let controlName in this.formControls) {
-        this.formControls[controlName].isTouched = true;
+  getInputsStatus() {
+    const status = { };
+
+    for (let [inputName, input] of Object.entries(this.formInputs)) {
+      status[inputName] = {
+        value: input.value,
+        isValid: input.isValid,
+        isTouched: input.isTouched,
+        isRequired: input.isRequired
       }
-      this.controlChangeColor();
+    }
+    return status;
+  };
+
+  clear() {
+    Object.values(this.formInputs).forEach(input => input.clear());
+  }
+
+  async send() {
+    if (this.isValid) {
+      this.preparationData()
+    } else {
+      for (let inputName in this.formInputs) {
+        this.formInputs[inputName].isTouched = true;
+      }
+      this.inputChangeColor();
       console.error('Invalid Form');
       return false;
     }
     try {
-      await setTimeout(() => console.log("data send"), 5000);
+      await setTimeout(() => {
+        this.clear();
+        this.validateForm();
+        this.inputChangeColor(true);
+      }, 3000);
       return true;
     } catch (e) {
       console.log('Data send error', e)
     }
   }
+
+  onChange() {}
 }
 
 
-export class SubscribeForm extends Form {
+class FormInputs {
+  name = undefined;
+  _valid = false;
+  _touched = false;
+  _value = '';
+  isRequired = true;
 
-  constructor($el, options={}) {
-    super();
-    const DEFAULT_OPTIONS = {
-      name: FORM_CONTROLS_TEMPLATE.name,
-      phone: FORM_CONTROLS_TEMPLATE.phone,
-      license: FORM_CONTROLS_TEMPLATE.license,
-      calendar: FORM_CONTROLS_TEMPLATE.calendar,
-      email: FORM_CONTROLS_TEMPLATE.email,
-      text: FORM_CONTROLS_TEMPLATE.text
-    };
-    const formControls = options ?
-        Object.assign(DEFAULT_OPTIONS, options) :
-        DEFAULT_OPTIONS;
-
-    for (let controlName in formControls) {
-      const $control = $el.querySelector(`[data-formcontrol=${controlName}]`);
-      if ($control) {
-        formControls[controlName].node  = controlName === 'license' ? $control.parentElement :
-                                                                      $control;
-        this.formControls[controlName] = {...formControls[controlName]};
-        switch (controlName) {
-          case 'name':
-            this._activateNameInput($control);
-            break;
-          case 'phone':
-            this._activatePhoneInput($control);
-            break;
-          case 'license':
-            this._activeLicenseInput($control);
-            break;
-          case 'calendar':
-            this._activeCalendarInput($control);
-            break;
-          case 'email':
-            this._activeEmailInput($control);
-            break;
-          case 'text':
-            this._activeTextInput($control);
-        }
-      }
-    }
-
-    const $button = $el.querySelector('a[data-formcontrol=submit]');
-    if ($button){
-      $button.addEventListener('click', ()=>this.send())
-    }
+  constructor($input, callback = function() {
+    throw new Error("You must set onChange callback")
+  }) {
+    this.$inputElement = $input;
+    this._onChange = callback;
   }
 
-  controlModifier(control, controlName, event) {
-    if (controlName === 'name') {
-      control.value = event.target.value.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
-      event.target.value = control.value;
-    }
-    if (controlName === 'license') {
-      control.value = event.target.checked;
-    }
-    if (controlName === 'phone') {
-      control.value = event.target.value;
-    }
-    if (controlName === 'calendar') {
-      control.value = event;
-    }
-    if (controlName === 'text') {
-      control.value = event.target.value;
-    }
-    if (controlName === 'email') {
-      control.value = event.target.value.toLowerCase();
-      event.target.value = control.value
-    }
+  set isValid(value) {
+    throw new Error('Read only property, cant set "isValid":' + value )
   }
 
-  validateControl(value, validation) {
-    let isValid = true;
-    if (validation.required) {
-      isValid = value.toString().trim() !== "" && isValid
-    }
-    if (validation.email) {
-      isValid = isEmail(value) && isValid
-    }
-    if (validation.phone) {
-      isValid = /\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/.test(value) && isValid
-    }
-    if (validation.checked) {
-      isValid = value === validation.checked
-    }
-    return isValid;
-  };
-
-  _activateNameInput($control) {
-    $control.addEventListener('keyup',
-        e => this.onChangeHandler(e, 'name'));
+  get isValid() {
+    return this._valid || !this.isRequired;
   }
 
-  _activeLicenseInput($control) {
-    $control.addEventListener('click',
-        e => this.onChangeHandler(e, 'license'));
+  set isTouched(value) {
+    this._touched = Boolean(value);
   }
 
-  _activeTextInput($control) {
-    $control.addEventListener('keyup',
-        e => this.onChangeHandler(e, 'text'));
+  get isTouched() {
+    return this._touched
   }
 
-  _activeEmailInput($control) {
-    $control.addEventListener('keyup',
-        e => this.onChangeHandler(e, 'email'));
+  set value(value) {
+    this._touched = true;
+    this._value = this._modifier(value);
+    this._valid = this._validator(this._value);
+    this.updateInputValue();
+    this._onChange();
   }
 
-  _activatePhoneInput($control) {
+  _modifier(value) {
+    return value;
+  }
+
+  _validator(value) {
+    throw  new Error("Subclass must implement abstract method");
+  }
+
+  get value(){
+    return this._value;
+  }
+
+  updateInputValue() {};
+
+  clear() {
+    this.isTouched = false;
+    this.updateInputValue();
+  }
+}
+
+
+class NameInput extends FormInputs {
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'name';
+    this._value = '';
+    $input.addEventListener('keyup', e => this.value = e.target.value)
+  }
+
+  _modifier(value) {
+    return value.replace(/(?:^|\s)\S/g, l => l.toUpperCase());
+  }
+
+  _validator(value) {
+    return value.toString().trim() !== ""
+  }
+
+  updateInputValue() {
+    this.$inputElement.value = this.value
+  }
+
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
+  }
+}
+
+
+class TextInput extends FormInputs {
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'text';
+    this._value = '';
+    $input.addEventListener('keyup', e => this.value = e.target.value)
+  }
+
+  _validator(value) {
+    return value.toString().trim() !== ""
+  }
+
+  updateInputValue() {
+    this.$inputElement.value = this.value
+  }
+
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
+  }
+}
+
+
+class EmailInput extends FormInputs{
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'email';
+    this._value = '';
+    $input.addEventListener('keyup', e => this.value = e.target.value)
+  }
+
+  _validator(value) {
+    return isEmail(value);
+  }
+
+  updateInputValue() {
+    this.$inputElement.value = this.value
+  }
+  clear() {
+    this._value = '';
+    this._valid = false;
+    super.clear();
+  }
+}
+
+
+class LicenseInput extends FormInputs {
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'license';
+    this._value = $input.checked;
+    this._valid = true;
+
+    $input.addEventListener('click', e => this.value = e.target.checked);
+    this.$inputElement = $input.parentNode;
+    this.$valueElement = $input
+  }
+  _validator(value) {
+    return this._value;
+  }
+
+  updateInputValue() {
+    this.$valueElement.checked = this.value;
+  }
+
+  clear() {
+    this._value = true;
+    this._valid = true;
+    super.clear();
+  }
+}
+
+
+class PhoneInput extends FormInputs {
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'phone';
+    this._value = '';
+
     const phonePattern = '+{7}(000)000-00-00';
-    const phoneMask = new IMask($control, {
+    this.phoneMask = new IMask($input, {
       mask: phonePattern,
       lazy: true,
       placeholderChar: '_'
     });
-
-    $control.addEventListener('focus', () => {
-      phoneMask.updateOptions({ lazy: false });
-    });
-    $control.addEventListener('blur', () => {
-      if (phoneMask.unmaskedValue === '7') {
-        phoneMask.updateOptions({ mask: '', lazy: true });
-        phoneMask.updateOptions({ mask: phonePattern});
-      }
-    });
-    $control.addEventListener('keyup',e => this.onChangeHandler(e, 'phone'));
+    $input.addEventListener('keyup', () => this.value = this.phoneMask.value);
   }
 
-  _activeCalendarInput($control) {
+  _validator(value) {
+    return /\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/.test(value)
+  }
+
+  clear() {
+    this.phoneMask.value = '';
+    this._valid = false;
+    super.clear();
+  }
+}
+
+
+class CalendarInput extends FormInputs {
+  constructor($input, callback) {
+    super($input, callback);
+    this.name = 'calendar';
+    this._value = '';
     const options = {
       locale: Russian,
       dateFormat: 'j F Y',
       minDate: "today",
       position: 'below',
-      onClose: selectedDate => this.onChangeHandler(selectedDate[0], 'calendar')
+      onChange: selectedDate => this.value = selectedDate[0]
     };
-    flatpickr($control, options)
+    this._calendar = new Flatpickr($input, options)
+  }
+
+  _validator(value) {
+     return value !== '';
+  }
+
+  getFormattedDate(format) {
+    return this._calendar.formatDate(this.value, format)
+  }
+
+}
+
+class CalendarInlineInput extends CalendarInput {
+  constructor(inputNode, callback) {
+    super(inputNode, callback);
+    this.name = 'calendar-inline';
+    this._value = '';
+    const options ={
+      locale: Russian,
+      dateFormat: 'j F Y',
+      minDate: "today",
+      position: 'below',
+      inline: true,
+      defaultDate: this._value,
+      onChange: selectedDate => this.value = selectedDate[0]
+    };
+    this._calendar = new Flatpickr(inputNode, options)
+  }
+  _validator(value) {
+    return Boolean(value);
+  }
+}
+
+const FORM_DEFAULT_INPUTS = {
+  'name': NameInput,
+  'phone': PhoneInput,
+  'license': LicenseInput,
+  'calendar': CalendarInput,
+  'email': EmailInput,
+  'text': TextInput
+};
+
+export class SubscribeForm extends Form {
+  constructor($form) {
+    super();
+    for (let [inputName, inputClass] of Object.entries(FORM_DEFAULT_INPUTS)) {
+      const $input = $form.querySelector(`[data-formcontrol=${inputName}]`);
+      if ($input) {
+        this.formInputs[inputName] = new inputClass($input, () => this.onChangeHandler())
+      }
+    }
+
+    const $button = $form.querySelector('a[data-formcontrol=submit]');
+    if ($button){
+      $button.addEventListener('click', ()=>this.send())
+    }
+  }
+}
+
+
+export class CalculatorForm extends SubscribeForm {
+  constructor(node, inputNode) {
+    super(node);
+    const calendarInlineNode = node.querySelector('[data-formcontrol=calendar-inline]');
+    const self = this;
+    this.formInputs['text'].isRequired = false;
+    this.formInputs['calendar'] = new CalendarInlineInput(calendarInlineNode, function() {
+      inputNode.innerHTML = this.getFormattedDate('d.m.y');
+      self.onChangeHandler();
+    });
   }
 }
