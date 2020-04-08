@@ -3,7 +3,7 @@ import IMask from 'imask';
 import Flatpickr from 'flatpickr';
 import '../../less/2_plugins/flatpickr_light.css'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
-import SuccessFeedBackPopup from './SuccessFeedBackPopup';
+import SuccessFeedBackPopup from './Popups/SuccessFeedBackPopup';
 
 
 class Form {
