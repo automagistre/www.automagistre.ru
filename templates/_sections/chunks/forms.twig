@@ -12,7 +12,10 @@
             <textarea class="form__text"  data-formcontrol="text" placeholder="Ваш вопрос"></textarea>
         </div>
         <div class="form__line">
-            <a class="btn btn_arrow-rt" data-formcontrol="submit" >Заказать</a>
+            <a class="btn btn_arrow-rt sp-ex-right" data-formcontrol="submit" >
+                <span>Заказать</span>
+                <div class="sp sp-ring sp-spin"></div>
+            </a>
         </div>
     </form>
 {% endmacro %}
@@ -37,6 +40,10 @@
                 <div class="subscribe__hint"><span>Я принимаю условия передачи информации и условия политики конфиденциальности</span></div>
             </div>
         {% endif %}
-        <a class="btn subscribe__btn"  data-formcontrol="submit" role="button">Записаться <i class="btn__icon-rt icon_arrow-rt"></i></a>
+        <a class="btn subscribe__btn sp-ex-right" data-formcontrol="submit">
+            <span>Записаться</span>
+            <div class="sp sp-ring sp-spin"></div>
+            <i class="btn__icon-rt icon_arrow-rt"></i>
+        </a>
     </form>
 {% endmacro %}
