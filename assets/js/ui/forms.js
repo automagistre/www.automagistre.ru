@@ -65,7 +65,7 @@ class Form {
   async send() {
     const serverImitation = () => new Promise(resolve => {
       setTimeout(() => {console.log('получено');
-        resolve('OK')}, 2000);
+        resolve('OK')}, 5000);
     });
     if (this.isValid) {
       this.preparationData()
@@ -78,6 +78,7 @@ class Form {
       return false;
     }
     try {
+      this.isSending = true;
       const popup = new SuccessFeedBackPopup();
       await serverImitation();
       this.clear();
@@ -86,8 +87,10 @@ class Form {
       popup.message = 'Мы получили ваше сообщение';
       popup.open();
       setTimeout(()=> popup.close(), 3000);
+      this.isSending = false;
     } catch (e) {
-      console.log('Data send error', e)
+      console.log('Data send error', e);
+      this.isSending = false;
     }
   }
 
@@ -350,7 +353,12 @@ export class SubscribeForm extends Form {
 
     const $button = $form.querySelector('a[data-formcontrol=submit]');
     if ($button){
-      $button.addEventListener('click', ()=>this.send())
+      $button.addEventListener('click', ()=>{
+        if (!this.isSending) {
+          $button.classList.add('running');
+          this.send().then(()=> {$button.classList.remove('running')})
+        }
+      })
     }
   }
 }
