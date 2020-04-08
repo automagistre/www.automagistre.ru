@@ -18,14 +18,12 @@ class ErrorFeedBackPopup extends Popup{
 
 
   renderPopupBody() {
-    return `<h4 class="popup__title">Возникала ошибка!</h4>
+    return `<h4 class="popup__title">Возникла ошибка!</h4>
             <div class="popup-order">
               <div class="popup-order__lead">
                  ${this.message}
               </div>
-              <div class="popup-order__lead">
-                 В ближайшее время с вами свяжется наш менеджер <br> для уточнения заказа
-              </div>
+              
               <img class="popup-order__img" src="/img/face_medved.png" alt="генеральный директор АвтоМагист">
               <div class="popup-order__note">
                   «Мы очень внимательно относимся к пожеланиям клиентов,
