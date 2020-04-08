@@ -35,6 +35,33 @@ textarea {
 }
 
 /*--------------------- BLOCKS: Buttons --------------------------------------*/
+.running {
+  &.btn {
+    transition: all 0.5s;
+    transition-timing-function: ease-in;
+    box-shadow: 0 3px 10px rgba(204, 22, 18, .5);
+    &:before {
+      background: @red-dark;
+    }
+    @media (min-width: 1025px) {
+      &_arrow-rt {
+        &:hover {
+          padding: 14px 37px 12px;
+          transition: all 0.5s;
+          transition-delay: 0s;
+          &:after {
+            opacity: 0;
+            transition-delay: .1s;
+          }
+        }
+      }
+    }
+  }
+  &>.btn__icon-rt {
+    opacity: 0;
+  }
+}
+
 .btn {
   display: inline-block;
   position: relative;
@@ -73,7 +100,7 @@ textarea {
     transition: box-shadow 0.3s;
   }
   &:active {
-    box-shadow: 0 3px 10px rgba(204, 22, 18, .5);;
+    box-shadow: 0 3px 10px rgba(204, 22, 18, .5);
     transition: box-shadow 0.3s;
   }
 
