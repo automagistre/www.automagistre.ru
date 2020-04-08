@@ -3,27 +3,30 @@ import IMask from 'imask';
 import Flatpickr from 'flatpickr';
 import '../../less/2_plugins/flatpickr_light.css'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
+import SuccessFeedBackPopup from './Popups/SuccessFeedBackPopup';
 
 
 class Form {
-  isValid = false;
   formInputs = {};
 
-  validateForm() {
+  get isValid() {
     let isValid = true;
     const inputs = {...this.formInputs};
     for (let input of Object.values(inputs)) {
       isValid = input.isValid && isValid;
     }
-    this.isValid = isValid
-  };
+    return  isValid
+  }
+
+  set isValid(value) {
+    throw new Error('Cant set readonly property "isValid"' + value);
+  }
 
   preparationData() {
     // throw "Subclass must implement abstract method";
   }
 
   onChangeHandler() {
-    this.validateForm();
     this.inputChangeColor();
     this.onChange()
   };
@@ -62,6 +65,10 @@ class Form {
   }
 
   async send() {
+    const serverImitation = () => new Promise(resolve => {
+      setTimeout(() => {console.log('получено');
+        resolve('OK')}, 5000);
+    });
     if (this.isValid) {
       this.preparationData()
     } else {
@@ -73,14 +80,18 @@ class Form {
       return false;
     }
     try {
-      await setTimeout(() => {
-        this.clear();
-        this.validateForm();
-        this.inputChangeColor(true);
-      }, 3000);
-      return true;
+      this.isSending = true;
+      await serverImitation();
+      this.clear();
+      this.inputChangeColor(true);
+      const popup = new SuccessFeedBackPopup();
+      popup.message = 'Мы получили ваше сообщение';
+      popup.open();
+      setTimeout(()=> popup.close(), 3000);
+      this.isSending = false;
     } catch (e) {
-      console.log('Data send error', e)
+      console.log('Data send error', e);
+      this.isSending = false;
     }
   }
 
@@ -343,7 +354,12 @@ export class SubscribeForm extends Form {
 
     const $button = $form.querySelector('a[data-formcontrol=submit]');
     if ($button){
-      $button.addEventListener('click', ()=>this.send())
+      $button.addEventListener('click', ()=>{
+        if (!this.isSending) {
+          $button.classList.add('running');
+          this.send().then(()=> {$button.classList.remove('running')})
+        }
+      })
     }
   }
 }
