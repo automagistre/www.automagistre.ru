@@ -7,24 +7,26 @@ import SuccessFeedBackPopup from './Popups/SuccessFeedBackPopup';
 
 
 class Form {
-  isValid = false;
   formInputs = {};
 
-  validateForm() {
+  get isValid() {
     let isValid = true;
     const inputs = {...this.formInputs};
     for (let input of Object.values(inputs)) {
       isValid = input.isValid && isValid;
     }
-    this.isValid = isValid
-  };
+    return  isValid
+  }
+
+  set isValid(value) {
+    throw new Error('Cant set readonly property "isValid"' + value);
+  }
 
   preparationData() {
     // throw "Subclass must implement abstract method";
   }
 
   onChangeHandler() {
-    this.validateForm();
     this.inputChangeColor();
     this.onChange()
   };
@@ -79,11 +81,10 @@ class Form {
     }
     try {
       this.isSending = true;
-      const popup = new SuccessFeedBackPopup();
       await serverImitation();
       this.clear();
-      this.validateForm();
       this.inputChangeColor(true);
+      const popup = new SuccessFeedBackPopup();
       popup.message = 'Мы получили ваше сообщение';
       popup.open();
       setTimeout(()=> popup.close(), 3000);
