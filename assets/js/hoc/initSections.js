@@ -76,4 +76,9 @@ export default function initSections() {
       require('../sections/costing/costing').default();
     })
   }
+  if (document.querySelector('section.sec-reviews')){
+    require.ensure([], require => {
+      require('../sections/reviews').default();
+    })
+  }
 }

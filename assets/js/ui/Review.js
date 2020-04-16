@@ -19,7 +19,7 @@ class Review {
   }
 
   get author(){
-    return this._data.author.toLowerCase()
+    return this._data.author.toLowerCase() || 'Неизвестный'
   }
 
   set author(value) {
@@ -27,7 +27,7 @@ class Review {
   }
 
   get manufacture() {
-    return this._data.manufacturer.toLowerCase()
+    return this._data.manufacturer.toLowerCase() || 'Автомобиле'
   }
 
   set manufacture(value) {
@@ -35,7 +35,7 @@ class Review {
   }
 
   get model() {
-    return this._data.model.toLowerCase()
+    return this._data.model.toLowerCase() || ''
   }
 
   set model(value) {
@@ -43,7 +43,7 @@ class Review {
   }
 
   get content() {
-    return this._data.content
+    return this._data.content || '';
   }
 
   set content(value) {
@@ -51,7 +51,7 @@ class Review {
   }
 
   get source() {
-    return this._data.source.toLowerCase()
+    return this._data.source.toLowerCase() || '&#128540;'
   }
 
   set source(value) {
