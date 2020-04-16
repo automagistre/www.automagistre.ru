@@ -19,7 +19,7 @@ class Review {
   }
 
   get author(){
-    return this._data.author.toLowerCase() || 'Неизвестный'
+    return this._data.author || 'Неизвестный'
   }
 
   set author(value) {
@@ -76,7 +76,9 @@ class Review {
     wrapper.innerHTML =
         `<div class="sec-reviews__slide">
             <div class="review-card">
-                <h4 class="review-card__title">${this.author} на ${this.manufacture} ${this.model}</h4>
+                <h4 class="review-card__title">
+                    ${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>
+                </h4>
                 <div class="review-card__text js-scroll-y">
                     ${this.content}
                 </div>
