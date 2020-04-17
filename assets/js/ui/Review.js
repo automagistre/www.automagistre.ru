@@ -51,7 +51,7 @@ class Review {
   }
 
   get source() {
-    return this._data.source.toLowerCase() || '<img src="/img/icons/shrug_1f937.png" alt="хм">'
+    return this._data.source.toLowerCase() || ''
   }
 
   set source(value) {
@@ -83,7 +83,7 @@ class Review {
                     ${this.content}
                 </div>
                 <div class="review-card__info">
-                    <span class="review-card__source">Источник: ${this.source}</span>
+                    <span class="review-card__source">Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" alt="хм">'}</span>
                     <b class="review-card__date">${this.formattedDate}</b>
                 </div>
             </div>
