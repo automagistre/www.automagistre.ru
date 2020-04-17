@@ -1,4 +1,5 @@
 import ReadOnlyPropertyError from '../Errors/ReadOnlyPropertyError';
+import ReviewPopup from './Popups/ReviewPopup';
 
 class Review {
 
@@ -73,14 +74,22 @@ class Review {
 
   render() {
     const wrapper = document.createElement('div');
+    const title = `${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>`,
+          review = this.content,
+          footer = `Источник: <span class="review-card__source">${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" alt="хм" style="height: 20px; margin: 0 20px 0 10px">'}  ${this.formattedDate}</span>`,
+          isLong = this.content.length > 380;
     wrapper.innerHTML =
         `<div class="sec-reviews__slide">
             <div class="review-card">
                 <h4 class="review-card__title">
-                    ${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>
+                    ${title}
                 </h4>
                 <div class="review-card__text js-review-scroll-y">
-                    ${this.content}
+                    ${review}
+                    
+                </div>
+                <div class="review-card__more">
+                    <a ${isLong ? 'style="visibility: visible"' : ''}">Читать полностью</a>
                 </div>
                 <div class="review-card__info">
                     <span class="review-card__source">Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" alt="хм">'}</span>
@@ -88,6 +97,12 @@ class Review {
                 </div>
             </div>
          </div>`;
+    wrapper.firstElementChild.querySelector('.review-card__more')
+                             .addEventListener('click', ()=> {
+                                const popup = new ReviewPopup(title, review, footer);
+                                popup.open();
+                              });
+    this.node = wrapper.firstElementChild;
     return wrapper.firstElementChild;
   }
 }

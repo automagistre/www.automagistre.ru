@@ -1,7 +1,6 @@
 import Review from '../ui/Review';
 import $ from 'jquery';
 import reviews from '../ui/reviews';
-import {initScroll_Y} from '../hoc/service';
 
 
 const initSlick = () => {
@@ -40,10 +39,10 @@ const reviewSec = () => {
 
      reviews10.forEach(reviewObj => {
        const review = new Review(reviewObj);
-       $reviewsNode.append(review.render());
+       review.render();
+       $reviewsNode.append(review.node);
      });
      initSlick();
-     initScroll_Y($('.js-review-scroll-y'))
   }
 };
 

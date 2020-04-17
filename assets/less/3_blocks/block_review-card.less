@@ -36,6 +36,22 @@
     }
   }
 
+  &__more {
+    visibility: hidden;
+    position: absolute;
+    bottom: 50px;
+    right: 40px;
+    display: inline-block;
+    flex: 0 0 auto;
+    color: #929599;
+    font-size: 14px;
+    line-height: 18px;
+    z-index: 10;
+    &:hover {
+      color: @red-dark;
+    }
+  }
+
   &__title {
     height: 40px;
     margin: 5px 0;
@@ -120,8 +136,10 @@
 /* ---------- ADAPTIVE < 1620 ------------------------------------------------*/
 @media (max-width: 1620px) {
   .review-card {
-    padding: 30px 20px;
-
+    padding: 30px 20px 0 20px;
+    &__more {
+      right: 20px;
+    }
     .mCSB_scrollTools {
       right: -30px;
       opacity: 0;
