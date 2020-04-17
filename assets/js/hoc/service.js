@@ -48,8 +48,10 @@ export const initScroll_Y = $elem => {
         scrollButtons: {enable: false},
         scrollbarPosition: 'outside',
         alwaysShowScrollbar: 0,
-        updateOnContentResize: true,
         autoDraggerLength: false,
+        advanced: {
+            updateOnContentResize: true
+        }
     });
 };
 

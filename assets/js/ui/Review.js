@@ -79,7 +79,7 @@ class Review {
                 <h4 class="review-card__title">
                     ${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>
                 </h4>
-                <div class="review-card__text js-scroll-y">
+                <div class="review-card__text js-review-scroll-y">
                     ${this.content}
                 </div>
                 <div class="review-card__info">

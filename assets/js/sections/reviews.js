@@ -43,7 +43,7 @@ const reviewSec = () => {
        $reviewsNode.append(review.render());
      });
      initSlick();
-     initScroll_Y($('.js-scroll-y'));
+     initScroll_Y($('.js-review-scroll-y'))
   }
 };
 
