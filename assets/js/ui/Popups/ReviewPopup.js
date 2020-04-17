@@ -2,21 +2,21 @@ import Popup from './Popup';
 
 class ReviewPopup extends Popup{
 
-  constructor(title, review, footer) {
+  constructor(data) {
     super();
-    this._title = title;
-    this._review = review;
-    this._footer = footer;
+    this._data = data
   }
 
   renderPopupBody() {
-    return `<h4 class="popup__title">${this._title}</h4>
-            <div class="popup-order">
-              <div class="popup-order__lead">
-                 ${this._review}
+    const {title, review, source, date} = {...this._data};
+    return `<h4 class="popup__title">${title}</h4>
+            <div class="popup-review">
+              <div class="popup-review__content">
+                 ${review}
               </div>
-              <div class="popup-order__remark">
-                  ${this._footer}
+              <div class="popup-review__info">
+                    <span class="popup-review__source">${source}</span>
+                    <b class="popup-review__date">${date}</b>
               </div>
             </div>`;
   }
