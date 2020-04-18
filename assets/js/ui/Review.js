@@ -1,6 +1,7 @@
 import ReadOnlyPropertyError from '../Errors/ReadOnlyPropertyError';
 import ReviewPopup from './Popups/ReviewPopup';
 
+
 class Review {
 
   /**
@@ -72,7 +73,10 @@ class Review {
     return new Intl.DateTimeFormat('ru-RU').format(d)
   }
 
-  render() {
+  render(options={}) {
+    const defaultOptions = {isOpen: false}
+    Object.assign(defaultOptions, options);
+    const {isOpen} = defaultOptions;
     const wrapper = document.createElement('div');
     const title = `${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>`,
           review = this.content,
@@ -85,7 +89,7 @@ class Review {
                 <h4 class="review-card__title">
                     ${title}
                 </h4>
-                <div class="review-card__text js-review-scroll-y">
+                <div class="review-card__text ${isOpen ? 'no-limit' : ''}">
                     ${review}
                 </div>
                 <div class="review-card__more">
