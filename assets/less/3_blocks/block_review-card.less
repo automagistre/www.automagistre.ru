@@ -7,6 +7,7 @@
   transition: box-shadow .3s;
 
   &:after {
+    visibility: visible;
     content: '';
     position: relative;
     bottom: 70px;
@@ -15,6 +16,16 @@
     width: 100%;
     background: rgb(250,251,252);
     background: linear-gradient(180deg, rgba(250,251,252,0) 0%, rgba(250,251,252,1) 75%);
+
+  }
+
+  &.no-limit {
+    &:after {
+      visibility: hidden;
+    }
+    &>.review-card__text {
+      height: auto;
+    }
   }
 
   &:hover {
@@ -70,12 +81,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     text-overflow-ellipsis: 3;
-
-
-    &.no-limit {
-      height: auto;
-      transition: height 0.3s;
-    }
   }
 
   &__info {

@@ -89,15 +89,15 @@ class Review {
           isLong = this.content.length > 380;
     wrapper.innerHTML =
         `<div class="sec-reviews__slide">
-            <div class="review-card">
+            <div class="review-card ${isOpen ? 'no-limit' : ''}">
                 <h4 class="review-card__title">
                     ${title}
                 </h4>
-                <div class="review-card__text ${isOpen ? 'no-limit' : ''}">
+                <div class="review-card__text ">
                     ${review}
                 </div>
                 <div class="review-card__more">
-                    <a ${isLong ? 'style="visibility: visible"' : ''}">Читать полностью</a>
+                    <a ${isLong && !isOpen ? 'style="visibility: visible"' : ''}">Читать полностью</a>
                 </div>
                 <div class="review-card__info">
                     <span class="review-card__source">${source}</span>
