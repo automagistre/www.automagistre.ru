@@ -2,13 +2,16 @@ import Popup from './Popup';
 
 class ReviewPopup extends Popup{
 
-  constructor(data) {
+  constructor(review) {
     super();
-    this._data = data
+    this._review = review
   }
 
   renderPopupBody() {
-    const {title, review, source, date} = {...this._data};
+    const title = `${this._review.author} на <span style="text-transform: capitalize">${this._review.manufacture} ${this._review.model}</span>`,
+          review = this._review.contentToHTML,
+          source = `Источник: ${this._review.source ? this._review.source : '<img src="/img/icons/shrug_1f937.png" alt="хм">'}`,
+          date = `${this._review.formattedDate}`;
     return `<h4 class="popup__title">${title}</h4>
             <div class="popup-review">
               <div class="popup-review__content">

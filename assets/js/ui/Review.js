@@ -48,6 +48,10 @@ class Review {
     return this._data.content || '';
   }
 
+  get contentToHTML() {
+    return this._data.content.replace(/\\n/g, '<br>') || '';
+  }
+
   set content(value) {
     throw new ReadOnlyPropertyError('content', value)
   }
@@ -79,7 +83,7 @@ class Review {
     const {isOpen} = defaultOptions;
     const wrapper = document.createElement('div');
     const title = `${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>`,
-          review = this.content,
+          review = this.contentToHTML,
           source = `Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" alt="хм">'}`,
           date = `${this.formattedDate}`,
           isLong = this.content.length > 380;
@@ -104,7 +108,7 @@ class Review {
     wrapper.firstElementChild
            .querySelector('.review-card__more')
            .addEventListener('click', ()=> {
-              const popup = new ReviewPopup({title, review, source, date});
+              const popup = new ReviewPopup(this);
               popup.open();
            });
     this.node = wrapper.firstElementChild;
