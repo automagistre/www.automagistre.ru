@@ -26,7 +26,7 @@ RUN NODE_ENV=production webpack
 # PHP-FPM
 #
 FROM composer:1.10.5 as composer
-FROM php:7.3.16-fpm-stretch as base
+FROM php:7.3.17-fpm-stretch as base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
