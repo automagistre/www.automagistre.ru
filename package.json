@@ -49,6 +49,7 @@
     "webpack-manifest-plugin": "^2.2.0"
   },
   "dependencies": {
+    "@egjs/infinitegrid": "^3.6.2",
     "ajv": "^6.11.0",
     "animated-scroll-to": "^2.0.5",
     "bootstrap": "^4.4.1",
