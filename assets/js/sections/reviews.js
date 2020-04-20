@@ -38,9 +38,10 @@ const reviewSec = () => {
      }).slice(0, 10);
 
      reviews10.forEach(reviewObj => {
-       const review = new Review(reviewObj);
-              review.render({isOpen: false});
-       $reviewsNode.append(review.node);
+       const node = document.createElement('div');
+       node.className = 'sec-reviews__slide';
+       node.append(new Review(reviewObj).render())
+       $reviewsNode.append(node);
      });
      initSlick();
   }
