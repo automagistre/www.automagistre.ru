@@ -10,10 +10,20 @@ class Header {
     if (header) {
       this.header = header;
       this.navBarHeight = header.offsetHeight;
+      const pageName = window.location.pathname.split('/').pop().toLowerCase(),
+            whitePages = ['map', 'reviews'];
+      if (whitePages.includes(pageName)){
+        this.whiteColor();
+      }
       document.addEventListener('scroll', ()=> this._toggleHeader());
       this.isInit = true
     }
+    console.log()
   };
+
+  whiteColor() {
+    this.header.classList.add('is-white');
+  }
 
   scrolledColor(isScrolled) {
     this.isScrolled = isScrolled;
