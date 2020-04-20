@@ -17,8 +17,9 @@ class Header {
       }
       document.addEventListener('scroll', ()=> this._toggleHeader());
       this.isInit = true
+      this._toggleHeader();
     }
-    console.log()
+
   };
 
   whiteColor() {
