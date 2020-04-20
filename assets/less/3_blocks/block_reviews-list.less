@@ -1,17 +1,11 @@
 ﻿/*--------------------- BLOCKS: Reviews-list ----------------------------------*/
 .reviews-list {
-  margin: 0 -20px;
   padding: 0;
   list-style: none;
 
-  &:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-
   &__item {
     padding: 20px;
+    width: 33.33333%;
     perspective: 800px;
     transition: opacity .6s, transform .6s;
 
@@ -31,12 +25,35 @@
 }
 
 /* ---------- ADAPTIVE < 760 -------------------------------------------------*/
+@media (min-width: 1025px) {
+  .reviews-list {
+    &__item {
+      width: 33.33333%;
+    }
+  }
+}
+
+
+@media (min-width: 640px) and (max-width: 1024px) {
+  .reviews-list {
+    &__item {
+      width: 50%;
+    }
+  }
+}
+
 @media (max-width: 760px) {
   .reviews-list {
-    margin: 0 -10px;
-
     &__item {
       padding: 10px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .reviews-list {
+    &__item {
+      width: 100%;
     }
   }
 }

@@ -6,7 +6,7 @@ class Review {
 
   /**
    *
-   * @param {Object} review
+   * @param {{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}} review
    * @param {String} review.author
    * @param {String} review.manufacturer
    * @param {String} review.model
