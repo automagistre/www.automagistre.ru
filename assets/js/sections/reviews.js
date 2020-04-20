@@ -39,7 +39,7 @@ const reviewSec = () => {
 
      reviews10.forEach(reviewObj => {
        const review = new Review(reviewObj);
-              review.render({isOpen: true});
+              review.render({isOpen: false});
        $reviewsNode.append(review.node);
      });
      initSlick();
