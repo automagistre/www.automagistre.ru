@@ -38,7 +38,12 @@ class reviewsGrid {
   }
 
   destroy() {
-    this._ig.destroy()
+    return new Promise(resolve => {
+      setTimeout(()=> {
+        this._ig.destroy();
+        resolve();
+      }, 500)
+    })
   }
 
   getNextReviews (groupKey, count) {
@@ -128,23 +133,26 @@ const reviewPage = () => {
   filtersNode.querySelector('[data-filter=all]')
             .addEventListener('click', (e)=> {
               e.preventDefault();
-              ig.destroy();
-              ig = igRender.all();
-              ig.layout();
-  });
+              ig.destroy().then(()=> {
+                ig = igRender.all();
+                ig.layout();
+              });
+            });
   filtersNode.querySelector('[data-filter=brand]')
             .addEventListener('click', (e)=> {
               e.preventDefault();
-              ig.destroy();
-              ig = igRender.byManufacture(e.target.innerText);
-              ig.layout();
+              ig.destroy().then(()=> {
+                ig = igRender.byManufacture(e.target.innerText);
+                ig.layout();
+              });
             })
   filtersNode.querySelector('[data-filter=model]')
             .addEventListener('click', (e)=> {
               e.preventDefault();
-              ig.destroy();
-              ig = igRender.byModel(e.target.innerText);
-              ig.layout();
+              ig.destroy().then(()=> {
+                ig = igRender.byModel(e.target.innerText);
+                ig.layout();
+              });
             })
 }
 
