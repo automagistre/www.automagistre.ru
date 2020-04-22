@@ -1,4 +1,4 @@
-FROM node:13.13.0-alpine as node-base
+FROM node:14.0.0-alpine as node-base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
@@ -26,7 +26,7 @@ RUN NODE_ENV=production webpack
 # PHP-FPM
 #
 FROM composer:1.10.5 as composer
-FROM php:7.3.16-fpm-stretch as base
+FROM php:7.3.17-fpm-stretch as base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
@@ -100,7 +100,7 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=5s \
 #
 # nginx
 #
-FROM nginx:1.17.9-alpine as nginx
+FROM nginx:1.17.10-alpine as nginx
 
 WORKDIR /usr/local/app/public
 
