@@ -2,7 +2,7 @@
 
 const webpack = require("webpack");
 const path = require("path");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -33,15 +33,16 @@ module.exports = {
         "extensions": [".js", ".less", ".css"]
     },
     optimization: {
+        minimize: true,
         minimizer:[
-            new UglifyJsPlugin({
-                uglifyOptions: {
-                    warnings: false,
+            new TerserPlugin({
+                parallel: true,
+                terserOptions: {
+                    extractComments: 'all',
                     compress: {
-                        drop_console: true
+                        drop_console: true,
                     },
                 },
-                parallel: true,
             })
         ],
         splitChunks: {

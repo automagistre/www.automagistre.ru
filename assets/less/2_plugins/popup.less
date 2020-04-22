@@ -166,6 +166,51 @@
   }
 }
 
+.popup-review {
+  text-align: left;
+
+  &__content {
+    text-indent: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
+
+    strong {
+      color: @red-dark;
+      font-weight: 400;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    color: #929599;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__source {
+    display: inline-block;
+    flex: 0 0 auto;
+    text-transform: capitalize;
+
+    img {
+      position: relative;
+      height: 25px;
+      margin: -5px 10px;
+    }
+  }
+
+  &__date {
+    display: block;
+    flex: 0 0 70px;
+    max-width: 90px;
+    font-weight: 400;
+  }
+
+}
+
 /* ---------- ADAPTIVE < 760 -------------------------------------------------*/
 @media (max-width: 760px) {
   .popup {

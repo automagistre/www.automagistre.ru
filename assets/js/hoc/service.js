@@ -30,7 +30,7 @@ goToButtons.forEach(btn => {
 const $scroll_X = $('.js-scroll-x'),
       $scroll_Y = $('.js-scroll-y');
 
-const initScroll_X = $elem => {
+export const initScroll_X = $elem => {
     $elem.mCustomScrollbar({
         axis: 'x',
         scrollButtons: {enable: false},
@@ -42,14 +42,16 @@ const initScroll_X = $elem => {
     });
 };
 
-const initScroll_Y = $elem => {
+export const initScroll_Y = $elem => {
     $elem.mCustomScrollbar({
         axis: 'y',
         scrollButtons: {enable: false},
         scrollbarPosition: 'outside',
         alwaysShowScrollbar: 0,
-        updateOnContentResize: true,
         autoDraggerLength: false,
+        advanced: {
+            updateOnContentResize: true
+        }
     });
 };
 

@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+
+{% set brand = app.request.attributes.get('brand')|capitalize %}
+
+{% block content %}
+    <!-- MAIN ================================================================== -->
+    <main class="site-main page bg-gray">
+        <div class="page__head">
+            <div class="container">
+                <h1 class="page__title">2124 отзывов</h1>
+                <div class="page__lead">О автосервисе АвтоМагстир</div>
+                <nav class="page__nav" id="reviews-filters">
+                    <a class="page__nav-link is-active" data-filter="all" >Все</a>
+                    <a class="page__nav-link" data-filter="brand">Nissan</a>
+                    <a class="page__nav-link" data-filter="model">Altezza</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="page__body">
+            <div class="container">
+                <div class="reviews-list" id="reviews-grid">
+
+
+                </div><!-- END reviews-list -->
+
+                <div class="page__more">
+                    <div class="spinner page__more-loader" id="js-auto-load-reviews">
+                        <div class="spinner__dot spinner__dot_01"></div><div class="spinner__dot spinner__dot_02"></div>
+                        <div class="spinner__dot spinner__dot_03"></div><div class="spinner__dot spinner__dot_04"></div>
+                        <div class="spinner__dot spinner__dot_05"></div><div class="spinner__dot spinner__dot_06"></div>
+                        <div class="spinner__dot spinner__dot_07"></div><div class="spinner__dot spinner__dot_08"></div>
+                    </div>
+                    <div class="page__more-temp" id="temp-container"></div>
+                </div>
+
+            </div><!-- END container -->
+        </div><!-- END page__body -->
+    </main><!-- END site-main -->
+{% endblock %}
