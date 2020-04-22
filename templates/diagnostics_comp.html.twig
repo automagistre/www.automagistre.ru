@@ -58,7 +58,7 @@
 
         {{ include('_sections/master.html.twig') }}
 
-        {{ render(controller('App\\Controller\\Service\\ReviewsController::section', {'brand': app.request.attributes.get('brand')})) }}
+        {{ include('_sections/reviews.html.twig') }}
 
         {{ include('_sections/clubs.html.twig') }}
 
