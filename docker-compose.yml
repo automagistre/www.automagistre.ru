@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     nginx:
-        image: nginx:1.17.5-alpine
+        image: nginx:1.18.0-alpine
         labels:
             ru.grachevko.dhu: 'www.automagistre.local'
         volumes:
