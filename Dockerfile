@@ -100,11 +100,13 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=5s \
 #
 # nginx
 #
-FROM nginx:1.18.0-alpine as nginx
+FROM nginx:1.18.0-alpine as nginx-base
 
 WORKDIR /usr/local/app/public
 
 RUN apk add --no-cache gzip curl
+
+FROM nginx-base AS nginx
 
 COPY --from=node /usr/local/app/public/images images
 COPY --from=node /usr/local/app/public/img img
