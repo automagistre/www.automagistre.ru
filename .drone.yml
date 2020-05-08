@@ -160,7 +160,7 @@ steps:
             -   name: docker.sock
                 path: /var/run/docker.sock
         commands:
-            - docker-compose --file docker-compose.prod.yml config | docker stack deploy --prune --with-registry-auth --compose-file - www
+            - docker-compose --file .swarm.yml config | docker stack deploy --prune --with-registry-auth --compose-file - www
         when:
             branch: [ master ]
         depends_on:
