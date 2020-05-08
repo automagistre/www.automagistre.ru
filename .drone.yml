@@ -155,6 +155,8 @@ steps:
     -   name: deploy
         image: docker/compose:1.25.0-alpine
         volumes:
+            -   name: env
+                path: /drone/src/.env
             -   name: docker.sock
                 path: /var/run/docker.sock
         commands:
@@ -169,3 +171,6 @@ volumes:
     -   name: docker.sock
         host:
             path: /var/run/docker.sock
+    -   name: env
+        host:
+            path: /opt/secrets/automagistre

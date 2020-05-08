@@ -27,12 +27,12 @@ services:
 
     app:
         image: automagistre/www-app:${DRONE_BUILD_NUMBER}
+        environment:
+            APP_SECRET: ${APP_SECRET}
         networks:
             www:
                 aliases:
                     - php-fpm
-        secrets:
-            - app_secret
         deploy:
             mode: replicated
             replicas: 1
@@ -85,8 +85,3 @@ networks:
     www:
         driver: overlay
         name: www_am
-
-secrets:
-    app_secret:
-        external: true
-        name: www_app_secret
