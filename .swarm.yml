@@ -4,7 +4,7 @@ services:
     nginx:
         image: automagistre/www-nginx:${DRONE_BUILD_NUMBER}
         networks:
-            - www
+            - default
             - ingress
         deploy:
             mode: replicated
@@ -25,14 +25,10 @@ services:
                 - "traefik.protocol=http"
                 - "traefik.backend.loadbalancer.method=drr"
 
-    app:
+    php-fpm:
         image: automagistre/www-app:${DRONE_BUILD_NUMBER}
         environment:
             APP_SECRET: ${APP_SECRET}
-        networks:
-            www:
-                aliases:
-                    - php-fpm
         deploy:
             mode: replicated
             replicas: 1
@@ -46,8 +42,6 @@ services:
 
     memcached:
         image: memcached:1.5.20-alpine
-        networks:
-            - www
         healthcheck:
             test: nc -z 127.0.0.1 11211
             interval: 5s
@@ -82,6 +76,6 @@ networks:
     ingress:
         external: true
         name: proxy
-    www:
+    default:
         driver: overlay
         name: www_am
