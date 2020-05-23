@@ -86,4 +86,9 @@ export default function initSections() {
       require('../pages/reviews').default();
     })
   }
+  if (document.querySelector('#tire-service')){
+    require.ensure([], require => {
+      require('../sections/tire-sevice').default();
+    })
+  }
 }

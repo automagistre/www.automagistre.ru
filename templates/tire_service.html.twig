@@ -4,6 +4,12 @@
 
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
 {% set features = ['speed', 'heart', 'tire', 'binocul'] %}
+{% set types = {
+    'car': 'Легковая',
+    'suv': 'Внедорожник',
+    'minibus': 'Микроавтобус'
+} %}
+
 
 {% block content %}
     <main class="site-main">
@@ -21,23 +27,22 @@
             </div>
         </section><!-- END sec-intro -->
 
-        <section class="sec-about" id="about">
+        <section class="sec-about" id="tire-service">
             <div class="container">
                 <div class="sec-about__row">
                     <div class="sec-about__col-lt">
-                        <img class="sec-about__img" src="{{ asset('img/sec-about/about_tire.png') }}" alt="Компьютерная диагностика">
+                        <img class="sec-about__img" src="{{ asset('img/sec-about/about_tire.png') }}" alt="Шиномотаж">
                     </div>
                     <div class="sec-about__col-rt">
                         <form class="sec-about__form">
                             <div class="sec-about__filter">
                                 <div class="sec-about__filter-col">
-                                    <div class="selector">
-                                        <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
+                                    <div class="selector js-tire-selector">
+                                        <input type="hidden" value="10"><!-- Выставление правильного предзаданного значения в селекте -->
                                         <div class="selector__val" data-val="0">Выбрать радиус</div>
                                         <div class="selector__drop">
                                             <ul class="selector__list">
-                                                <li data-val="0">Выбрать радиус</li>
-                                                {% for diameter in 13..22 %}
+                                                {% for diameter in 13..20 %}
                                                     <li data-val="{{ diameter }}">{{ diameter }}"</li>
                                                 {% endfor %}
                                             </ul>
@@ -45,17 +50,11 @@
                                     </div>
                                 </div>
                                 <div class="sec-about__filter-col">
-                                    <div class="selector">
+                                    <div class="selector js-car-selector">
                                         <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
                                         <div class="selector__val" data-val="0">Вид машины</div>
                                         <div class="selector__drop">
                                             <ul class="selector__list">
-                                                <li data-val="0">Вид машины</li>
-                                                {% set types = {
-                                                    'car': 'Легковая',
-                                                    'suv': 'Внедорожник',
-                                                    'minibus': 'Микроавтобус'
-                                                } %}
                                                 {% for type, name in types %}
                                                     <li data-val="{{ type }}">{{ name }}</li>
                                                 {% endfor %}
