@@ -15,7 +15,7 @@ const PATHS = {
     assets: 'assets/'
 };
 
-const idDev = NODE_ENV === "development";
+const isDev = NODE_ENV === "development";
 
 module.exports = {
     mode: NODE_ENV,
@@ -57,10 +57,13 @@ module.exports = {
         }
     },
     module: {
-        rules: [{
+        rules: [
+          {
             test: /\.js$/,
-            loader: "babel-loader",
-            exclude: /(node_modules|bower_components)/
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: "babel-loader",
+            }
         },{
             test: /\.css$/,
             use: [
@@ -113,7 +116,7 @@ module.exports = {
     watchOptions: {
         aggregateTimeout: 100
     },
-    devtool: NODE_ENV === "development" ? "inline-cheap-module-source-map" : false,
+    // devtool: isDev ? "source-map" : false,
 
     plugins: [
         new webpack.ProvidePlugin({
@@ -140,6 +143,10 @@ module.exports = {
             {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
             {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
         ]),
-        new ManifestPlugin()
+        new ManifestPlugin(),
+        new webpack.SourceMapDevToolPlugin({
+            filename: PATHS.assets + '[name].[hash].js.map',
+            exclude: ['vendors.js']
+        })
     ],
 };
