@@ -57,12 +57,8 @@ class Selector {
     this._currentSelect = item;
     this._statusNode.innerText = item.name
     this._inputNode.value = this._statusNode.dataset.val = item.value
-    console.log(this._currentSelect)
   }
-
 }
-
-
 
 
 export default Selector
