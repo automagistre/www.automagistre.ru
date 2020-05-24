@@ -12,7 +12,7 @@ const PRICE = {
           name: 'Переустановка колес'
         },{
           id: 'ReplaceBalanceWheels',
-          name: 'Переустановка колес c балансировки'
+          name: 'Переустановка колес c балансировкой'
         },{
           id: 'FullReplaceWheels',
           name: 'Полный шиномонтаж'
@@ -58,7 +58,7 @@ const tireServiceSec = () => {
 
   carSelector.onChange = tireSelector.onChange = () =>{
     if (carSelector.currentSelect && tireSelector.currentSelect) {
-      tireService.updatePrice(tireSelector, carSelector)
+      tireService.updatePrice(tireSelector.currentSelect, carSelector.currentSelect)
       tireService.show()
     } else {
       tireService.hide()
