@@ -12,11 +12,11 @@ class TireService {
   }
 
   hide() {
-    this._node.styles.display = 'none'
+    this._node.style.display = 'none'
   }
 
   show() {
-    this._node.styles.display = 'block'
+    this._node.style.display = 'block'
   }
 
   updatePrice(tireSelector, carSelector) {

@@ -57,7 +57,13 @@ class Selector {
     this._currentSelect = item;
     this._statusNode.innerText = item.name
     this._inputNode.value = this._statusNode.dataset.val = item.value
+    this.onChange()
   }
+
+  onChange() {
+
+  }
+
 }
 
 
