@@ -46,7 +46,7 @@ class PriceItem {
   }
 
   updatePrice(tireSelector, carSelector) {
-    this.price = this._calculator(tireSelector, carSelector)
+    this.price = this._calculator.getPrice(tireSelector, carSelector)
   }
 
   render(node) {

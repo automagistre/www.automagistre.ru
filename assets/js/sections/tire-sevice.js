@@ -56,6 +56,15 @@ const tireServiceSec = () => {
         tireSelector = new Selector(tireSelectorNode)
   const tireService = new TireService(tireServiceNode)
 
+  carSelector.onChange = tireSelector.onChange = () =>{
+    if (carSelector.currentSelect && tireSelector.currentSelect) {
+      tireService.updatePrice(tireSelector, carSelector)
+      tireService.show()
+    } else {
+      tireService.hide()
+    }
+  }
+
   for(let group of PRICE.groups) {
     tireService.addPriceGroup(new PriceGroup(group))
   }
