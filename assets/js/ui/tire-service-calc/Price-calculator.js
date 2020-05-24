@@ -81,7 +81,7 @@ class ReplaceBalanceWheelsPriceCalculator extends FormulaPriceCalculator{
 class FullReplaceWheelsPriceCalculator extends FormulaPriceCalculator{
 
   BASE_PRICE = 1400
-  TIRE_EXTRA_PRICE = 100
+  TIRE_EXTRA_PRICE = 200
   CAR_EXTRA_PRICE = {
     car: 0,
     suv: 400,
