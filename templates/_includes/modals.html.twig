@@ -1,14 +1,18 @@
 {% set brands = [
     {
+        "id": 0,
         "name": "Nissan",
         "classPref": "nis"
     },{
+        "id": 1,
         "name": "Toyota",
         "classPref": "toy"
     },{
+        "id": 2,
         "name": "Infiniti",
         "classPref": "inf"
     },{
+        "id": 3,
         "name": "Lexus",
         "classPref": "lex"
     }
@@ -60,7 +64,7 @@
                     </div>
                     <nav class="sec-start__nav">
                         {% for brand in brands %}
-                            <a class="sec-start__nav-link icon-{{ brand.classPref }} js-set-start-slide" data-slide="0" role="button"></a>
+                            <a class="sec-start__nav-link icon-{{ brand.classPref }} js-set-start-slide" data-slide="{{ brand.id }}" role="button"></a>
                         {% endfor %}
                     </nav>
                 </div>

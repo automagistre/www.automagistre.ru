@@ -32,8 +32,15 @@ class SelectCarWizardStep1 {
       ],
     }
 
-    this.slider = $('#select-car-slider').slick(options)
-      
+    this.$slider = $('#select-car-slider').slick(options)
+
+    document.querySelectorAll('.js-set-start-slide').forEach(btnNode => {
+      const sliderToGo = btnNode.dataset.slide || 0;
+      btnNode.addEventListener('click', ()=> {
+        this.$slider.slick('slickGoTo', sliderToGo, false)
+      })
+    })
+
   }
 }
 
