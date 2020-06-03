@@ -7,10 +7,13 @@ class SelectCarWizard {
 
   constructor(node) {
     this.steps[0] = new  SelectCarWizardStepManufacturer(node)
+    this.steps[1] = new  SelectCarWizardStepModel(node)
     this.steps[0].setActive(this.steps[0])
     node.querySelectorAll('.js-select-manufacturer').forEach( node=> {
       node.addEventListener('click', ()=> this.changeStep(1))
     })
+
+
   }
 
   changeStep(num) {
@@ -28,6 +31,10 @@ class SelectCarWizardStep {
   _indicatorNode = undefined
   _node = undefined
 
+  constructor() {
+
+  }
+
   setActive(entity) {
     this._indicatorNode.classList.toggle('is-active', entity === this)
     this._node.classList.toggle('is-active', entity === this)
@@ -35,7 +42,7 @@ class SelectCarWizardStep {
   }
 
   setComplete(test) {
-    this._indicatorNode.classList.toggle('is-complete', test)
+    this._indicatorNode.classList.toggle('is-completed', test)
   }
 
   get content() {
@@ -78,10 +85,20 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
         this._selectedContent.manufacturer = manufacturer
       })
     })
-    this._indicatorNode = node.querySelector('.modal__step[data-step="Manufacturer"]')
+    this._indicatorNode = node.querySelector('.modal__step[data-step="manufacturer"]')
     this._node = node.querySelector('#modal-tab_01')
   }
 
+}
+
+
+class SelectCarWizardStepModel extends SelectCarWizardStep {
+
+  constructor(node) {
+    super();
+    this._indicatorNode = node.querySelector('.modal__step[data-step="model"]')
+    this._node = node.querySelector('#modal-tab_02')
+  }
 }
 
 

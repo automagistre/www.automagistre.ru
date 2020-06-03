@@ -13,8 +13,13 @@ class ModalSelectCar {
 
     const node = document.querySelector('#modal')
     if (!node) return
+
+    node.querySelector('.js-modal-close')
+        .addEventListener('click', ()=> this.hide())
+
     new SelectCarWizard(node)
     this._node = node
+
   }
 
   show() {
