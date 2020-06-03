@@ -8,10 +8,16 @@ import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import {SubscribeForm} from '../ui/forms';
+import ModalSelectCar from '../ui/SelectCarModal/Modal';
 
 
 new Header();
+
 new ScrollToTop();
+
+if (document.querySelector('#modal')) {
+    window.modal = ModalSelectCar.instance
+}
 
 initSections();
 
