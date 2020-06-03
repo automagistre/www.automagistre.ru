@@ -28,9 +28,8 @@
             <div class="modal__nav">
                 <div class="modal__nav-half">
                     <ul class="modal__steps">
-                        <li class="modal__step is-completed">Марка</li>
-                        <li class="modal__step is-active">Модель</li>
-                        <li class="modal__step">Год выпуска</li>
+                        <li class="modal__step" data-step="Manufacturer">Марка</li>
+                        <li class="modal__step" data-step="model">Модель</li>
                     </ul>
                 </div>
                 <div class="modal__nav-half">
@@ -57,14 +56,17 @@
                                     <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt"></div>
                                 </div>
                                 <div class="sec-start__slide-btm">
-                                    <a class="btn btn_big sec-start__slide-btn js-select-car" role="button">Выбрать {{ brand.name }}</a>
+                                    <a class="btn btn_big sec-start__slide-btn js-select-manufacturer" role="button">Выбрать {{ brand.name }}</a>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                     <nav class="sec-start__nav">
                         {% for brand in brands %}
-                            <a class="sec-start__nav-link icon-{{ brand.classPref }} js-set-start-slide" data-slide="{{ brand.id }}" role="button"></a>
+                            <a class="sec-start__nav-link icon-{{ brand.classPref }} js-set-start-slide"
+                               data-slide="{{ brand.id }}"
+                               data-content="{{ brand.name }}"
+                               role="button"></a>
                         {% endfor %}
                     </nav>
                 </div>
