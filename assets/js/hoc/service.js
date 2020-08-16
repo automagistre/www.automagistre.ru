@@ -9,7 +9,7 @@ import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import {SubscribeForm} from '../ui/forms';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
-
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
 new Header();
 
@@ -72,3 +72,18 @@ $(window).on('load', ()=> {
     if ($scroll_Y.length) initScroll_Y($scroll_Y);
     $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());
 });
+
+const client = new ApolloClient({
+    uri: 'http://localhost:3000',
+    cache: new InMemoryCache()
+});
+
+client
+    .query({
+    query: gql`
+        query maintenances {
+            name        
+        }
+    `
+})
+.then(result => console.log(result));
