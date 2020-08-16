@@ -1,37 +1,44 @@
-import Maintenance from './mongo/maintenanceShema';
-
 const { ApolloServer } = require('apollo-server')
 import typeDefs from './typeDefs/maintenance'
 import resolvers from './resolvers/maintenance';
-
-
-const mongoose = require('mongoose')
+import mongoose from  'mongoose'
 
 const DB_URL = 'mongodb://mongo.automagistre.local/www'
 const SERVER_URL = 'localhost'
 const SERVER_PORT = 3000
 
-mongoose.connect(DB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true } )
-const db = mongoose.connection;
+class Server {
 
-db.on('error', console.error.bind(console, 'connection error:'))
-db.once('open', ()=> console.log('DB connected'))
+  constructor(apolloServerOptions) {
+    this.apolloServer = new ApolloServer(apolloServerOptions)
+  }
 
-const server = new ApolloServer({typeDefs, resolvers});
+  async start () {
+    const db = mongoose.connection;
 
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+    db.on('error', console.error.bind(console, 'connection error:'))
+    db.once('open', ()=> console.log('DB connected'))
 
+    await mongoose.connect(DB_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true } )
 
-const test = async () => {
-  const res = await Maintenance.findOne({
-    'vehicle.caseName': 'J10',
-    'vehicle.manufacturer.name': 'Nissan'
-  }).exec()
-  console.log(res.engine)
+    const {url} = await this.apolloServer.listen({
+      port: SERVER_PORT,
+      host: SERVER_URL
+    })
+    console.log(`Server started at: ${url}`)
+  }
 }
 
-test()
+
+const apolloServerOptions = {
+  typeDefs,
+  resolvers,
+  playground: true,
+  cors: false
+}
+
+const server = new Server(apolloServerOptions)
+
+server.start()
