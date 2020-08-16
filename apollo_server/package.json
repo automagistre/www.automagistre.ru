@@ -4,7 +4,7 @@
   "description": "API for automagistre",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node index.js"
   },
   "keywords": [
     "API",
@@ -20,5 +20,11 @@
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.0",
     "nodemon": "^2.0.4"
+  },
+  "dependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.10.4",
+    "apollo-server": "^2.16.1",
+    "graphql": "^15.3.0",
+    "mongoose": "^5.10.0"
   }
 }

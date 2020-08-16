@@ -18,3 +18,5 @@
 /public/img
 /public/images
 /public/manifest.json
+/apollo_server/node_modules/
+
