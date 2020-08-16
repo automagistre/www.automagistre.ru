@@ -5,7 +5,7 @@ const path = require("path");
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || "development";
@@ -139,10 +139,20 @@ module.exports = {
             protectWebpackAssets: false,
             cleanOnceBeforeBuildPatterns: ['**/assets/*', '**/img/*', '**/images/*']
         }),
-        new CopyWebpackPlugin([
-            {from: PATHS.src + 'images', to: PATHS.dist + 'images', ignore:['*/uncompressed/*']},
-            {from: PATHS.src + 'img', to: PATHS.dist + 'img', ignore:['*/uncompressed/*']}
-        ]),
+        new CopyPlugin({
+            patterns: [
+                {
+                    from: PATHS.src + 'images',
+                    to: PATHS.dist + 'images',
+                    // ignore: ['*/uncompressed/*'],
+                },
+                {
+                    from: PATHS.src + 'img',
+                    to: PATHS.dist + 'img',
+                    // ignore: ['*/uncompressed/*'],
+                },
+            ],
+        }),
         new ManifestPlugin(),
         new webpack.SourceMapDevToolPlugin({
             filename: PATHS.assets + '[name].[hash].js.map',
