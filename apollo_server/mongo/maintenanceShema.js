@@ -64,4 +64,4 @@ const MaintenanceSchema = new Schema({
   }]
 })
 
-module.exports = mongoose.model('maintenance', MaintenanceSchema, 'maintenance')
+export default mongoose.model('maintenance', MaintenanceSchema, 'maintenance')
