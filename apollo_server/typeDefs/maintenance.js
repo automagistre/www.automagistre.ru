@@ -3,7 +3,7 @@ const {gql} = require('apollo-server')
 
 const typeDefs = gql`
   type Maintenance {
-      id: String,
+      id: ID,
       engine: Engine,
       transmission: String,
       vehicle: Vehicle,
@@ -12,15 +12,15 @@ const typeDefs = gql`
   }
   
   type Engine {
-      airIntake: String,
-      capacity: String,
-      injection: String,
       name: String,
       type: String,
+      airIntake: String,
+      injection: String,
+      capacity: String,
   }
   
   type Vehicle {
-      id: String,
+      _id: ID,
       caseName: String,
       localizedName: String,
       manufacturer: Manufacturer,
@@ -30,7 +30,7 @@ const typeDefs = gql`
   }
   
   type Manufacturer {
-      id: String,
+      id: ID,
       localizedName: String,
       name: String,
   }
@@ -51,8 +51,8 @@ const typeDefs = gql`
   }
   
   type Part {
+      id: ID,
       discount: Price,
-      id: String,
       manufacturer: Manufacturer,
       name: String,
       number: String,
@@ -63,6 +63,11 @@ const typeDefs = gql`
   type Price {
       amount: String,
       currency: String,
+  }
+  
+  type Query {
+      maintenances: [Maintenance]!
+      maintenanceByCaseName(caseName: String, manufacturer: String): Maintenance
   }
 `
 export default typeDefs

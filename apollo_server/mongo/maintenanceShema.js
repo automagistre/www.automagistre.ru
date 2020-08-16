@@ -1,16 +1,18 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
+
 const Schema = mongoose.Schema;
 
 const MaintenanceSchema = new Schema({
   _id: String,
-  engine: {
-    airIntake: String,
-    capacity: String,
-    injection: String,
-    name: String,
-    type: String,
-  },
+
   transmission: String,
+  engine: {
+    name: String,
+    type: Object,
+    airIntake: String,
+    injection: String,
+    capacity: String
+  },
   vehicle: {
     _id: String,
     caseName: String,
@@ -54,14 +56,14 @@ const MaintenanceSchema = new Schema({
       }
     ],
     period: Number,
-    price: [
-      {
+    price: {
         amount: String,
         currency: String,
-      }
-    ],
+    },
     recommended: Boolean
   }]
 })
 
-export default mongoose.model('maintenance', MaintenanceSchema, 'maintenance')
+const Maintenance = mongoose.model('maintenance', MaintenanceSchema, 'maintenance')
+
+export default Maintenance
