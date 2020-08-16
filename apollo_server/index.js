@@ -36,7 +36,7 @@ const apolloServerOptions = {
   typeDefs,
   resolvers,
   playground: true,
-  cors: false
+  cors: true
 }
 
 const server = new Server(apolloServerOptions)
