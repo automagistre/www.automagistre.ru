@@ -1,13 +1,15 @@
 import $ from 'jquery'
 import 'slick-carousel'
+import ServerData from '../../helpers/ServerData';
 
 class SelectCarWizard {
 
   steps = []
 
   constructor(node) {
-    this.steps[0] = new  SelectCarWizardStepManufacturer(node)
-    this.steps[1] = new  SelectCarWizardStepModel(node)
+    this.steps[0] = new SelectCarWizardStepManufacturer(node)
+    this.steps[1] = new SelectCarWizardStepModel(node)
+    this.steps[1].init()
     this.steps[0].setActive(this.steps[0])
     node.querySelectorAll('.js-select-manufacturer').forEach( node=> {
       node.addEventListener('click', ()=> this.changeStep(1))
@@ -91,14 +93,53 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
 
 }
 
+class ModelItem {
+
+  constructor(model) {
+    this._model = model
+  }
+
+  render(node) {
+    const wrapper = document.createElement('div')
+    const carImage = `${this._model.manufacturer.toLowerCase()}_${this._model.caseName.toUpperCase()}.jpg`
+    wrapper.innerHTML =
+        `<div class="modal__model">
+            <div class="car-card">
+                <h4 class="car-card__title">${this._model.name}</h4>
+                <div class="car-card__pict">
+                    <img class="car-card__img" src="/images/car-find/${carImage}" alt="${this._model.name}">
+                </div>
+                <div class="car-card__info">
+                    <div class="car-card__code">${this._model.caseName}</div>
+                    <div class="car-card__year">${this._model.yearFrom} - ${this._model.yearTill || 'н.в'}</div>
+                </div>
+                <a class="car-card__link js-car-card" role="button"></a>
+            </div>
+         </div>
+        `
+    this._node = wrapper.lastElementChild
+    node.append(this._node)
+  }
+
+}
+
 
 class SelectCarWizardStepModel extends SelectCarWizardStep {
 
   constructor(node) {
     super();
+    this._server = new ServerData()
     this._indicatorNode = node.querySelector('.modal__step[data-step="model"]')
     this._node = node.querySelector('#modal-tab_02')
   }
+
+  async init() {
+    const models = await this._server.getVehiclesByManufacturer('Nissan')
+    const modelItem = models.map(model => new ModelItem(model))
+    const nodeForAppend = this._node.querySelector('.modal__models')
+    modelItem.forEach(modelItem => modelItem.render(nodeForAppend))
+  }
+
 }
 
 
