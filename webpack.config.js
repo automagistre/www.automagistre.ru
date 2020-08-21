@@ -24,8 +24,8 @@ module.exports = {
         styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: PATHS.assets + "[name].[hash:8].js",
-        chunkFilename: PATHS.assets + "[id].[hash:8].js",
+        filename: PATHS.assets + "[name].[hash].js",
+        chunkFilename: PATHS.assets + "[id].[hash].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -111,13 +111,18 @@ module.exports = {
             options: {
                 name: "[path][name].[ext]"
             }
-        }]
+        },{
+            test: /\.(graphql|gql)$/,
+            exclude: /node_modules/,
+            loader: 'graphql-tag/loader',
+        }
+        ]
     },
     watch: NODE_ENV === "development" ,
     watchOptions: {
         aggregateTimeout: 100
     },
-    devtool: isDev ? "source-map" : false,
+    devtool: isDev ? "eval-cheap-source-map" : false,
 
     plugins: [
         new webpack.ProvidePlugin({
@@ -160,7 +165,7 @@ module.exports = {
         }),
         new ManifestPlugin(),
         new webpack.SourceMapDevToolPlugin({
-            filename: PATHS.assets + '[name].[hash:8].map',
+            filename: PATHS.assets + '[name].[hash].js.map',
             exclude: ['vendors.js']
         })
     ],

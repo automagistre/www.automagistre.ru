@@ -1,5 +1,6 @@
 import './hoc/service'
 import {mobChecker} from "./lib";
+import ServerData from './helpers/ServerData';
 
 const BODY = document.body;
 
