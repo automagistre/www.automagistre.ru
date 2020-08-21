@@ -173,4 +173,4 @@ volumes:
             path: /var/run/docker.sock
     -   name: env
         host:
-            path: /opt/secrets/automagistre
+            path: /opt/secrets/www
