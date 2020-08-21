@@ -66,8 +66,11 @@ const typeDefs = gql`
   }
   
   type Query {
-      maintenances: [Maintenance]!
-      maintenanceByCaseName(caseName: String, manufacturer: String): Maintenance
+      getVehiclesByManufacturer(manufacturer: String): [Vehicle]!,
+      getVehicleByID(id: String): Vehicle
+      getWorksByMaintenanceID(id: String): [Work]!
+      maintenancesByVehicleID(id: String): [Maintenance]!
+      
   }
 `
 export default typeDefs
