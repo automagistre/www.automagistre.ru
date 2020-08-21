@@ -24,7 +24,8 @@ module.exports = {
         styles: PATHS.src + "/less/main",
     },
     output: {
-        filename: PATHS.assets + "[name].[hash].js",
+        filename: PATHS.assets + "[name].[hash:8].js",
+        chunkFilename: PATHS.assets + "[id].[hash:8].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -116,7 +117,7 @@ module.exports = {
     watchOptions: {
         aggregateTimeout: 100
     },
-    // devtool: isDev ? "source-map" : false,
+    devtool: isDev ? "source-map" : false,
 
     plugins: [
         new webpack.ProvidePlugin({
@@ -144,18 +145,22 @@ module.exports = {
                 {
                     from: PATHS.src + 'images',
                     to: PATHS.dist + 'images',
-                    // ignore: ['*/uncompressed/*'],
+                    globOptions: {
+                        ignore: ['*/uncompressed/*']
+                    }
                 },
                 {
                     from: PATHS.src + 'img',
                     to: PATHS.dist + 'img',
-                    // ignore: ['*/uncompressed/*'],
+                    globOptions: {
+                        ignore: ['*/uncompressed/*']
+                    }
                 },
             ],
         }),
         new ManifestPlugin(),
         new webpack.SourceMapDevToolPlugin({
-            filename: PATHS.assets + '[name].[hash].js.map',
+            filename: PATHS.assets + '[name].[hash:8].map',
             exclude: ['vendors.js']
         })
     ],
