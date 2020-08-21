@@ -9,7 +9,7 @@ import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import {SubscribeForm} from '../ui/forms';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
+import ServerData from '../helpers/ServerData';
 
 new Header();
 
@@ -72,3 +72,14 @@ $(window).on('load', ()=> {
     if ($scroll_Y.length) initScroll_Y($scroll_Y);
     $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());
 });
+
+
+const serverData = new ServerData()
+
+const test = async () => {
+    const data = await serverData.getVehiclesByManufacturer('Nissan')
+    console.log(data);
+}
+
+
+test()
