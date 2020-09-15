@@ -23,6 +23,7 @@ class SelectCarWizard {
       this.steps[i].setComplete(i < num)
       this.steps[i].setActive(this.steps[num])
     }
+    document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
   }
 }
 
