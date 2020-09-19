@@ -102,14 +102,12 @@ class ModelItem {
 
   render(node) {
     const wrapper = document.createElement('div')
-    const carImage = `${this._model.manufacturer.toLowerCase()}_${this._model.caseName.toUpperCase()}.jpg`
+
     wrapper.innerHTML =
         `<div class="modal__model">
             <div class="car-card">
                 <h4 class="car-card__title">${this._model.name}</h4>
-                <div class="car-card__pict">
-                    <img class="car-card__img" src="/images/car-find/${carImage}" alt="${this._model.name}">
-                </div>
+                <div class="car-card__pict"> </div>
                 <div class="car-card__info">
                     <div class="car-card__code">${this._model.caseName}</div>
                     <div class="car-card__year">${this._model.yearFrom} - ${this._model.yearTill || 'н.в'}</div>
@@ -119,6 +117,14 @@ class ModelItem {
          </div>
         `
     this._node = wrapper.lastElementChild
+
+    const carImageName = `${this._model.manufacturer.toLowerCase()}_${this._model.caseName.toUpperCase()}.jpg`
+    const carImage = new Image()
+    carImage.src = `/images/car-find/${carImageName}`
+    carImage.onerror = () => { carImage.src = "/images/car-find/default.jpg" }
+    carImage.alt = `${this._model.name}`
+    carImage.classList.add('car-card__img')
+    this._node.querySelector('div.car-card__pict').append(carImage)
     node.append(this._node)
   }
 
