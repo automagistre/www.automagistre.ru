@@ -26,7 +26,7 @@ class Selector {
 
   constructor(node) {
     this._node = node
-    this._listNode = node.querySelector('.selector__list')
+    this._listNodes = node.querySelectorAll('.selector__list')
     this._statusNode = node.querySelector('.selector__val')
     this._inputNode = node.querySelector('input')
     this._statusNode.addEventListener('click', ()=> this.show())
@@ -46,10 +46,12 @@ class Selector {
   }
 
   _initList() {
-    for (const itemNode of this._listNode.querySelectorAll('li')) {
-      const selectorItem = new SelectorItem(itemNode)
-      selectorItem.onSelect = () => this._selectItem(selectorItem)
-    }
+    this._listNodes.forEach( listNode => {
+      for (const itemNode of listNode.querySelectorAll('li')) {
+        const selectorItem = new SelectorItem(itemNode)
+        selectorItem.onSelect = () => this._selectItem(selectorItem)
+      }
+    })
   }
 
   _selectItem(item) {
