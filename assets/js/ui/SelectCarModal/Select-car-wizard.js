@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import 'slick-carousel'
 import ServerData from '../../helpers/ServerData';
+import Selector from '../Selector';
 
 class SelectCarWizard {
 
@@ -9,19 +10,19 @@ class SelectCarWizard {
   constructor(node) {
     this.steps[0] = new SelectCarWizardStepManufacturer(node)
     this.steps[1] = new SelectCarWizardStepModel(node)
-    this.steps[1].init()
     this.steps[0].setActive(this.steps[0])
     node.querySelectorAll('.js-select-manufacturer').forEach( node=> {
       node.addEventListener('click', ()=> this.changeStep(1))
     })
-
-
   }
 
   changeStep(num) {
+    const data = {
+      manufacturer: this.steps[0].content.manufacturer
+    }
     for (let i = 0; i < this.steps.length; i++) {
       this.steps[i].setComplete(i < num)
-      this.steps[i].setActive(this.steps[num])
+      this.steps[i].setActive(this.steps[num], data)
     }
     document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
   }
@@ -78,18 +79,20 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
       ],
     }
 
+    this._node = node.querySelector('#modal-tab_01')
     this.$slider = $('#select-car-slider').slick(options)
 
     document.querySelectorAll('.js-set-start-slide').forEach(btnNode => {
       const sliderToGo = btnNode.dataset.slide || 0;
-      const manufacturer = btnNode.dataset.content;
       btnNode.addEventListener('click', ()=> {
         this.$slider.slick('slickGoTo', sliderToGo, false)
-        this._selectedContent.manufacturer = manufacturer
       })
     })
+
+    this._node.querySelectorAll('.js-select-manufacturer').forEach( node => {
+      node.addEventListener('click', () => this._selectedContent.manufacturer = node.dataset.manufactirer)
+    })
     this._indicatorNode = node.querySelector('.modal__step[data-step="manufacturer"]')
-    this._node = node.querySelector('#modal-tab_01')
   }
 
 }
@@ -138,13 +141,24 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     this._server = new ServerData()
     this._indicatorNode = node.querySelector('.modal__step[data-step="model"]')
     this._node = node.querySelector('#modal-tab_02')
+    this._modelListNode = this._node.querySelector('.modal__models')
+    this._selector = new Selector(document.querySelector('#modal__selector'))
   }
 
-  async init() {
-    const models = await this._server.getVehiclesByManufacturer('Nissan')
+  async renderModels(manufacturer) {
+    const models = await this._server.getVehiclesByManufacturer(manufacturer)
     const modelItem = models.map(model => new ModelItem(model))
-    const nodeForAppend = this._node.querySelector('.modal__models')
-    modelItem.forEach(modelItem => modelItem.render(nodeForAppend))
+
+    modelItem.forEach(modelItem => modelItem.render(this._modelListNode))
+  }
+
+  clear() {
+    this._modelListNode.innerHTML ='';
+  }
+
+  setActive(entity, data) {
+    super.setActive(entity);
+    this.renderModels(data.manufacturer)
   }
 
 }
