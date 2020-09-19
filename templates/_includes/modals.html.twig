@@ -9,11 +9,11 @@
         "classPref": "toy"
     },{
         "id": 2,
-        "name": "Infiniti",
+        "name": "INFINITI",
         "classPref": "inf"
     },{
         "id": 3,
-        "name": "Lexus",
+        "name": "LEXUS",
         "classPref": "lex"
     }
 
@@ -26,11 +26,66 @@
         <div class="container">
             <h4 class="modal__title">Выберите модель машины:</h4>
             <div class="modal__nav">
+
                 <div class="modal__nav-half">
                     <ul class="modal__steps">
                         <li class="modal__step" data-step="manufacturer">Марка</li>
                         <li class="modal__step" data-step="model">Модель</li>
                     </ul>
+                    <div class="modal__year">
+                        <div class="selector modal__selector show-list" id="modal__selector">
+                            <input value="0" type="hidden"><!-- Выставление правильного предзаданного значения в селекте -->
+                            <div class="selector__val" data-val="0">Выбрать год</div>
+                            <div class="selector__drop selector__years">
+                                <div class="selector__years-col">
+                                    <div class="selector__years-title">2010e</div>
+                                    <ul class="selector__list selector__years-list">
+                                        <li data-val="2010">2010</li>
+                                        <li data-val="2011">2011</li>
+                                        <li data-val="2012">2012</li>
+                                        <li data-val="2013">2013</li>
+                                        <li data-val="2014">2014</li>
+                                        <li data-val="2015">2015</li>
+                                        <li data-val="2016">2016</li>
+                                        <li data-val="2017">2017</li>
+                                        <li data-val="2018">2018</li>
+                                        <li data-val="2019">2019</li>
+                                    </ul>
+                                </div>
+                                <div class="selector__years-col">
+                                    <div class="selector__years-title">2000e</div>
+                                    <ul class="selector__list selector__years-list">
+                                        <li data-val="2000">2000</li>
+                                        <li data-val="2001">2001</li>
+                                        <li data-val="2002">2002</li>
+                                        <li data-val="2003">2003</li>
+                                        <li data-val="2004">2004</li>
+                                        <li data-val="2005">2005</li>
+                                        <li data-val="2006">2006</li>
+                                        <li data-val="2007">2007</li>
+                                        <li data-val="2008">2008</li>
+                                        <li data-val="2009">2009</li>
+                                    </ul>
+                                </div>
+                                <div class="selector__years-col">
+                                    <div class="selector__years-title">1990e</div>
+                                    <ul class="selector__list selector__years-list">
+                                        <li data-val="1990">1990</li>
+                                        <li data-val="1991">1991</li>
+                                        <li data-val="1992">1992</li>
+                                        <li data-val="1993">1993</li>
+                                        <li data-val="1994">1994</li>
+                                        <li data-val="1995">1995</li>
+                                        <li data-val="1996">1996</li>
+                                        <li data-val="1997">1997</li>
+                                        <li data-val="1998">1998</li>
+                                        <li data-val="1999">1999</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal__nav-half">
                     <form class="modal__search">
@@ -49,14 +104,14 @@
                     <h1 class="sec-start__title">Выберите <br> интересующее направление:</h1>
                     <div class="sec-start__slider" id="select-car-slider">
                         {% for brand in brands %}
-                            <div class="sec-start__slide st-nis">
+                            <div class="sec-start__slide st-{{ brand.classPref }}">
                                 <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo"></div>
                                 <div class="sec-start__slide-car st-{{ brand.classPref }}__car">
                                     <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt"></div>
                                     <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt"></div>
                                 </div>
                                 <div class="sec-start__slide-btm">
-                                    <a class="btn btn_big sec-start__slide-btn js-select-manufacturer" role="button">Выбрать {{ brand.name }}</a>
+                                    <a class="btn btn_big sec-start__slide-btn js-select-manufacturer" data-manufactirer="{{ brand.name }}" role="button">Выбрать {{ brand.name }}</a>
                                 </div>
                             </div>
                         {% endfor %}
@@ -77,117 +132,6 @@
             <div class="container">
                 <div class="modal__models">
 
-                </div>
-            </div>
-        </div>
-
-        <div class="modal__tab js-modal-tab" id="modal-tab_03">
-            <div class="container">
-                <div class="modal__periods">
-                    <div class="modal__period">
-                        <div class="selector">
-                            <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
-                            <div class="selector__val" data-val="0">2010е</div>
-                            <div class="selector__drop">
-                                <ul class="selector__list">
-                                    <li data-val="0">2010е</li>
-                                    <li data-val="2010">2010</li>
-                                    <li data-val="2011">2011</li>
-                                    <li data-val="2012">2012</li>
-                                    <li data-val="2013">2013</li>
-                                    <li data-val="2014">2014</li>
-                                    <li data-val="2015">2015</li>
-                                    <li data-val="2016">2016</li>
-                                    <li data-val="2017">2017</li>
-                                    <li data-val="2018">2018</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- End modal__period -->
-                    <div class="modal__period">
-                        <div class="selector">
-                            <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
-                            <div class="selector__val" data-val="0">2010е</div>
-                            <div class="selector__drop">
-                                <ul class="selector__list">
-                                    <li data-val="0">2000е</li>
-                                    <li data-val="2001">2000</li>
-                                    <li data-val="2001">2001</li>
-                                    <li data-val="2002">2002</li>
-                                    <li data-val="2003">2003</li>
-                                    <li data-val="2004">2004</li>
-                                    <li data-val="2005">2005</li>
-                                    <li data-val="2006">2006</li>
-                                    <li data-val="2007">2007</li>
-                                    <li data-val="2008">2008</li>
-                                    <li data-val="2009">2009</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- End modal__period -->
-                    <div class="modal__period">
-                        <div class="selector">
-                            <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
-                            <div class="selector__val" data-val="0">1990е</div>
-                            <div class="selector__drop">
-                                <ul class="selector__list">
-                                    <li data-val="0">1990е</li>
-                                    <li data-val="1990">1990</li>
-                                    <li data-val="1991">1991</li>
-                                    <li data-val="1992">1992</li>
-                                    <li data-val="1993">1993</li>
-                                    <li data-val="1994">1994</li>
-                                    <li data-val="1995">1995</li>
-                                    <li data-val="1996">1996</li>
-                                    <li data-val="1997">1997</li>
-                                    <li data-val="1998">1998</li>
-                                    <li data-val="1999">1999</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- End modal__period -->
-                    <div class="modal__period">
-                        <div class="selector">
-                            <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
-                            <div class="selector__val" data-val="0">1980е</div>
-                            <div class="selector__drop">
-                                <ul class="selector__list">
-                                    <li data-val="0">1980е</li>
-                                    <li data-val="1980">1980</li>
-                                    <li data-val="1981">1981</li>
-                                    <li data-val="1982">1982</li>
-                                    <li data-val="1983">1983</li>
-                                    <li data-val="1984">1984</li>
-                                    <li data-val="1985">1985</li>
-                                    <li data-val="1986">1986</li>
-                                    <li data-val="1987">1987</li>
-                                    <li data-val="1988">1988</li>
-                                    <li data-val="1989">1989</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- End modal__period -->
-                    <div class="modal__period">
-                        <div class="selector">
-                            <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
-                            <div class="selector__val" data-val="0">1970е</div>
-                            <div class="selector__drop">
-                                <ul class="selector__list">
-                                    <li data-val="0">1970е</li>
-                                    <li data-val="1970">1970</li>
-                                    <li data-val="1971">1971</li>
-                                    <li data-val="1972">1972</li>
-                                    <li data-val="1973">1973</li>
-                                    <li data-val="1974">1974</li>
-                                    <li data-val="1975">1975</li>
-                                    <li data-val="1976">1976</li>
-                                    <li data-val="1977">1977</li>
-                                    <li data-val="1978">1978</li>
-                                    <li data-val="1979">1979</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div><!-- End modal__period -->
                 </div>
             </div>
         </div>
