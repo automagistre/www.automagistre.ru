@@ -29,6 +29,10 @@ class Selector {
     this._listNodes = node.querySelectorAll('.selector__list')
     this._statusNode = node.querySelector('.selector__val')
     this._inputNode = node.querySelector('input')
+    this._defaultVal = {
+      text: this._statusNode.innerText,
+      value: this._statusNode.dataset.val
+    }
     this._statusNode.addEventListener('click', ()=> this.show())
     this._initList()
   }
@@ -43,6 +47,13 @@ class Selector {
 
   get currentSelect() {
     return this._currentSelect
+  }
+
+  clear() {
+    this._currentSelect = undefined
+    this._inputNode.value = ''
+    this._statusNode.dataset.val = this._defaultVal.value
+    this._statusNode.innerText = this._defaultVal.text
   }
 
   _initList() {
