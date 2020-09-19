@@ -131,6 +131,21 @@ class ModelItem {
     node.append(this._node)
   }
 
+  get yearFrom() {
+    return +this._model.yearFrom
+  }
+
+  get yearTill() {
+    return +this._model.yearTill
+  }
+
+  hide() {
+    this._node.classList.add('is-hidden')
+  }
+
+  show() {
+    this._node.classList.remove('is-hidden')
+  }
 }
 
 
@@ -142,14 +157,17 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     this._indicatorNode = node.querySelector('.modal__step[data-step="model"]')
     this._node = node.querySelector('#modal-tab_02')
     this._modelListNode = this._node.querySelector('.modal__models')
-    this._selector = new Selector(document.querySelector('#modal__selector'))
+    this._yearSelector = new Selector(document.querySelector('#modal__selector'))
+    this._yearSelector.onChange = ()=> {
+      this.filterModelsByYear(+this._yearSelector.currentSelect.value);
+    }
   }
 
   async renderModels(manufacturer) {
     const models = await this._server.getVehiclesByManufacturer(manufacturer)
-    const modelItem = models.map(model => new ModelItem(model))
+    this._models = models.map(model => new ModelItem(model))
 
-    modelItem.forEach(modelItem => modelItem.render(this._modelListNode))
+    this._models.forEach(modelItem => modelItem.render(this._modelListNode))
   }
 
   clear() {
@@ -159,6 +177,16 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   setActive(entity, data) {
     super.setActive(entity);
     this.renderModels(data.manufacturer)
+  }
+
+  filterModelsByYear(year) {
+    for (const model of this._models) {
+      if(model.yearFrom <= year && (year <= model.yearTill || !model.yearTill)) {
+        model.show()
+      } else {
+        model.hide()
+      }
+    }
   }
 
 }
