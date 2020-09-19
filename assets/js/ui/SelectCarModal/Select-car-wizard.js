@@ -14,6 +14,10 @@ class SelectCarWizard {
     node.querySelectorAll('.js-select-manufacturer').forEach( node=> {
       node.addEventListener('click', ()=> this.changeStep(1))
     })
+    node.querySelector('.modal__step[data-step="manufacturer"]').addEventListener('click', ()=> {
+      this.steps[1].clear()
+      this.changeStep(0)
+    })
   }
 
   changeStep(num) {
@@ -21,8 +25,11 @@ class SelectCarWizard {
       manufacturer: this.steps[0].content.manufacturer
     }
     for (let i = 0; i < this.steps.length; i++) {
-      this.steps[i].setComplete(i < num)
-      this.steps[i].setActive(this.steps[num], data)
+      // this.steps[i].setComplete(i < num)
+      this.steps[i].setActive(this.steps[num])
+    }
+    if (num === 1) {
+      this.steps[1].renderModels(data.manufacturer)
     }
     document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
   }
@@ -171,12 +178,11 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   }
 
   clear() {
-    this._modelListNode.innerHTML ='';
-  }
+    while (this._modelListNode.firstChild) {
+      this._modelListNode.removeChild(this._modelListNode.firstChild)
+    }
 
-  setActive(entity, data) {
-    super.setActive(entity);
-    this.renderModels(data.manufacturer)
+    this._yearSelector.clear()
   }
 
   filterModelsByYear(year) {
