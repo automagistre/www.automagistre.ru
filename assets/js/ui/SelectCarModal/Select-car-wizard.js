@@ -146,6 +146,14 @@ class ModelItem {
     return +this._model.yearTill
   }
 
+  get name() {
+    return this._model.name
+  }
+
+  get caseName() {
+    return this._model.caseName
+  }
+
   hide() {
     this._node.classList.add('is-hidden')
   }
@@ -176,8 +184,16 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       yearMin = Math.min(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMin)
       yearMax = Math.max(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMax)
     })
-    console.log(yearMax, yearMin);
     this.initYearSelector(yearMin, yearMax)
+    this.initSearchInput()
+  }
+
+  initSearchInput() {
+    this._searchInputNode = document.querySelector('#modal-input-search')
+    this._searchInputNode.addEventListener('input', ()=> {
+      this.filterByName(this._searchInputNode.value);
+      this._yearSelector.clear()
+    })
   }
 
   initYearSelector(minYear, maxYear) {
@@ -214,7 +230,8 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
 
     this._yearSelector = new Selector(selectorNode.firstElementChild)
     this._yearSelector.onChange = ()=> {
-      this.filterModelsByYear(+this._yearSelector.currentSelect.value);
+      this.filterModelsByYear(+this._yearSelector.currentSelect.value)
+      this._searchInputNode.value = ''
     }
   }
 
@@ -224,11 +241,24 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     }
 
     this._yearSelector.destroy()
+    this._searchInputNode.value = ''
   }
 
   filterModelsByYear(year) {
     for (const model of this._models) {
       if(model.yearFrom <= year && (year <= model.yearTill || !model.yearTill)) {
+        model.show()
+      } else {
+        model.hide()
+      }
+    }
+  }
+
+  filterByName(filterString) {
+    filterString = filterString.toLowerCase()
+    for (const model of this._models) {
+      const fullName = model.name.toLowerCase() + model.caseName.toLowerCase()
+      if (fullName.includes(filterString)) {
         model.show()
       } else {
         model.hide()
