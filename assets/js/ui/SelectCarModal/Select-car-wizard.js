@@ -164,17 +164,57 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     this._indicatorNode = node.querySelector('.modal__step[data-step="model"]')
     this._node = node.querySelector('#modal-tab_02')
     this._modelListNode = this._node.querySelector('.modal__models')
-    this._yearSelector = new Selector(document.querySelector('#modal__selector'))
-    this._yearSelector.onChange = ()=> {
-      this.filterModelsByYear(+this._yearSelector.currentSelect.value);
-    }
   }
 
   async renderModels(manufacturer) {
+    let yearMin = Infinity, yearMax = - Infinity;
     const models = await this._server.getVehiclesByManufacturer(manufacturer)
     this._models = models.map(model => new ModelItem(model))
 
-    this._models.forEach(modelItem => modelItem.render(this._modelListNode))
+    this._models.forEach(modelItem => {
+      modelItem.render(this._modelListNode)
+      yearMin = Math.min(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMin)
+      yearMax = Math.max(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMax)
+    })
+    this.initYearSelector(yearMin, yearMax)
+  }
+
+  initYearSelector(minYear, maxYear) {
+    const selectorNode = document.querySelector('#modal__selector')
+    let wrapper = document.createElement('div')
+    wrapper.innerHTML = `
+        <div class="selector modal__selector">
+            <input value="0" type="hidden">
+            <div class="selector__val" data-val="0">Выбрать год</div>
+            <div class="selector__drop selector__years"></div>
+        </div>`
+    let currentYear = Math.trunc(minYear / 10) * 10
+
+    while (currentYear <= maxYear) {
+      const newDecYearWrapper = document.createElement('div')
+      if (currentYear % 10 === 0) {
+        newDecYearWrapper.innerHTML = `
+            <div class="selector__years-col">
+                <div class="selector__years-title">${currentYear}e</div>
+                <ul class="selector__list selector__years-list">
+                </ul>
+            </div>`
+        for (let i = 0; i < 10 && currentYear <=maxYear; i++, currentYear++) {
+          const yearListItemWrapper = document.createElement('div')
+          yearListItemWrapper.innerHTML = `<li data-val="${currentYear}">${currentYear}</li>`
+          newDecYearWrapper.firstElementChild.lastElementChild.append(yearListItemWrapper.firstElementChild)
+        }
+      }
+      wrapper.firstElementChild.lastElementChild.append(newDecYearWrapper.firstElementChild)
+    }
+    console.log(wrapper);
+
+    selectorNode.append(wrapper.firstElementChild)
+
+    this._yearSelector = new Selector(selectorNode.firstElementChild)
+    this._yearSelector.onChange = ()=> {
+      this.filterModelsByYear(+this._yearSelector.currentSelect.value);
+    }
   }
 
   clear() {
