@@ -56,6 +56,10 @@ class Selector {
     this._statusNode.innerText = this._defaultVal.text
   }
 
+  destroy() {
+    this._node.remove()
+  }
+
   _initList() {
     this._listNodes.forEach( listNode => {
       for (const itemNode of listNode.querySelectorAll('li')) {
