@@ -176,6 +176,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       yearMin = Math.min(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMin)
       yearMax = Math.max(modelItem.yearFrom, modelItem.yearTill || (new Date()).getFullYear(), yearMax)
     })
+    console.log(yearMax, yearMin);
     this.initYearSelector(yearMin, yearMax)
   }
 
@@ -200,6 +201,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
                 </ul>
             </div>`
         for (let i = 0; i < 10 && currentYear <=maxYear; i++, currentYear++) {
+          if (currentYear < minYear) continue;
           const yearListItemWrapper = document.createElement('div')
           yearListItemWrapper.innerHTML = `<li data-val="${currentYear}">${currentYear}</li>`
           newDecYearWrapper.firstElementChild.lastElementChild.append(yearListItemWrapper.firstElementChild)
@@ -207,7 +209,6 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       }
       wrapper.firstElementChild.lastElementChild.append(newDecYearWrapper.firstElementChild)
     }
-    console.log(wrapper);
 
     selectorNode.append(wrapper.firstElementChild)
 
@@ -222,7 +223,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       this._modelListNode.removeChild(this._modelListNode.firstChild)
     }
 
-    this._yearSelector.clear()
+    this._yearSelector.destroy()
   }
 
   filterModelsByYear(year) {
