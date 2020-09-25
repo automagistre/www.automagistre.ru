@@ -257,7 +257,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   filterByName(filterString) {
     filterString = filterString.toLowerCase()
     for (const model of this._models) {
-      const fullName = model.name.toLowerCase() + model.caseName.toLowerCase()
+      const fullName = model.name.toLowerCase() + '#' + model.caseName.toLowerCase()
       if (fullName.includes(filterString)) {
         model.show()
       } else {
