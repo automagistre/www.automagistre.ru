@@ -2,6 +2,7 @@ import $ from 'jquery'
 import 'slick-carousel'
 import ServerData from '../../helpers/ServerData';
 import Selector from '../Selector';
+import LocalStorageManager from '../../helpers/Local-storage-manager';
 
 class SelectCarWizard {
 
@@ -135,6 +136,7 @@ class ModelItem {
     carImage.alt = `${this._model.name}`
     carImage.classList.add('car-card__img')
     this._node.querySelector('div.car-card__pict').append(carImage)
+    this._node.addEventListener('click', async ()=> await this.select())
     node.append(this._node)
   }
 
@@ -154,12 +156,29 @@ class ModelItem {
     return this._model.caseName
   }
 
+  get manufacturer() {
+    return this._model.manufacturer
+  }
+
   hide() {
     this._node.classList.add('is-hidden')
   }
 
   show() {
     this._node.classList.remove('is-hidden')
+  }
+
+  async select() {
+    this._node.firstElementChild.classList.add('is-selected')
+    await new Promise(resolve => setTimeout(()=>resolve(), 500))
+    const path = document.location.pathname.split('/')
+    const localStorageManager = new LocalStorageManager()
+    path[2] = this.manufacturer.toLowerCase()
+    localStorageManager.manufacturer = this.manufacturer
+    localStorageManager.caseName = this.caseName
+    const newURL = location.origin + path.join('/')
+    console.log(newURL);
+    document.location.href = location.origin + path.join('/')
   }
 }
 

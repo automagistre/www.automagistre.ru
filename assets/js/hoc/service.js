@@ -9,7 +9,14 @@ import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import {SubscribeForm} from '../ui/forms';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
+import LocalStorageManager from '../helpers/Local-storage-manager';
 
+const localStorageManager = new LocalStorageManager()
+const manufacturer = document.location.pathname.split('/')[2]
+
+if (document.location.pathname.split('/')[2]) {
+    localStorageManager.manufacturer = manufacturer
+}
 
 new Header();
 
