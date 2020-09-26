@@ -13,7 +13,7 @@ class LocalStorageManager {
   }
 
   get caseName() {
-    localStorage.getItem('caseName')
+    return  localStorage.getItem('caseName')
   }
 
 }
