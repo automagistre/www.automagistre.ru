@@ -4,6 +4,14 @@ import ServerData from '../../helpers/ServerData';
 import Selector from '../Selector';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
 
+
+const manufacturerStepList = {
+  'nissan': 0,
+  'infiniti': 2,
+  'toyota': 1,
+  'lexus': 3
+}
+
 class SelectCarWizard {
 
   steps = []
@@ -101,6 +109,11 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
       node.addEventListener('click', () => this._selectedContent.manufacturer = node.dataset.manufactirer)
     })
     this._indicatorNode = node.querySelector('.modal__step[data-step="manufacturer"]')
+
+    const currentManufacturer = (new LocalStorageManager()).manufacturer.toLowerCase()
+    if (currentManufacturer) {
+      this.$slider.slick('slickGoTo', manufacturerStepList[currentManufacturer], false)
+    }
   }
 
 }
