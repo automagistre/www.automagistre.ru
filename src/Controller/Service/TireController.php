@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class TireController extends AbstractController
 {
     /**
-     * @Route("/tire", name="type")
+     * @Route("/tire", name="tire")
      */
     public function __invoke(): Response
     {
