@@ -3,7 +3,7 @@ _service:
     type: annotation
     prefix: /service/{brand}
     requirements:
-        brand: "nissan|toyota|infinity|lexus"
+        brand: "nissan|toyota|infiniti|lexus"
 
 _shop:
     resource: '../src/Controller/Shop'
