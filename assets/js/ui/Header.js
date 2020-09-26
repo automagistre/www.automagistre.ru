@@ -4,8 +4,10 @@ class Header {
   isScrolled = false;
   isVisible = true;
   isInit = false;
+  isMobileMenuOpen = false;
 
   constructor()  {
+    this._headerNode = document.querySelector('#site-header')
     const header = document.getElementById('header-line');
     if (header) {
       this.header = header;
@@ -19,6 +21,7 @@ class Header {
       this.isInit = true
       this._toggleHeader();
     }
+    this._initMobileMenu()
 
   };
 
@@ -56,6 +59,18 @@ class Header {
     if (currentScroll + window.innerHeight + 5 >= document.body.scrollHeight) this.show();
     this.lastScrollY = currentScroll
   };
+
+  _initMobileMenu() {
+    if(this._headerNode) {
+      const mobileMenuButton = this._headerNode.querySelector('.js-mobmenu-toggle ')
+      mobileMenuButton.addEventListener('click', ()=>{
+        this.isMobileMenuOpen = !this.isMobileMenuOpen
+        mobileMenuButton.classList.toggle('is-open', this.isMobileMenuOpen)
+        this._headerNode.classList.toggle('is-open', this.isMobileMenuOpen)
+
+      })
+    }
+  }
 }
 
 export default Header;
