@@ -1,5 +1,13 @@
 {% extends 'layout.html.twig' %}
 
+{#{#}
+{#'num': '03',#}
+{#'class': 'sec-intro__repair',#}
+{#'title': 'Ремонт',#}
+{#'note': 'Качественный, профессиональный ремонт любой сложности с использованием запчастей проверенных брендов.',#}
+{#'path': path('repair')#}
+{#},#}
+
 {#Panels data#}
 {% set panels = [{
     'num': '01',
@@ -17,11 +25,12 @@
     'path': path('maintenance')
     },{
     'num': '03',
-    'class': 'sec-intro__repair',
-    'title': 'Ремонт',
-    'note': 'Качественный, профессиональный ремонт любой сложности с использованием запчастей проверенных брендов.',
-    'path': path('repair')
-}] %}
+    'class': 'sec-intro__tire',
+    'title': 'Шиномонтаж',
+    'note': 'Качественный, профессиональный шиномонтаж на современном оборудовании',
+    'path': path('tire')
+    }
+] %}
 
 {% block content %}
     <main class="site-main">
