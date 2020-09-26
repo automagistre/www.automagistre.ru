@@ -22,9 +22,6 @@ new Header();
 
 new ScrollToTop();
 
-if (document.querySelector('#modal')) {
-    window.modal = ModalSelectCar.instance
-}
 
 initSections();
 
@@ -80,3 +77,7 @@ $(window).on('load', ()=> {
     $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());
 });
 
+if (document.querySelector('#modal')) {
+    const selectCarModal = ModalSelectCar.instance
+    document.querySelectorAll('.js-show-modal').forEach(item => item.addEventListener('click', ()=> selectCarModal.show()))
+}
