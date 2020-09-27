@@ -1,6 +1,10 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
-import {getVehiclesByManufacturer} from './gql/queries'
-import CarCase from '../ui/SelectCarModal/CarCase'
+import {
+  getVehiclesByManufacturer,
+  maintenancesByVehicleID,
+  getVehicleByID
+} from './gql/queries';
+import CarCase from '../ui/SelectCarModal/CarCase';
 
 const SERVER_URL = 'http://localhost:3000'
 
@@ -9,7 +13,7 @@ class ServerData {
   constructor() {
     this.client = new ApolloClient({
       uri: SERVER_URL,
-      cache: new InMemoryCache()
+      cache: new InMemoryCache(),
     })
   }
 
@@ -27,6 +31,53 @@ class ServerData {
                 yearFrom: vehicle.yearFrom,
                 yearTill: vehicle.yearTill
               }, this))
+  }
+
+  async maintenancesByVehicleID(id) {
+    const {data} = await  this.client.query({
+      query: maintenancesByVehicleID,
+      variables: {id}})
+    return data.maintenancesByVehicleID
+      .map(eq => {
+      return {
+          id: eq.id,
+          name: `${eq.engine.capacity} ${eq.transmission} ${eq.wheelDrive}`,
+          mileageRepeat: 15,
+          works: eq.works.map(work => {
+            return {
+              name: work.name,
+              price: work.price.amount / 100,
+              repeat: work.period,
+              type: work.recommended ? 'recommendation' : 'work',
+              note: work.description,
+              parts: work.parts.map(part => {
+                return {
+                  id: part.part.id,
+                  name: part.part.name,
+                  manufacture: part.part.manufacturer.name,
+                  unit: 'шт',
+                  count: part.quantity / 100,
+                  price: part.part.price.amount / 100
+                }
+              })
+            }
+          })
+        }
+      })
+  }
+
+  async getVehicleByID(id) {
+    const {data} = await this.client.query({
+      query: getVehicleByID,
+      variables: {id}})
+    return {
+      id: data.getVehicleByID._id,
+      caseName: data.getVehicleByID.caseName,
+      name: data.getVehicleByID.name,
+      manufacturer: data.getVehicleByID.manufacturer.name,
+      yearFrom: data.getVehicleByID.yearFrom,
+      yearTill: data.getVehicleByID.yearTill
+    }
   }
 
 }

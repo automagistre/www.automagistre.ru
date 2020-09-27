@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import 'slick-carousel'
 import Calculator from '../../ui/Calculator/Calculator';
-import {carModel} from '../../ui/model'
+
 
 const initSlick = node => {
   const slickOptions = {
@@ -46,7 +46,7 @@ const costingSec = () => {
         costingSvgNode = costingSectionNode.querySelector('#cs-stage');
   let currentStep = 1;
 
-  let calculator = new Calculator(costingSectionNode, carModel);
+  let calculator = new Calculator(costingSectionNode);
 
   initSlick(costingSlickNode);
 
@@ -91,7 +91,7 @@ const costingSec = () => {
     }
     if (currentStepNumber === 4 && nextStepNumber === 1) {
       calculator.destroy();
-      calculator = new Calculator(costingSectionNode, carModel)
+      calculator = new Calculator(costingSectionNode)
     }
   };
 

@@ -2,25 +2,49 @@ import CalculatorFirstStep from './CalculatorFirstStep';
 import CalculatorSecondStep from './CalculatorSecondStep';
 import CalculatorThirdStep from './CalculatorThirdStep';
 import CalculatorFourthStep from './CalculatorFourthStep';
+import LocalStorageManager from '../../helpers/Local-storage-manager';
+import ServerData from '../../helpers/ServerData';
 
 class Calculator {
   isValid = false;
   steps = {};
   currentStep = 1;
 
-  constructor(node, carModel) {
+  constructor(node) {
+    this.initSteps(node)
+  }
+
+
+  async initSteps(node) {
+    const localData = new LocalStorageManager(),
+          serverData = new ServerData()
+
+    if (!localData.caseID) return
+
+    const model = await  serverData.getVehicleByID(localData.caseID)
+    const equipments = await serverData.maintenancesByVehicleID(localData.caseID)
+
+    const carModel = {
+      id: model.id,
+      name: model.name,
+      model: model.caseName,
+      startYear: model.yearFrom,
+      stopYear: model.yearTill || '',
+      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}`,
+      equipments
+    }
+
+    this.model = {...carModel}
+
     const firstStepNode = node.querySelector('#costing-step_01'),
-          secondStepNode = node.querySelector('#costing-step_02'),
-          thirdStepNode = node.querySelector('#costing-step_03'),
-          fourthStepNode = node.querySelector('#costing-step_04');
+        secondStepNode = node.querySelector('#costing-step_02'),
+        thirdStepNode = node.querySelector('#costing-step_03'),
+        fourthStepNode = node.querySelector('#costing-step_04');
 
-
-    this.model = {...carModel};
-    console.log(this.model)
     const firstStep =  new CalculatorFirstStep(firstStepNode, this.model.equipments),
-          secondStep = new CalculatorSecondStep(secondStepNode),
-          thirdStep = new CalculatorThirdStep(thirdStepNode),
-          fourthStep = new CalculatorFourthStep(fourthStepNode);
+        secondStep = new CalculatorSecondStep(secondStepNode),
+        thirdStep = new CalculatorThirdStep(thirdStepNode),
+        fourthStep = new CalculatorFourthStep(fourthStepNode);
 
     firstStep.onChangeEquipment = () => {
       secondStep.clear();
@@ -28,7 +52,7 @@ class Calculator {
 
     firstStep.onChangeMileage = () => {
       const equipment =  firstStep.equipment,
-            range = firstStep.range;
+          range = firstStep.range;
       secondStep.clear();
       secondStep.render(equipment, range);
     };
