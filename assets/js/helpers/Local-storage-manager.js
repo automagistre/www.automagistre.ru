@@ -16,6 +16,14 @@ class LocalStorageManager {
     return  localStorage.getItem('caseName')
   }
 
+  set caseID(caseID) {
+    localStorage.setItem('caseID', caseID)
+  }
+
+  get caseID() {
+    return localStorage.getItem('caseID')
+  }
+
 }
 
 export default LocalStorageManager
