@@ -8,7 +8,7 @@ const initSlick = node => {
     arrows: false,
     dots: false,
     draggable: false,
-    adaptiveHeight: true,
+    adaptiveHeight: false,
     swipe: false,
     infinite: false,
     speed: 1200,
@@ -46,9 +46,7 @@ const costingSec = () => {
         costingSvgNode = costingSectionNode.querySelector('#cs-stage');
   let currentStep = 1;
 
-  let calculator = new Calculator(costingSectionNode);
-
-  initSlick(costingSlickNode);
+  let calculator = new Calculator(costingSectionNode, () => initSlick(costingSlickNode));
 
   const animateSteps = nextStep => {
     const classesMap = {

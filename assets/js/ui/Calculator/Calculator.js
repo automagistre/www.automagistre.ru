@@ -10,8 +10,8 @@ class Calculator {
   steps = {};
   currentStep = 1;
 
-  constructor(node) {
-    this.initSteps(node)
+  constructor(node, callback) {
+    this.initSteps(node).then(() => callback())
   }
 
 
