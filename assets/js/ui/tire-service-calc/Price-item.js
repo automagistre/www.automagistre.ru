@@ -51,6 +51,11 @@ class PriceItem {
 
   render(node) {
     node.append(this._node)
+    this._node.querySelector('.prices__note').addEventListener('touchstart', e => {
+      e.stopPropagation()
+      e.preventDefault()
+      this._inputNode.checked = !this._inputNode.checked
+    })
   }
 }
 
