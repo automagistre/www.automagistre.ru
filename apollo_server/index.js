@@ -4,7 +4,7 @@ import resolvers from './resolvers/maintenance';
 import mongoose from  'mongoose'
 
 const DB_URL = 'mongodb://mongo.automagistre.local/www'
-const SERVER_URL = 'localhost'
+const SERVER_URL = 'test.kach.su'
 const SERVER_PORT = 3000
 
 class Server {
@@ -25,7 +25,7 @@ class Server {
 
     const {url} = await this.apolloServer.listen({
       port: SERVER_PORT,
-      host: SERVER_URL
+      // host: SERVER_URL
     })
     console.log(`Server started at: ${url}`)
   }
