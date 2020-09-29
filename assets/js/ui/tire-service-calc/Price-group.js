@@ -4,9 +4,10 @@ class PriceGroup {
 
   _items = []
 
-  constructor(group) {
+  constructor(group, onlyOne=true) {
     this._name = group.name
     this._node = this._createNode()
+    this._onlyOne = onlyOne
     if (group.services) {
       for (const service of group.services) {
         this.addPriceItem(new PriceItem(service));
@@ -19,6 +20,13 @@ class PriceGroup {
   }
 
   addPriceItem(priceItem) {
+    if (this._onlyOne) {
+      priceItem.onSelect = () => {
+        for(const item of this._items) {
+          if (item !== priceItem) item.unCheck()
+        }
+      }
+    }
     this._items.push(priceItem)
   }
 
