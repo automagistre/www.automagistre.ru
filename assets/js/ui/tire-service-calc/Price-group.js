@@ -4,10 +4,10 @@ class PriceGroup {
 
   _items = []
 
-  constructor(group, onlyOne=true) {
+  constructor(group) {
     this._name = group.name
     this._node = this._createNode()
-    this._onlyOne = onlyOne
+    this._onlyOne = group.onlyOne
     if (group.services) {
       for (const service of group.services) {
         this.addPriceItem(new PriceItem(service));
