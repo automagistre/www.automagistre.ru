@@ -17,7 +17,8 @@ const PRICE = {
           id: 'FullReplaceWheels',
           name: 'Полный шиномонтаж'
         }
-      ]
+      ],
+      onlyOne: true
     },{
       name: 'Хранение шин',
       services: [
@@ -28,7 +29,8 @@ const PRICE = {
           id: 'WheelKeeping',
           name: 'Хранение шин на дисках'
         }
-      ]
+      ],
+      onlyOne: true
     },{
       name: 'Допонительно',
       services: [
@@ -42,7 +44,8 @@ const PRICE = {
           id: 'NewPackages',
           name: 'Комплект новых пакетов для колес'
         }
-      ]
+      ],
+      onlyOne: false
     }
   ]
 }
