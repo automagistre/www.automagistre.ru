@@ -55,7 +55,17 @@ class PriceItem {
       e.stopPropagation()
       e.preventDefault()
       this._inputNode.checked = !this._inputNode.checked
+      this.onSelect()
     })
+    this._inputNode.addEventListener('change', ()=> {
+      this.onSelect()
+    })
+  }
+
+  onSelect() { }
+
+  unCheck() {
+    this._inputNode.checked = false
   }
 }
 
