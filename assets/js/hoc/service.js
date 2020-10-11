@@ -13,7 +13,7 @@ import LocalStorageManager from '../helpers/Local-storage-manager';
 
 const localStorageManager = new LocalStorageManager()
 const manufacturer = document.location.pathname.split('/')[2]
-const asideSelectCar = document.querySelector('#site-side-select-car')
+
 
 if (document.location.pathname.split('/')[2]) {
     localStorageManager.manufacturer = manufacturer
@@ -83,6 +83,8 @@ if (document.querySelector('#modal')) {
     document.querySelectorAll('.js-show-modal').forEach(item => item.addEventListener('click', ()=> selectCarModal.show()))
 }
 
-
-asideSelectCar.classList.toggle('navbar__item_red', !Boolean(localStorageManager.caseName))
-asideSelectCar.classList.toggle('is-active', !Boolean(localStorageManager.caseName))
+if (document.querySelector('aside.site-side')) {
+    const asideSelectCar = document.querySelector('#site-side-select-car')
+    asideSelectCar.classList.toggle('navbar__item_red', !Boolean(localStorageManager.caseName))
+    asideSelectCar.classList.toggle('is-active', !Boolean(localStorageManager.caseName))
+}
