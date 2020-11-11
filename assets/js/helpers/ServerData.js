@@ -18,22 +18,33 @@ class ServerData {
   }
 
   async getVehiclesByManufacturer(manufacturer) {
+    try {
+      const {data} = await this.client.query({
+        query: getVehiclesByManufacturer,
+        variables: {manufacturer}})
+      return {
+        'response': 200,
+        'data': data.getVehiclesByManufacturer
+                .map(vehicle =>  new CarCase({
+                  id: vehicle._id,
+                  caseName: vehicle.caseName,
+                  name: vehicle.name,
+                  manufacturer: vehicle.manufacturer.name,
+                  yearFrom: vehicle.yearFrom,
+                  yearTill: vehicle.yearTill
+                }, this))
+      }
 
-    const {data} = await this.client.query({
-      query: getVehiclesByManufacturer,
-      variables: {manufacturer}})
-    return data.getVehiclesByManufacturer
-            .map(vehicle =>  new CarCase({
-                id: vehicle._id,
-                caseName: vehicle.caseName,
-                name: vehicle.name,
-                manufacturer: vehicle.manufacturer.name,
-                yearFrom: vehicle.yearFrom,
-                yearTill: vehicle.yearTill
-              }, this))
+    } catch (error) {
+      return {
+        'response': 500,
+        'data': []
+      }
+    }
   }
 
   async maintenancesByVehicleID(id) {
+    try {
     const {data} = await  this.client.query({
       query: maintenancesByVehicleID,
       variables: {id}})
@@ -64,6 +75,9 @@ class ServerData {
           })
         }
       })
+    } catch (e) {
+      return undefined
+    }
   }
 
   async getVehicleByID(id) {
