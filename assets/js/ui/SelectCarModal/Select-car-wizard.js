@@ -3,7 +3,8 @@ import 'slick-carousel'
 import ServerData from '../../helpers/ServerData';
 import Selector from '../Selector';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
-
+import LoadingSpinner from '../LoadingSpinner';
+import errorMessages from '../../Errors/ErrorMassges';
 
 const manufacturerStepList = {
   'nissan': 0,
@@ -115,7 +116,6 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
       this.$slider.slick('slickGoTo', manufacturerStepList[currentManufacturer], false)
     }
   }
-
 }
 
 class ModelItem {
@@ -170,7 +170,6 @@ class ModelItem {
   }
 
   get caseID() {
-    console.log(this._model);
     return this._model.id
   }
 
@@ -202,6 +201,9 @@ class ModelItem {
 
 class SelectCarWizardStepModel extends SelectCarWizardStep {
 
+  _isInit = false
+  _isLoading = false
+
   constructor(node) {
     super();
     this._server = new ServerData()
@@ -211,9 +213,31 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   }
 
   async renderModels(manufacturer) {
+    const spinner = new LoadingSpinner(this._modelListNode, 1)
+
+    spinner.show()
+    this._isLoading = true
+    const {response, data} = await this._server.getVehiclesByManufacturer(manufacturer)
+    spinner.remove()
+    this._isLoading = false
+    if (response !== 200) {
+      if (this._isInit) this.clear()
+      this._modelListNode.innerHTML = `
+            <div class="modal__errors">
+                <div class="modal__errors_name">${errorMessages.serverErrorResponse}</div>
+                <div><a class="btn btn_big sec-start__slide-btn js-reload-modal-step2" href="">Обновить</a></div>
+            </div>`
+      this._modelListNode.querySelector('.js-reload-modal-step2').addEventListener('click', (e) => {
+        e.preventDefault()
+        if (!this._isLoading) {
+          this.clear()
+          this.renderModels(manufacturer)
+        }
+      })
+      return
+    }
     let yearMin = Infinity, yearMax = - Infinity;
-    const models = await this._server.getVehiclesByManufacturer(manufacturer)
-    this._models = models.map(model => new ModelItem(model))
+    this._models = data.map(model => new ModelItem(model))
 
     this._models.forEach(modelItem => {
       modelItem.render(this._modelListNode)
@@ -222,6 +246,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     })
     this.initYearSelector(yearMin, yearMax)
     this.initSearchInput()
+    this._isInit = true
   }
 
   initSearchInput() {
@@ -275,9 +300,12 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     while (this._modelListNode.firstChild) {
       this._modelListNode.removeChild(this._modelListNode.firstChild)
     }
-
-    this._yearSelector.destroy()
-    this._searchInputNode.value = ''
+    if (this._isInit) {
+      this._models = undefined
+      this._yearSelector.destroy()
+      this._searchInputNode.value = ''
+    }
+    this._isInit = false
   }
 
   filterModelsByYear(year) {
