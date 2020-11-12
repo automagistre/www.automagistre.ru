@@ -21,21 +21,7 @@ const initSlick = node => {
 
 
 const renderModel = ($el, carModel) => {
-  const blockHTML = `
-    <div class="cg-car__name">${carModel.manufacture} ${carModel.name}</div>
-        <div class="cg-car__pict">
-            <img class="cg-car__img" src="${carModel.img}" alt="${carModel.manufacture} ${carModel.name}">
-        </div>
-        <ul class="cg-car__data">
-            <li>${carModel.model}</li>
-            <li>${+carModel.startYear} - ${carModel.stopYear || "н.в"}</li>
-        </ul>
-    </div>`;
-  const carBlock = $el.querySelector('#costing-step_01_model');
-  // При нажатии на этот элемент появляется выбор тачки
-  if ( carBlock) {
-    carBlock.innerHTML = blockHTML;
-  }
+
 };
 
 
