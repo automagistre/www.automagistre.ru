@@ -4,7 +4,7 @@ import resolvers from './resolvers/maintenance';
 import mongoose from  'mongoose'
 
 const DB_URL = 'mongodb://mongo.automagistre.local/www'
-const SERVER_URL = '192.168.10.8'
+const SERVER_URL = 'localhost'
 const SERVER_PORT = 3000
 
 class Server {

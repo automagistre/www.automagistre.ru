@@ -11,6 +11,7 @@ class Calculator {
   currentStep = 1;
 
   constructor(node, callback) {
+    this._node = node
     this.initSteps(node).then(() => callback())
   }
 
@@ -23,9 +24,9 @@ class Calculator {
 
     const model = await  serverData.getVehicleByID(localData.caseID)
     const equipments = await serverData.maintenancesByVehicleID(localData.caseID)
-
     const carModel = {
       id: model.id,
+      manufacturer: localData.manufacturer,
       name: model.name,
       model: model.caseName,
       startYear: model.yearFrom,
@@ -35,6 +36,8 @@ class Calculator {
     }
 
     this.model = {...carModel}
+
+    this._renderCurrentModelIcon()
 
     const firstStepNode = node.querySelector('#costing-step_01'),
         secondStepNode = node.querySelector('#costing-step_02'),
@@ -91,6 +94,24 @@ class Calculator {
     this.isDestroyed = true;
   }
 
+  _renderCurrentModelIcon() {
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML  = `
+    <div class="cg-car__name" style="text-transform: capitalize">${this.model.manufacturer.toLowerCase()} ${this.model.name.toLocaleString()}</div>
+    <div class="cg-car__pict">
+        <img class="cg-car__img" 
+        src="/images/costing/${this.model.manufacturer.toLowerCase()}_${this.model.model.toUpperCase()}.jpg" 
+        alt="${this.model.manufacturer} ${this.model.model}">
+    </div>
+    <ul class="cg-car__data">
+        <li>${this.model.model}</li>
+        <li>${this.model.startYear} - ${this.model.stopYear || "н.в"}</li>
+    </ul>`;
+    const modelIconNode = this._node.querySelector('#costing-step_01_model');
+    if ( modelIconNode) {
+      modelIconNode.appendChild(wrapper)
+    }
+  }
 }
 
 export default Calculator;

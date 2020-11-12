@@ -6,7 +6,7 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-const SERVER_URL = 'http://192.168.10.8:3000'
+const SERVER_URL = 'http://localhost:3000'
 
 class ServerData {
 
