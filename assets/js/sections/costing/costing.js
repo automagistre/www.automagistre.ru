@@ -20,11 +20,6 @@ const initSlick = node => {
 };
 
 
-const renderModel = ($el, carModel) => {
-
-};
-
-
 const costingSec = () => {
   const costingSectionNode =  document.querySelector('section.sec-costing'),
         costingSlickNode = $('#costing-steps'),
