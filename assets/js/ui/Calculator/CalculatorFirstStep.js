@@ -1,18 +1,18 @@
 import CalculatorSteps from './CalculatorSteps';
 import Equipment from './Equipment';
+import LoadingSpinner from '../LoadingSpinner';
 
 
 class CalculatorFirstStep extends CalculatorSteps {
   equipment = undefined;
   range = 0;
 
-  constructor(node, equipments) {
+  constructor(node) {
     super(node);
 
     this.equipmentsNode = node.querySelector('#costing-step_01_model_equipments')
     this.mileageNode = node.querySelector('#costing-run-line')
 
-    this.renderEquipments(equipments);
   }
 
   get isValid() {
@@ -36,6 +36,16 @@ class CalculatorFirstStep extends CalculatorSteps {
     const equipmentsNode = this.equipmentsNode;
     while (equipmentsNode.firstChild) {
       equipmentsNode.removeChild(equipmentsNode.firstChild);
+    }
+  }
+
+  set isFetching(status) {
+    if (status) {
+      (new LoadingSpinner(this.mileageNode)).show();
+      (new LoadingSpinner(this.equipmentsNode)).show();
+    } else {
+      while (this.mileageNode.firstChild) this.mileageNode.firstChild.remove()
+      while (this.equipmentsNode.firstChild) this.equipmentsNode.firstChild.remove()
     }
   }
 
