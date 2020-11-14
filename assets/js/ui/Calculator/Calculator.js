@@ -63,12 +63,12 @@ class Calculator {
 
     const carModel = {
       id: model.id,
-      manufacturer: localData.manufacturer,
-      name: model.name,
-      model: model.caseName,
+      manufacturer: localData.manufacturer.toLowerCase(),
+      name: model.name.toLowerCase(),
+      model: model.caseName.toUpperCase(),
       startYear: model.yearFrom,
       stopYear: model.yearTill || '',
-      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}`,
+      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}.jpg`,
     }
 
     this.model = {...carModel}
@@ -105,10 +105,10 @@ class Calculator {
   _renderCurrentModelIcon() {
     const wrapper = document.createElement('div')
     wrapper.innerHTML  = `
-    <div class="cg-car__name" style="text-transform: capitalize">${this.model.manufacturer.toLowerCase()} ${this.model.name.toLocaleString()}</div>
+    <div class="cg-car__name" style="text-transform: capitalize">${this.model.manufacturer} ${this.model.name}</div>
     <div class="cg-car__pict">
         <img class="cg-car__img" 
-        src="/images/costing/${this.model.manufacturer.toLowerCase()}_${this.model.model.toUpperCase()}.jpg" 
+        src="${this.model.img}" 
         alt="${this.model.manufacturer} ${this.model.model}">
     </div>
     <ul class="cg-car__data">
