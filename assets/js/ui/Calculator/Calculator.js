@@ -4,6 +4,7 @@ import CalculatorThirdStep from './CalculatorThirdStep';
 import CalculatorFourthStep from './CalculatorFourthStep';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
 import ServerData from '../../helpers/ServerData';
+import LoadingSpinner from '../LoadingSpinner';
 
 class Calculator {
   isValid = false;
@@ -12,6 +13,7 @@ class Calculator {
 
   constructor(node, callback) {
     this._node = node
+    this._modelIconNode = this._node.querySelector('#costing-step_01_model');
     this.initSteps(node).then(() => callback())
   }
 
@@ -22,29 +24,13 @@ class Calculator {
 
     if (!localData.caseID) return
 
-    const model = await  serverData.getVehicleByID(localData.caseID)
-    const equipments = await serverData.maintenancesByVehicleID(localData.caseID)
-    const carModel = {
-      id: model.id,
-      manufacturer: localData.manufacturer,
-      name: model.name,
-      model: model.caseName,
-      startYear: model.yearFrom,
-      stopYear: model.yearTill || '',
-      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}`,
-      equipments
-    }
-
-    this.model = {...carModel}
-
-    this._renderCurrentModelIcon()
 
     const firstStepNode = node.querySelector('#costing-step_01'),
         secondStepNode = node.querySelector('#costing-step_02'),
         thirdStepNode = node.querySelector('#costing-step_03'),
         fourthStepNode = node.querySelector('#costing-step_04');
 
-    const firstStep =  new CalculatorFirstStep(firstStepNode, this.model.equipments),
+    const firstStep =  new CalculatorFirstStep(firstStepNode),
         secondStep = new CalculatorSecondStep(secondStepNode),
         thirdStep = new CalculatorThirdStep(thirdStepNode),
         fourthStep = new CalculatorFourthStep(fourthStepNode);
@@ -72,8 +58,30 @@ class Calculator {
       fourthStep.name = formStatus['name'].value;
     };
 
+    this._renderSpinnerCarModelIcon()
+    const model = await  serverData.getVehicleByID(localData.caseID)
+
+    const carModel = {
+      id: model.id,
+      manufacturer: localData.manufacturer,
+      name: model.name,
+      model: model.caseName,
+      startYear: model.yearFrom,
+      stopYear: model.yearTill || '',
+      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}`,
+    }
+
+    this.model = {...carModel}
+
+    this._renderCurrentModelIcon()
+
+    firstStep.isFetching = true
+    this.model.equipments = await serverData.maintenancesByVehicleID(localData.caseID)
+    firstStep.isFetching = false
+    firstStep.renderEquipments(this.model.equipments)
+
     fourthStep.car = {
-      manufacture: this.model.manufacture,
+      manufacture: this.model.manufacturer,
       name: this.model.name,
       model: this.model.model
     };
@@ -107,10 +115,21 @@ class Calculator {
         <li>${this.model.model}</li>
         <li>${this.model.startYear} - ${this.model.stopYear || "н.в"}</li>
     </ul>`;
-    const modelIconNode = this._node.querySelector('#costing-step_01_model');
-    if ( modelIconNode) {
-      modelIconNode.appendChild(wrapper)
+
+    this._clearCarModelIcon()
+    this._modelIconNode.appendChild(wrapper)
+  }
+
+  _clearCarModelIcon() {
+    while (this._modelIconNode.firstChild) {
+      this._modelIconNode.firstChild.remove()
     }
+  }
+
+  _renderSpinnerCarModelIcon() {
+    this._clearCarModelIcon()
+    const spinner = new LoadingSpinner(this._modelIconNode)
+    spinner.show()
   }
 }
 
