@@ -15,6 +15,7 @@ class Calculator {
     this._node = node
     this._modelIconNode = this._node.querySelector('#costing-step_01_model');
     this.initSteps(node).then(() => callback())
+    this._reinitSlick = callback
   }
 
 
@@ -37,6 +38,7 @@ class Calculator {
 
     firstStep.onChangeEquipment = () => {
       secondStep.clear();
+      this._reinitSlick()
     };
 
     firstStep.onChangeMileage = () => {
