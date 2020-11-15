@@ -19,7 +19,7 @@ if (document.location.pathname.split('/')[2]) {
     localStorageManager.manufacturer = manufacturer
 }
 
-new Header();
+const header = Header.instance;
 
 new ScrollToTop();
 
