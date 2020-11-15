@@ -1,5 +1,8 @@
 const WHITE_PAGES = ['contacts']
 
+let singleton = Symbol();
+let singletonEnforcer = Symbol();
+
 class Header {
   lastScrollY = 0;
   navBarHeight = 0;
@@ -8,7 +11,12 @@ class Header {
   isInit = false;
   isMobileMenuOpen = false;
 
-  constructor()  {
+  constructor(enforcer)  {
+
+    if (enforcer !== singletonEnforcer){
+      throw "Instantiation failed: use Singleton.getInstance() instead of new.";
+    }
+
     this._headerNode = document.querySelector('#site-header')
     const header = document.getElementById('header-line');
     if (header) {
@@ -33,6 +41,12 @@ class Header {
     this._initMobileMenu()
 
   };
+
+  static get instance() {
+    if (!this[singleton])
+      this[singleton] = new Header(singletonEnforcer);
+    return this[singleton];
+  }
 
   whiteColor() {
     this.header.classList.add('is-white');
