@@ -10,7 +10,7 @@ class Header {
   isVisible = true;
   isInit = false;
   isMobileMenuOpen = false;
-  isAlwaysHide = false;
+  _isAlwaysHide = false;
 
   constructor(enforcer)  {
 
@@ -68,6 +68,15 @@ class Header {
     this.isVisible = false;
     this.header.classList.remove('nav-up');
     this.header.classList.add('nav-down');
+  }
+
+  set isAlwaysHide(status) {
+    this.hide()
+    this._isAlwaysHide = Boolean(status)
+  }
+
+  get isAlwaysHide() {
+    return this._isAlwaysHide
   }
 
   _toggleHeader() {
