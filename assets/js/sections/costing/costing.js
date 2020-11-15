@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import 'slick-carousel'
 import Calculator from '../../ui/Calculator/Calculator';
+import Header from '../../ui/Header';
 
 
 const initSlick = node => {
@@ -11,7 +12,7 @@ const initSlick = node => {
     adaptiveHeight: true,
     swipe: false,
     infinite: false,
-    speed: 1200,
+    speed: 800,
     autoplay: false,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -67,11 +68,14 @@ const costingSec = () => {
   const changeStep = nextStepNumber => {
     const currentStepNumber = calculator.currentStep,
           currentStep = calculator.steps[currentStepNumber];
+    const header = Header.instance
     if (currentStep.isValid || nextStepNumber < currentStepNumber) {
       costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false);
       calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1;
       animateSteps(nextStepNumber);
+      header.isAlwaysHide = true
       document.getElementById('costing').scrollIntoView({behavior: "auto"});
+      setTimeout(()=> header.isAlwaysHide = false, 500)
     } else {
       currentStep.showInvalidSelections();
     }
