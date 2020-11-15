@@ -23,7 +23,10 @@ class Calculator {
     const localData = new LocalStorageManager(),
           serverData = new ServerData()
 
-    if (!localData.caseID) return
+    if (!localData.caseID) {
+      this._renderSelectCarModelIcon()
+      return
+    }
 
 
     const firstStepNode = node.querySelector('#costing-step_01'),
@@ -78,8 +81,12 @@ class Calculator {
     this._renderCurrentModelIcon()
 
     firstStep.isFetching = true
-    this.model.equipments = await serverData.maintenancesByVehicleID(localData.caseID)
+    const {response, data} = await serverData.maintenancesByVehicleID(localData.caseID)
     firstStep.isFetching = false
+    if (response !== 200) {
+      return
+    }
+    this.model.equipments = data
     firstStep.renderEquipments(this.model.equipments)
 
     fourthStep.car = {
@@ -132,6 +139,19 @@ class Calculator {
     this._clearCarModelIcon()
     const spinner = new LoadingSpinner(this._modelIconNode)
     spinner.show()
+  }
+
+  _renderSelectCarModelIcon() {
+    this._clearCarModelIcon()
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML  = `
+    <div class="cg-car__name" style="text-transform: capitalize">Выберите модель</div>
+    <div class="cg-car__pict">
+        <img class="cg-car__img" 
+        src="/images/costing/empty.jpg" 
+        alt="Выберите модель">
+    </div>`;
+    this._modelIconNode.append(wrapper)
   }
 }
 
