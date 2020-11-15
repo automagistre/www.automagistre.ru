@@ -10,6 +10,7 @@ class Header {
   isVisible = true;
   isInit = false;
   isMobileMenuOpen = false;
+  isAlwaysHide = false;
 
   constructor(enforcer)  {
 
@@ -70,6 +71,10 @@ class Header {
   }
 
   _toggleHeader() {
+    if (this.isAlwaysHide) {
+      if (this.isVisible) this.hide()
+      return;
+    }
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop,
         delta = 5;
     if (Math.abs(this.lastScrollY - currentScroll) <= delta) return;
