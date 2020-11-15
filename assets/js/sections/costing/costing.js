@@ -11,7 +11,7 @@ const initSlick = node => {
     adaptiveHeight: true,
     swipe: false,
     infinite: false,
-    speed: 800,
+    speed: 1200,
     autoplay: false,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -71,7 +71,7 @@ const costingSec = () => {
       costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false);
       calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1;
       animateSteps(nextStepNumber);
-      document.getElementById('costing').scrollIntoView({behavior: "smooth"});
+      document.getElementById('costing').scrollIntoView({behavior: "auto"});
     } else {
       currentStep.showInvalidSelections();
     }
