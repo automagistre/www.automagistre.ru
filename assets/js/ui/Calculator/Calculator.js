@@ -73,7 +73,6 @@ class Calculator {
       model: model.caseName.toUpperCase(),
       startYear: model.yearFrom,
       stopYear: model.yearTill || '',
-      img: `/images/costing/${model.manufacturer.toLowerCase()}_${model.caseName.toUpperCase()}.jpg`,
     }
 
     this.model = {...carModel}
@@ -116,14 +115,22 @@ class Calculator {
     wrapper.innerHTML  = `
     <div class="cg-car__name" style="text-transform: capitalize">${this.model.manufacturer} ${this.model.name}</div>
     <div class="cg-car__pict">
-        <img class="cg-car__img" 
-        src="${this.model.img}" 
-        alt="${this.model.manufacturer} ${this.model.model}">
+
     </div>
     <ul class="cg-car__data">
         <li>${this.model.model}</li>
         <li>${this.model.startYear} - ${this.model.stopYear || "н.в"}</li>
     </ul>`;
+
+    const carImageName = `${this.model.manufacturer}_${this.model.model}.jpg`
+    const carImage = new Image()
+    carImage.src = `/images/costing/${carImageName}`
+    carImage.onerror = () => { carImage.src = "/images/costing/default.jpg" }
+    carImage.alt = `${this.model.name}`
+    carImage.classList.add('cg-car__img')
+    this.model.img = carImage
+
+    wrapper.querySelector('div.cg-car__pict').append(carImage)
 
     this._clearCarModelIcon()
     this._modelIconNode.appendChild(wrapper)
