@@ -39,7 +39,7 @@ goToButtons.forEach(btn => {
 });
 
 const customScrollBarOptions = {
-    handlers: ['click-rail', 'drag-thumb', 'wheel', 'touch'],
+    handlers: ['drag-thumb', 'wheel', 'touch'],
     swipeEasing: true,
     maxScrollbarLength: 150
 }
