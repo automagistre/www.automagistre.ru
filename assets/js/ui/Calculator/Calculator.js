@@ -64,8 +64,13 @@ class Calculator {
     };
 
     this._renderSpinnerCarModelIcon()
-    const model = await  serverData.getVehicleByID(localData.caseID)
+    let response = await  serverData.getVehicleByID(localData.caseID)
+    if (response.response !== 200) {
+      this._renderErrorCarIconModel()
+      return
+    }
 
+    const model = response.data
     const carModel = {
       id: model.id,
       manufacturer: localData.manufacturer.toLowerCase(),
@@ -80,12 +85,13 @@ class Calculator {
     this._renderCurrentModelIcon()
 
     firstStep.isFetching = true
-    const {response, data} = await serverData.maintenancesByVehicleID(localData.caseID)
+    response = await serverData.maintenancesByVehicleID(localData.caseID)
     firstStep.isFetching = false
-    if (response !== 200) {
+    if (response.response !== 200) {
+      this._renderErrorCarIconModel()
       return
     }
-    this.model.equipments = data
+    this.model.equipments = response.data
     firstStep.renderEquipments(this.model.equipments)
 
     fourthStep.car = {
@@ -158,6 +164,22 @@ class Calculator {
         src="/images/costing/empty.jpg" 
         alt="Выберите модель">
     </div>`;
+    this._modelIconNode.append(wrapper)
+  }
+
+  _renderErrorCarIconModel() {
+    this._clearCarModelIcon()
+    const wrapper = document.createElement('div')
+    wrapper.innerHTML  = `
+    <div class="cg-car__name" style="text-transform: capitalize">Ошибка соединения</div>
+    <div class="cg-car__pict">
+        <img class="cg-car__img" 
+        src="/img/icons/Red_circular_arrow.svg" 
+        alt="повторить">
+    </div>
+        <ul class="cg-car__data">
+        <li>Повторить</li>
+    </ul>`;
     this._modelIconNode.append(wrapper)
   }
 }
