@@ -6,7 +6,7 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-const SERVER_URL = 'http://localhost:3000'
+const SERVER_URL = 'http://192.168.10.8:3000'
 
 class ServerData {
 
@@ -48,9 +48,11 @@ class ServerData {
     const {data} = await  this.client.query({
       query: maintenancesByVehicleID,
       variables: {id}})
-    return data.maintenancesByVehicleID
+    return {
+      'response': 200,
+      'data': data.maintenancesByVehicleID
       .map(eq => {
-      return {
+        return {
           id: eq.id,
           name: `${eq.engine.capacity} ${eq.transmission} ${eq.wheelDrive}`,
           mileageRepeat: 15,
@@ -75,22 +77,37 @@ class ServerData {
           })
         }
       })
+    }
+
     } catch (e) {
-      return undefined
+      return {
+        'response': 500,
+        'data': []
+      }
     }
   }
 
   async getVehicleByID(id) {
-    const {data} = await this.client.query({
-      query: getVehicleByID,
-      variables: {id}})
-    return {
-      id: data.getVehicleByID._id,
-      caseName: data.getVehicleByID.caseName,
-      name: data.getVehicleByID.name,
-      manufacturer: data.getVehicleByID.manufacturer.name,
-      yearFrom: data.getVehicleByID.yearFrom,
-      yearTill: data.getVehicleByID.yearTill
+    try {
+      const {data} = await this.client.query({
+        query: getVehicleByID,
+        variables: {id}})
+      return {
+        'response': 200,
+        'data': {
+          id: data.getVehicleByID._id,
+          caseName: data.getVehicleByID.caseName,
+          name: data.getVehicleByID.name,
+          manufacturer: data.getVehicleByID.manufacturer.name,
+          yearFrom: data.getVehicleByID.yearFrom,
+          yearTill: data.getVehicleByID.yearTill
+        }
+      }
+    } catch (e) {
+      return {
+        'response': 500,
+        'data': {}
+      }
     }
   }
 
