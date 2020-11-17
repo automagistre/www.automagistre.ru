@@ -177,7 +177,9 @@ steps:
         commands:
             - docker-compose --file .swarm.yml config | docker stack deploy --prune --with-registry-auth --compose-file - www
         when:
-            branch: [ master ]
+            branch:
+                - master
+                - rc
         depends_on:
             - build
             - phpunit
