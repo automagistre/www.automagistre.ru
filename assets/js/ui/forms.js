@@ -8,6 +8,14 @@ import { Russian } from "flatpickr/dist/l10n/ru.js"
 class Form {
   _formInputs = []
 
+  constructor(type) {
+    this._type = type
+  }
+
+  get type() {
+    return this._type
+  }
+
   get isValid() {
     let isValid = true
     const inputs = [...this._formInputs]
@@ -333,8 +341,8 @@ class InputFactory {
 }
 
 export class SubscribeForm extends Form {
-  constructor(formNode) {
-    super();
+  constructor(formNode, type) {
+    super(type);
     const inputFactory = new InputFactory()
     const inputsList = formNode.querySelectorAll('input, textarea')
     inputsList.forEach(inputNode => {
