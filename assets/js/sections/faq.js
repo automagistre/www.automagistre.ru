@@ -16,7 +16,7 @@ const faqSec = () => {
     })
   }
   initTabs(tabs, body);
-  new SubscribeForm($form);
+  new SubscribeForm($form, 'qu');
 };
 
 export default faqSec;

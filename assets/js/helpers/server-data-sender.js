@@ -95,11 +95,11 @@ class FormDataFactory {
 
   getFormData(form) {
     switch (form.type) {
-      case 'Cooperation':
+      case 'cooperation':
         return new FormCooperationData(form)
-      case 'Question':
+      case 'question':
         return new FormQuestionData(form)
-      case 'Schedule':
+      case 'schedule':
         return new FormScheduleData(form)
       default:
         return null
