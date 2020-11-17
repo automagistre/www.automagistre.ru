@@ -1,21 +1,8 @@
 {
     "name": "automagistre/www.automagistre.ru",
+    "type": "project",
     "description": "Customer website of Automagistre LLC",
     "license": "proprietary",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Tests\\": "tests/"
-        },
-        "files": [
-            "vendor/symfony/var-dumper/Resources/functions/dump.php"
-        ]
-    },
     "require": {
         "php": ">=7.4",
         "sensio/framework-extra-bundle": "^5.3",
@@ -26,6 +13,7 @@
         "symfony/dotenv": "^5.0",
         "symfony/event-dispatcher": "^5.0",
         "symfony/expression-language": "^5.0",
+        "symfony/flex": "^1.10",
         "symfony/form": "^5.0",
         "symfony/framework-bundle": "^5.0",
         "symfony/http-kernel": "^5.0",
@@ -39,7 +27,8 @@
         "symfony/yaml": "^5.0"
     },
     "require-dev": {
-        "brianium/paratest": "^4.0",
+        "brianium/paratest": "^5.0",
+        "ergebnis/composer-normalize": "^2.11",
         "friendsofphp/php-cs-fixer": "^2.15",
         "pedrotroller/php-cs-custom-fixer": "^2.17",
         "phpstan/phpstan": "^0.12",
@@ -47,36 +36,45 @@
         "phpstan/phpstan-strict-rules": "^0.12",
         "phpstan/phpstan-symfony": "^0.12",
         "phpunit/phpunit": "^9.0",
-        "psalm/plugin-phpunit": "^0.10.0",
+        "psalm/plugin-phpunit": "^0.13.0",
         "symfony/browser-kit": "^5.0",
         "symfony/debug-bundle": "^5.0",
         "symfony/phpunit-bridge": "^5.0",
-        "symfony/requirements-checker": "^1.1",
+        "symfony/requirements-checker": "^2.0",
         "symfony/web-profiler-bundle": "^5.0",
-        "vimeo/psalm": "^3.2"
-    },
-    "scripts": {
-        "auto-scripts": [
-            "bin/console cache:warmup",
-            "bin/console assets:install public"
-        ],
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ]
-    },
-    "extra": {
-        "symfony-app-dir": "src",
-        "symfony-bin-dir": "bin",
-        "symfony-var-dir": "var",
-        "symfony-web-dir": "public",
-        "symfony-tests-dir": "tests"
+        "vimeo/psalm": "^4.1"
     },
     "config": {
         "cache-dir": "/var/cache/composer",
         "preferred-install": "dist",
         "sort-packages": true
+    },
+    "extra": {
+        "symfony-app-dir": "src",
+        "symfony-bin-dir": "bin",
+        "symfony-tests-dir": "tests",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "public"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        },
+        "files": [
+            "vendor/symfony/var-dumper/Resources/functions/dump.php"
+        ]
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd",
+            "security-checker security:check": "script",
+            "requirements-checker": "script"
+        }
     }
 }

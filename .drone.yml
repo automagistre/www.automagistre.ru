@@ -40,7 +40,11 @@ steps:
     -   name: install
         image: automagistre/www-app:base
         commands:
+            - echo APP_ENV=test >> .env
+            - echo APP_DEBUG=1 >> .env
             - composer install --no-interaction --no-progress --classmap-authoritative
+            - bin/console cache:warmup
+            - bin/console assets:install public
         environment:
             APP_ENV: test
             APP_DEBUG: '1'
@@ -59,6 +63,16 @@ steps:
         image: automagistre/www-app:base
         commands:
             - vendor/bin/php-cs-fixer fix --dry-run --diff-format udiff --using-cache=no
+        when:
+            branch:
+                exclude: [ master ]
+        depends_on:
+            - install
+
+    -   name: composer normalize
+        image: automagistre/www-app:base
+        commands:
+            - composer normalize --dry-run
         when:
             branch:
                 exclude: [ master ]
