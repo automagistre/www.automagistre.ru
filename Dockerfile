@@ -129,3 +129,33 @@ RUN find . \
     -exec echo Compressed: {} \;
 
 HEALTHCHECK --interval=5s --timeout=3s --start-period=5s CMD curl --fail http://127.0.0.1/healthcheck || exit 1
+
+
+#
+# apollo base
+#
+FROM node:15.2.1-alpine as apollo-base
+
+LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
+
+ENV APP_DIR=/usr/local/app
+ENV PATH=${APP_DIR}/node_modules/.bin:${PATH}
+
+WORKDIR ${APP_DIR}
+
+RUN apk add --no-cache git
+
+COPY apollo_server/package.json apollo_server/package-lock.json ${APP_DIR}/
+RUN npm install --no-audit
+
+FROM apollo-base as apollo
+
+ENV NODE_ENV=production
+
+COPY apollo_server/mongo mongo
+COPY apollo_server/resolvers resolvers
+COPY apollo_server/typeDefs typeDefs
+COPY apollo_server/.babelrc .
+COPY apollo_server/index.js .
+
+CMD ["npm", "start"]

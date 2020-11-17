@@ -16,6 +16,7 @@ steps:
             - docker build -t "automagistre/www-node:base" --target node-base .
             - docker build -t "automagistre/www-app:base" --target base .
             - docker build -t "automagistre/www-nginx:base" --target nginx-base .
+            - docker build -t "automagistre/www-apollo:base" --target apollo-base .
 
     -   name: push base
         image: docker:19.03.5
@@ -27,6 +28,7 @@ steps:
             - docker push automagistre/www-app:base
             - docker push automagistre/www-node:base
             - docker push automagistre/www-nginx:base
+            - docker push automagistre/www-apollo:base
         environment:
             USERNAME:
                 from_secret: HUB_USER
@@ -163,6 +165,10 @@ steps:
                 --build-arg APP_ENV="prod"
                 --build-arg APP_DEBUG="0"
                 --target nginx
+                .
+            - >-
+                docker build -t "automagistre/www-apollo:${DRONE_BUILD_NUMBER}"
+                --target apollo
                 .
         depends_on:
             - build base

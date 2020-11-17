@@ -3,7 +3,7 @@ import typeDefs from './typeDefs/maintenance'
 import resolvers from './resolvers/maintenance';
 import mongoose from  'mongoose'
 
-const DB_URL = `mongodb://${process.env.DB_URL || 'localhost'}/www`
+const DB_URL = process.env.MONGO_URL || 'mongodb://localhost/www'
 const SERVER_URL = process.env.SERVER_URL || 'localhost'
 const SERVER_PORT = 3000
 
@@ -35,7 +35,7 @@ class Server {
 const apolloServerOptions = {
   typeDefs,
   resolvers,
-  playground: true,
+  playground: 'production' !== process.env.NODE_ENV,
   cors: true
 }
 
