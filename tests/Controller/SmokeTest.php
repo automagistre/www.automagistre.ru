@@ -39,7 +39,7 @@ final class SmokeTest extends WebTestCase
 
         foreach ($this->servicesPages() as $page) {
             $path = $page[0];
-            foreach (['nissan', 'lexus', 'infinity', 'toyota'] as $brand) {
+            foreach (['nissan', 'lexus', 'infiniti', 'toyota'] as $brand) {
                 $page[0] = \sprintf('/service/%s', $brand.$path);
 
                 yield $page;
