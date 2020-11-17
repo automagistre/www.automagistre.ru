@@ -41,6 +41,10 @@ class Form {
     }
   }
 
+  addInput(input) {
+    this._formInputs.push(input)
+  }
+
   get inputs() {
       return this._formInputs
   };
@@ -307,43 +311,39 @@ class InputFactory {
 
   }
 
-  getInput(inputNode, inputName) {
+  getInput(inputNode, inputName, callback) {
+    if(!inputName) return null
     switch (inputName) {
       case 'name':
-        return new NameInput(inputNode)
+        return new NameInput(inputNode, callback)
       case 'phone':
-        return new PhoneInput(inputNode)
+        return new PhoneInput(inputNode, callback)
       case 'license':
-        return new LicenseInput(inputNode)
+        return new LicenseInput(inputNode, callback)
       case 'calendar':
-        return new CalendarInput(inputNode)
+        return new CalendarInput(inputNode, callback)
       case 'email':
-        return new EmailInput(inputNode)
+        return new EmailInput(inputNode, callback)
       case 'text':
-        return new TextInput(inputNode)
+        return new TextInput(inputNode, callback)
+      default:
+        return null
     }
   }
 }
 
 export class SubscribeForm extends Form {
-  constructor($form) {
+  constructor(formNode) {
     super();
-    for (let [inputName, inputClass] of Object.entries(FORM_DEFAULT_INPUTS)) {
-      const $input = $form.querySelector(`[data-formcontrol=${inputName}]`);
-      if ($input) {
-        this._formInputs[inputName] = new inputClass($input, () => this.onChangeHandler())
+    const inputFactory = new InputFactory()
+    const inputsList = formNode.querySelectorAll('input, textarea')
+    inputsList.forEach(inputNode => {
+      const input = inputFactory.getInput(inputNode, inputNode.dataset.type, ()=>this.onChangeHandler())
+      if (input) {
+        input.isRequired = Boolean(inputNode.dataset.required)
+        this.addInput(input)
       }
-    }
-
-    const $button = $form.querySelector('a[data-formcontrol=submit]');
-    if ($button){
-      $button.addEventListener('click', ()=>{
-        if (!this.isSending) {
-          $button.classList.add('running');
-          this.send().then(()=> {$button.classList.remove('running')})
-        }
-      })
-    }
+    })
   }
 }
 
