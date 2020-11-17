@@ -25,8 +25,8 @@ RUN NODE_ENV=production webpack
 #
 # PHP-FPM
 #
-FROM composer:1.10.6 as composer
-FROM php:7.4.6-fpm-buster as base
+FROM composer:2.0.7 as composer
+FROM php:7.4.12-fpm-buster as base
 
 LABEL MAINTAINER="Konstantin Grachev <me@grachevko.ru>"
 
@@ -56,8 +56,6 @@ RUN set -ex \
 ENV COMPOSER_ALLOW_SUPERUSER 1
 ENV COMPOSER_MEMORY_LIMIT -1
 COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN set -ex \
-    && composer global require "hirak/prestissimo:^0.3"
 
 ENV WAIT_FOR_IT /usr/local/bin/wait-for-it.sh
 RUN curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o ${WAIT_FOR_IT} \
@@ -100,7 +98,7 @@ HEALTHCHECK --interval=10s --timeout=5s --start-period=5s \
 #
 # nginx
 #
-FROM nginx:1.19.0-alpine as nginx-base
+FROM nginx:1.19.4-alpine as nginx-base
 
 WORKDIR /usr/local/app/public
 
