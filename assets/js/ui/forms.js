@@ -296,18 +296,34 @@ class CalendarInlineInput extends CalendarInput {
     this._calendar = new Flatpickr(inputNode, options)
   }
   _validator(value) {
-    return Boolean(value);
+    return Boolean(value)
   }
 }
 
-const FORM_DEFAULT_INPUTS = {
-  'name': NameInput,
-  'phone': PhoneInput,
-  'license': LicenseInput,
-  'calendar': CalendarInput,
-  'email': EmailInput,
-  'text': TextInput
-};
+
+class InputFactory {
+
+  constructor() {
+
+  }
+
+  getInput(inputNode, inputName) {
+    switch (inputName) {
+      case 'name':
+        return new NameInput(inputNode)
+      case 'phone':
+        return new PhoneInput(inputNode)
+      case 'license':
+        return new LicenseInput(inputNode)
+      case 'calendar':
+        return new CalendarInput(inputNode)
+      case 'email':
+        return new EmailInput(inputNode)
+      case 'text':
+        return new TextInput(inputNode)
+    }
+  }
+}
 
 export class SubscribeForm extends Form {
   constructor($form) {
