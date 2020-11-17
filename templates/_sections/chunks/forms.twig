@@ -3,16 +3,16 @@
         <h3 class="form__title">Мы готовы помочь</h3>
         <div class="form__lead">Если у вас остались вопросы, задайте их прямо сейчас:</div>
         <div class="form__line">
-            <input class="form__input" type="text"  data-formcontrol="name" placeholder="Имя">
+            <input class="form__input" type="text"  data-type="name" data-required="true" placeholder="Имя">
         </div>
         <div class="form__line">
-            <input class="form__input" type="text" data-formcontrol="email" placeholder="E-mail">
+            <input class="form__input" type="text" data-type="email" data-required="true" placeholder="E-mail">
         </div>
         <div class="form__line">
-            <textarea class="form__text"  data-formcontrol="text" placeholder="Ваш вопрос"></textarea>
+            <textarea class="form__text"  data-type="text" data-required="true" placeholder="Ваш вопрос"></textarea>
         </div>
         <div class="form__line">
-            <a class="btn btn_arrow-rt sp-ex-right" data-formcontrol="submit" >
+            <a class="btn btn_arrow-rt sp-ex-right" data-type="submit" >
                 <span>Заказать</span>
                 <div class="sp sp-ring sp-spin"></div>
             </a>
@@ -24,23 +24,23 @@
     {% set isSlim = inputs|length < 4 %}
     <form class="subscribe {{ class }} {{ isSlim ? "#{class}_slim" }}">
         {% if 'name' in inputs %}
-            <input class="subscribe__name" type="text" data-formcontrol="name" placeholder="Имя">
+            <input class="subscribe__name" type="text" data-type="name" data-required="true" placeholder="Имя">
         {% endif %}
         {% if 'phone' in inputs %}
-            <input class="subscribe__numb" type="tel" data-formcontrol="phone" placeholder="Телефон">
+            <input class="subscribe__numb" type="tel" data-type="phone" data-required="true" placeholder="Телефон">
         {% endif %}
         {% if 'calendar' in inputs %}
-            <input class="subscribe__date" type="text" data-formcontrol="calendar"  placeholder="Выберите дату" id="calendar">
+            <input class="subscribe__date" type="text" data-type="calendar" data-required="true" placeholder="Выберите дату" id="calendar">
         {% endif %}
         {% if 'license' in inputs %}
             <div class="subscribe__agree">
                 <label class="subscribe__check">
-                    <input class="js-license" data-formcontrol="license" type="checkbox" checked><span></span>
+                    <input class="js-license" data-type="license" data-required="true" type="checkbox" checked><span></span>
                 </label>
                 <div class="subscribe__hint"><span>Я принимаю условия передачи информации и условия политики конфиденциальности</span></div>
             </div>
         {% endif %}
-        <a class="btn subscribe__btn sp-ex-right" data-formcontrol="submit">
+        <a class="btn subscribe__btn sp-ex-right" data-type="submit">
             <span>Записаться</span>
             <div class="sp sp-ring sp-spin"></div>
             <i class="btn__icon-rt icon_arrow-rt"></i>
