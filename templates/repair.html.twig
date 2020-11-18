@@ -1,5 +1,8 @@
 {% extends 'layout.html.twig' %}
+{% from '_sections/chunks/forms.twig' import formSubscribe %}
 
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['suspension', 'speed', 'piggy', 'binocul'] %}
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
 {% block content %}
@@ -11,230 +14,15 @@
             <div class="sec-intro__front">
                 <div class="container">
                     <h1 class="sec-intro__title">Ремонт и обслуживание<br>{{ brand }} в Москве</h1>
-                    <a class="btn sec-intro__btn js-scroll-to" data-scrollto="#sec-offer-slider" role="button">К прайс-листу</a>
+{#                    <a class="btn sec-intro__btn js-scroll-to" data-scrollto="#sec-offer-slider" role="button">К прайс-листу</a>#}
+                    {{ formSubscribe('sec-intro__form', 'schedule') }}
+
+                    {{ renderFeatures(features, "sec-intro__features") }}
                 </div>
             </div>
         </section><!-- END sec-intro -->
 
-        <section class="sec-offer">
-            <div class="sec-offer__wrap">
-                <div class="sec-offer__row" id="sec-offer-slider">
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_car-search"></i>
-                        <h2 class="sec-offer__title">Обслуживание</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена свечей масла, жидкостей и фильтров</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Шиномонтаж, балансировка колес, хранение резины</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Очистка радиаторов</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ламп</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Чистка инжектора с расходником</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_absorber"></i>
-                        <h2 class="sec-offer__title">Подвеска</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена переднего нижнего рычага</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена сайлентблока (при снятом рычаге)</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена стабилизатора</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена сайлентблоков подрамника</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ступицы в сборе</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ступичного подшипника</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена шаровой опоры со снятием рычага перед-зад</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Сварочная работа, 1 шов</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена приводного вала</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена карданного вала в сборе</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена подшипника, сальников полуоси</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена амортизатора</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Ремонт поворотного кулака</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Установка стабилизатора</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_brake-disk"></i>
-                        <h2 class="sec-offer__title">Тормозная система</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена тормозных дисков и колодок</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена колодок стояночного тормоза</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена главного тормозного цилиндра</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена тормозного цилиндра</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена рабочего цилиндра сцепления</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Подтянуть ручник</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Переборка суппортов</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_motor"></i>
-                        <h2 class="sec-offer__title">Двигатель</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена цепи ГРМ</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">С\у ГБЦ</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Капитальный ремонт двигателя</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена опоры ДВС</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена сальника к\в пер</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена радиатора охлаждения</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Герметизация поддона ДВС</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена приводного ремня</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_wheel"></i>
-                        <h2 class="sec-offer__title">Управление</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена рулевой тяги</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена рулевого наконечника</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена рулевой рейки</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена рулевого карданчика</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_car-search"></i>
-                        <h2 class="sec-offer__title">Обслуживание</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена свечей масла, жидкостей и фильтров</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Шиномонтаж, балансировка колес, хранение резины</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Очистка радиаторов</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ламп</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Чистка инжектора с расходником</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                    <div class="sec-offer__col">
-                        <i class="sec-offer__icon icon_absorber"></i>
-                        <h2 class="sec-offer__title">Подвеска</h2>
-                        <ul class="sec-offer__list">
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена переднего нижнего рычага</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена сайлентблока (при снятом рычаге)</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена стабилизатора</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена сайлентблоков подрамника</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ступицы в сборе</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена ступичного подшипника</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена шаровой опоры со снятием рычага перед-зад</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Сварочная работа, 1 шов</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена приводного вала</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена карданного вала в сборе</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена подшипника, сальников полуоси</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Замена амортизатора</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Ремонт поворотного кулака</a>
-                            </li>
-                            <li class="sec-offer__item">
-                                <a class="sec-offer__link" href="#">Установка стабилизатора</a>
-                            </li>
-                        </ul>
-                    </div><!-- END sec-offer__col -->
-                </div><!-- END sec-offer__wrap  -->
-            </div><!-- END sec-offer__row -->
-        </section><!-- END sec-offer -->
+        {{ include('_sections/work.html.twig') }}
 
         {{ include('_sections/happen.html.twig') }}
 
