@@ -119,7 +119,6 @@ class ServerDataSender {
   onSuccess() {}
 
   async sendForm(form) {
-    if (!form.isValid) return
     const formData = this._formFactory.getFormData(form)
     const response = await fetch(formData.url, {
       method: 'POST',
