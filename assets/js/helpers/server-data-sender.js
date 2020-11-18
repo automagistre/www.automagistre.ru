@@ -102,7 +102,7 @@ class FormDataFactory {
       case 'schedule':
         return new FormScheduleData(form)
       default:
-        return null
+        throw new Error('No API route')
     }
   }
 }
@@ -119,19 +119,18 @@ class ServerDataSender {
   onSuccess() {}
 
   async sendForm(form) {
-    const formData = this._formFactory.getFormData(form)
-    const response = await fetch(formData.url, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: formData.toJSON(),
-      mode: 'no-cors'
-    })
-    if (response.ok) {
-      const result = await response.json()
+    try {
+      const formData = this._formFactory.getFormData(form)
+      await fetch(formData.url, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: formData.toJSON(),
+        mode: 'no-cors'
+      })
       this.onSuccess()
-      return result
-    } else {
+    } catch (e) {
       this.onError()
+      console.log(e)
     }
   }
 }
