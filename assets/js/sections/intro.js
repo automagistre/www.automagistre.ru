@@ -9,7 +9,7 @@ const introSec = () => {
 
   if (!formNode) return
 
-  const scheduleForm = new SubscribeForm(formNode, 'schedule');
+  const scheduleForm = new SubscribeForm(formNode, formNode.dataset.formType || 'schedule');
   const dataSender = new ServerDataSender()
   dataSender.onSuccess = () => {
     (new SuccessFeedBackPopup('Мы уже обрабатываем вашу заявку.')).open()
