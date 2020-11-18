@@ -91,4 +91,9 @@ export default function initSections() {
       require('../sections/tire-sevice').default();
     })
   }
+  if (document.querySelector('section.sec-intro')){
+    require.ensure([], require => {
+      require('../sections/intro').default();
+    })
+  }
 }
