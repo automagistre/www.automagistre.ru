@@ -29,12 +29,12 @@ const costingSec = () => {
   let currentStep = 1;
 
   initSlick(costingSlickNode)
-
-  let calculator = new Calculator(costingSectionNode, () => {
-    costingSlickNode.find(".slick-slide").height("auto");
+  const calculatorCallback = () => {
+    costingSlickNode.find(".slick-slide").height("auto")
     costingSlickNode.slick('reinit')
-    costingSlickNode.slick("setOption", null, null, true);
-  });
+    costingSlickNode.slick("setOption", null, null, true)
+  }
+  let calculator = new Calculator(costingSectionNode, calculatorCallback);
 
   const animateSteps = nextStep => {
     const classesMap = {
@@ -81,7 +81,7 @@ const costingSec = () => {
     }
     if (currentStepNumber === 4 && nextStepNumber === 1) {
       calculator.destroy();
-      calculator = new Calculator(costingSectionNode)
+      calculator = new Calculator(costingSectionNode, calculatorCallback)
     }
   };
 
