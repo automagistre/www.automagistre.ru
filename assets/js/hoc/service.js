@@ -7,7 +7,6 @@ import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
 import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
-import {SubscribeForm} from '../ui/forms';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
 import LocalStorageManager from '../helpers/Local-storage-manager';
 
