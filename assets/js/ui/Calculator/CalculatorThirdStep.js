@@ -28,22 +28,34 @@ class calculatorThirdStep extends CalculatorSteps {
   }
 
   getFormStatus() {
-    return this._form.getInputsStatus();
+    const status = {}
+    for (let input of this._form.inputs) {
+      status[input.name] = input.value
+    }
+    return status;
   }
 
   showInvalidSelections() {
     const calendarUnitNode = this._node.querySelector('.js-costing_calendar_unit'),
           formUnitNode = this._node.querySelector('.js-costing_form_unit'),
-          formStatus = this._form.getInputsStatus();
-    if (!formStatus['calendar'].isValid) {
-      console.log(formStatus['calendar'].isValid);
-      this.highlightNode(calendarUnitNode).then(() => {})
-    }
-    if (!formStatus['name'].isValid || !formStatus['phone'].isValid || !formStatus['license'].isValid) {
-      this.highlightNode(formUnitNode).then(() => {})
+          formInputs = this._form.inputs
+    let isHighlightCalendar, isHighlightContacts = false
+    for (let input of formInputs) {
+      if (isHighlightCalendar && isHighlightContacts) break
+
+      if (input.name === 'inline-calendar' && !input.isValid) {
+        this.highlightNode(calendarUnitNode).then(() => {})
+        isHighlightCalendar = true
+      }
+
+      if (isHighlightContacts) continue
+
+      if (input.name !== 'inline-calendar' && !input.isValid) {
+        this.highlightNode(formUnitNode).then(() => {})
+        isHighlightContacts = true
+      }
     }
   }
-
 }
 
 export default calculatorThirdStep;
