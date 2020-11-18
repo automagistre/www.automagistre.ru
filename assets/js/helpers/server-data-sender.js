@@ -22,7 +22,7 @@ class FormScheduleData extends FormData {
   _api_url = '/api/v1/appeal/schedule'
   _data = {
     name: '',
-    email: '',
+    phone: '',
     date: ''
   }
 
@@ -32,8 +32,8 @@ class FormScheduleData extends FormData {
       switch (input.name) {
         case 'name':
           this._data.name = input.value; break
-        case 'email':
-          this._data.email = input.value; break
+        case 'phone':
+          this._data.phone = input.value; break
         case 'calendar':
           this._data.date = input.getFormattedDate('Y-m-d'); break
         case 'calendar-inline':
