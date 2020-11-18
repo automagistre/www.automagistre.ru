@@ -26,11 +26,6 @@ new ScrollToTop();
 
 initSections();
 
-const $forms = document.querySelectorAll('form.subscribe');
-if ($forms){
-    $forms.forEach( $form => new SubscribeForm($form))
-}
-
 const goToButtons = document.querySelectorAll('[data-scrollTo]');
 goToButtons.forEach(btn => {
     const scrollTarget = document.querySelector(btn.dataset.scrollto);
