@@ -1,5 +1,5 @@
 {% macro formSmall(class) %}
-    <form class="form {{ class }}">
+    <form class="form {{ class }}" data-form-type="question">
         <h3 class="form__title">Мы готовы помочь</h3>
         <div class="form__lead">Если у вас остались вопросы, задайте их прямо сейчас:</div>
         <div class="form__line">
@@ -20,9 +20,9 @@
     </form>
 {% endmacro %}
 
-{% macro formSubscribe(class, inputs=['name', 'phone', 'calendar', 'license']) %}
+{% macro formSubscribe(class,  type, inputs=['name', 'phone', 'calendar', 'license']) %}
     {% set isSlim = inputs|length < 4 %}
-    <form class="subscribe {{ class }} {{ isSlim ? "#{class}_slim" }}">
+    <form class="subscribe {{ class }} {{ isSlim ? "#{class}_slim" }}" data-form-type="{{ type }}">
         {% if 'name' in inputs %}
             <input class="subscribe__name" type="text" data-type="name" data-required="true" placeholder="Имя">
         {% endif %}
