@@ -1,4 +1,4 @@
-const SERVER_URL = `${location.protocol}//${location.host}`
+const SERVER_URL = `${location.protocol}//msk.${location.host}`
 
 class FormData {
   _data = {}
@@ -9,7 +9,7 @@ class FormData {
   }
 
   toJSON() {
-    return this._data.toJSON()
+    return JSON.stringify(this._data)
   }
 
   get url() {
@@ -28,7 +28,7 @@ class FormScheduleData extends FormData {
 
   constructor(form) {
     super(form);
-    for (input of input) {
+    for (let input of form.inputs) {
       switch (input.name) {
         case 'name':
           this._data.name = input.value; break
@@ -55,7 +55,7 @@ class FormQuestionData extends FormData {
 
   constructor (form) {
     super(form);
-    for (input of input) {
+    for (let input of form.inputs) {
       switch (input.name) {
         case 'name':
           this._data.name = input.value; break
@@ -79,7 +79,7 @@ class FormCooperationData extends FormData {
 
   constructor (form) {
     super(form);
-    for (input of input) {
+    for (let input of form.inputs) {
       switch (input.name) {
         case 'name':
           this._data.name = input.value; break
@@ -114,10 +114,27 @@ class ServerDataSender {
     this._formFactory = new FormDataFactory()
   }
 
+  onError() {}
+
+  onSuccess() {}
+
   async sendForm(form) {
+    if (!form.isValid) return
     const formData = this._formFactory.getFormData(form)
-    const response = await fetch(formData.url, {method: 'POST', headers: {'Content-Type': 'application/json'}})
-    console.log(response);
+    const response = await fetch(formData.url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: formData.toJSON(),
+      mode: 'no-cors'
+    })
+    if (response.ok) {
+      const result = await response.json()
+      this.onSuccess()
+      return result
+    } else {
+      console.log(response);
+      this.onError()
+    }
   }
 }
 
