@@ -20,15 +20,15 @@ const faqSec = () => {
   }
   initTabs(tabs, body);
   const faqForm = new SubscribeForm(formNode, 'question');
+  const dataSender = new ServerDataSender()
+  dataSender.onSuccess = () => {
+    (new SuccessFeedBackPopup('Мы получили Ваш вопрос.')).open()
+  }
+  dataSender.onError = () => {
+    (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
+  }
   formNode.querySelector('a[data-type="submit"]').addEventListener('click', async ()=>{
-    const dataSender = new ServerDataSender()
-    dataSender.onSuccess = () => {
-      (new SuccessFeedBackPopup('Мы получили Ваш вопрос.')).open()
-    }
-    dataSender.onError = () => {
-      (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
-    }
-    await dataSender.sendForm(faqForm)
+    if (faqForm.isValid) await dataSender.sendForm(faqForm)
   })
 };
 
