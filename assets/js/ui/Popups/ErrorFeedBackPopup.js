@@ -4,8 +4,9 @@ class ErrorFeedBackPopup extends Popup{
 
   _message= '';
 
-  constructor() {
+  constructor(message='') {
     super();
+    this.message = message
   }
 
   set message(value) {
