@@ -30,6 +30,7 @@ class CalculatorFourthStep extends CalculatorSteps {
   }
 
   set date(value) {
+    if (!value) return
     this._date = value;
     const d = new Date(value);
     const ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
