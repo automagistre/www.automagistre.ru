@@ -132,7 +132,6 @@ class ServerDataSender {
       this.onSuccess()
       return result
     } else {
-      console.log(response);
       this.onError()
     }
   }
