@@ -348,7 +348,7 @@ export class SubscribeForm extends Form {
     inputsList.forEach(inputNode => {
       const input = inputFactory.getInput(inputNode, inputNode.dataset.type, ()=>this.onChangeHandler())
       if (input) {
-        input.isRequired = Boolean(inputNode.dataset.required)
+        input.isRequired = inputNode.dataset.required === 'true'
         this.addInput(input)
       }
     })
@@ -357,14 +357,14 @@ export class SubscribeForm extends Form {
 
 
 export class CalculatorForm extends SubscribeForm {
-  constructor(node, inputNode) {
-    super(node);
-    const calendarInlineNode = node.querySelector('[data-formcontrol=calendar-inline]');
-    const self = this;
-    this._formInputs['text'].isRequired = false;
-    this._formInputs['calendar'] = new CalendarInlineInput(calendarInlineNode, function() {
-      inputNode.innerHTML = this.getFormattedDate('d.m.y');
-      self.onChangeHandler();
-    });
+  constructor(formNode, inputNode) {
+    super(formNode, 'calculator');
+    const calendarInlineNode = formNode.querySelector('[data-type=calendar-inline]')
+    const inlineCalendar = new CalendarInlineInput(calendarInlineNode, () => {
+      inputNode.innerHTML = inlineCalendar.getFormattedDate('d.m.y')
+      this.onChangeHandler();
+    })
+    inlineCalendar.isRequired = calendarInlineNode.dataset.required === 'true'
+    this.addInput(inlineCalendar)
   }
 }

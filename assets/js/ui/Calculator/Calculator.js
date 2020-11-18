@@ -59,8 +59,8 @@ class Calculator {
 
     thirdStep.onChange = () => {
       const formStatus = thirdStep.getFormStatus();
-      fourthStep.date = formStatus['calendar'].value;
-      fourthStep.name = formStatus['name'].value;
+      fourthStep.date = formStatus['calendar-inline'];
+      fourthStep.name = formStatus['name'];
     };
 
     this._renderSpinnerCarModelIcon()
