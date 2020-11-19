@@ -29,6 +29,7 @@ const costingSec = () => {
         costingStepsNode = costingSectionNode.querySelectorAll('.js-cg-step'),
         costingSvgNode = costingSectionNode.querySelector('#cs-stage'),
         costingFormSubmitNode = costingSectionNode.querySelector('.js-cg-submit'),
+        costingFormNewNode = costingSectionNode.querySelector('.js-cg-new'),
         topOfSection = document.getElementById('costing')
   let currentStep = 1;
 
@@ -69,11 +70,7 @@ const costingSec = () => {
     }
     currentStep = nextStep;
   };
-  //
-  // if (currentStepNumber === 4 && nextStepNumber === 1) {
-  //   calculator.destroy();
-  //   calculator = new Calculator(costingSectionNode, calculatorCallback)
-  // }
+
   const changeStep = nextStepNumber => {
     const header = Header.instance
     costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false)
@@ -108,6 +105,11 @@ const costingSec = () => {
     } else {
       currentStep.showInvalidSelections()
     }
+  })
+  costingFormNewNode.addEventListener('click', ()=> {
+    calculator.destroy();
+    calculator = new Calculator(costingSectionNode, calculatorCallback)
+    changeStep(1)
   })
 }
 
