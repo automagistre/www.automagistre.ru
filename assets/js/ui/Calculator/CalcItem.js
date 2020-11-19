@@ -5,6 +5,8 @@ class CalcItem {
     this._isSelected = true
   }
 
+  get id() { }
+
   get name() {
     return this._item.name || '';
   }

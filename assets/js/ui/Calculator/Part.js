@@ -5,6 +5,10 @@ class Part extends CalcItem {
     super(item);
   }
 
+  get id() {
+    return this._item.id
+  }
+
   get totalPrice() {
     return this.isSelected ? +this._item.count * +this._item.price : 0;
   }
