@@ -15,6 +15,10 @@ class CalcItem {
     return this._item.note || '';
   }
 
+  get price() {
+    return this._item.price
+  }
+
   get totalPrice() { }
 
   set isSelected(value) {

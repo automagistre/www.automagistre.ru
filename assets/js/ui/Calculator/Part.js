@@ -6,7 +6,11 @@ class Part extends CalcItem {
   }
 
   get id() {
-    return this._item.id
+    return this._item.id || ''
+  }
+
+  get count() {
+    return this._item.count || 0
   }
 
   get totalPrice() {

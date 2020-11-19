@@ -113,7 +113,28 @@ class FormCalculatorData extends FormData {
     this._data.equipment = calculator.equipment.id
     this._data.mileage = calculator.mileage
     this._data.total = calculator.totalPrice
-    this._data.works = calculator.works
+
+    for (let work of calculator.works) {
+      const workData = {
+        id: work.id,
+        name: work.name,
+        price: work.price,
+        type: work.type,
+        isSelected: work.isSelected,
+        parts: []
+      }
+      for (let part of work.parts) {
+        const partData = {
+          id: part.id,
+          name: part.name,
+          price: part.price,
+          count: part.count,
+          isSelected: part.isSelected
+        }
+        workData.parts.push(partData)
+      }
+      this._data.works.push(workData)
+    }
   }
 }
 
@@ -149,7 +170,6 @@ class ServerDataSender {
   async sendForm(form) {
     try {
       const formData = this._formFactory.getFormData(form)
-      console.log(formData)
       await fetch(formData.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
