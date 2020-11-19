@@ -110,7 +110,7 @@ class FormCalculatorData extends FormData {
     this._data.phone = calculator.phone
     this._data.note = calculator.note
     this._data.date = calculator.getFormattedDate('Y-m-d')
-    this._data.equipment = calculator.equipment
+    this._data.equipment = calculator.equipment.id
     this._data.mileage = calculator.mileage
     this._data.total = calculator.totalPrice
   }

@@ -22,8 +22,8 @@ class CalculatorFirstStep extends CalculatorSteps {
   renderEquipments(equipments) {
     const equipmentsNode = this.equipmentsNode;
     if (equipmentsNode) {
-      for (let [entityID, entity] of Object.entries(equipments)) {
-        const equipment = new Equipment(entityID, entity),
+      for (let entity of equipments) {
+        const equipment = new Equipment(entity),
               node = equipment.render();
         equipment.onClick = () => this.equipmentChange(equipment);
 

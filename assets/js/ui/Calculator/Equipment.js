@@ -2,9 +2,12 @@ class Equipment {
 
   _node = undefined;
 
-  constructor(id, equipment) {
-    this.id = id;
+  constructor(equipment) {
     this._equipment = equipment;
+  }
+
+  get id() {
+    return this._equipment.id
   }
 
   get name() {
