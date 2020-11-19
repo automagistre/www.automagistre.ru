@@ -10,6 +10,7 @@ class Calculator {
   isValid = false;
   steps = {};
   currentStep = 1;
+  type = 'calculator'
 
   constructor(node, callback) {
     this._node = node
@@ -59,8 +60,8 @@ class Calculator {
 
     thirdStep.onChange = () => {
       const formStatus = thirdStep.getFormStatus();
-      fourthStep.date = formStatus['calendar-inline'];
-      fourthStep.name = formStatus['name'];
+      fourthStep.date = formStatus['calendar-inline'].value;
+      fourthStep.name = formStatus['name'].value;
     };
 
     this._renderSpinnerCarModelIcon()
@@ -114,6 +115,34 @@ class Calculator {
     this.currentStep = undefined;
     this.isValid = false;
     this.isDestroyed = true;
+  }
+
+  get name() {
+    return this.steps[3].getFormStatus()['name'].value
+  }
+
+  get phone() {
+    return this.steps[3].getFormStatus()['phone'].value
+  }
+
+  get note() {
+    return this.steps[3].getFormStatus()['text'].value
+  }
+
+  getFormattedDate(format) {
+    return this.steps[3].getFormStatus()['calendar-inline'].getFormattedDate(format)
+  }
+
+  get equipment() {
+    return this.steps[1].equipment
+  }
+
+  get mileage() {
+    return this.steps[1].range
+  }
+
+  get totalPrice() {
+    return this.steps[2].totalPrice
   }
 
   _renderCurrentModelIcon() {

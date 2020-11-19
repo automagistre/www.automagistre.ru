@@ -30,7 +30,7 @@ class calculatorThirdStep extends CalculatorSteps {
   getFormStatus() {
     const status = {}
     for (let input of this._form.inputs) {
-      status[input.name] = input.value
+      status[input.name] = input
     }
     return status;
   }
