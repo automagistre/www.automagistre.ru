@@ -58,7 +58,8 @@ class Form {
   };
 
   clear() {
-    Object.values(this._formInputs).forEach(input => input.clear())
+    this._formInputs.forEach(input => input.clear())
+    this.inputChangeColor(true)
   }
 
   onChange() {}

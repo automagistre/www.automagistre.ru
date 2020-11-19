@@ -55,6 +55,12 @@ class calculatorThirdStep extends CalculatorSteps {
         isHighlightContacts = true
       }
     }
+    this._form.inputs.forEach(input => input.isTouched = true)
+    this._form.inputChangeColor()
+  }
+
+  clear() {
+    this._form.clear()
   }
 }
 
