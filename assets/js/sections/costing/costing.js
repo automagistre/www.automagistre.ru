@@ -100,7 +100,7 @@ const costingSec = () => {
   costingFormSubmitNode.addEventListener('click', async () => {
     const currentStep = calculator.steps[calculator.currentStep]
     if (currentStep.isValid) {
-      await calculatorSender.sendCalculator(calculator)
+      await calculatorSender.sendForm(calculator)
       changeStep(calculator.currentStep + 1)
     } else {
       currentStep.showInvalidSelections()

@@ -4,7 +4,7 @@ class FormData {
   _data = {}
   _api_url = ''
 
-  constructor(form) {
+  constructor() {
 
   }
 
@@ -90,6 +90,31 @@ class FormCooperationData extends FormData {
   }
 }
 
+class FormCalculatorData extends FormData {
+
+  _api_url = '/api/v1/appeal/calc'
+  _data = {
+    name: '',  // Name in form
+    phone: '', // Phone in form
+    note: '',  // Message from user
+    date: '',  // date in form
+    equipment: '', // id equipment
+    mileage: 0, // mileage of selected TO
+    total: 0, // Total cost of order
+    works: [ ] // selected works and parts
+  }
+
+  constructor(calculator) {
+    super()
+    this._data.name = calculator.name
+    this._data.phone = calculator.phone
+    this._data.note = calculator.note
+    this._data.date = calculator.getFormattedDate('Y-m-d')
+    this._data.equipment = calculator.equipment
+    this._data.mileage = calculator.mileage
+    this._data.total = calculator.totalPrice
+  }
+}
 
 class FormDataFactory {
 
@@ -101,6 +126,8 @@ class FormDataFactory {
         return new FormQuestionData(form)
       case 'schedule':
         return new FormScheduleData(form)
+      case 'calculator':
+        return new FormCalculatorData(form)
       default:
         throw new Error('No API route')
     }
@@ -121,6 +148,7 @@ class ServerDataSender {
   async sendForm(form) {
     try {
       const formData = this._formFactory.getFormData(form)
+      console.log(formData)
       await fetch(formData.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
