@@ -23,33 +23,16 @@ class CalculatorSecondStep extends CalculatorSteps {
     return this._calculateTotalsPrices('work');
   }
 
-  set worksPrice(value) {
-    throw new Error('Read only property "worksPrice". Can`t set value:' + value)
-  }
-
   get recommendationsPrice() {
     return this._calculateTotalsPrices('recommendation');
-  }
-
-  set recommendationsPrice(value) {
-    throw new Error('Read only property "recommendationsPrice". Can`t set value:' + value)
   }
 
   get totalPrice() {
     return this.worksPrice + this.recommendationsPrice;
   }
 
-  set totalPrice(value) {
-    throw new Error('Read only property "totalPrice". Can`t set value:' + value)
-  }
-
-
   get selectedWorks() {
 
-  }
-
-  set selectedWorks(value) {
-    throw new Error('Can not set value read only property "selectedWorks":' + value)
   }
 
   addWork(work) {
