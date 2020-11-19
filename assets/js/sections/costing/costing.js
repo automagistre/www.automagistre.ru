@@ -2,6 +2,8 @@ import $ from 'jquery'
 import 'slick-carousel'
 import Calculator from '../../ui/Calculator/Calculator';
 import Header from '../../ui/Header';
+import ServerDataSender from '../../helpers/server-data-sender';
+import ErrorFeedBackPopup from '../../ui/Popups/ErrorFeedBackPopup';
 
 
 const initSlick = node => {
@@ -25,7 +27,9 @@ const costingSec = () => {
   const costingSectionNode =  document.querySelector('section.sec-costing'),
         costingSlickNode = $('#costing-steps'),
         costingStepsNode = costingSectionNode.querySelectorAll('.js-cg-step'),
-        costingSvgNode = costingSectionNode.querySelector('#cs-stage');
+        costingSvgNode = costingSectionNode.querySelector('#cs-stage'),
+        costingFormSubmitNode = costingSectionNode.querySelector('.js-cg-submit'),
+        topOfSection = document.getElementById('costing')
   let currentStep = 1;
 
   initSlick(costingSlickNode)
@@ -34,6 +38,7 @@ const costingSec = () => {
     costingSlickNode.slick('reinit')
     costingSlickNode.slick("setOption", null, null, true)
   }
+
   let calculator = new Calculator(costingSectionNode, calculatorCallback);
 
   const animateSteps = nextStep => {
@@ -64,31 +69,46 @@ const costingSec = () => {
     }
     currentStep = nextStep;
   };
-
+  //
+  // if (currentStepNumber === 4 && nextStepNumber === 1) {
+  //   calculator.destroy();
+  //   calculator = new Calculator(costingSectionNode, calculatorCallback)
+  // }
   const changeStep = nextStepNumber => {
-    const currentStepNumber = calculator.currentStep,
-          currentStep = calculator.steps[currentStepNumber];
     const header = Header.instance
-    if (currentStep.isValid || nextStepNumber < currentStepNumber) {
-      costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false);
-      calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1;
-      animateSteps(nextStepNumber);
-      header.isAlwaysHide = true
-      document.getElementById('costing').scrollIntoView({behavior: "auto"});
-      setTimeout(()=> header.isAlwaysHide = false, 500)
-    } else {
-      currentStep.showInvalidSelections();
-    }
-    if (currentStepNumber === 4 && nextStepNumber === 1) {
-      calculator.destroy();
-      calculator = new Calculator(costingSectionNode, calculatorCallback)
-    }
-  };
+    costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false)
+    calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1
+    animateSteps(nextStepNumber);
+    header.isAlwaysHide = true
+    topOfSection.scrollIntoView({behavior: "auto"});
+    setTimeout(()=> header.isAlwaysHide = false, 500)
+  }
 
   costingStepsNode.forEach(node => {
-    node.addEventListener('click', el => changeStep(+el.target.dataset.step))
-  });
+    node.addEventListener('click', el => {
+      const currentStep = calculator.steps[calculator.currentStep]
+      const nextStepNumber = +el.target.dataset.step
+      if (currentStep.isValid || nextStepNumber < calculator.currentStep) {
+        changeStep(nextStepNumber)
+      } else {
+        currentStep.showInvalidSelections()
+      }
+  })})
 
-};
+
+  const calculatorSender = new ServerDataSender()
+  calculatorSender.onError = () => {
+    (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
+  }
+  costingFormSubmitNode.addEventListener('click', async () => {
+    const currentStep = calculator.steps[calculator.currentStep]
+    if (currentStep.isValid) {
+      await calculatorSender.sendCalculator(calculator)
+      changeStep(calculator.currentStep + 1)
+    } else {
+      currentStep.showInvalidSelections()
+    }
+  })
+}
 
 export default costingSec;
