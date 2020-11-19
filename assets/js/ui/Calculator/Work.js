@@ -6,6 +6,10 @@ class Work extends CalcItem {
     super(item);
   }
 
+  get id() {
+    return 1
+  }
+
   get type() {
     return this._item.type || '';
   }
