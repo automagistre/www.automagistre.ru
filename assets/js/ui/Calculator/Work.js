@@ -10,16 +10,8 @@ class Work extends CalcItem {
     return this._item.type || '';
   }
 
-  set type(value) {
-    throw new Error('Read only property "type". Can`t set value:' + value)
-  }
-
   get parts() {
     return this._parts;
-  }
-
-  set parts(value) {
-    throw new Error('Read only property "parts". Can`t set value:' + value)
   }
 
   addPart(part) {
