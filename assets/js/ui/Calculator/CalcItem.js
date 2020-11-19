@@ -1,7 +1,6 @@
 class CalcItem {
 
-  constructor(id, item) {
-    this.id = id;
+  constructor(item) {
     this._item = item;
     this._selected = true;
   }
@@ -10,20 +9,8 @@ class CalcItem {
     return this._item.name || '';
   }
 
-  set name(value) {
-    throw new Error('Read only property "name". Can`t set value:' + value)
-  }
-
   get note() {
     return this._item.note || '';
-  }
-
-  set note(value) {
-    throw new Error('Read only property "note". Can`t set value:' + value)
-  }
-
-  set totalPrice(value) {
-    throw new Error('Read only property "totalPrice". Can`t set value:' + value)
   }
 
   get totalPrice() { }
