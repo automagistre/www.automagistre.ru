@@ -31,8 +31,8 @@ class CalculatorSecondStep extends CalculatorSteps {
     return this.worksPrice + this.recommendationsPrice;
   }
 
-  get selectedWorks() {
-
+  get works() {
+    return this._works
   }
 
   addWork(work) {

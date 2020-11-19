@@ -145,6 +145,10 @@ class Calculator {
     return this.steps[2].totalPrice
   }
 
+  get works() {
+    return this.steps[2].works
+  }
+
   _renderCurrentModelIcon() {
     const wrapper = document.createElement('div')
     wrapper.innerHTML  = `
