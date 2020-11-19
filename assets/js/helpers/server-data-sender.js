@@ -113,6 +113,7 @@ class FormCalculatorData extends FormData {
     this._data.equipment = calculator.equipment.id
     this._data.mileage = calculator.mileage
     this._data.total = calculator.totalPrice
+    this._data.works = calculator.works
   }
 }
 
