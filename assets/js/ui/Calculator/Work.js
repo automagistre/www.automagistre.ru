@@ -2,8 +2,8 @@ import CalcItem from './CalcItem';
 
 class Work extends CalcItem {
   _parts = [];
-  constructor(id, item) {
-    super(id, item);
+  constructor(item) {
+    super(item);
   }
 
   get type() {
@@ -28,7 +28,7 @@ class Work extends CalcItem {
   }
 
   get isSelected() {
-    return this._selected;
+    return super.isSelected
   }
 
   get totalPrice() {

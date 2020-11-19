@@ -1,16 +1,12 @@
 import CalcItem from './CalcItem';
 
 class Part extends CalcItem {
-  constructor(id, item) {
-    super(id, item);
+  constructor(item) {
+    super(item);
   }
 
   get totalPrice() {
     return this.isSelected ? +this._item.count * +this._item.price : 0;
-  }
-
-  get isSelected() {
-    return this._selected;
   }
 
   set isSelected(value) {
@@ -18,7 +14,13 @@ class Part extends CalcItem {
     this.onChange();
   }
 
-  get isDisabled() {}
+  get isSelected() {
+    return super.isSelected
+  }
+
+  get isDisabled() {
+    return this._node.disabled
+  }
 
   set isDisabled(value) {
     if (value) this.isSelected = false;

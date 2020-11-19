@@ -49,10 +49,10 @@ class CalculatorSecondStep extends CalculatorSteps {
     };
 
     if (works) {
-      for (let [workID, work] of Object.entries(works)) {
+      for (let work of works) {
         if (this.range % work.repeat === 0){
           const isSelect = work.type === 'work',
-                workEntity = new Work(workID, work);
+                workEntity = new Work(work);
                 workEntity.onChange = onChange;
 
           const parent = workEntity.type === 'work' ? worksNode : recommendationsNode,
@@ -65,8 +65,8 @@ class CalculatorSecondStep extends CalculatorSteps {
             const partsNode =  document.createElement('ul');
             partsNode.className = 'cg-price__list';
 
-            for (let [partID, part] of Object.entries(work.parts)){
-              const partEntity = new Part(partID, part);
+            for (let part of work.parts){
+              const partEntity = new Part(part);
               partEntity.onChange = onChange;
 
               const partNode = partEntity.render();

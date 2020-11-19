@@ -2,7 +2,7 @@ class CalcItem {
 
   constructor(item) {
     this._item = item;
-    this._selected = true;
+    this._isSelected = true
   }
 
   get name() {
@@ -15,11 +15,13 @@ class CalcItem {
 
   get totalPrice() { }
 
-  get isSelected() { }
-
   set isSelected(value) {
-    this._selected = value;
+    this._isSelected = value
     this._node.checked = value;
+  }
+
+  get isSelected() {
+    return this._isSelected
   }
 
   toString() {
@@ -35,7 +37,7 @@ class CalcItem {
         `<li class="cg-price__item">
             <div class="cg-price__line">
                 <label class="cg-price__check">
-                  <input type="checkbox" value="${this.id}">
+                  <input type="checkbox">
                   <span>${this.name}</span>
                 </label>
                 <div class="cg-price__cost">
