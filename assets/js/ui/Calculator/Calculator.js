@@ -130,7 +130,8 @@ class Calculator {
   }
 
   getFormattedDate(format) {
-    return this.steps[3].getFormStatus()['calendar-inline'].getFormattedDate(format)
+    const dateInput = this.steps[3].getFormStatus()['calendar-inline']
+    return dateInput.value ? dateInput.getFormattedDate(format) : ''
   }
 
   get equipment() {
