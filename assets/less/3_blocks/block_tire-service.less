@@ -1,0 +1,55 @@
+.tire-order {
+  display: flex;
+  justify-content: space-between;
+  color: @red;
+  margin-bottom: 10px;
+  padding: 0 10px;
+
+  &__title,
+  &__cost {
+    font-size: 24px;
+    line-height: 45px;
+  }
+
+  &__title {
+    display: block;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  &__cost {
+    font-weight: 700;
+  }
+
+  &__contacts {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 10px;
+  }
+
+  &__line {
+    width: 100%;
+    margin: 10px 0;
+
+  }
+
+  &__input {
+    width: 100%;
+    padding: 21px 20px 19px 40px;
+    border: 1px solid #e3e6ee;
+    border-radius: 30px;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: 15px 50%;
+    background-size: 14px 14px;
+
+    &_name {
+      background-image: data-uri("@{img-dir}icons/icon_subscribe-user.svg");
+    }
+
+    &_phone {
+      background-image: data-uri("@{img-dir}icons/icon_subscribe-phone.svg");
+    }
+  }
+
+}
