@@ -55,6 +55,7 @@ const tireServiceSec = () => {
         tireSelectorNode = secNode.querySelector('.js-tire-selector'),
         carSelectorNode = secNode.querySelector('.js-car-selector'),
         tireServiceNode = secNode.querySelector('.price-groups'),
+        tireServiceTotalNode = secNode.querySelector('.tire-order__cost'),
         carSelector = new Selector(carSelectorNode),
         tireSelector = new Selector(tireSelectorNode)
   const tireService = new TireService(tireServiceNode)
@@ -68,8 +69,12 @@ const tireServiceSec = () => {
     }
   }
 
+  const updateTotalCost = () => {
+    tireServiceTotalNode.innerHTML = `${tireService.totalCost}<i class="icon-rub">a</i>`
+  }
   for(let group of PRICE.groups) {
-    tireService.addPriceGroup(new PriceGroup(group))
+    const priceGroup = new PriceGroup(group, updateTotalCost)
+    tireService.addPriceGroup(priceGroup)
   }
   tireService.render(tireServiceNode)
 }
