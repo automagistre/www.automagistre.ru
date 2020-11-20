@@ -20,6 +20,10 @@ class PriceGroup {
     return this._name
   }
 
+  get items() {
+    return this._items
+  }
+
   addPriceItem(priceItem, callback) {
     if (this._onlyOne) {
       priceItem.onChange = () => {

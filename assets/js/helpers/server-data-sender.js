@@ -1,3 +1,5 @@
+import LocalStorageManager from './Local-storage-manager';
+
 const SERVER_URL = `${location.protocol}//msk.${location.host}`
 
 class FormData {
@@ -138,6 +140,45 @@ class FormCalculatorData extends FormData {
   }
 }
 
+class FormTireServiceData extends FormData {
+
+  _api_url = '/api/v1/appeal/tire-fitting'
+  _data = {
+    name: '',  // Name in form
+    phone: '', // Phone in form
+    model: '', // id model if available
+    diameter: 0, // diameter of tires
+    carType: '', // Selected car type
+    total: 0, // Total cost of order
+    works: [ ] // selected works
+  }
+
+  constructor(form) {
+    super();
+    for (let input of form.inputs) {
+      switch (input.name) {
+        case 'name':
+          this._data.name = input.value; break
+        case 'phone':
+          this._data.phone = input.value; break
+      }
+    }
+    const localData = new LocalStorageManager()
+    this._data.model = localData.caseID || ''
+    this._data.diameter = +form.tireSelector.currentSelect.value || 0
+    this._data.carType = form.carSelector.currentSelect.name || ''
+    this._data.total = form.tireService.totalCost || 0
+    const works = []
+    for (let work of form.tireService.getSelected()) {
+      works.push({
+        name: work.name,
+        price: work.price
+      })
+    }
+    this._data.works = works
+  }
+}
+
 class FormDataFactory {
 
   getFormData(form) {
@@ -150,6 +191,8 @@ class FormDataFactory {
         return new FormScheduleData(form)
       case 'calculator':
         return new FormCalculatorData(form)
+      case 'tire-fitting':
+        return new FormTireServiceData(form)
       default:
         throw new Error('No API route')
     }
@@ -169,12 +212,13 @@ class ServerDataSender {
 
   async sendForm(form) {
     const formData = this._formFactory.getFormData(form)
+    console.log(formData)
     try {
       const response = await fetch(formData.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: formData.toJSON(),
-        // mode: 'no-cors'
+        mode: 'no-cors'
       })
       console.log(response);
       this.onSuccess()
