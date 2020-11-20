@@ -15,6 +15,7 @@ const happenSec = () => {
   const dataSender = new ServerDataSender()
   dataSender.onSuccess = () => {
     (new SuccessFeedBackPopup('Мы получили ваш запрос')).open()
+    scheduleForm.clear()
   }
   dataSender.onError = () => {
     (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
