@@ -1,6 +1,6 @@
 import LocalStorageManager from './Local-storage-manager';
 
-const SERVER_URL = `${location.protocol}//msk.${location.host}`
+const SERVER_URL = `${location.protocol}//msk.${location.host.replace(/www\./,'')}`
 
 class FormData {
   _data = {}
@@ -212,19 +212,16 @@ class ServerDataSender {
 
   async sendForm(form) {
     const formData = this._formFactory.getFormData(form)
-    console.log(formData)
-    try {
-      const response = await fetch(formData.url, {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: formData.toJSON(),
-        mode: 'no-cors'
-      })
-      console.log(response);
+    const response = await fetch(formData.url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: formData.toJSON(),
+      // mode: 'no-cors'
+    })
+    if (response.ok) {
       this.onSuccess()
-    } catch (e) {
+    } else {
       this.onError()
-      console.log(e)
     }
   }
 }
