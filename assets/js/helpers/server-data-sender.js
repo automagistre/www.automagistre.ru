@@ -1,6 +1,6 @@
 import LocalStorageManager from './Local-storage-manager';
 
-const SERVER_URL = `${location.protocol}//msk.${location.host.replace(/www\./,'')}`
+const SERVER_URL = API_URL
 
 class FormData {
   _data = {}
