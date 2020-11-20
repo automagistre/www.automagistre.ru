@@ -276,7 +276,9 @@ class CalendarInput extends FormInputs {
       locale: Russian,
       dateFormat: 'j F Y',
       minDate: "today",
-      position: 'below',
+      position: 'above left',
+      positionElement: inputNode,
+      // static: true,
       onChange: selectedDate => this.value = selectedDate[0]
     };
     this._calendar = new Flatpickr(inputNode, options)
