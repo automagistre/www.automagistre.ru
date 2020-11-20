@@ -100,6 +100,7 @@ const tireServiceSec = () => {
     e.preventDefault()
     if (form.isValid) {
       await dataSender.sendForm(form)
+      form.clear()
     } else {
       form.inputs.forEach(input => input.isTouched = true)
       form.inputChangeColor()

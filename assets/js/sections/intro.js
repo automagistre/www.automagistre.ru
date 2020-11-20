@@ -13,6 +13,7 @@ const introSec = () => {
   const dataSender = new ServerDataSender()
   dataSender.onSuccess = () => {
     (new SuccessFeedBackPopup('Мы уже обрабатываем вашу заявку.')).open()
+    scheduleForm.clear()
   }
   dataSender.onError = () => {
     (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
