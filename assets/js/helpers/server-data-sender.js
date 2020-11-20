@@ -168,14 +168,15 @@ class ServerDataSender {
   onSuccess() {}
 
   async sendForm(form) {
+    const formData = this._formFactory.getFormData(form)
     try {
-      const formData = this._formFactory.getFormData(form)
-      await fetch(formData.url, {
+      const response = await fetch(formData.url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: formData.toJSON(),
-        mode: 'no-cors'
+        // mode: 'no-cors'
       })
+      console.log(response);
       this.onSuccess()
     } catch (e) {
       this.onError()

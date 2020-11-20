@@ -4,13 +4,14 @@ class PriceGroup {
 
   _items = []
 
-  constructor(group) {
+  constructor(group, callback) {
     this._name = group.name
     this._node = this._createNode()
     this._onlyOne = group.onlyOne
     if (group.services) {
       for (const service of group.services) {
-        this.addPriceItem(new PriceItem(service));
+        const priceItem = new PriceItem(service)
+        this.addPriceItem(priceItem, callback);
       }
     }
   }
@@ -19,14 +20,18 @@ class PriceGroup {
     return this._name
   }
 
-  addPriceItem(priceItem) {
+  addPriceItem(priceItem, callback) {
     if (this._onlyOne) {
-      priceItem.onSelect = () => {
+      priceItem.onChange = () => {
         for(const item of this._items) {
           if (item !== priceItem) item.unCheck()
         }
+        callback()
       }
+    } else {
+      priceItem.onChange = callback
     }
+
     this._items.push(priceItem)
   }
 
@@ -47,6 +52,14 @@ class PriceGroup {
     const itemsNode = this._node.querySelector('.prices.sec-about__prices')
     this._items.forEach(item => item.render(itemsNode))
     node.append(this._node)
+  }
+
+  get totalCost() {
+    let cost = 0
+    for (let item of this._items) {
+      if (item.isChecked) cost += item.price
+    }
+    return cost
   }
 
 }

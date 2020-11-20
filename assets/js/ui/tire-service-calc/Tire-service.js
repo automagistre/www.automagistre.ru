@@ -27,6 +27,14 @@ class TireService {
     this._priceGroups.forEach(group => group.render(this._node))
   }
 
+  get totalCost() {
+    let cost = 0
+    for (let group of this._priceGroups) {
+      cost += group.totalCost
+    }
+    return cost
+  }
+
 }
 
 export default TireService
