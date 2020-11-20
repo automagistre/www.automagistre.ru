@@ -1,6 +1,7 @@
 class LocalStorageManager {
 
   set manufacturer(manufacturer) {
+    this.caseName
     localStorage.setItem('manufacturer', manufacturer)
   }
 
@@ -22,6 +23,12 @@ class LocalStorageManager {
 
   get caseID() {
     return localStorage.getItem('caseID')
+  }
+
+  removeItems(items) {
+    for (let item of items) {
+      localStorage.removeItem(item)
+    }
   }
 
 }
