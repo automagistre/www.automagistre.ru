@@ -66,18 +66,20 @@ const tireServiceSec = () => {
         tireSelector = new Selector(tireSelectorNode)
   const tireService = new TireService(tireServiceNode)
 
+  const updateTotalCost = () => {
+    tireServiceTotalNode.innerHTML = `${tireService.totalCost}<i class="icon-rub">a</i>`
+  }
+
   carSelector.onChange = tireSelector.onChange = () =>{
     if (carSelector.currentSelect && tireSelector.currentSelect) {
       tireService.updatePrice(tireSelector.currentSelect, carSelector.currentSelect)
+      updateTotalCost()
       tireService.show()
     } else {
       tireService.hide()
     }
   }
 
-  const updateTotalCost = () => {
-    tireServiceTotalNode.innerHTML = `${tireService.totalCost}<i class="icon-rub">a</i>`
-  }
   for(let group of PRICE.groups) {
     const priceGroup = new PriceGroup(group, updateTotalCost)
     tireService.addPriceGroup(priceGroup)
