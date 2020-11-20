@@ -9,6 +9,14 @@ class Part extends CalcItem {
     return this._item.id || ''
   }
 
+  get manufacturer() {
+    return this._item.manufacture
+  }
+
+  get note() {
+    return `Производитель ${this.manufacturer}`
+  }
+
   get count() {
     return this._item.count || 0
   }

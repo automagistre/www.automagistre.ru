@@ -10,6 +10,10 @@ class Work extends CalcItem {
     return this._item.id || ''
   }
 
+  get note() {
+    return null
+  }
+
   get type() {
     return this._item.type || '';
   }
