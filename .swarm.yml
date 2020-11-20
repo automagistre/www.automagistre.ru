@@ -29,6 +29,8 @@ services:
         image: automagistre/www-app:${DRONE_BUILD_NUMBER}
         environment:
             APP_SECRET: ${APP_SECRET}
+            APOLLO_URL: https://www.automagistre.ru/graphql
+            API_URL: https://msk.automagistre.ru/api/v1
         deploy:
             mode: replicated
             replicas: 1

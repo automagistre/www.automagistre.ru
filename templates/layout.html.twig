@@ -27,6 +27,11 @@
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
     <link rel="stylesheet" href="{{ asset('main.css') }}"/><!-- Main styles from .js -->
     <!--link rel="stylesheet" href="css/modify.css"/--><!-- Fast dev additions -->
+
+    <script>
+        let APOLLO_URL = '{{ apollo_url() }}';
+        let API_URL = '{{ api_url() }}';
+    </script>
 </head>
 
 <body class="no-start-animations">
