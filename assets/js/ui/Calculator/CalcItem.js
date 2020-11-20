@@ -39,6 +39,7 @@ class CalcItem {
 
   render() {
     const wrapper = document.createElement('div');
+    const note = this.note ? `<span>${this.note}</span>` : ``
     wrapper.innerHTML =
         `<li class="cg-price__item">
             <div class="cg-price__line">
@@ -50,9 +51,7 @@ class CalcItem {
                     ${this.toString()}
                     <i class="icon-rub">a</i>
                 </div>
-                <div class="cg-price__info">
-                    <span>${this.note || ''}</span>
-                </div>
+                <div class="cg-price__info ${!this.note ? 'empty' : ''}">${note}</div>        
             </div>
         </li>`;
     this._node = wrapper.querySelector('input');
