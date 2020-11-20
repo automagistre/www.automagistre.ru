@@ -7,7 +7,7 @@ class Work extends CalcItem {
   }
 
   get id() {
-    return 1
+    return this._item.id || ''
   }
 
   get type() {
