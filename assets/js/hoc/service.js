@@ -13,8 +13,11 @@ import LocalStorageManager from '../helpers/Local-storage-manager';
 const localStorageManager = new LocalStorageManager()
 const manufacturer = document.location.pathname.split('/')[2]
 
+const currentManufacturer = localStorageManager.manufacturer
 
-if (document.location.pathname.split('/')[2]) {
+if (manufacturer) {
+    if (currentManufacturer !== manufacturer)
+        localStorageManager.removeItems(['caseID', 'caseName'])
     localStorageManager.manufacturer = manufacturer
 }
 
