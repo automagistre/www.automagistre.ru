@@ -16,7 +16,8 @@ const manufacturer = document.location.pathname.split('/')[2]
 const currentManufacturer = localStorageManager.manufacturer
 
 if (manufacturer) {
-    if (currentManufacturer !== manufacturer)
+    console.log(currentManufacturer, manufacturer);
+    if (currentManufacturer.toLowerCase() !== manufacturer.toLowerCase())
         localStorageManager.removeItems(['caseID', 'caseName'])
     localStorageManager.manufacturer = manufacturer
 }
