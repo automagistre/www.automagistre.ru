@@ -371,3 +371,12 @@ export class CalculatorForm extends SubscribeForm {
     this.addInput(inlineCalendar)
   }
 }
+
+export class TireServiceForm extends SubscribeForm {
+  constructor(formNode, tireSelector, carSelector, tireService) {
+    super(formNode, 'tire-fitting')
+    this.tireSelector = tireSelector
+    this.carSelector = carSelector
+    this.tireService = tireService
+  }
+}

@@ -35,6 +35,16 @@ class TireService {
     return cost
   }
 
+  getSelected() {
+    const selectedItems = []
+    for (let group of this._priceGroups) {
+      for (let item of group.items) {
+        if (item.isChecked) selectedItems.push(item)
+      }
+    }
+    return selectedItems
+  }
+
 }
 
 export default TireService

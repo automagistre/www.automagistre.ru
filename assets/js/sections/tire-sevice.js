@@ -1,6 +1,10 @@
 import Selector from '../ui/Selector';
 import TireService from '../ui/tire-service-calc/Tire-service';
 import PriceGroup from '../ui/tire-service-calc/Price-group';
+import {TireServiceForm} from '../ui/forms';
+import ServerDataSender from '../helpers/server-data-sender';
+import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
+import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
 const PRICE = {
   groups:[
@@ -56,6 +60,8 @@ const tireServiceSec = () => {
         carSelectorNode = secNode.querySelector('.js-car-selector'),
         tireServiceNode = secNode.querySelector('.price-groups'),
         tireServiceTotalNode = secNode.querySelector('.tire-order__cost'),
+        tireServiceContactsNode = secNode.querySelector('.tire-order__contacts'),
+        submitButton = secNode.querySelector('.js-tire-service-submit'),
         carSelector = new Selector(carSelectorNode),
         tireSelector = new Selector(tireSelectorNode)
   const tireService = new TireService(tireServiceNode)
@@ -77,6 +83,26 @@ const tireServiceSec = () => {
     tireService.addPriceGroup(priceGroup)
   }
   tireService.render(tireServiceNode)
+
+  const form = new TireServiceForm(tireServiceContactsNode, tireSelector, carSelector, tireService)
+
+  const dataSender = new ServerDataSender();
+  dataSender.onSuccess = () => {
+    (new SuccessFeedBackPopup('Мы получили Ваш заказ!')).open()
+  }
+  dataSender.onError = () => {
+    (new ErrorFeedBackPopup('Нет соединения с сервером, повторите попытку позже')).open()
+  }
+
+  submitButton.addEventListener('click', async (e)=> {
+    e.preventDefault()
+    if (form.isValid) {
+      await dataSender.sendForm(form)
+    } else {
+      form.inputs.forEach(input => input.isTouched = true)
+      form.inputChangeColor()
+    }
+  })
 }
 
 export default tireServiceSec;
