@@ -34,7 +34,7 @@
     </script>
 </head>
 
-<body class="no-start-animations">
+<body class="no-start-animations popup-lock">
 
 <!--[if lte IE 9]>
 <div class="stop-modal">
@@ -66,7 +66,7 @@
     {% block body %}
         {% block header %}
             {# HEADER ================================================================ #}
-            <header class="site-header" id="site-header">
+            <header class="site-header popup-lock" id="site-header">
                 <div class="sh-line {{- white_header|default(false) ? ' is-white' }}" id="header-line">
                     <div class="sh-line__row sh-line__for-comp">
                         <div class="sh-line__col-lt">
