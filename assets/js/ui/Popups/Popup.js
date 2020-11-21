@@ -6,8 +6,10 @@ class Popup {
   constructor() { }
 
   open() {
+    const bodyLockPadding = window.innerWidth - document.querySelector('.site-wrapper').offsetWidth + 'px'
     this._node = this.render();
     this._node.classList.add('is-inited', 'is-active');
+    document.querySelectorAll('.popup-lock').forEach(node => node.style.paddingRight = bodyLockPadding)
     document.body.classList.add('is-trimmed');
     document.body.append(this._node);
     this.initCloseActions();
@@ -18,8 +20,13 @@ class Popup {
   close() {
     if (this._isOpen) {
       this._node.classList.remove('is-active');
-      setTimeout(() => this._node.classList.remove('is-inited'), 300);
-      document.body.classList.remove('is-trimmed');
+      setTimeout(() => {
+        this._node.classList.remove('is-inited');
+      }, 300);
+      setTimeout(() => {
+        document.querySelectorAll('.popup-lock').forEach(node => node.style.paddingRight = 0)
+        document.body.classList.remove('is-trimmed');
+      }, 400);
       this._isOpen = false;
       this.onClose();
       setTimeout(()=> this._node.remove(), 500);
