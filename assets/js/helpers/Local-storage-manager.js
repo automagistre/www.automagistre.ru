@@ -6,7 +6,7 @@ class LocalStorageManager {
   }
 
   get manufacturer() {
-    return localStorage.getItem('manufacturer')
+    return localStorage.getItem('manufacturer') || ''
   }
 
   set caseName(caseName) {
@@ -14,7 +14,7 @@ class LocalStorageManager {
   }
 
   get caseName() {
-    return  localStorage.getItem('caseName')
+    return  localStorage.getItem('caseName') || ''
   }
 
   set caseID(caseID) {
@@ -22,7 +22,7 @@ class LocalStorageManager {
   }
 
   get caseID() {
-    return localStorage.getItem('caseID')
+    return localStorage.getItem('caseID') || ''
   }
 
   removeItems(items) {
