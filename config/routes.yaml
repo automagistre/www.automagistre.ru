@@ -12,10 +12,11 @@ _shop:
     prefix: /shop
 
 _blog:
-    resource: '../src/Controller/BlogController.php'
+    resource: '../src/Blog/Controller'
     type: annotation
-    name_prefix: blog_
-    prefix: /blog
+_blogs:
+    resource: '../templates/blog'
+    type: blog
 
 _garage:
     resource: '../src/Controller/GarageController.php'

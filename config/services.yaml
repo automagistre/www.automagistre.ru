@@ -16,3 +16,9 @@ services:
 
     App\Router\ListeningRouterDecorator:
         decorates: router
+
+    App\Blog\Routing\BlogLoader:
+        arguments:
+            - '@Symfony\Component\HttpKernel\Config\FileLocator'
+        tags:
+            - { name: routing.loader }

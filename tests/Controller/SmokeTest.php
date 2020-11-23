@@ -14,6 +14,7 @@ final class SmokeTest extends WebTestCase
 {
     /**
      * @dataProvider pagesProvider
+     * @dataProvider blogs
      */
     public function testPages(string $url, int $statusCode): void
     {
@@ -34,8 +35,6 @@ final class SmokeTest extends WebTestCase
         yield ['/', 200];
         yield ['/shop/', 200];
         yield ['/garage/', 200];
-        yield ['/blog/', 200];
-        yield ['/blog/1', 200];
 
         foreach ($this->servicesPages() as $page) {
             $path = $page[0];
@@ -45,6 +44,13 @@ final class SmokeTest extends WebTestCase
                 yield $page;
             }
         }
+    }
+
+    public function blogs(): Generator
+    {
+        yield ['/blog', 200];
+        yield ['/blog/show-show', 200];
+        yield ['/blog/fuck', 404];
     }
 
     /**
