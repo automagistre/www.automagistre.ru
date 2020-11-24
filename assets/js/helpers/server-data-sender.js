@@ -21,7 +21,7 @@ class FormData {
 
 class FormScheduleData extends FormData {
 
-  _api_url = '/api/v1/appeal/schedule'
+  _api_url = '/appeal/schedule'
   _data = {
     name: '',
     phone: '',
@@ -48,7 +48,7 @@ class FormScheduleData extends FormData {
 
 class FormQuestionData extends FormData {
 
-  _api_url = '/api/v1/appeal/question'
+  _api_url = '/appeal/question'
   _data = {
     name: '',
     email: '',
@@ -73,7 +73,7 @@ class FormQuestionData extends FormData {
 
 class FormCooperationData extends FormData {
 
-  _api_url = '/api/v1/appeal/cooperation'
+  _api_url = '/appeal/cooperation'
   _data = {
     name: '',
     phone: ''
@@ -94,7 +94,7 @@ class FormCooperationData extends FormData {
 
 class FormCalculatorData extends FormData {
 
-  _api_url = '/api/v1/appeal/calc'
+  _api_url = '/appeal/calc'
   _data = {
     name: '',  // Name in form
     phone: '', // Phone in form
@@ -142,7 +142,7 @@ class FormCalculatorData extends FormData {
 
 class FormTireServiceData extends FormData {
 
-  _api_url = '/api/v1/appeal/tire-fitting'
+  _api_url = '/appeal/tire-fitting'
   _data = {
     name: '',  // Name in form
     phone: '', // Phone in form
