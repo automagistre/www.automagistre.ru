@@ -27,8 +27,8 @@ services:
             APP_ENV: prod
             APP_DEBUG: 0
             MYSQL_PASSWORD: 'db'
-            APOLLO_URL: http://www.automagistre.local
-            API_URL: http://msk.automagistre.local
+            APOLLO_URL: http://www.automagistre.local/graphql
+            API_URL: http://msk.automagistre.local/api/v1
 
     memcached:
         image: memcached:1.5.20-alpine
