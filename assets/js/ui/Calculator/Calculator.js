@@ -137,6 +137,14 @@ class Calculator {
     return this.steps[2].works
   }
 
+  set isSending(value) {
+    this.steps[3].form.isSending = value
+  }
+
+  get isSending() {
+    return this.steps[3].form.isSending
+  }
+
   _renderCurrentModelIcon() {
     const wrapper = document.createElement('div')
     wrapper.innerHTML  = `
