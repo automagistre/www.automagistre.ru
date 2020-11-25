@@ -6,7 +6,9 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-const SERVER_URL = APOLLO_URL
+// const SERVER_URL = APOLLO_URL
+
+const SERVER_URL = 'http://automagistre.local:3000'
 
 class ServerData {
 
@@ -52,10 +54,11 @@ class ServerData {
       'response': 200,
       'data': data.maintenancesByVehicleID
       .map(eq => {
+        const mileageRepeat = Math.min(...eq.works.map(work => +work.period))
         return {
           id: eq.id,
           name: `${eq.engine.capacity} ${eq.transmission} ${eq.wheelDrive}`,
-          mileageRepeat: 15,
+          mileageRepeat,
           works: eq.works.map(work => {
             return {
               name: work.name,
