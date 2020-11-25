@@ -117,21 +117,8 @@ class Calculator {
     this.isDestroyed = true;
   }
 
-  get name() {
-    return this.steps[3].getFormStatus()['name'].value
-  }
-
-  get phone() {
-    return this.steps[3].getFormStatus()['phone'].value
-  }
-
-  get note() {
-    return this.steps[3].getFormStatus()['text'].value
-  }
-
-  getFormattedDate(format) {
-    const dateInput = this.steps[3].getFormStatus()['calendar-inline']
-    return dateInput.value ? dateInput.getFormattedDate(format) : ''
+  get inputs() {
+    return this.steps[3].inputs
   }
 
   get equipment() {

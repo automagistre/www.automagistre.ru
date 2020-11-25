@@ -6,10 +6,20 @@ import { Russian } from "flatpickr/dist/l10n/ru.js"
 
 
 class Form {
+
   _formInputs = []
+  _isSending = false
 
   constructor(type) {
     this._type = type
+  }
+
+  get isSending() {
+    return this._isSending
+  }
+
+  set isSending(value) {
+    this._isSending = Boolean(value)
   }
 
   get type() {
@@ -43,8 +53,8 @@ class Form {
     }
     for (let input of this._formInputs) {
       if (input.isTouched) {
-        input.inputNode.classList.toggle('input-valid', input.isValid)
-        input.inputNode.classList.toggle('input-error', !input.isValid)
+        input.inputNode.classList.toggle('input-valid', input.isValid || !input.isRequired)
+        input.inputNode.classList.toggle('input-error', !input.isValid && input.isRequired)
       }
     }
   }
@@ -62,11 +72,17 @@ class Form {
     this.inputChangeColor(true)
   }
 
+  showInvalidInputs() {
+    this.inputs.forEach(input => input.isTouched = true)
+    this.inputChangeColor()
+  }
+
   onChange() {}
+
 }
 
 
-class FormInputs {
+export class FormInputs {
 
   _name = ''
   _valid = false
@@ -86,11 +102,11 @@ class FormInputs {
   }
 
   set isValid(value) {
-    throw new Error('Read only property, cant set "isValid":' + value )
+    this._valid = Boolean(value)
   }
 
   get isValid() {
-    return this._valid || !this.isRequired;
+    return this._valid;
   }
 
   set isTouched(value) {
@@ -135,6 +151,11 @@ class FormInputs {
     this.isTouched = false
     this.updateInputValue()
   }
+
+  set disabled(value) {
+    this._inputNode.disabled = value
+  }
+
 }
 
 
@@ -289,12 +310,12 @@ class CalendarInput extends FormInputs {
   }
 
   getFormattedDate(format) {
-    return this._calendar.formatDate(this.value, format)
+    return this.value ? this._calendar.formatDate(this.value, format) : ''
   }
 
 }
 
-class CalendarInlineInput extends CalendarInput {
+class CalendarInlineInput extends FormInputs {
   constructor(inputNode, callback) {
     super(inputNode, callback)
     this.name = 'calendar-inline'
@@ -312,6 +333,10 @@ class CalendarInlineInput extends CalendarInput {
   }
   _validator(value) {
     return Boolean(value)
+  }
+
+  getFormattedDate(format) {
+    return this.value ? this._calendar.formatDate(this.value, format) : ''
   }
 }
 
@@ -355,6 +380,19 @@ export class SubscribeForm extends Form {
         this.addInput(input)
       }
     })
+    this._submitButtonNode = formNode.querySelector('[data-type="submit"]')
+  }
+
+  set isSending (value) {
+    super.isSending = value
+    this._formInputs.forEach(input => input.disabled = this.isSending)
+    if (this._submitButtonNode) {
+      this._submitButtonNode.classList.toggle('running', this.isSending)
+    }
+  }
+
+  get isSending() {
+    return super.isSending
   }
 }
 
@@ -378,5 +416,6 @@ export class TireServiceForm extends SubscribeForm {
     this.tireSelector = tireSelector
     this.carSelector = carSelector
     this.tireService = tireService
+    console.log(this._submitButtonNode);
   }
 }
