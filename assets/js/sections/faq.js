@@ -30,6 +30,7 @@ const faqSec = () => {
   }
   formNode.querySelector('a[data-type="submit"]').addEventListener('click', async ()=>{
     if (faqForm.isValid) await dataSender.sendForm(faqForm)
+    else faqForm.showInvalidInputs()
   })
 };
 

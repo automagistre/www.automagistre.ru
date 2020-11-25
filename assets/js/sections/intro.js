@@ -20,6 +20,7 @@ const introSec = () => {
   }
   formNode.querySelector('a[data-type="submit"]').addEventListener('click', async ()=>{
     if (scheduleForm.isValid) await dataSender.sendForm(scheduleForm)
+    else scheduleForm.showInvalidInputs()
   })
 }
 
