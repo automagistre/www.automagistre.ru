@@ -416,6 +416,5 @@ export class TireServiceForm extends SubscribeForm {
     this.tireSelector = tireSelector
     this.carSelector = carSelector
     this.tireService = tireService
-    console.log(this._submitButtonNode);
   }
 }
