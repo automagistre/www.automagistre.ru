@@ -139,7 +139,7 @@ class FormCalculatorData extends FormData {
   }
 
   constructor(calculator) {
-    super(form)
+    super(calculator.steps[3].form)
     for (let input of calculator.inputs) {
       switch (input.name) {
         case 'name':
