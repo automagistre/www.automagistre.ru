@@ -97,13 +97,17 @@ const costingSec = () => {
   calculatorSender.onError = () => {
     (new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open()
   }
+  calculatorSender.onSuccess = () => {
+    changeStep(calculator.currentStep + 1)
+  }
   costingFormSubmitNode.addEventListener('click', async () => {
     const currentStep = calculator.steps[calculator.currentStep]
     if (currentStep.isValid) {
-      await calculatorSender.sendForm(calculator)
-      changeStep(calculator.currentStep + 1)
-    } else {
-      currentStep.showInvalidSelections()
+      await calculatorSender.sendForm(calculator);
+    }
+    else {
+      calculator.steps[3].form.showInvalidInputs()
+      calculator.steps[3].showInvalidSelections()
     }
   })
   costingFormNewNode.addEventListener('click', ()=> {
