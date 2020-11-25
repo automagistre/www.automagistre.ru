@@ -60,7 +60,7 @@ const tireServiceSec = () => {
         carSelectorNode = secNode.querySelector('.js-car-selector'),
         tireServiceNode = secNode.querySelector('.price-groups'),
         tireServiceTotalNode = secNode.querySelector('.tire-order__cost'),
-        tireServiceContactsNode = secNode.querySelector('.tire-order__contacts'),
+        tireServiceFromNode = secNode.querySelector('.sec-about__form'),
         submitButton = secNode.querySelector('.js-tire-service-submit'),
         carSelector = new Selector(carSelectorNode),
         tireSelector = new Selector(tireSelectorNode)
@@ -86,11 +86,12 @@ const tireServiceSec = () => {
   }
   tireService.render(tireServiceNode)
 
-  const form = new TireServiceForm(tireServiceContactsNode, tireSelector, carSelector, tireService)
+  const form = new TireServiceForm(tireServiceFromNode, tireSelector, carSelector, tireService)
 
   const dataSender = new ServerDataSender();
   dataSender.onSuccess = () => {
     (new SuccessFeedBackPopup('Мы получили Ваш заказ!')).open()
+    form.clear()
   }
   dataSender.onError = () => {
     (new ErrorFeedBackPopup('Нет соединения с сервером, повторите попытку позже')).open()
@@ -98,13 +99,8 @@ const tireServiceSec = () => {
 
   submitButton.addEventListener('click', async (e)=> {
     e.preventDefault()
-    if (form.isValid) {
-      await dataSender.sendForm(form)
-      form.clear()
-    } else {
-      form.inputs.forEach(input => input.isTouched = true)
-      form.inputChangeColor()
-    }
+    if (form.isValid) await dataSender.sendForm(form)
+    else form.showInvalidInputs()
   })
 }
 

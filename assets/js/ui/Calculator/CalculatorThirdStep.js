@@ -17,6 +17,10 @@ class calculatorThirdStep extends CalculatorSteps {
     return this._totalPrice;
   }
 
+  get inputs() {
+    return this._form.inputs
+  }
+
   set totalPrice(value) {
     this._totalPrice = value;
     this._totalPriceNode.innerHTML = value.toString()
