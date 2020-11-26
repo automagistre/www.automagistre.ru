@@ -26,7 +26,6 @@ class SelectCarWizard {
       node.addEventListener('click', ()=> this.changeStep(1))
     })
     node.querySelector('.modal__step[data-step="manufacturer"]').addEventListener('click', ()=> {
-      this.steps[1].clear()
       this.changeStep(0)
     })
   }
@@ -218,6 +217,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   }
 
   async renderModels(manufacturerID) {
+    this.clear()
     const spinner = new LoadingSpinner(this._modelListNode, 1)
 
     spinner.show()
