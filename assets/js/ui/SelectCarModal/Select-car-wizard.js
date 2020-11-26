@@ -5,6 +5,7 @@ import Selector from '../Selector';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
 import LoadingSpinner from '../LoadingSpinner';
 import errorMessages from '../../Errors/ErrorMassges';
+import {manufactirerID} from '../../vars/manufactirerID';
 
 const manufacturerStepList = {
   'nissan': 0,
@@ -39,7 +40,7 @@ class SelectCarWizard {
       this.steps[i].setActive(this.steps[num])
     }
     if (num === 1) {
-      this.steps[1].renderModels(data.manufacturer)
+      this.steps[1].renderModels(manufactirerID[data.manufacturer.toLowerCase()])
     }
     document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
   }
@@ -96,6 +97,10 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
       ],
     }
 
+    const localData = new LocalStorageManager()
+
+    this._selectedContent.manufacturer = localData.manufacturer
+
     this._node = node.querySelector('#modal-tab_01')
     this.$slider = $('#select-car-slider').slick(options)
 
@@ -111,7 +116,7 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
     })
     this._indicatorNode = node.querySelector('.modal__step[data-step="manufacturer"]')
 
-    const currentManufacturer = (new LocalStorageManager()).manufacturer.toLowerCase()
+    const currentManufacturer = localData.manufacturer
     if (currentManufacturer) {
       this.$slider.slick('slickGoTo', manufacturerStepList[currentManufacturer], false)
     }
@@ -212,12 +217,13 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     this._modelListNode = this._node.querySelector('.modal__models')
   }
 
-  async renderModels(manufacturer) {
+  async renderModels(manufacturerID) {
     const spinner = new LoadingSpinner(this._modelListNode, 1)
 
     spinner.show()
     this._isLoading = true
-    const {response, data} = await this._server.getVehiclesByManufacturer(manufacturer)
+    const {response, data} = await this._server.getVehiclesByManufacturerID(manufacturerID)
+    console.log(response, data, manufacturerID);
     spinner.remove()
     this._isLoading = false
     if (response !== 200) {
@@ -231,7 +237,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
         e.preventDefault()
         if (!this._isLoading) {
           this.clear()
-          this.renderModels(manufacturer)
+          this.renderModels(manufacturerID)
         }
       })
       return

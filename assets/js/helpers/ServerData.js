@@ -1,6 +1,6 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {
-  getVehiclesByManufacturer,
+  getVehiclesByManufacturerID,
   maintenancesByVehicleID,
   getVehicleByID
 } from './gql/queries';
@@ -19,19 +19,20 @@ class ServerData {
     })
   }
 
-  async getVehiclesByManufacturer(manufacturer) {
+  async getVehiclesByManufacturerID(manufacturerID) {
     try {
       const {data} = await this.client.query({
-        query: getVehiclesByManufacturer,
-        variables: {manufacturer}})
+        query: getVehiclesByManufacturerID,
+        variables: {manufacturerID}})
       return {
         'response': 200,
-        'data': data.getVehiclesByManufacturer
+        'data': data.getVehiclesByManufacturerID
                 .map(vehicle =>  new CarCase({
                   id: vehicle._id,
                   caseName: vehicle.caseName,
                   name: vehicle.name,
                   manufacturer: vehicle.manufacturer.name,
+                  manufacturerID: vehicle.manufacturer.id,
                   yearFrom: vehicle.yearFrom,
                   yearTill: vehicle.yearTill
                 }, this))

@@ -67,7 +67,7 @@ const typeDefs = gql`
   }
   
   type Query {
-      getVehiclesByManufacturer(manufacturer: String): [Vehicle]!,
+      getVehiclesByManufacturerID(manufacturerID: String): [Vehicle]!,
       getVehicleByID(id: String): Vehicle
       getWorksByMaintenanceID(id: String): [Work]!
       maintenancesByVehicleID(id: String): [Maintenance]!

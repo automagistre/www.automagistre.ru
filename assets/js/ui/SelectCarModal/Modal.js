@@ -17,14 +17,15 @@ class ModalSelectCar {
     node.querySelector('.js-modal-close')
         .addEventListener('click', ()=> this.hide())
 
-    new SelectCarWizard(node)
+    this.carSeletWizard = new SelectCarWizard(node)
     this._node = node
 
   }
 
-  show() {
+  show(first=false) {
     this._node.classList.add('is-active')
     document.body.classList.add('is-cut')
+    if (!first) this.carSeletWizard.changeStep(1)
   }
 
   hide() {
