@@ -5,7 +5,7 @@ import Selector from '../Selector';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
 import LoadingSpinner from '../LoadingSpinner';
 import errorMessages from '../../Errors/ErrorMassges';
-import {manufactirerID} from '../../vars/manufactirerID';
+import {manufacturerID} from '../../vars/manufactirerID';
 
 const manufacturerStepList = {
   'nissan': 0,
@@ -40,7 +40,7 @@ class SelectCarWizard {
       this.steps[i].setActive(this.steps[num])
     }
     if (num === 1) {
-      this.steps[1].renderModels(manufactirerID[data.manufacturer.toLowerCase()])
+      this.steps[1].renderModels(manufacturerID[data.manufacturer.toLowerCase()])
     }
     document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
   }
