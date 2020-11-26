@@ -28,6 +28,7 @@ const MaintenanceSchema = new Schema({
   },
   wheelDrive: String,
   works: [{
+    id: String,
     description: String,
     name: String,
     parts: [
