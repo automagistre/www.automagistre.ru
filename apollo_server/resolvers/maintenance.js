@@ -3,8 +3,8 @@ import Maintenance from '../mongo/maintenanceShema';
 const  resolvers = {
   Query: {
 
-    async getVehiclesByManufacturer(_, args) {
-      return Maintenance.find({'vehicle.manufacturer.name': args.manufacturer}, {vehicle: 1, _id: 0}).distinct('vehicle')
+    async getVehiclesByManufacturerID(_, args) {
+      return Maintenance.find({'vehicle.manufacturer.id': args.manufacturerID}, {vehicle: 1, _id: 0}).distinct('vehicle')
     },
 
     async getVehicleByID(_, args) {
