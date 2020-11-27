@@ -61,7 +61,9 @@ class ServerData {
           name: `${eq.engine.capacity} ${eq.transmission} ${eq.wheelDrive}`,
           mileageRepeat,
           works: eq.works.map(work => {
+            console.log(work);
             return {
+              id: work._id,
               name: work.name,
               price: work.price.amount / 100,
               repeat: work.period,
