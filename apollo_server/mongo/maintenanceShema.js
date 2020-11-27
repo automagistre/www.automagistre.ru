@@ -61,7 +61,8 @@ const MaintenanceSchema = new Schema({
         amount: String,
         currency: String,
     },
-    recommended: Boolean
+    recommended: Boolean,
+    position: Number
   }]
 })
 
