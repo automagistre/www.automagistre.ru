@@ -43,6 +43,7 @@ const typeDefs = gql`
       period: Int,
       price: Price,
       recommended: Boolean,
+      position: Int
   }
   
   type PartItem {
