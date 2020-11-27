@@ -124,7 +124,8 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
 
 class ModelItem {
 
-  constructor(model) {
+  constructor(model, targetID) {
+    this._targetID = targetID
     this._model = model
   }
 
@@ -195,6 +196,7 @@ class ModelItem {
     const path = document.location.pathname.split('/')
     const localStorageManager = new LocalStorageManager()
     path[2] = this.manufacturer.toLowerCase()
+    if(this._targetID) path[path.length] = '#' + this._targetID
     localStorageManager.manufacturer = this.manufacturer
     localStorageManager.caseName = this.caseName
     localStorageManager.caseID = this.caseID
@@ -207,6 +209,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
 
   _isInit = false
   _isLoading = false
+  _targetToScroll = ''
 
   constructor(node) {
     super();
@@ -243,7 +246,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       return
     }
     let yearMin = Infinity, yearMax = - Infinity;
-    this._models = data.map(model => new ModelItem(model))
+    this._models = data.map(model => new ModelItem(model, this.targetToScroll))
 
     this._models.forEach(modelItem => {
       modelItem.render(this._modelListNode)
@@ -253,6 +256,14 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     this.initYearSelector(yearMin, yearMax)
     this.initSearchInput()
     this._isInit = true
+  }
+
+  set targetToScroll(value) {
+    this._targetToScroll = value || ''
+  }
+
+  get targetToScroll() {
+    return this._targetToScroll || ''
   }
 
   initSearchInput() {
