@@ -56,9 +56,11 @@ class ServerData {
       'data': data.maintenancesByVehicleID
       .map(eq => {
         const mileageRepeat = Math.min(...eq.works.map(work => +work.period))
+        let engineType = eq.engine.type
+        engineType = engineType.toLowerCase() === 'дизель' ? 'D' : ''
         return {
           id: eq.id,
-          name: `${eq.engine.capacity} ${eq.transmission} ${eq.wheelDrive}`,
+          name: `${eq.engine.capacity}${engineType} ${eq.transmission} ${eq.wheelDrive}`,
           mileageRepeat,
           works: eq.works.map(work => {
             return {
