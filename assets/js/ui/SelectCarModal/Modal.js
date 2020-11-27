@@ -22,10 +22,14 @@ class ModalSelectCar {
 
   }
 
-  show(first=false) {
+  show(node) {
     this._node.classList.add('is-active')
     document.body.classList.add('is-cut')
-    if (!first) this.carSeletWizard.changeStep(1)
+    if (node.dataset.modalStep) {
+      this.carSeletWizard.changeStep(+node.dataset.modalStep)
+    } else {
+      this.carSeletWizard.changeStep(0)
+    }
   }
 
   hide() {
