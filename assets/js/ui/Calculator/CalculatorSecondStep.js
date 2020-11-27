@@ -48,8 +48,11 @@ class CalculatorSecondStep extends CalculatorSteps {
       this.onChange()
     };
 
-    if (works) {
-      for (let work of works) {
+    if (works.length) {
+      let sortedWorks = works.sort((w1, w2) => {
+        return +w1.position - +w2.position
+      })
+      for (let work of sortedWorks) {
         if (this.range % work.repeat === 0){
           const isSelect = work.type === 'work',
                 workEntity = new Work(work);
@@ -61,11 +64,15 @@ class CalculatorSecondStep extends CalculatorSteps {
           this.addWork(workEntity);
           parent.append(workNode);
 
-          if (work.parts) {
+          if (work.parts.length) {
+            let parts = work.parts
+            parts = parts.sort((p1, p2) => {
+              return p2.count * p2.price - p1.count * p1.price
+            })
             const partsNode =  document.createElement('ul');
             partsNode.className = 'cg-price__list';
 
-            for (let part of work.parts){
+            for (let part of parts){
               const partEntity = new Part(part);
               partEntity.onChange = onChange;
 
