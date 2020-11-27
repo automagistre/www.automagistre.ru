@@ -180,7 +180,6 @@ class Calculator {
 
   _renderSpinnerCarModelIcon() {
     this._clearCarModelIcon()
-    this._node.querySelector('#costing-step_01').classList.toggle('costing__inactive', true)
     const spinner = new LoadingSpinner(this._modelIconNode)
     spinner.show()
   }
