@@ -69,6 +69,7 @@ class ServerData {
               repeat: work.period,
               type: work.recommended ? 'recommendation' : 'work',
               note: work.description,
+              position: work.position === 0 ? 9999 : work.position,
               parts: work.parts.map(part => {
                 return {
                   id: part.part.id,

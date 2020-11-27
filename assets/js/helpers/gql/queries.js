@@ -61,6 +61,7 @@ export const maintenancesByVehicleID = gql`
                   currency
               }
               recommended
+              position
           }
       }}`
 
