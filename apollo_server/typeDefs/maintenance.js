@@ -36,6 +36,7 @@ const typeDefs = gql`
   }
   
   type Work {
+      _id: String,
       description: String,
       name: String,
       parts: [PartItem],

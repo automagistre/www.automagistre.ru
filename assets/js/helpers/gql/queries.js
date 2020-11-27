@@ -30,6 +30,7 @@ export const maintenancesByVehicleID = gql`
           transmission
           wheelDrive
           works {
+              _id
               description
               name
               parts {
