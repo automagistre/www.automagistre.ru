@@ -226,7 +226,6 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     spinner.show()
     this._isLoading = true
     const {response, data} = await this._server.getVehiclesByManufacturerID(manufacturerID)
-    console.log(response, data, manufacturerID);
     spinner.remove()
     this._isLoading = false
     if (response !== 200) {
@@ -246,7 +245,17 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       return
     }
     let yearMin = Infinity, yearMax = - Infinity;
-    this._models = data.map(model => new ModelItem(model, this.targetToScroll))
+    this._models = data.sort((a, b) => {
+      const aName = a.name.toLowerCase(),
+            bName = b.name.toLowerCase(),
+            aYear = a.yearFrom,
+            bYear = b.yearFrom
+      if (aName < bName) return -1
+      if (bName < aName) return  1
+      if (aYear < bYear) return -1
+      if (bYear < aYear) return  1
+      return 0
+    }).map(model => new ModelItem(model, this.targetToScroll))
 
     this._models.forEach(modelItem => {
       modelItem.render(this._modelListNode)
