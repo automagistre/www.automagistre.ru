@@ -25,6 +25,7 @@ class ModalSelectCar {
   show(node) {
     this._node.classList.add('is-active')
     document.body.classList.add('is-cut')
+    this.carSeletWizard.steps[1].targetToScroll = node.dataset.modalTarget
     if (node.dataset.modalStep) {
       this.carSeletWizard.changeStep(+node.dataset.modalStep)
     } else {
