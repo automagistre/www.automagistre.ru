@@ -56,7 +56,7 @@ $(window).on('load', ()=> {
 
 if (document.querySelector('#modal')) {
     const selectCarModal = ModalSelectCar.instance
-    document.querySelectorAll('.js-show-modal').forEach(item => item.addEventListener('click', ()=> selectCarModal.show()))
+    document.querySelectorAll('.js-show-modal').forEach(item => item.addEventListener('click', ()=> selectCarModal.show(item)))
 }
 
 if (document.querySelector('aside.site-side')) {
