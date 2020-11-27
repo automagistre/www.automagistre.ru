@@ -169,6 +169,7 @@ class Calculator {
 
     this._clearCarModelIcon()
     this._modelIconNode.appendChild(wrapper)
+    this._node.querySelector('#costing-step_01').classList.toggle('costing__inactive', false)
   }
 
   _clearCarModelIcon() {
@@ -179,12 +180,14 @@ class Calculator {
 
   _renderSpinnerCarModelIcon() {
     this._clearCarModelIcon()
+    this._node.querySelector('#costing-step_01').classList.toggle('costing__inactive', true)
     const spinner = new LoadingSpinner(this._modelIconNode)
     spinner.show()
   }
 
   _renderSelectCarModelIcon() {
     this._clearCarModelIcon()
+    this._node.querySelector('#costing-step_01').classList.toggle('costing__inactive', true)
     const wrapper = document.createElement('div')
     wrapper.innerHTML  = `
     <div class="cg-car__name" style="text-transform: capitalize">Выберите модель</div>
@@ -198,6 +201,7 @@ class Calculator {
 
   _renderErrorCarIconModel() {
     this._clearCarModelIcon()
+    this._node.querySelector('#costing-step_01').classList.toggle('costing__inactive', true)
     const wrapper = document.createElement('div')
     wrapper.innerHTML  = `
     <div class="cg-car__name" style="text-transform: capitalize">Ошибка соединения</div>
