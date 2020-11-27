@@ -80,9 +80,9 @@ class CalculatorSecondStep extends CalculatorSteps {
               workEntity.addPart(partEntity);
               partsNode.append(partNode);
             }
-            workEntity.isSelected = isSelect;
             workNode.append(partsNode);
           }
+          workEntity.isSelected = isSelect;
         }
       }
     }
