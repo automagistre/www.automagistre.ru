@@ -4,6 +4,7 @@ const initSlickSlider = () => {
   const slickOptions = {
     arrows: true,
     dots: true,
+    lazyLoad: 'ondemand',
     infinite: true,
     speed: 800,
     autoplay: false,
