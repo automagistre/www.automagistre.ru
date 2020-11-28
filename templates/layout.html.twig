@@ -24,10 +24,14 @@
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon-152x152.png') }}" sizes="152x152"/>
     <!-- Styles ================================================================================== -->
+    <link rel="preload" href="/assets/fonts/circe/300/circe_light.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/circe/400/circe_regular.woff" as="font" type="font/woff" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/circe/700/circe_bold.woff" as="font" type="font/woff" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
-{#    <link rel="stylesheet" href="{{ asset('main.css') }}"/><!-- Main styles from .js -->#}
-    <!--link rel="stylesheet" href="css/modify.css"/--><!-- Fast dev additions -->
 
+    {#    <link rel="stylesheet" href="{{ asset('main.css') }}"/><!-- Main styles from .js -->#}
+    <!--link rel="stylesheet" href="css/modify.css"/--><!-- Fast dev additions -->
+    <link>
     <script>
         let APOLLO_URL = '{{ apollo_url() }}';
         let API_URL = '{{ api_url() }}';
@@ -231,6 +235,7 @@
 <!-- SCRIPTS =============================================================== -->
 <script src="{{ asset('vendors.js') }}"></script>
 <script src="{{ asset('main.js') }}"></script>
+<script src="{{ asset('fonts.js') }}"></script>
 
 </body>
 </html>

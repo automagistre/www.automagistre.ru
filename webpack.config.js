@@ -22,6 +22,7 @@ module.exports = {
     entry: {
         main: ['babel-polyfill', PATHS.src + "/js/main"],
         styles: PATHS.src + "/less/main",
+        fonts: PATHS.src + "/less/1_base/fonts"
     },
     output: {
         filename: PATHS.assets + "[name].[hash].js",
