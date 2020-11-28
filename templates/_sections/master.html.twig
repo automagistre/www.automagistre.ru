@@ -55,7 +55,7 @@
 ] %}
 
 <section class="sec-master">
-    <div class="sec-master__back" style="background-image: url({{ asset('img/backgrounds/bg_sec-master.jpg') }})"></div>
+    <div class="sec-master__back lazy"></div>
     <div class="sec-master__front">
         <h2 class="sec-master__title">Наши мастера</h2>
         <div class="sec-master__slider" id="sec-master-slider">
@@ -63,7 +63,7 @@
                 <div class="sec-master__slide">
                     <div class="container sec-master__slide-row">
                         <div class="sec-master__slide-lt">
-                            <img class="sec-master__slide-img" data-lazy="{{ master.photo }}" alt="{{ master.altName }}">
+                            <img class="sec-master__slide-img" data-src="{{ master.photo }}" loading="lazy" alt="{{ master.altName }}">
                         </div>
                         <div class="sec-master__slide-rt">
                             <div class="sec-master__slide-text js-scroll-y">
