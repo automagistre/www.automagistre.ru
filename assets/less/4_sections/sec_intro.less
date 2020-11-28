@@ -82,6 +82,14 @@
     background-size: cover;
     background-attachment: fixed;
 
+    &.sec-intro__maintenance {
+      background-image: url("@{img-dir}backgrounds/bg_maintenance.jpg");
+
+      &.lazy {
+        background-image: none;
+      }
+    }
+
     &:before {
       content: "";
       display: block;
