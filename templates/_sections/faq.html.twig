@@ -78,7 +78,7 @@
 {% from '_sections/chunks/forms.twig' import formSmall %}
 
 <section class="sec-faq {{- scroll|default(false) ? ' js-sec-scroll' }}">
-    <div class="sec-faq__back"></div>
+    <div class="sec-faq__back lazy"></div>
     <div class="sec-faq__front">
         <div class="container sec-faq__container">
             <h2 class="sec-faq__title">Часто задаваемые вопросы </h2>
@@ -113,7 +113,7 @@
                 </div>
             </div><!-- END sec-faq__row -->
 
-            <img class="sec-faq__girl" src="{{ asset('img/sec-faq/woman.png') }}" alt="Мы готовы помочь">
+            <img class="sec-faq__girl" data-src="{{ asset('img/sec-faq/woman.png') }}" loading="lazy" alt="Мы готовы помочь">
 
         </div><!-- END sec-faq__container -->
     </div><!-- END sec-faq__front -->
