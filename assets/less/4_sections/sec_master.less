@@ -9,9 +9,13 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: no-repeat center;
     background-size: cover;
     background-attachment: fixed;
+    background-image: url("@{img-dir}backgrounds/bg_sec-master.jpg");
+
+    &.lazy {
+      background-image: none;
+    }
 
     &:after {
       content: "";
