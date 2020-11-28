@@ -31,9 +31,28 @@ async function createMap(sectionID) {
 }
 
 const mapSec = () => {
-  require.ensure([], require => require('../../less/2_plugins/YMap.less'));
-  createMap('section-map').then();
-};
+  let lazyloadThrottleTimeout
+  const mapSecNode = document.querySelector('section.sec-map')
+
+  const lazyload = () => {
+    if(lazyloadThrottleTimeout) {
+      clearTimeout(lazyloadThrottleTimeout)
+    }
+    lazyloadThrottleTimeout = setTimeout(() => {
+      const scrollTop = window.pageYOffset
+      if(mapSecNode.offsetTop < (window.innerHeight + scrollTop)) {
+        require.ensure([], require => require('../../less/2_plugins/YMap.less'))
+        createMap('section-map').then(() => {
+          document.removeEventListener("scroll", lazyload)
+          window.removeEventListener("resize", lazyload)
+          window.removeEventListener("orientationChange", lazyload)
+        })
+      }}, 20)
+  }
+  document.addEventListener("scroll", lazyload)
+  window.addEventListener("resize", lazyload)
+  window.addEventListener("orientationChange", lazyload)
+}
 
 export default mapSec;
 
