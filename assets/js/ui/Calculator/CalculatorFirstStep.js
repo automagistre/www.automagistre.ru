@@ -40,6 +40,7 @@ class CalculatorFirstStep extends CalculatorSteps {
   }
 
   set isFetching(status) {
+    this.clear()
     if (status) {
       (new LoadingSpinner(this.mileageNode)).show();
       (new LoadingSpinner(this.equipmentsNode)).show();
