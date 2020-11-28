@@ -7,6 +7,16 @@ const BODY = document.body;
 
 let isMobileView;
 
+if ('loading' in HTMLImageElement.prototype) {
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        img.src = img.dataset.src
+    })
+} else {
+    require.ensure([], require => {
+        require('lazysizes')
+    })
+}
+
 isMobileView = mobChecker(1024);
 
 setTimeout(function() {
