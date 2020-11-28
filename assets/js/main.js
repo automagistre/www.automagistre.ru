@@ -1,6 +1,5 @@
 import './hoc/service'
 import {mobChecker} from "./lib";
-import ServerData from './helpers/ServerData';
 import inDevPopup from './ui/Popups/InDevPopup';
 
 const BODY = document.body;
@@ -16,6 +15,49 @@ if ('loading' in HTMLImageElement.prototype) {
         require('lazysizes')
     })
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    let lazyloadNodes;
+    if ("IntersectionObserver" in window) {
+        lazyloadNodes = document.querySelectorAll(".lazy")
+        const nodeObserver = new IntersectionObserver(entries => {
+            entries.forEach( entry => {
+                if (entry.isIntersecting) {
+                    const node = entry.target
+                    node.classList.remove("lazy")
+                    nodeObserver.unobserve(node)
+                }
+            })
+        })
+        lazyloadNodes.forEach(node => nodeObserver.observe(node))
+    } else {
+        let lazyloadThrottleTimeout
+        lazyloadNodes = document.querySelectorAll(".lazy")
+
+        const lazyload = () => {
+            if(lazyloadThrottleTimeout) {
+                clearTimeout(lazyloadThrottleTimeout)
+            }
+
+            lazyloadThrottleTimeout = setTimeout(() => {
+                const scrollTop = window.pageYOffset;
+                lazyloadNodes.forEach(node => {
+                    if(node.offsetTop < (window.innerHeight + scrollTop)) {
+                        node.classList.remove('lazy')
+                    }
+                });
+                if(lazyloadNodes.length === 0) {
+                    document.removeEventListener("scroll", lazyload)
+                    window.removeEventListener("resize", lazyload)
+                    window.removeEventListener("orientationChange", lazyload)
+                }
+            }, 20)
+        }
+        document.addEventListener("scroll", lazyload)
+        window.addEventListener("resize", lazyload)
+        window.addEventListener("orientationChange", lazyload)
+    }
+})
 
 isMobileView = mobChecker(1024);
 
