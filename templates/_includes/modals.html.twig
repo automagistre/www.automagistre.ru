@@ -55,10 +55,10 @@
                     <div class="sec-start__slider" id="select-car-slider">
                         {% for brand in brands %}
                             <div class="sec-start__slide st-{{ brand.classPref }}">
-                                <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo"></div>
-                                <div class="sec-start__slide-car st-{{ brand.classPref }}__car">
-                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt"></div>
-                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt"></div>
+                                <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo lazy"></div>
+                                <div class="sec-start__slide-car st-{{ brand.classPref }}__car lazy">
+                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt lazy"></div>
+                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt lazy"></div>
                                 </div>
                                 <div class="sec-start__slide-btm">
                                     <a class="btn btn_big sec-start__slide-btn js-select-manufacturer" data-manufactirer="{{ brand.name }}" role="button">Выбрать {{ brand.name }}</a>
@@ -68,10 +68,10 @@
                     </div>
                     <nav class="sec-start__nav">
                         {% for brand in brands %}
-                            <a class="sec-start__nav-link icon-{{ brand.classPref }} js-set-start-slide"
+                            <a class="sec-start__nav-link icon-{{ brand.classPref }} lazy js-set-start-slide"
                                data-slide="{{ brand.id }}"
                                data-content="{{ brand.name }}"
-                               role="button"></a>
+                               role="button">{{ brand.name }}</a>
                         {% endfor %}
                     </nav>
                 </div>
