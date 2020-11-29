@@ -31,9 +31,22 @@ async function createMap(sectionID) {
 }
 
 const mapSec = () => {
-  let lazyloadThrottleTimeout
+  require.ensure([], require => require('../../less/2_plugins/YMap.less'))
   const mapSecNode = document.querySelector('section.sec-map')
+  if ("IntersectionObserver" in window) {
+    const nodeObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const node = entry.target
+          createMap('section-map').then(() => nodeObserver.unobserve(node))
+        }
+      })
+    })
+    nodeObserver.observe(mapSecNode)
+    return
+  }
 
+  let lazyloadThrottleTimeout
   const lazyload = () => {
     if(lazyloadThrottleTimeout) {
       clearTimeout(lazyloadThrottleTimeout)
@@ -41,7 +54,6 @@ const mapSec = () => {
     lazyloadThrottleTimeout = setTimeout(() => {
       const scrollTop = window.pageYOffset
       if(mapSecNode.offsetTop < (window.innerHeight + scrollTop)) {
-        require.ensure([], require => require('../../less/2_plugins/YMap.less'))
         createMap('section-map').then(() => {
           document.removeEventListener("scroll", lazyload)
           window.removeEventListener("resize", lazyload)
