@@ -1,5 +1,4 @@
 import $ from "jquery";
-import PerfectScrollbar from 'perfect-scrollbar'
 import 'jquery-scrollify'
 import {mobChecker} from "../lib";
 import '../sections/start'
@@ -34,21 +33,6 @@ goToButtons.forEach(btn => {
     if (scrollTarget)
         btn.addEventListener('click', ()=>animateScrollTo(scrollTarget))
 });
-
-const customScrollBarOptions = {
-    handlers: ['drag-thumb', 'wheel', 'touch'],
-    swipeEasing: true,
-    maxScrollbarLength: 150
-}
-
-document.querySelectorAll('.js-scroll-x').forEach(el => new PerfectScrollbar(el, {
-    ...customScrollBarOptions,
-    suppressScrollY: true
-}))
-document.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
-    ...customScrollBarOptions,
-    suppressScrollX: true
-}))
 
 $(window).on('load', ()=> {
     $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());

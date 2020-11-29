@@ -5,9 +5,27 @@ import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
+const customScrollBarOptions = {
+  handlers: ['drag-thumb', 'wheel', 'touch'],
+  swipeEasing: true,
+  maxScrollbarLength: 150
+}
+
+
 const faqSec = () => {
-  const formNode  = document.querySelector('section.sec-faq')
-                         .querySelector('.sec-faq__form');
+  const faqSecNode = document.querySelector('section.sec-faq')
+  import('../../less/4_sections/sec_faq.less').then(() => {
+    faqSecNode.querySelectorAll('.js-scroll-x').forEach(el => new PerfectScrollbar(el, {
+      ...customScrollBarOptions,
+      suppressScrollY: true
+    }))
+    faqSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
+      ...customScrollBarOptions,
+      suppressScrollX: true
+    }))
+  })
+
+  const formNode = faqSecNode.querySelector('.sec-faq__form');
   const tabs = 'sec-faq-tabs',
         body = 'sec-faq-body';
   if (mobChecker(760)) {
