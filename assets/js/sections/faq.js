@@ -4,6 +4,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
+import('../../less/2_plugins/perfect-scrollbar')
 
 const customScrollBarOptions = {
   handlers: ['drag-thumb', 'wheel', 'touch'],
@@ -14,7 +15,8 @@ const customScrollBarOptions = {
 
 const faqSec = () => {
   const faqSecNode = document.querySelector('section.sec-faq')
-  import('../../less/4_sections/sec_faq.less').then(() => {
+  import('../../less/4_sections/sec_faq.less')
+  .then(() => {
     faqSecNode.querySelectorAll('.js-scroll-x').forEach(el => new PerfectScrollbar(el, {
       ...customScrollBarOptions,
       suppressScrollY: true
