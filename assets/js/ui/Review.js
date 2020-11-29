@@ -84,7 +84,7 @@ class Review {
     const wrapper = document.createElement('div');
     const title = `${this.author} на <span style="text-transform: capitalize">${this.manufacture} ${this.model}</span>`,
           review = this.contentToHTML,
-          source = `Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" alt="хм">'}`,
+          source = `Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" width="25" height="25" alt="хм">'}`,
           date = `${this.formattedDate}`,
           isLong = this.content.length > 380;
     wrapper.innerHTML =

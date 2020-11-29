@@ -162,6 +162,8 @@ class Calculator {
     carImage.src = `/images/costing/${carImageName}`
     carImage.onerror = () => { carImage.src = "/images/costing/default.jpg" }
     carImage.alt = `${this.model.name}`
+    carImage.width = 170
+    carImage.height = 75
     carImage.classList.add('cg-car__img')
     this.model.img = carImage
 
@@ -193,6 +195,7 @@ class Calculator {
     <div class="cg-car__pict">
         <img class="cg-car__img" 
         src="/images/costing/empty.jpg" 
+        width="170" height="75"
         alt="Выберите модель">
     </div>`;
     this._modelIconNode.append(wrapper)
