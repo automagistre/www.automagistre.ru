@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import '../../less/4_sections/sec_master.less'
 
 const initSlickSlider = () => {
   const slickOptions = {
