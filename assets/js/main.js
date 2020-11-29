@@ -6,15 +6,13 @@ const BODY = document.body;
 
 let isMobileView;
 
-if ('loading' in HTMLImageElement.prototype) {
-    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
-        img.src = img.dataset.src
-    })
-} else {
-    require.ensure([], require => {
-        require('lazysizes')
-    })
-}
+// if ('loading' in HTMLImageElement.prototype) {
+//     document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+//         img.src = img.dataset.src
+//     })
+// } else {
+    import('lazysizes')
+// }
 
 document.addEventListener("DOMContentLoaded", () => {
     let lazyloadNodes;
