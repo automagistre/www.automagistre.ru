@@ -78,3 +78,40 @@ export const script = (url) => {
         t.parentNode.insertBefore(s, t);
     });
 };
+
+export const nodesObserver = (nodes, callback) => {
+    document.addEventListener("DOMContentLoaded", () => {
+        if ("IntersectionObserver" in window) {
+            const nodeObserver = new IntersectionObserver(entries => {
+                entries.forEach( entry => {
+                    if (entry.isIntersecting) {
+                        const node = entry.target
+                        callback(node)
+                        nodeObserver.unobserve(node)
+                    }
+                })
+            })
+            nodes.forEach(node => nodeObserver.observe(node))
+        } else {
+            let lazyloadThrottleTimeout
+
+            const lazyload = () => {
+                if(lazyloadThrottleTimeout) {
+                    clearTimeout(lazyloadThrottleTimeout)
+                }
+
+                lazyloadThrottleTimeout = setTimeout(() => {
+                    const scrollTop = window.pageYOffset;
+                    nodes.forEach(node => {
+                        if(node.offsetTop < (window.innerHeight + scrollTop)) {
+                            callback(node)
+                        }
+                    });
+                }, 20)
+            }
+            document.addEventListener("scroll", lazyload)
+            window.addEventListener("resize", lazyload)
+            window.addEventListener("orientationChange", lazyload)
+        }
+    })
+}
