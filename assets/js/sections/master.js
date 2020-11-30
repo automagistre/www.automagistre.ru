@@ -1,11 +1,11 @@
 import $ from 'jquery';
 import '../../less/4_sections/sec_master.less'
+import PerfectScrollbar from 'perfect-scrollbar';
 
 const initSlickSlider = () => {
   const slickOptions = {
     arrows: true,
     dots: true,
-    lazyLoad: 'ondemand',
     infinite: true,
     speed: 800,
     autoplay: false,
@@ -21,8 +21,20 @@ const initSlickSlider = () => {
   if ($masterSlider.length) $masterSlider.slick(slickOptions)
 };
 
+const customScrollBarOptions = {
+  handlers: ['drag-thumb', 'wheel', 'touch'],
+  swipeEasing: true,
+  maxScrollbarLength: 150
+}
+
 const secMaster = () => {
-  initSlickSlider();
+  const masterSecNode = document.querySelector('section.sec-master')
+  import('../../less/2_plugins/slick-slider').then(() => initSlickSlider()).then(()=> {
+    masterSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
+      ...customScrollBarOptions,
+      suppressScrollX: true
+    }))
+  })
 };
 
 export default secMaster;
