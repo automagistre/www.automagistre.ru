@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import '../../less/4_sections/sec_master.less'
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const initSlickSlider = () => {
@@ -29,7 +28,7 @@ const customScrollBarOptions = {
 
 const secMaster = () => {
   const masterSecNode = document.querySelector('section.sec-master')
-  import('../../less/2_plugins/slick-slider').then(() => initSlickSlider()).then(()=> {
+  import('../../less/4_sections/sec_master.less').then(() => initSlickSlider()).then(()=> {
     masterSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
       ...customScrollBarOptions,
       suppressScrollX: true
