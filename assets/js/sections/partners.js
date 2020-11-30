@@ -22,7 +22,7 @@ const initSlickSlider = () => {
 };
 
 const partnersSec = () => {
-  import('../../less/2_plugins/slick-slider').then(() => initSlickSlider())
+  initSlickSlider()
 };
 
 export default partnersSec;
