@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import '../../less/4_sections/sec_partners'
 
 const initSlickSlider = () => {
   const slickOptions = {
@@ -21,7 +22,7 @@ const initSlickSlider = () => {
 };
 
 const partnersSec = () => {
-  initSlickSlider();
+  import('../../less/2_plugins/slick-slider').then(() => initSlickSlider())
 };
 
 export default partnersSec;
