@@ -38,6 +38,7 @@ module.exports = {
         minimize: true,
         minimizer:[
             new TerserPlugin({
+                extractComments: false,
                 parallel: true,
                 terserOptions: {
                     extractComments: 'all',
@@ -138,6 +139,9 @@ module.exports = {
             filename: PATHS.assets + '[name].[hash].css',
             chunkFilename: PATHS.assets + '[id].[hash].css',
             esModule: true,
+            modules: {
+                namedExport: true,
+            },
         }),
         new CleanWebpackPlugin({
             dry: false,

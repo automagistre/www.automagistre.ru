@@ -4,8 +4,7 @@ import Calculator from '../../ui/Calculator/Calculator';
 import Header from '../../ui/Header';
 import ServerDataSender from '../../helpers/server-data-sender';
 import ErrorFeedBackPopup from '../../ui/Popups/ErrorFeedBackPopup';
-import '../../../less/3_blocks/block_costing'
-import '../../../less/4_sections/sec_costing'
+
 
 const initSlick = node => {
   const slickOptions = {

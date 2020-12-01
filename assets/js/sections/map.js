@@ -1,5 +1,5 @@
 import {script} from "../lib"
-import '../../less/4_sections/sec_map'
+
 
 async function createMap(sectionID) {
     const point = [55.717355, 37.721175],
@@ -32,7 +32,7 @@ async function createMap(sectionID) {
 }
 
 const mapSec = () => {
-  require.ensure([], require => require('../../less/2_plugins/YMap.less'))
+  import('../../less/2_plugins/YMap.less')
   const mapSecNode = document.querySelector('section.sec-map')
   if ("IntersectionObserver" in window) {
     const nodeObserver = new IntersectionObserver(entries => {

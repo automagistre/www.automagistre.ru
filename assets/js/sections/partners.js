@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import '../../less/4_sections/sec_partners'
+
 
 const initSlickSlider = () => {
   const slickOptions = {

@@ -2,8 +2,7 @@ import {SubscribeForm} from '../ui/forms';
 import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
-import '../../less/3_blocks/block_feature'
-import '../../less/4_sections/sec_intro'
+
 
 const introSec = () => {
   const formNode  = document.querySelector('section.sec-intro')

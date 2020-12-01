@@ -19,7 +19,6 @@ class SelectCarWizard {
   steps = []
 
   constructor(node) {
-    import ('../../../less/4_sections/sec_start')
     this.steps[0] = new SelectCarWizardStepManufacturer(node)
     this.steps[1] = new SelectCarWizardStepModel(node)
     this.steps[0].setActive(this.steps[0])
