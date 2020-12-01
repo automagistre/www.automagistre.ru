@@ -18,9 +18,7 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-faq')){
-    require.ensure([], require => {
-      require('../sections/faq').default();
-    })
+    import('../sections/faq').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-work')){
@@ -36,9 +34,7 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-map')){
-    require.ensure([], require => {
-      require('../sections/map').default();
-    })
+    import('../sections/map').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-services')){
@@ -54,15 +50,11 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-master')){
-    require.ensure([], require => {
-      require('../sections/master').default();
-    })
+    import('../sections/master').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-partners')){
-    require.ensure([], require => {
-      require('../sections/partners').default();
-    })
+    import('../sections/partners').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-happen')){
@@ -72,14 +64,10 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-costing')){
-    require.ensure([], require => {
-      require('../sections/costing/costing').default();
-    })
+    import('../sections/costing/costing').then(sec => sec.default())
   }
   if (document.querySelector('section.sec-reviews')){
-    require.ensure([], require => {
-      require('../sections/reviews').default();
-    })
+    import('../sections/reviews').then(sec => sec.default())
   }
   if (document.querySelector('#reviews-grid')){
     require.ensure([], require => {
@@ -92,8 +80,6 @@ export default function initSections() {
     })
   }
   if (document.querySelector('section.sec-intro')){
-    require.ensure([], require => {
-      require('../sections/intro').default();
-    })
+    import('../sections/intro').then(sec => sec.default())
   }
 }

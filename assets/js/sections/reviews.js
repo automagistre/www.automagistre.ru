@@ -1,8 +1,7 @@
 import Review from '../ui/Review';
 import $ from 'jquery';
 import reviews from '../ui/reviews';
-import '../../less/4_sections/sec_reviews.less'
-// import '../../less/3_blocks/re'
+
 
 const initSlick = () => {
   const $slider = $('#sec-reviews-slider'),
@@ -44,7 +43,7 @@ const reviewSec = () => {
        node.append(new Review(reviewObj).render())
        $reviewsNode.append(node);
      });
-     import('../../less/3_blocks/block_review-card').then(()=> initSlick())
+  initSlick()
   }
 };
 

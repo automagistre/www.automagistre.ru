@@ -6,7 +6,8 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-const SERVER_URL = APOLLO_URL
+// const SERVER_URL = APOLLO_URL
+const SERVER_URL = 'http://automagistre.local:3000'
 
 class ServerData {
 

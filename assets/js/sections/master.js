@@ -28,12 +28,11 @@ const customScrollBarOptions = {
 
 const secMaster = () => {
   const masterSecNode = document.querySelector('section.sec-master')
-  import('../../less/4_sections/sec_master.less').then(() => initSlickSlider()).then(()=> {
-    masterSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
-      ...customScrollBarOptions,
-      suppressScrollX: true
-    }))
-  })
-};
+  initSlickSlider()
+  masterSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
+    ...customScrollBarOptions,
+    suppressScrollX: true
+  }))
+}
 
 export default secMaster;
