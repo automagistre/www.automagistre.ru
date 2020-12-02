@@ -38,7 +38,7 @@
         <div class="sec-intro__panels">
             {% for panel in panels %}
                 <div class="panel sec-intro__panel {{ panel.class }}">
-                    <div class="panel__back"></div>
+                    <div class="panel__back lazy"></div>
                     <div class="panel__info">
                         <div class="panel__num">{{ panel.num }}</div>
                         <h2 class="panel__title">{{ panel.title | raw }}</h2>
