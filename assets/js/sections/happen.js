@@ -5,7 +5,8 @@ import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
 const happenSec = () => {
-  odometer('js-odometer')
+  const happenSecNode = document.querySelector('section.sec-happen')
+  odometer(happenSecNode.querySelector('.sec-happen__facts'))
   const formNode  = document.querySelector('section.sec-happen')
   .querySelector('.sec-happen__form');
 
