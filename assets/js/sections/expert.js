@@ -110,15 +110,14 @@ const expertSec = () => {
         },
     ]
     const imgPromises = []
-    for (let img of expertBackImages) {
-        imgPromises.push(import(`../../img/sec-expert/${img.img}`).then(res=>{
-            img.node.src = res.default
-        }))
-    }
-    Promise.all(imgPromises).then(()=>{
-        nodesObserver(document.querySelectorAll('section.sec-features'), ()=> {
-            initParallaxAnimation(expertBackNode, expertBackImages)
-        })
+
+    nodesObserver([expertBackNode], ()=> {
+        for (let img of expertBackImages) {
+            imgPromises.push(import(/* webpackPrefetch: true */ `../../img/sec-expert/${img.img}`).then(res=>{
+                img.node.src = res.default
+            }))
+        }
+        Promise.all(imgPromises).then(()=>{initParallaxAnimation(expertBackNode, expertBackImages)})
     })
     initSlickSlider()
 };

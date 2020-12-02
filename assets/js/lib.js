@@ -106,7 +106,7 @@ export const nodesObserver = (nodes, callback) => {
                     nodeObserver.unobserve(node)
                 }
             })
-        })
+        },{threshold: 0.001})
         nodes.forEach(node => nodeObserver.observe(node))
     } else {
         let lazyloadThrottleTimeout
