@@ -27,9 +27,9 @@
                     <div class="proposal__more">
                         <a class="btn" href="{{ path('diagnostics', {'type': 'comp'}) }}">Подробнее об услуге</a>
                     </div>
-                    <img class="proposal__img proposal__img-lt" src="{{ asset('img/sec-features/proposal-lt.png') }}" alt="Бесплатная диагностика">
-                    <img class="proposal__img proposal__img-rt" src="{{ asset('img/sec-features/proposal-rt.png') }}" alt="Бесплатная диагностика">
-                    <img class="proposal__img proposal__img-btm" src="{{ asset('img/sec-features/proposal-btm.png') }}" alt="Бесплатная диагностика">
+                    <img class="proposal__img proposal__img-lt lazyload" data-src="{{ asset('img/sec-features/proposal-lt.png') }}" loading="lazy" alt="Бесплатная диагностика">
+                    <img class="proposal__img proposal__img-rt lazyload" data-src="{{ asset('img/sec-features/proposal-rt.png') }}" loading="lazy" alt="Бесплатная диагностика">
+                    <img class="proposal__img proposal__img-btm lazyload" data-src="{{ asset('img/sec-features/proposal-btm.png') }}" loading="lazy" alt="Бесплатная диагностика">
                 </div>
             </div>
         </div>
