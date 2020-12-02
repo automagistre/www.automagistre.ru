@@ -327,7 +327,8 @@ class CalendarInlineInput extends FormInputs {
       position: 'below',
       inline: true,
       defaultDate: this._value,
-      onChange: selectedDate => this.value = selectedDate[0]
+      onChange: selectedDate => this.value = selectedDate[0],
+      onReady: ()=> import('../../less/2_plugins/flatpickr_light.css')
     };
     this._calendar = new Flatpickr(inputNode, options)
   }
