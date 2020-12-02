@@ -1,22 +1,14 @@
-import {mobChecker, startParallax} from "../lib";
+import {mobChecker, nodesObserver, startParallax} from '../lib';
 import TweenMax from "gsap/TweenMax";
 
-const initParallaxAnimation = () => {
-    const features = document.querySelector('#sec-features-back');
+
+const initParallaxAnimation = (features, images) => {
     if (!mobChecker(1024) && features) {
-        const secFeatures = [
-            [features.querySelector('.sec-features__lt-img_min'), 8],
-            [features.querySelector('.sec-features__lt-img_big'), 5],
-            [features.querySelector('.sec-features__lt-img_blur'), 2],
-            [features.querySelector('.sec-features__rt-img_min'), 7],
-            [features.querySelector('.sec-features__rt-img_big'), 3],
-            [features.querySelector('.sec-features__rt-img_blur'), 2],
-        ];
         const featuresParr = () => {
             let thisOffset = startParallax(features);
             if (thisOffset) {
-                for( let [sprite, pos] of secFeatures) {
-                    TweenMax.to(sprite,  2, {y: thisOffset / pos, force3D: true, delay: 0.1});
+                for( let image of images) {
+                    TweenMax.to(image.node,  2, {y: thisOffset / image.position, force3D: true, delay: 0.1});
                 }
             }
         };
@@ -27,7 +19,50 @@ const initParallaxAnimation = () => {
 };
 
 const featuresSec = () => {
-    initParallaxAnimation();
-};
+    const featuresSecNode = document.querySelector('#sec-features-back');
+    const parallaxImages = [
+        {
+            node: featuresSecNode.querySelector('.sec-features__lt-img_min'),
+            img: 'lt-img_min.png',
+            position: 8
+        },
+        {
+            node: featuresSecNode.querySelector('.sec-features__lt-img_big'),
+            img: 'lt-img_big.png',
+            position: 5
+        },
+        {
+            node: featuresSecNode.querySelector('.sec-features__lt-img_blur'),
+            img: 'lt-img_blur.png',
+            position: 2
+        },
+        {
+            node: featuresSecNode.querySelector('.sec-features__rt-img_min'),
+            img: 'rt-img_min.png',
+            position: 7
+        },
+        {
+            node: featuresSecNode.querySelector('.sec-features__rt-img_big'),
+            img: 'rt-img_big.png',
+            position: 3
+        },
+        {
+            node: featuresSecNode.querySelector('.sec-features__rt-img_blur'),
+            img: 'rt-img_blur.png',
+            position: 2
+        },
+    ]
+    const imgPromises = []
+    for (let img of parallaxImages) {
+        imgPromises.push(import(`../../img/sec-features/${img.img}`).then(res=>{
+            img.node.src = res.default
+        }))
+    }
+    Promise.all(imgPromises).then(()=>{
+        nodesObserver(document.querySelectorAll('section.sec-features'), ()=> {
+            initParallaxAnimation(featuresSecNode, parallaxImages);
+        })
+    })
+}
 
 export default featuresSec;
