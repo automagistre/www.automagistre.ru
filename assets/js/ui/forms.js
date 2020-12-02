@@ -298,11 +298,14 @@ class CalendarInput extends FormInputs {
       minDate: "today",
       position: 'above left',
       positionElement: inputNode,
+      monthSelectorType: 'static',
+      clickOpens: false,
       // static: true,
       onChange: selectedDate => this.value = selectedDate[0],
       onReady: ()=> import('../../less/2_plugins/flatpickr_light.css')
     };
     this._calendar = new Flatpickr(inputNode, options)
+    inputNode.addEventListener('click', this._calendar.open)
   }
 
   _validator(value) {
@@ -327,6 +330,7 @@ class CalendarInlineInput extends FormInputs {
       position: 'below',
       inline: true,
       defaultDate: this._value,
+      monthSelectorType: 'static',
       onChange: selectedDate => this.value = selectedDate[0],
       onReady: ()=> import('../../less/2_plugins/flatpickr_light.css')
     };
