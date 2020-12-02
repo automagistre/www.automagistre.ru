@@ -1,4 +1,5 @@
 import Odometer from 'odometer';
+import TweenMax from 'gsap/TweenMax';
 
 export const mobChecker = (maxWinWidth) =>
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -6,7 +7,7 @@ export const mobChecker = (maxWinWidth) =>
         window.matchMedia('(max-width: ' + maxWinWidth + 'px)').matches ||
         document.body.clientWidth < maxWinWidth;
 
-export const startParallax = element => {
+const startParallax = element => {
     const winScroll = window.scrollY,
           winHeight = window.innerHeight;
     let secTop = element.getBoundingClientRect().top + pageYOffset,
@@ -15,6 +16,22 @@ export const startParallax = element => {
     stopLevel = secTop + winHeight;
     if (winScroll < startLevel || winScroll > stopLevel) return false;
     return  winScroll - startLevel;
+};
+
+export const initParallaxAnimation = (features, images) => {
+    if (!mobChecker(1024) && features) {
+        const featuresParr = () => {
+            let thisOffset = startParallax(features);
+            if (thisOffset) {
+                for( let image of images) {
+                    TweenMax.to(image.node,  2, {y: thisOffset / image.position, force3D: true, delay: 0.1});
+                }
+            }
+        };
+        document.addEventListener('scroll', featuresParr)
+    } else {
+        throw new Error('Failed init parallax in sec-features')
+    }
 };
 
 export const odometer = className => {

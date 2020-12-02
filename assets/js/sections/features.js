@@ -1,22 +1,4 @@
-import {mobChecker, nodesObserver, startParallax} from '../lib';
-import TweenMax from "gsap/TweenMax";
-
-
-const initParallaxAnimation = (features, images) => {
-    if (!mobChecker(1024) && features) {
-        const featuresParr = () => {
-            let thisOffset = startParallax(features);
-            if (thisOffset) {
-                for( let image of images) {
-                    TweenMax.to(image.node,  2, {y: thisOffset / image.position, force3D: true, delay: 0.1});
-                }
-            }
-        };
-        document.addEventListener('scroll', featuresParr)
-    } else {
-        throw new Error('Failed init parallax in sec-features')
-    }
-};
+import {nodesObserver, initParallaxAnimation} from '../lib';
 
 const featuresSec = () => {
     const featuresSecNode = document.querySelector('#sec-features-back');

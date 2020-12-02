@@ -1,42 +1,8 @@
-import {mobChecker, startParallax} from "../lib";
-import TweenMax from "gsap/TweenMax";
+import { initParallaxAnimation, nodesObserver } from '../lib';
 import $ from "jquery";
 import "slick-carousel";
 import 'modal-video/js/jquery-modal-video';
 
-const initParallaxAnimation = () => {
-    const expertBack = document.querySelector('#sec-expert-back');
-    if (expertBack) {
-        const secExpert = [
-            [expertBack.querySelector('.sec-expert__lt-img_01'), 14],
-            [expertBack.querySelector('.sec-expert__lt-img_02'), 12],
-            [expertBack.querySelector('.sec-expert__lt-img_03'), 10],
-            [expertBack.querySelector('.sec-expert__lt-img_04'), 8],
-            [expertBack.querySelector('.sec-expert__lt-img_05'), 6],
-            [expertBack.querySelector('.sec-expert__lt-img_06'), 4],
-            [expertBack.querySelector('.sec-expert__lt-img_07'), 2],
-            [expertBack.querySelector('.sec-expert__rt-img_01'), 12],
-            [expertBack.querySelector('.sec-expert__rt-img_02'), 10],
-            [expertBack.querySelector('.sec-expert__rt-img_03'), 8],
-            [expertBack.querySelector('.sec-expert__rt-img_04'), 6],
-            [expertBack.querySelector('.sec-expert__rt-img_05'), 4],
-            [expertBack.querySelector('.sec-expert__rt-img_06'), 2],
-        ];
-        const expertParr = () => {
-            let thisOffset = startParallax(expertBack);
-            if (thisOffset) {
-                for (let [sprite, pos] of secExpert) {
-                    TweenMax.to(sprite, 2, {y: thisOffset / pos, force3D: true, delay: 0.1});
-                }
-            }
-        };
-        if (!mobChecker(1024) && expertBack) {
-            document.addEventListener('scroll', expertParr);
-        }
-    } else {
-        throw new Error('Fail init parallax in sec-expert')
-    }
-};
 
 const initSlickSlider = () => {
     const slickOptions = {
@@ -75,8 +41,86 @@ const initSlickSlider = () => {
 };
 
 const expertSec = () => {
-    initParallaxAnimation();
-    initSlickSlider();
+    const expertBackNode = document.querySelector('#sec-expert-back')
+    const expertBackImages = [
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_01'),
+            img: 'lt-img_01.png',
+            position: 14
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_02'),
+            img: 'lt-img_02.png',
+            position: 12
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_03'),
+            img: 'lt-img_03.png',
+            position: 10
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_04'),
+            img: 'lt-img_04.png',
+            position: 8
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_05'),
+            img: 'lt-img_05.png',
+            position: 6
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_06'),
+            img: 'lt-img_06.png',
+            position: 4
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__lt-img_07'),
+            img: 'lt-img_07.png',
+            position: 2
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_01'),
+            img: 'rt-img_01.png',
+            position: 12
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_02'),
+            img: 'rt-img_02.png',
+            position: 10
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_03'),
+            img: 'rt-img_03.png',
+            position: 8
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_04'),
+            img: 'rt-img_04.png',
+            position: 6
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_05'),
+            img: 'rt-img_05.png',
+            position: 4
+        },
+        {
+            node: expertBackNode.querySelector('.sec-expert__rt-img_06'),
+            img: 'rt-img_06.png',
+            position: 2
+        },
+    ]
+    const imgPromises = []
+    for (let img of expertBackImages) {
+        imgPromises.push(import(`../../img/sec-expert/${img.img}`).then(res=>{
+            img.node.src = res.default
+        }))
+    }
+    Promise.all(imgPromises).then(()=>{
+        nodesObserver(document.querySelectorAll('section.sec-features'), ()=> {
+            initParallaxAnimation(expertBackNode, expertBackImages)
+        })
+    })
+    initSlickSlider()
 };
 
 export default expertSec;
