@@ -27,7 +27,10 @@
             <div class="container">
                 <div class="sec-about__row">
                     <div class="sec-about__col-lt">
-                        <img class="sec-about__comp" src="{{ asset('img/sec-about/about_comp.png') }}" alt="Компьютерная диагностика">
+                        <img class="sec-about__comp lazyload"
+                             data-src="{{ asset('img/sec-about/about_comp.png') }}"
+                             loading="lazy"
+                             alt="Компьютерная диагностика">
                     </div>
                     <div class="sec-about__col-rt">
                         <h2 class="sec-about__title">Компьютер знает всё о вашем автомобиле</h2>
@@ -50,7 +53,10 @@
                         </div>
                     </div>
                 </div>
-                <img class="sec-about__robot" src="{{ asset('img/sec-about/about_robot.png') }}" alt="Компьютерная диагностика">
+                <img class="sec-about__robot lazyload"
+                     data-src="{{ asset('img/sec-about/about_robot.png') }}"
+                     loading="lazy"
+                     alt="Компьютерная диагностика">
             </div><!-- END container -->
         </section><!-- END sec-about -->
 
