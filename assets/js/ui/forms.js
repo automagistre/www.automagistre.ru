@@ -1,7 +1,6 @@
 import isEmail from 'is-email'
 import IMask from 'imask'
 import Flatpickr from 'flatpickr'
-import '../../less/2_plugins/flatpickr_light.css'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
 
 
@@ -300,7 +299,8 @@ class CalendarInput extends FormInputs {
       position: 'above left',
       positionElement: inputNode,
       // static: true,
-      onChange: selectedDate => this.value = selectedDate[0]
+      onChange: selectedDate => this.value = selectedDate[0],
+      onReady: ()=> import('../../less/2_plugins/flatpickr_light.css')
     };
     this._calendar = new Flatpickr(inputNode, options)
   }
