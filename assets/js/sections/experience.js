@@ -2,7 +2,7 @@ import {odometer} from '../lib';
 
 
 const experienceSec = () => {
-  odometer('js-odometer')
+  odometer(document.querySelector('.sec-experience__facts'))
 };
 
 export default experienceSec;
