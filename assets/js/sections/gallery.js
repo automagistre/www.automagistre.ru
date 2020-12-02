@@ -11,7 +11,7 @@ const gallerySec = () => {
         () => {
             zooming.listen('.sec-gallery__img');
         })
-    odometer('facts');
+    odometer(document.querySelector('.sec-gallery__facts'));
 };
 
 export default gallerySec;
