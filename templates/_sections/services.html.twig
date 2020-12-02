@@ -58,7 +58,8 @@
                     <div class="sec-services__picts">
                         {% for block in secData %}
                             <img class="sec-services__img js-services-img {{ block.active|default(false) ? 'is-active' : '' }}"
-                                 src="{{ block.img }}"
+                                 data-src="{{ block.img }}"
+                                 loading="lazy"
                                  alt="{{ block.title }}"
                                  data-kind="{{ block.num }}">
                         {% endfor %}
