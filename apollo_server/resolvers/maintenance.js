@@ -1,6 +1,6 @@
 import Maintenance from '../mongo/maintenanceShema';
 
-const  resolvers = {
+export default {
   Query: {
 
     async getVehiclesByManufacturerID(_, args) {
@@ -23,4 +23,3 @@ const  resolvers = {
   }
 }
 
-export default resolvers

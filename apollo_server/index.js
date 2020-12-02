@@ -1,11 +1,19 @@
 const { ApolloServer } = require('apollo-server')
-import typeDefs from './typeDefs/maintenance'
-import resolvers from './resolvers/maintenance';
+const { mergeTypeDefs } = require('@graphql-tools/merge');
+const { composeResolvers } = require('@graphql-tools/resolvers-composition');
+import maintenanceDefs from './typeDefs/maintenance'
+import reviewDefs from './typeDefs/review';
+import Queries from './typeDefs/Query';
+import maintenanceResolvers from './resolvers/maintenance';
+import reviewsResolvers from './resolvers/reviews';
 import mongoose from  'mongoose'
 
 const DB_URL = process.env.MONGO_URL || 'mongodb://localhost/www'
 const SERVER_URL = process.env.SERVER_URL || 'localhost'
 const SERVER_PORT = 3000
+
+const typeDefs = mergeTypeDefs([maintenanceDefs, reviewDefs, Queries])
+const resolvers = composeResolvers([maintenanceResolvers, reviewsResolvers])
 
 class Server {
 
