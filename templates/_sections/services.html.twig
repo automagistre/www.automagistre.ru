@@ -57,7 +57,7 @@
                     <div class="sec-services__count" id="services-count">{{ initActiveNum }}</div>
                     <div class="sec-services__picts">
                         {% for block in secData %}
-                            <img class="sec-services__img js-services-img {{ block.active|default(false) ? 'is-active' : '' }}"
+                            <img class="sec-services__img lazyload js-services-img {{ block.active|default(false) ? 'is-active' : '' }}"
                                  data-src="{{ block.img }}"
                                  loading="lazy"
                                  alt="{{ block.title }}"
