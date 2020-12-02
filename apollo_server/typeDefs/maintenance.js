@@ -1,7 +1,7 @@
 const {gql} = require('apollo-server')
 
 
-const typeDefs = gql`
+export default gql`  
   type Maintenance {
       id: ID,
       engine: Engine,
@@ -66,13 +66,4 @@ const typeDefs = gql`
       amount: String,
       currency: String,
   }
-  
-  type Query {
-      getVehiclesByManufacturerID(manufacturerID: String): [Vehicle]!,
-      getVehicleByID(id: String): Vehicle
-      getWorksByMaintenanceID(id: String): [Work]!
-      maintenancesByVehicleID(id: String): [Maintenance]!
-      
-  }
 `
-export default typeDefs

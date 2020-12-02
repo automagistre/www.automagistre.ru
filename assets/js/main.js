@@ -1,6 +1,7 @@
 import './hoc/service'
 import {mobChecker, nodesObserver} from "./lib";
 import inDevPopup from './ui/Popups/InDevPopup';
+import ServerData from './helpers/ServerData';
 
 const BODY = document.body;
 
@@ -32,3 +33,6 @@ document.querySelectorAll('.js-in-dev').forEach(link => {
         popup.open()
     })
 })
+
+const server = new ServerData()
+server.getReviews().then(res=> console.log(res))
