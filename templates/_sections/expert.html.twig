@@ -28,7 +28,7 @@
 ] %}
 
 <section class="sec-expert js-sec-scroll">
-    <div class="sec-expert__back" id="sec-expert-back">
+    <div class="sec-expert__back lazy" id="sec-expert-back">
         <div class="sec-expert__parr-lt">
             <img class="sec-expert__parr-img sec-expert__lt-img_01" src="" alt="Авторемонт">
             <img class="sec-expert__parr-img sec-expert__lt-img_02" src="" alt="Авторемонт">
@@ -79,6 +79,6 @@
                 </div><!-- END sec-expert__slide -->
             {% endfor %}
         </div><!-- END sec-expert__slider -->
-        <img class="sec-expert__worker" src="{{ asset('images/sec-expert/worker.png') }}" alt="Авторемонтник">
+        <img class="sec-expert__worker lazyload" data-src="{{ asset('images/sec-expert/worker.png') }}" loading="lazy" alt="Авторемонтник">
     </div><!-- END sec-expert__front -->
 </section><!-- END sec-expert -->

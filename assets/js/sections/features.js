@@ -35,14 +35,14 @@ const featuresSec = () => {
         },
     ]
     const imgPromises = []
-    for (let img of parallaxImages) {
-        imgPromises.push(import(`../../img/sec-features/${img.img}`).then(res=>{
-            img.node.src = res.default
-        }))
-    }
-    Promise.all(imgPromises).then(()=>{
-        nodesObserver(document.querySelectorAll('section.sec-features'), ()=> {
-            initParallaxAnimation(featuresSecNode, parallaxImages);
+    nodesObserver([featuresSecNode], ()=> {
+        for (let img of parallaxImages) {
+            imgPromises.push(import(/* webpackPrefetch: true */ `../../img/sec-features/${img.img}`).then(res=>{
+                img.node.src = res.default
+            }))
+        }
+        Promise.all(imgPromises).then(()=>{
+        initParallaxAnimation(featuresSecNode, parallaxImages);
         })
     })
 }
