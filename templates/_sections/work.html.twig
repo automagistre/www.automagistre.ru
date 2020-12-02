@@ -151,10 +151,16 @@
                             {% for image in work.images %}
                                 <div class="sec-work__slide js-type-{{ work.key }}">
                                     <div class="sec-work__slide-back">
-                                        <img class="sec-work__slide-min" src="{{ image.small }}" alt="{{ image.smallImgTitle }}">
+                                        <img class="sec-work__slide-min"
+                                             data-src="{{ image.small }}"
+                                             loading="lazy"
+                                             alt="{{ image.smallImgTitle }}">
                                     </div>
                                     <div class="sec-work__slide-front">
-                                        <img class="sec-work__slide-big" src="{{ image.big }}" alt="{{ image.bigImgTitle }}">
+                                        <img class="sec-work__slide-big"
+                                             data-src="{{ image.big }}"
+                                             loading="lazy"
+                                             alt="{{ image.bigImgTitle }}">
                                         <div class="sec-work__slide-note"><span>{{ image.title }}</span></div>
                                     </div>
                                 </div>
