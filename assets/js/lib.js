@@ -34,24 +34,20 @@ export const initParallaxAnimation = (features, images) => {
     }
 };
 
-export const odometer = className => {
-    const odBlock = document.getElementsByClassName(className)[0];
+export const odometer = odNode => {
     const startOdometer = () =>{
-        if (odBlock.getBoundingClientRect().top + pageYOffset < pageYOffset + window.innerHeight - 100) {
-            document.querySelectorAll('.js-odometer').forEach(odElem => {
-                odElem.classList.remove('is-hidden');
-                let od = new Odometer({
-                    el: odElem,
-                    value: odElem.innerText,
-                    format: '( ddd)',
-                    duration: 3000,});
-                od.update(odElem.dataset.value);
-                document.removeEventListener('scroll', startOdometer)
-            })
-        }
-    };
-    document.addEventListener('scroll', startOdometer);
-};
+        odNode.querySelectorAll('.js-odometer').forEach(odElem => {
+            odElem.classList.remove('is-hidden')
+            let od = new Odometer({
+                el: odElem,
+                value: odElem.innerText,
+                format: '( ddd)',
+                duration: 3000,});
+            od.update(odElem.dataset.value)
+        })
+    }
+    nodesObserver([odNode], ()=> startOdometer())
+}
 
 export const initTabs = (tabsID, bodyID) => {
     const changeTab = event => {
