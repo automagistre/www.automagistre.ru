@@ -166,6 +166,10 @@ module.exports = {
                         ignore: ['*/uncompressed/*']
                     }
                 },
+                {
+                    from: PATHS.src + 'fonts',
+                    to: PATHS.dist + 'fonts',
+                },
             ],
         }),
         new ManifestPlugin(),
