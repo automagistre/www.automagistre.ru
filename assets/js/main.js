@@ -33,6 +33,3 @@ document.querySelectorAll('.js-in-dev').forEach(link => {
         popup.open()
     })
 })
-
-const server = new ServerData()
-server.getReviews().then(res=> console.log(res))
