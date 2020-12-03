@@ -12,7 +12,7 @@ export default {
     },
 
     async getCountOfReviews() {
-      return Reviews.count({})
+      return Reviews.countDocuments()
     }
   }
 }
