@@ -149,6 +149,23 @@ class ServerData {
       }
     }
   }
+
+  async getCountOfReviews() {
+    try {
+      const {data} = await this.client.query({
+        query: getCountOfReviews,
+      })
+      return {
+        'response': 200,
+        'data': data.getCountOfReviews
+      }
+    } catch (e) {
+      return {
+        'response': 500,
+        'data': 376
+      }
+    }
+  }
 }
 
 export default ServerData;
