@@ -2,8 +2,17 @@ import Reviews from '../mongo/reviewShema';
 
 export default {
   Query: {
-    async getReviews() {
-      return Reviews.find().sort({'publishAt': -1}).skip(20).limit(10)
+
+    async getLastReviews(_, args) {
+      return Reviews.find().sort({'publishAt': -1}).limit(args.count)
+    },
+
+    async getReviewsByPageNumber(_, args) {
+      return Reviews.find().sort({'publishAt': -1}).skip(args.count * args.page).limit(args.count)
+    },
+
+    async getCountOfReviews() {
+      return Reviews.count({})
     }
   }
 }

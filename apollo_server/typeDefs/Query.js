@@ -7,7 +7,9 @@ const Queries = gql`
         getVehicleByID(id: String): Vehicle
         getWorksByMaintenanceID(id: String): [Work]!
         maintenancesByVehicleID(id: String): [Maintenance]!
-        getReviews: [Review]
+        getLastReviews(count: Int): [Review]
+        getReviewsByPageNumber(count: Int, page: Int): [Review]
+        getCountOfReviews: Int
     }
 `
 export default Queries
