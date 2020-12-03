@@ -150,6 +150,32 @@ class ServerData {
     }
   }
 
+  async getReviewsByPageNumber(count, page) {
+    try {
+      const {data} = await this.client.query({
+        query: getReviewsByPageNumber,
+        variables: {count, page}})
+      return {
+        'response': 200,
+        'data': data.getReviewsByPageNumber.map(review => {
+          return {
+            author: review.author,
+            manufacturer: '',
+            model: '',
+            content: review.content,
+            source: '',
+            publish_at: new Date(review.publishAt)
+          };
+        })
+      }
+    } catch (e) {
+      return {
+        'response': 500,
+        'data': []
+      }
+    }
+  }
+
   async getCountOfReviews() {
     try {
       const {data} = await this.client.query({
