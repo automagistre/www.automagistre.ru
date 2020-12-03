@@ -1,6 +1,6 @@
-import Review from '../ui/Review';
-import $ from 'jquery';
-import reviews from '../ui/reviews';
+import Review from '../ui/Review'
+import $ from 'jquery'
+import ServerData from '../helpers/ServerData'
 
 
 const initSlick = () => {
@@ -22,29 +22,31 @@ const initSlick = () => {
           ],
         };
   if ($slider.length) {
-    $slider.slick(options);
+    $slider.slick(options)
     return true
   }
   return false
-};
+}
 
-const reviewSec = () => {
-  const $reviewsNode = $('#sec-reviews-slider');
+const reviewSec = async () => {
+  const secReviewNode = document.querySelector('section.sec-reviews'),
+        reviewsBTN = secReviewNode.querySelector('.sec-reviews__more-btn')
+  const serverData = new ServerData()
+  const $reviewsNode = $('#sec-reviews-slider')
   if ($reviewsNode) {
-     const reviews10 = reviews.sort((a, b) => {
-       if (a.publish_at > b.publish_at) return -1;
-       if (a.publish_at < b.publish_at) return 1;
-       return 0;
-     }).slice(0, 10);
-
-     reviews10.forEach(reviewObj => {
-       const node = document.createElement('div');
-       node.className = 'sec-reviews__slide';
-       node.append(new Review(reviewObj).render())
-       $reviewsNode.append(node);
-     });
-  initSlick()
+    const reviews10 = await serverData.getLastReviews(8)
+    const reviewsCountResponse = await serverData.getCountOfReviews()
+    const reviewsCount = Math.floor(reviewsCountResponse.data / 10) * 10
+    if (reviews10.response !== 200) return
+    reviewsBTN.textContent = `Посмотреть более ${reviewsCount} отзывов`
+    reviews10.data.forEach(reviewObj => {
+      const node = document.createElement('div')
+      node.className = 'sec-reviews__slide'
+      node.append(new Review(reviewObj).render())
+      $reviewsNode.append(node)
+    })
+    initSlick()
   }
-};
+}
 
-export default reviewSec;
+export default reviewSec
