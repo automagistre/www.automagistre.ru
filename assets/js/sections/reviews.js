@@ -1,5 +1,6 @@
 import Review from '../ui/Review'
 import $ from 'jquery'
+import 'slick-carousel'
 import ServerData from '../helpers/ServerData'
 
 
