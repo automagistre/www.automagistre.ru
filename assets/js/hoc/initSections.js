@@ -86,4 +86,7 @@ export default function initSections() {
     import('../../less/3_blocks/block_blog-card')
     import('../../less/3_blocks/block_blog-list')
   }
+  if (document.querySelector('#js-article-page')) {
+    import('../pages/article').then(sec => sec.default())
+  }
 }
