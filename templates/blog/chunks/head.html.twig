@@ -1,0 +1,12 @@
+{% block head %}
+    <div class="article__head">
+        <div class="article__head-back" style="background-image: url({{ asset(article.img_path ~ article.background) }})"></div>
+        <div class="article__head-front">
+            <div class="container">
+                <a class="btn btn_gray-outlined article__go-back" href="/blog">В блог</a>
+                <h2 class="article__title">{{ article.title }}</h2>
+                <div class="article__date">{{ article.date }}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

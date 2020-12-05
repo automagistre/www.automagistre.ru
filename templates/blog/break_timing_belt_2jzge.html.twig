@@ -7,20 +7,11 @@
     'img_path': 'images/blog/break_timing_belt_2jzgte/'
 } %}
 
-{% set gallery = [] %}
 
 {% block content %}
     <main class="site-main article" id="site-main">
-        <div class="article__head">
-            <div class="article__head-back" style="background-image: url({{ asset(article.img_path ~ article.background) }})"></div>
-            <div class="article__head-front">
-                <div class="container">
-                    <a class="btn btn_gray-outlined article__go-back" href="/blog">В блог</a>
-                    <h2 class="article__title">{{ article.title }}</h2>
-                    <div class="article__date">{{ article.date }}</div>
-                </div>
-            </div>
-        </div>
+
+    {{ include('blog/chunks/head.html.twig') }}
 
         <div class="article__body" id="js-article-page">
             <div class="user-content-styles">
@@ -42,10 +33,13 @@
                 <p>
                     В итоге посчитав сумму денег, которая понадобиться для восстановления данной ГБЦ, было принято решение поменять её на б/у с не большим косметическим ремонтом (правка клапанов и замена сальников штока клапанов)
                 </p>
-                <figure class="ucs-figure">
-                    <img src="{{ asset(article.img_path ~ 'break_timing_belt_2jzge_03.jpg') }}" data-action="zoom" alt="Lorem ipsum dolor">
-                    <figcaption>6 клапанов закончили свой путь</figcaption>
-                </figure>
+
+                {% set figure = {
+                    'img': 'break_timing_belt_2jzge_03.jpg',
+                    'txt': '6 клапанов закончили свой путь'
+                } %}
+
+                {{ include('blog/chunks/figure.html.twig') }}
 
                 <p>
                     Можно сказать, что проведенный нами ремонт вышел вполне в бюджетную сумму, но последствия могли быть и намного печальнее. Допустим если бы оторвало тарелку клапана,она запросто могла пробить и гильзу блока, и тогда проблем было бы ещё больше.
@@ -64,62 +58,10 @@
                     {'img': 'break_timing_belt_2jzge_06.jpg', 'txt': ''},
                     {'img': 'break_timing_belt_2jzge_07.jpg', 'txt': ''},
                 ] %}
-                <div class="ucs-gallery js-ucs-gallery">
-                    {% for img in galleryItems %}
-                        <div class="ucs-gallery__slide">
-                            <img class="ucs-gallery__img lazyload" data-src="{{ asset(article.img_path ~ img.img) }}" loading='lazy' alt="{{ img.txt ? img.txt : 'Слайд' }}">
-                            {% if img.txt %}
-                                <div class="ucs-gallery__txt">{{ img.txt }}</div>
-                            {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
+
+                {{ include('blog/chunks/gallery.html.twig') }}
+
             </div><!-- END user-content-styles -->
-
-{#            <div class="share">#}
-{#                <div class="share__title">Поделиться статьей:</div>#}
-{#                <ul class="share__list">#}
-{#                    <li class="share__item">#}
-{#                        <a class="share__link icon-yt" role="button"><span>100</span></a>#}
-{#                    </li>#}
-{#                    <li class="share__item">#}
-{#                        <a class="share__link icon-vk" role="button"><span>0</span></a>#}
-{#                    </li>#}
-{#                    <li class="share__item">#}
-{#                        <a class="share__link icon-tw" role="button"><span>57</span></a>#}
-{#                    </li>#}
-{#                    <li class="share__item">#}
-{#                        <a class="share__link icon-fb" role="button"><span>934</span></a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-
         </div><!-- END article__body -->
-
-        <section class="sec-announces">
-            <div class="container">
-{#                <h2 class="sec-announces__title">Похожие статьи</h2>#}
-                <div class="sec-announces__slider js-announces-slider">
-
-{#                    <div class="sec-announces__slide">#}
-{#                        <div class="blog-card">#}
-{#                            <a class="blog-card__pict">#}
-{#                                <img class="blog-card__img" src="{{ asset('images/blog/blog-card_01.jpg') }}" alt="Название статьи">#}
-{#                            </a>#}
-{#                            <div class="blog-card__text">#}
-{#                                <h3 class="blog-card__title">Название статьи</h3>#}
-{#                                <div class="blog-card__theme">Раздел</div>#}
-{#                                <div class="blog-card__note">#}
-{#                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate#}
-{#                                    eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit#}
-{#                                </div>#}
-{#                                <div class="blog-card__date">20 января, 2018</div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div><!-- END sec-announces__slide -->#}
-
-                </div><!-- END sec-announces__slider -->
-            </div><!-- END container -->
-        </section><!-- END sec-announces -->
     </main><!-- END site-main -->
 {% endblock %}
