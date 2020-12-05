@@ -1,4 +1,4 @@
 <figure class="ucs-figure">
-    <img src="{{ asset(article.img_path ~ figure.img) }}" data-action="zoom" alt="{{ figure.txt }}">
+    <img data-src="{{ asset(article.img_path ~ figure.img) }}" class="lazyload" loading="lazy" data-action="zoom" alt="{{ figure.txt }}">
     <figcaption>{{ figure.txt }}</figcaption>
 </figure>
