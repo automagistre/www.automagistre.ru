@@ -109,6 +109,7 @@ FROM nginx-base AS nginx
 COPY --from=node /usr/local/app/public/images images
 COPY --from=node /usr/local/app/public/img img
 COPY --from=node /usr/local/app/public/assets assets
+COPY --from=node /usr/local/app/public/fonts fonts
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
 
