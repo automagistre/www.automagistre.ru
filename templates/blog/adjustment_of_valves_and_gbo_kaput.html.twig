@@ -4,7 +4,7 @@
     'title': 'Регулировка клапанов и влияние ГБО на бензиновый двигатель',
     'background': 'adjustment_of_valves_15.jpg',
     'date': '21 апреля 2015',
-    'img_path': 'images/blog/adjustment_of_valves/'
+    'img_path': '/images/blog/adjustment_of_valves/'
 } %}
 
 
@@ -41,12 +41,10 @@
                     газе, где учтены все особенности эксплуатации на данном виде топлива.
                 </p>
 
-                {% set figure = {
-                    'img': 'adjustment_of_valves_01.jpg',
-                    'txt': 'Двигатель Nissan QG18DEN на газу'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'adjustment_of_valves_01.jpg',
+                    'txt': 'Двигатель Nissan QG18DEN на газу'} only
+                %}
 
                 <p>
                     Этот мотор модели QG18DEN, устанавливался на некоторые модификации автомобилей NISSAN AD и PULSAR
@@ -66,12 +64,10 @@
                     неустойчивая работа двигателя и потеря мощности.
                 </p>
 
-                {% set figure = {
-                    'img': 'adjustment_of_valves_05.jpg',
-                    'txt': 'Газовое оборудовние на двигателе'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'adjustment_of_valves_05.jpg',
+                    'txt': 'Газовое оборудовние на двигателе'} only
+                %}
 
                 <p>
                     Перед тем как обратиться в наш сервис, владелец этого автомобиля был на диагностике в другом техцентре,
@@ -95,26 +91,28 @@
                     приоткрытом состоянии, естественно эталонная компрессия невозможна на этом двигателе, отсюда
                     и неустойчивая работа мотора и потеря мощности.
                 </p>
-                {% set galleryItems = [
-                    {
-                        'img': 'adjustment_of_valves_04.jpg',
-                        'txt': 'Двигатель QR25DE',
-                    },{
-                        'img': 'adjustment_of_valves_13.jpg',
-                        'txt': 'Проверка зазора клапана',
-                    },{
-                        'img': 'adjustment_of_valves_14.jpg',
-                        'txt': 'Проверка зазора клапана',
-                    },{
-                        'img': 'adjustment_of_valves_09.jpg',
-                        'txt': 'Измерительные щупы',
-                    },{
-                        'img': 'adjustment_of_valves_08.jpg',
-                        'txt': 'Измерительные щупы',
-                    }
-                ] %}
 
-                {{ include('blog/chunks/gallery.html.twig') }}
+                {% include 'blog/chunks/gallery.html.twig' with {
+                    'path': article.img_path,
+                    'gallery': [
+                        {
+                            'img': 'adjustment_of_valves_04.jpg',
+                            'txt': 'Двигатель QR25DE',
+                        },{
+                            'img': 'adjustment_of_valves_13.jpg',
+                            'txt': 'Проверка зазора клапана',
+                        },{
+                            'img': 'adjustment_of_valves_14.jpg',
+                            'txt': 'Проверка зазора клапана',
+                        },{
+                            'img': 'adjustment_of_valves_09.jpg',
+                            'txt': 'Измерительные щупы',
+                        },{
+                            'img': 'adjustment_of_valves_08.jpg',
+                            'txt': 'Измерительные щупы',
+                        }
+                    ]
+                } only %}
 
                 <p>
                     Многие сейчас зададут вопрос: почему тепловой зазор на выпускных клапанах каким-то чудесным образом
@@ -159,23 +157,25 @@
                     двигатель стал развивать мощность и у автомобиля появилась завидная динамика, чему владелец был
                     несомненно рад.
                 </blockquote>
-                {% set galleryItems = [
-                    {
-                        'img': 'adjustment_of_valves_15.jpg',
-                        'txt': 'Подготовка клапана',
-                    },{
-                        'img': 'adjustment_of_valves_03.jpg',
-                        'txt': 'Метки ГРМ',
-                    },{
-                        'img': 'adjustment_of_valves_18.jpg',
-                        'txt': 'Стаканы клапанов',
-                    },{
-                        'img': 'adjustment_of_valves_22.jpg',
-                        'txt': 'Подгонка высоты клапана',
-                    }
-                ] %}
 
-                {{ include('blog/chunks/gallery.html.twig') }}
+                {% include 'blog/chunks/gallery.html.twig' with {
+                    'path': article.img_path,
+                    'gallery': [
+                        {
+                            'img': 'adjustment_of_valves_15.jpg',
+                            'txt': 'Подготовка клапана',
+                        },{
+                            'img': 'adjustment_of_valves_03.jpg',
+                            'txt': 'Метки ГРМ',
+                        },{
+                            'img': 'adjustment_of_valves_18.jpg',
+                            'txt': 'Стаканы клапанов',
+                        },{
+                            'img': 'adjustment_of_valves_22.jpg',
+                            'txt': 'Подгонка высоты клапана',
+                        }
+                    ]
+                } only %}
 
                 <p>
                     Это всего лишь одна из многочисленных историй про автомобиль, который побывал у нас в сервисе по
@@ -186,26 +186,27 @@
                     железного коня, ради спорной экономии?
                 </p>
 
-                {% set galleryItems = [
-                    {'img': 'adjustment_of_valves_02.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_06.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_07.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_10.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_11.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_12.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_16.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_17.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_19.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_20.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_21.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_23.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_24.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_25.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_26.jpg', 'txt': ''},
-                    {'img': 'adjustment_of_valves_27.jpg', 'txt': ''},
-                ] %}
-
-                {{ include('blog/chunks/gallery.html.twig') }}
+                {% include('blog/chunks/gallery.html.twig') with {
+                    'path': article.img_path,
+                    'gallery': [
+                        {'img': 'adjustment_of_valves_02.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_06.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_07.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_10.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_11.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_12.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_16.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_17.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_19.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_20.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_21.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_23.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_24.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_25.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_26.jpg', 'txt': ''},
+                        {'img': 'adjustment_of_valves_27.jpg', 'txt': ''},
+                    ]
+                } only %}
 
             </div><!-- END user-content-styles -->
         </div><!-- END article__body -->
