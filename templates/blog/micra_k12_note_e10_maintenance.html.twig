@@ -4,7 +4,7 @@
     'title': 'Эксплуатация автомобилей Nissan Micra и Nissan Note',
     'background': 'article_pic_01.jpg',
     'date': '25 января 2016',
-    'img_path': 'images/blog/micra_k12_note_e10_maintenance/'
+    'img_path': '/images/blog/micra_k12_note_e10_maintenance/'
 } %}
 
 
@@ -49,12 +49,11 @@
                     системой изменения фаз газораспределения (VTC). В целом двигатели этой серии довольно надежны, и
                     редко доставляют какие-либо проблемы.
                 </p>
-                {% set figure = {
-                    'img': 'engine_cr14.jpeg',
-                    'txt': 'Двигатели CR12DE и СR14DE'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'engine_cr14.jpeg',
+                    'txt': 'Двигатели CR12DE и СR14DE'} only
+                %}
 
                 <p>
                     Традиционно для компании Nissan, ГРМ приводится долговечной цепью. Ресурс цепи при правильном и
@@ -97,12 +96,11 @@
                     системой изменения фаз газораспределения (VTC). В целом двигатели этой серии довольно надежны, и
                     редко доставляют какие-либо проблемы.
                 </p>
-                {% set figure = {
-                    'img': 'engine_hr16de.jpg',
-                    'txt': 'Двигатель HR16DE, пока еще чистый'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'engine_hr16de.jpg',
+                    'txt': 'Двигатель HR16DE, пока еще чистый'} only
+                %}
 
                 <p>
                     Данный двигатель является совместной разработкой компаний Nissan-Renault, и является самым мощным
@@ -141,12 +139,11 @@
                     Модели NISSAN MICRA и NISSAN NOTE комплектовались двумя видами трансмиссий: механическая и
                     автоматическая. Модная бесступенчатая трансмиссия CVT не ставилась не на один из этих автомобилей.
                 </p>
-                {% set figure = {
-                    'img': 'mkpp_micra.jpg',
-                    'txt': 'Классическая МКПП Nissan'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'mkpp_micra.jpg',
+                    'txt': 'Классическая МКПП Nissan'} only
+                %}
 
                 <p>
                     <b>МКПП</b><br>
@@ -227,12 +224,11 @@
                     NISSAN MICRA первых годов выпуска были отмечены проблемы с электроусилителем руля. Данный дефект
                     встречался не редко, и безоговорочно исправлялся дилером по гарантии.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_stearing.jpg',
-                    'txt': 'Рулевая рейка Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_stearing.jpg',
+                    'txt': 'Рулевая рейка Nissan Micra и Note'} only
+                %}
 
                 <p>
                     К 150 тысячам пробега, может появиться большой люфт в рулевом механизме, причиной которого являются
@@ -276,12 +272,11 @@
                     особо ломаться там нечему. Задние амортизаторы могут начать "потеть", начиная с пробега в 50 тысяч.
                     Такой же ресурс и у задних подшипников. Остановимся на этом узле поподробнее.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_rear_break.jpg',
-                    'txt': 'Задняя подвеска Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_rear_break.jpg',
+                    'txt': 'Задняя подвеска Nissan Micra и Note'} only
+                %}
 
                 <p>
                     Конечно, многие автомобилисты со стажем сейчас скажут: «Что же это за подшипники, что ходят по 50
@@ -310,12 +305,11 @@
                     километров. Причины выхода из строя всё те же: нижнее расположение узла на стойке, попадание грязи и
                     влаги.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_front_suspension_1.jpg',
-                    'txt': 'Передний амортизатор Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_front_suspension_1.jpg',
+                    'txt': 'Передний амортизатор Nissan Micra и Note'} only
+                %}
 
                 <p>
                     Стойки и втулки переднего стабилизатора ходят от 40 до 60 тысяч. Как следствие высокой
@@ -323,12 +317,11 @@
                     шарнира стойки, и разбивание втулки при эксплуатации автомобиля в условиях плохого дорожного
                     покрытия.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_front_suspension_2.jpg',
-                    'txt': 'Стойки и втулки переднего стабилизатора Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_front_suspension_2.jpg',
+                    'txt': 'Стойки и втулки переднего стабилизатора Nissan Micra и Note'} only
+                %}
 
                 <p>
                     Начиная с пробега в 60 тысяч можно ожидать появление люфта и стука в шаровой опоре переднего рычага.
@@ -338,12 +331,11 @@
                     к 60 тысячам километров пробега. До недавнего времени данную деталь можно было приобрести только в
                     неоригинальном исполнении, но в последнее время появились и оригинальные сайлентблоки.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_front_suspension_3.jpg',
-                    'txt': 'Передняя подвеска Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_front_suspension_3.jpg',
+                    'txt': 'Передняя подвеска Nissan Micra и Note'} only
+                %}
 
                 <blockquote>
                     Нельзя не предупредить и о сайлентблоках серповидных рычагов крепления подрамника, имеющих
@@ -363,12 +355,12 @@
                     японских автомобилей, и я думаю, все вы уже догадались, инженеры какой компании додумались до этого
                     прогрессивного технического решения.
                 </p>
-                {% set figure = {
-                    'img': 'catalog_front_suspension_4.jpg',
-                    'txt': 'Задняя подушка ДВС Nissan Micra и Note'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'catalog_front_suspension_4.jpg',
+                    'txt': 'Задняя подушка ДВС Nissan Micra и Note'} only
+                %}
+
                 <div class="ucs-lead">
                     ЭЛЕКТРИКА АВТОМОБИЛЯ
                 </div>

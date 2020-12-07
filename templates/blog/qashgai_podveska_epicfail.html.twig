@@ -4,7 +4,7 @@
     'title': 'Ремонт типичных проблем подвески Ниссан Кашкай',
     'background': 'article_pic_07.jpeg',
     'date': '13 марта 2017',
-    'img_path': 'images/blog/qashgai_podveska_epicfail/'
+    'img_path': '/images/blog/qashgai_podveska_epicfail/'
 } %}
 
 
@@ -46,24 +46,20 @@
                     мы).
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_02.jpeg',
-                    'txt': 'АвтоМагистр'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_02.jpeg',
+                    'txt': 'АвтоМагистр'} only
+                %}
 
                 <p>
                     Вот машина в ремзоне и готова к работе хирурга. В качестве хирурга выступал первоклассный мастер
                     Дмитрий, который воскресил не одну сотню Ниссанов.
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_03.jpeg',
-                    'txt': 'Ниссан Кашкай на операционном столе'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_03.jpeg',
+                    'txt': 'Ниссан Кашкай на операционном столе'} only
+                %}
 
                 <p>
                     Первым делом снимается подрамник, что освобождает много места для остального ремонта, а многие вещи
@@ -73,135 +69,117 @@
                     и тот же срок службы
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_04.jpeg',
-                    'txt': 'Демонтаж подрамника'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_04.jpeg',
+                    'txt': 'Демонтаж подрамника'} only
+                %}
 
                 <p>
                     Подрамник повержен.
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_05.jpeg',
-                    'txt': 'Снятый подрамник Ниссан Кашкай'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_05.jpeg',
+                    'txt': 'Снятый подрамник Ниссан Кашкай'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     Рычаги оказали значительное сопротивление, но не достаточное для нас ).
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_06.jpeg',
-                    'txt': 'Сайлентблоки доживают свои последние секунды'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_06.jpeg',
+                    'txt': 'Сайлентблоки доживают свои последние секунды'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     Вот так выглядят сайлентблоки подрамника через 8 лет службы(очень хороший результат). Мы всегда
                     рекомендуем ставить оригинал, на данный момент около 10 машин тестирует сайлентблоки сторонних
                     производителей. О результатах сообщим позже, а пока оригинал… .
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_07.jpeg',
-                    'txt': 'Старые и новые сайлетблоки подрамника'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_07.jpeg',
+                    'txt': 'Старые и новые сайлетблоки подрамника'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     В данном случае было решено ставить рычаг в сборе от Колеоса, потому что они получились дешевле чем
                     отдельно японская шаровая опора, оригинальные сайлентблоки и работы по прессовке на станке. В других
                     случаях, конечно, дешевле ставить детали раздельно.
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_08.jpeg',
-                    'txt': 'Новый рычаг Koleos передней подвески'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_08.jpeg',
+                    'txt': 'Новый рычаг Koleos передней подвески'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     Попутно меняем приводной ремень, на фото видно, что такое износ ремня, и когда есть основания к
                     замене. Трещины ручейков, если что ).
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_09.jpeg',
-                    'txt': 'Шкиф коленвала перед снятием'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_09.jpeg',
+                    'txt': 'Шкиф коленвала перед снятием'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_10.jpeg',
+                    'txt': 'Приводной ремень требующий замены'} only
+                %}
 
-                {% set figure = {
-                    'img': 'article_pic_10.jpeg',
-                    'txt': 'Приводной ремень требующий замены'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     Пора подрамнику возвращаться домой, чтобы зафиксировать рулевую рейку и посмотреть, что бывает,
                     когда «забить» на рваный пыльник рулевой тяги.
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_11.jpeg',
-                    'txt': 'Мастер демонстрирует свое каратэ'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_11.jpeg',
+                    'txt': 'Мастер демонстрирует свое каратэ'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
                 <p>
                     В пыльник попадает вода, вымывает смазку, возникает коррозия и моментальный износ посадочного места
                     шарика. В итоге - опасный люфт.
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_12.jpeg',
-                    'txt': 'Рваный пыльник рулевой тяги'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_12.jpeg',
+                    'txt': 'Рваный пыльник рулевой тяги'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
-
-                {% set figure = {
-                    'img': 'article_pic_13.jpeg',
-                    'txt': 'Ржавая рулевая тяга'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_13.jpeg',
+                    'txt': 'Ржавая рулевая тяга'} only
+                %}
                 <p>
                     Смазываем, ставим на месте, закручиваем. Красиво и приятно ).
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_14.jpeg',
-                    'txt': 'Новая рулевая тяга установлена'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_14.jpeg',
+                    'txt': 'Новая рулевая тяга установлена'} only
+                %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
-
-                {% set figure = {
-                    'img': 'article_pic_15.jpeg',
-                    'txt': 'Работа с рулевой рейкой закончена'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_17.jpeg',
+                    'txt': 'Работа с рулевой рейкой закончена'} only
+                %}
                 <p>
                     Пришло время тормозных суппортов. Что это такое, зачем оно нужно, и как все происходит можно
                     посмотреть на подробном видео у нас на канале. (Да-да, сУппорт).
                 </p>
 
-                {% set figure = {
-                    'img': 'article_pic_16.jpeg',
-                    'txt': 'Тормозной цилиндр готовый к установке'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_15.jpeg',
+                    'txt': 'Тормозной цилиндр готовый к установке'} only
+                %}
 
-                {% set figure = {
-                    'img': 'article_pic_17.jpeg',
-                    'txt': 'Обслуживание тормозного суппорта'
-                } %}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_16.jpeg',
+                    'txt': 'Обслуживание тормозного суппорта'} only
+                %}
                 <p>
                     Спасибо нашему замечательному клиенту Алексею за профессиональную работу.
                 </p>

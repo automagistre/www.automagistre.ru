@@ -4,7 +4,7 @@
     'title': 'Замена цепи в двигателе Nissan Murano',
     'background': 'article_pic_60.jpg',
     'date': '09 июля 2015',
-    'img_path': 'images/blog/murano_chain/'
+    'img_path': '/images/blog/murano_chain/'
 } %}
 
 
@@ -136,21 +136,20 @@
                     успешно.
                 </p>
                 {% for i in 1..9 %}
-                    {% set figure = {
-                        'img': 'article_pic_0' ~ i ~ '.jpg',
-                        'txt': ''
-                    } %}
 
-                    {{ include('blog/chunks/figure.html.twig') }}
+                    {% include('blog/chunks/figure.html.twig') with {
+                        'img': article.img_path ~ 'article_pic_0' ~ i ~ '.jpg',
+                        'txt': ''
+                    } only %}
 
                 {% endfor %}
-                {% for i in 10..64 %}
-                    {% set figure = {
-                        'img': 'article_pic_' ~ i ~ '.jpg',
-                        'txt': ''
-                    } %}
 
-                    {{ include('blog/chunks/figure.html.twig') }}
+                {% for i in 10..64 %}
+
+                    {% include('blog/chunks/figure.html.twig') with {
+                        'img': article.img_path ~ 'article_pic_' ~ i ~ '.jpg',
+                        'txt': ''
+                    } only %}
 
                 {% endfor %}
             </div><!-- END user-content-styles -->

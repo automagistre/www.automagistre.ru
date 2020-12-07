@@ -1,7 +1,7 @@
 <div class="ucs-gallery js-ucs-gallery">
-    {% for img in galleryItems %}
+    {% for img in gallery %}
         <div class="ucs-gallery__slide">
-            <img class="ucs-gallery__img lazyload" data-src="{{ asset(article.img_path ~ img.img) }}" loading='lazy' alt="{{ img.txt ? img.txt : 'Слайд' }}">
+            <img class="ucs-gallery__img lazyload" data-src="{{ path ~ img.img }}" loading='lazy' alt="{{ img.txt ? img.txt : 'Слайд' }}">
             {% if img.txt %}
                 <div class="ucs-gallery__txt">{{ img.txt }}</div>
             {% endif %}

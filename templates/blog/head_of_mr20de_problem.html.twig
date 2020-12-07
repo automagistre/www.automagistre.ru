@@ -4,7 +4,7 @@
     'title': 'Проблемы с ГБЦ на двигателе MR20DE',
     'background': 'article_pic_01.jpg',
     'date': '12 октября 2017',
-    'img_path': 'images/blog/head_of_mr20de_problem/'
+    'img_path': '/images/blog/head_of_mr20de_problem/'
 } %}
 
 
@@ -24,12 +24,12 @@
                     обозрение. Но его величество случай в конце концов подтолкнул найти в себе силы и подготовить не
                     большую статью на тему двигателей MR20DE,а в частности проблем с ГБЦ, данного силового агрегата.
                 </p>
-                {% set figure = {
-                    'img': 'article_pic_02.jpg',
-                    'txt': 'ГБЦ двигателя MR20DE'
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_02.jpg',
+                    'txt': 'ГБЦ двигателя MR20DE'} only
+                %}
+
                 <p>
                     Я долго думал о подготовке отдельной статьи и не привязывать её к рубрике "Вот такие пироги" но в
                     итоге решил прикрепить её к данному разделу,так как пироги ещё те.<br>
@@ -125,12 +125,12 @@
                     В нашем тех-центре,мы меняем свечи с помощью специальной,свечной, динамометрической головки.Поэтому
                     шансы перетянуть,не дотянуть,сломать и т.д сводятся к нулю.
                 </blockquote>
-                {% set figure = {
-                    'img': 'article_pic_03.jpg',
-                    'txt': ''
-                } %}
 
-                {{ include('blog/chunks/figure.html.twig') }}
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'article_pic_03.jpg',
+                    'txt': ''} only
+                %}
+
                 <p>
                     Но если камера сгорания все таки имеет проблемы,затяжка свечи с требуемым моментом к сожалению не
                     решит общей проблемы.

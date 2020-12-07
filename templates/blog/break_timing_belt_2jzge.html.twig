@@ -4,7 +4,7 @@
     'title': 'Обрыв ремня ГРМ на 2JZ-GE',
     'background': 'break_timing_belt_2jzge_01.jpg',
     'date': '29 марта 2015',
-    'img_path': 'images/blog/break_timing_belt_2jzgte/'
+    'img_path': '/images/blog/break_timing_belt_2jzgte/'
 } %}
 
 
@@ -34,13 +34,10 @@
                     В итоге посчитав сумму денег, которая понадобиться для восстановления данной ГБЦ, было принято решение поменять её на б/у с не большим косметическим ремонтом (правка клапанов и замена сальников штока клапанов)
                 </p>
 
-                {% set figure = {
-                    'img': 'break_timing_belt_2jzge_03.jpg',
-                    'txt': '6 клапанов закончили свой путь'
-                } %}
-
-                {{ include('blog/chunks/figure.html.twig') }}
-
+                {% include 'blog/chunks/figure.html.twig' with {
+                    'img': article.img_path ~ 'break_timing_belt_2jzge_03.jpg',
+                    'txt': '6 клапанов закончили свой путь'} only
+                %}
                 <p>
                     Можно сказать, что проведенный нами ремонт вышел вполне в бюджетную сумму, но последствия могли быть и намного печальнее. Допустим если бы оторвало тарелку клапана,она запросто могла пробить и гильзу блока, и тогда проблем было бы ещё больше.
                 </p>
@@ -50,16 +47,17 @@
                     Берегите свои деньги и время.
                 </blockquote>
 
-                {% set galleryItems = [
-                    {'img': 'break_timing_belt_2jzge_01.jpg', 'txt': ''},
-                    {'img': 'break_timing_belt_2jzge_02.jpg', 'txt': ''},
-                    {'img': 'break_timing_belt_2jzge_04.jpg', 'txt': ''},
-                    {'img': 'break_timing_belt_2jzge_05.jpg', 'txt': ''},
-                    {'img': 'break_timing_belt_2jzge_06.jpg', 'txt': ''},
-                    {'img': 'break_timing_belt_2jzge_07.jpg', 'txt': ''},
-                ] %}
-
-                {{ include('blog/chunks/gallery.html.twig') }}
+                {% include('blog/chunks/gallery.html.twig') with {
+                    'path': article.img_path,
+                    'gallery': [
+                        {'img': 'break_timing_belt_2jzge_01.jpg', 'txt': ''},
+                        {'img': 'break_timing_belt_2jzge_02.jpg', 'txt': ''},
+                        {'img': 'break_timing_belt_2jzge_04.jpg', 'txt': ''},
+                        {'img': 'break_timing_belt_2jzge_05.jpg', 'txt': ''},
+                        {'img': 'break_timing_belt_2jzge_06.jpg', 'txt': ''},
+                        {'img': 'break_timing_belt_2jzge_07.jpg', 'txt': ''},
+                    ]
+                } only %}
 
             </div><!-- END user-content-styles -->
         </div><!-- END article__body -->
