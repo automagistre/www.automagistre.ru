@@ -1,5 +1,3 @@
-const WHITE_PAGES = ['contacts']
-
 let singleton = Symbol();
 let singletonEnforcer = Symbol();
 
@@ -31,14 +29,8 @@ class Header {
       document.addEventListener('scroll', ()=> this._toggleHeader());
       this.isInit = true
       this._toggleHeader();
-      const url = document.location.pathname.split('/')
-      for (const page of WHITE_PAGES) {
-        if (url.includes(page)) {
-          this.whiteColor()
-          break
-        }
-      }
     }
+
     this._initMobileMenu()
 
   };
