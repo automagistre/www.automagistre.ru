@@ -21,3 +21,5 @@
 /apollo_server/node_modules/
 
 /public/fonts/
+
+/tools/convert_for_web/converter.log
