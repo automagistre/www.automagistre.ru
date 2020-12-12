@@ -105,13 +105,28 @@ module.exports = {
             test: /\.(png|jpg|gif|svg)$/,
             loader: "file-loader",
             options: {
-                name: "[path][name].[ext]"
+                name: "[name].[ext]",
+                outputPath: PATHS.dist,
+                publicPath(url, resourcePath, context) {
+                    const pathSplited = resourcePath.split('/').reverse()
+                    const assetIndex = pathSplited.findIndex((element) => element=== 'assets')
+                    const path = pathSplited.slice(0, assetIndex)
+                    return `/${path.reverse().join('/')}`
+                }
             }
         },{
-            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
             loader: "file-loader",
             options: {
-                name: "[path][name].[ext]"
+                name: "[name].[ext]",
+                outputPath: PATHS.dist,
+                publicPath(url, resourcePath, context) {
+                    const pathSplited = resourcePath.split('/').reverse()
+                    const assetIndex = pathSplited.findIndex(
+                        (element) => element === 'assets')
+                    const path = pathSplited.slice(0, assetIndex)
+                    return `/${path.reverse().join('/')}`
+                }
             }
         },{
             test: /\.(graphql|gql)$/,
