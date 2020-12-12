@@ -17,6 +17,13 @@ const PATHS = {
 
 const isDev = NODE_ENV === "development";
 
+const resolveAssetsPath = (resourcePath) => {
+    const pathSplited = resourcePath.split('/').reverse()
+    const assetIndex = pathSplited.findIndex((element) => element=== 'assets')
+    const path = pathSplited.slice(0, assetIndex)
+    return `/${path.reverse().join('/')}`
+}
+
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -105,13 +112,25 @@ module.exports = {
             test: /\.(png|jpg|gif|svg)$/,
             loader: "file-loader",
             options: {
-                name: "[path][name].[ext]"
+                name: "[name].[ext]",
+                outputPath(url, resourcePath, context){
+                    return resolveAssetsPath(resourcePath)
+                },
+                publicPath(url, resourcePath, context) {
+                    return resolveAssetsPath(resourcePath)
+                }
             }
         },{
-            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
             loader: "file-loader",
             options: {
-                name: "[path][name].[ext]"
+                name: "[name].[ext]",
+                outputPath(url, resourcePath, context){
+                    return resolveAssetsPath(resourcePath)
+                },
+                publicPath(url, resourcePath, context) {
+                    return resolveAssetsPath(resourcePath)
+                }
             }
         },{
             test: /\.(graphql|gql)$/,
