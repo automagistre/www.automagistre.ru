@@ -17,6 +17,13 @@ const PATHS = {
 
 const isDev = NODE_ENV === "development";
 
+const resolveAssetsPath = (resourcePath) => {
+    const pathSplited = resourcePath.split('/').reverse()
+    const assetIndex = pathSplited.findIndex((element) => element=== 'assets')
+    const path = pathSplited.slice(0, assetIndex)
+    return `/${path.reverse().join('/')}`
+}
+
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -106,12 +113,11 @@ module.exports = {
             loader: "file-loader",
             options: {
                 name: "[name].[ext]",
-                outputPath: PATHS.dist,
+                outputPath(url, resourcePath, context){
+                    return resolveAssetsPath(resourcePath)
+                },
                 publicPath(url, resourcePath, context) {
-                    const pathSplited = resourcePath.split('/').reverse()
-                    const assetIndex = pathSplited.findIndex((element) => element=== 'assets')
-                    const path = pathSplited.slice(0, assetIndex)
-                    return `/${path.reverse().join('/')}`
+                    return resolveAssetsPath(resourcePath)
                 }
             }
         },{
@@ -119,13 +125,11 @@ module.exports = {
             loader: "file-loader",
             options: {
                 name: "[name].[ext]",
-                outputPath: PATHS.dist,
+                outputPath(url, resourcePath, context){
+                    return resolveAssetsPath(resourcePath)
+                },
                 publicPath(url, resourcePath, context) {
-                    const pathSplited = resourcePath.split('/').reverse()
-                    const assetIndex = pathSplited.findIndex(
-                        (element) => element === 'assets')
-                    const path = pathSplited.slice(0, assetIndex)
-                    return `/${path.reverse().join('/')}`
+                    return resolveAssetsPath(resourcePath)
                 }
             }
         },{
