@@ -89,4 +89,7 @@ export default function initSections() {
   if (document.querySelector('#js-article-page')) {
     import('../pages/article').then(sec => sec.default())
   }
+  if (document.querySelector('section.sec-announces')){
+    import('../sections/announces').then(sec => sec.default())
+  }
 }

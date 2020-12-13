@@ -1,0 +1,45 @@
+{% extends 'blog/layout.html.twig' %}
+
+{% block content %}
+    <main class="site-main article" id="site-main">
+
+        <div class="article__head">
+            <div class="article__head-back" style="background-image: url({{ asset(article.img_path ~ article.background) }})"></div>
+            <div class="article__head-front">
+                <div class="container">
+                    <a class="btn btn_gray-outlined article__go-back" href="/blog">В блог</a>
+                    <h2 class="article__title">{{ article.title }}</h2>
+                    <div class="article__date">{{ article.date }}</div>
+                </div>
+            </div>
+        </div>
+
+        {% block article_body %} {% endblock %}
+
+        <section class="sec-announces">
+            <div class="container">
+                <h2 class="sec-announces__title">Похожие статьи</h2>
+                <div class="sec-announces__slider js-announces-slider">
+                    {% for item in blogItems %}
+                        {% if article.title != item.title and article.theme == item.theme %}
+                            <div class="sec-announces__slide">
+                                <div class="blog-card">
+                                    <a class="blog-card__pict" href="{{ item.url }}">
+                                        <img class="blog-card__img lazyload" data-src="{{ asset(item.img) }}" loading="lazy" alt="{{ item.title }}">
+                                    </a>
+                                    <div class="blog-card__text">
+                                        <h3 class="blog-card__title">{{ item.title }}</h3>
+                                        <div class="blog-card__theme">{{ item.theme }}</div>
+                                        <div class="blog-card__note">{{ item.note }}</div>
+                                        <div class="blog-card__date">{{ item.date }}</div>
+                                    </div>
+                                </div>
+                            </div><!-- END sec-announces__slide -->
+                        {% endif %}
+                    {% endfor %}
+                </div><!-- END sec-announces__slider -->
+            </div><!-- END container -->
+        </section><!-- END sec-announces -->
+
+    </main><!-- END site-main -->
+{% endblock %}
