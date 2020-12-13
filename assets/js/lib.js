@@ -35,18 +35,18 @@ export const initParallaxAnimation = (features, images) => {
 };
 
 export const odometer = odNode => {
-    const startOdometer = () =>{
-        odNode.querySelectorAll('.js-odometer').forEach(odElem => {
-            odElem.classList.remove('is-hidden')
-            let od = new Odometer({
-                el: odElem,
-                value: odElem.innerText,
-                format: '( ddd)',
-                duration: 3000,});
-            od.update(odElem.dataset.value)
+    const odometers = odNode.querySelectorAll('.js-odometer')
+    nodesObserver(odometers, node => {
+        node.classList.remove('is-hidden')
+        const od = new Odometer({
+            auto: false,
+            el: node,
+            value: node.innerText,
+            format: '( ddd)',
+            duration: 3000
         })
-    }
-    nodesObserver([odNode], ()=> startOdometer())
+        od.update(node.dataset.value)
+    })
 }
 
 export const initTabs = (tabsID, bodyID) => {
