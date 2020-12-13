@@ -1,3 +1,6 @@
+_old_redirects:
+    resource: 'routes/old_redirects.php'
+
 _service:
     resource: '../src/Controller/Service'
     type: annotation
