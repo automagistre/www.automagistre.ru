@@ -1,20 +1,14 @@
 export default function initSections() {
   if (document.querySelector('section.sec-start')){
-    require.ensure([], require => {
-      require('../sections/start').default();
-    })
+    import('../sections/start').then(sec => sec.default())
   }
 
   if(document.querySelector('section.sec-expert')) {
-    require.ensure([], require => {
-      require('../sections/expert').default();
-    })
+    import('../sections/expert').then(sec => sec.default())
   }
 
   if(document.querySelector('section.sec-features')) {
-    require.ensure([], require => {
-      require('../sections/features').default();
-    })
+    import('../sections/features').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-faq')){
@@ -22,15 +16,11 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-work')){
-    require.ensure([], require => {
-      require('../sections/work').default();
-    })
+    import('../sections/work').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-gallery')){
-    require.ensure([], require => {
-      require('../sections/gallery').default();
-    })
+    import('../sections/gallery').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-map')){
@@ -38,15 +28,11 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-services')){
-    require.ensure([], require => {
-      require('../sections/services').default();
-    })
+    import('../sections/services').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-experience')){
-    require.ensure([], require => {
-      require('../sections/experience').default();
-    })
+    import('../sections/experience').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-master')){
@@ -58,35 +44,39 @@ export default function initSections() {
   }
 
   if (document.querySelector('section.sec-happen')){
-    require.ensure([], require => {
-      require('../sections/happen').default();
-    })
+    import('../sections/happen').then(sec => sec.default())
   }
 
   if (document.querySelector('section.sec-costing')){
     import('../sections/costing/costing').then(sec => sec.default())
   }
+
   if (document.querySelector('section.sec-reviews')){
     import('../sections/reviews').then(sec => sec.default())
   }
+
   if (document.querySelector('#reviews-grid')){
-    require.ensure([], require => {
-      require('../pages/reviews').default();
-    })
+    import('../pages/reviews').then(sec => sec.default())
   }
+
   if (document.querySelector('#tire-service')){
-    require.ensure([], require => {
-      require('../sections/tire-sevice').default();
-    })
+    import('../sections/tire-service').then(sec => sec.default())
   }
+
   if (document.querySelector('section.sec-intro')){
     import('../sections/intro').then(sec => sec.default())
   }
+
   if (document.querySelector('#js-blog-page')) {
     import('../../less/3_blocks/block_blog-card')
     import('../../less/3_blocks/block_blog-list')
   }
+
   if (document.querySelector('#js-article-page')) {
     import('../pages/article').then(sec => sec.default())
+  }
+
+  if (document.querySelector('section.sec-announces')){
+    import('../sections/announces').then(sec => sec.default())
   }
 }

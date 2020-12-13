@@ -1,18 +1,15 @@
-{% extends 'layout_white.html.twig' %}
+{% extends 'blog/layout_article.html.twig' %}
 
 {% set article = {
     'title': 'Эксплуатация автомобилей Nissan Micra и Nissan Note',
     'background': 'article_pic_01.jpg',
     'date': '25 января 2016',
-    'img_path': '/images/blog/micra_k12_note_e10_maintenance/'
+    'img_path': '/images/blog/micra_k12_note_e10_maintenance/',
+    'theme': 'Эксплуатация'
 } %}
 
 
-{% block content %}
-    <main class="site-main article" id="site-main">
-
-        {{ include('blog/chunks/head.html.twig') }}
-
+{% block article_body %}
         <div class="article__body" id="js-article-page">
             <div class="user-content-styles">
                 <div class="ucs-lead">
@@ -395,5 +392,4 @@
                 </p>
             </div><!-- END user-content-styles -->
         </div><!-- END article__body -->
-    </main><!-- END site-main -->
 {% endblock %}

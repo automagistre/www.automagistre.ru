@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import 'slick-carousel'
 import PerfectScrollbar from 'perfect-scrollbar';
 
 const initSlickSlider = () => {
