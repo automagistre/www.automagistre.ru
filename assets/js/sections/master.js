@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import 'slick-carousel'
-import PerfectScrollbar from 'perfect-scrollbar';
 
 const initSlickSlider = () => {
   const slickOptions = {
@@ -21,19 +20,9 @@ const initSlickSlider = () => {
   if ($masterSlider.length) $masterSlider.slick(slickOptions)
 };
 
-const customScrollBarOptions = {
-  handlers: ['drag-thumb', 'wheel', 'touch'],
-  swipeEasing: true,
-  maxScrollbarLength: 150
-}
 
 const secMaster = () => {
-  const masterSecNode = document.querySelector('section.sec-master')
   initSlickSlider()
-  masterSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
-    ...customScrollBarOptions,
-    suppressScrollX: true
-  }))
 }
 
 export default secMaster;

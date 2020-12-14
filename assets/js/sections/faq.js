@@ -1,28 +1,12 @@
 import {initTabs, mobChecker} from "../lib";
 import {SubscribeForm} from '../ui/forms';
-import PerfectScrollbar from 'perfect-scrollbar';
 import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
-const customScrollBarOptions = {
-  handlers: ['drag-thumb', 'wheel', 'touch'],
-  swipeEasing: true,
-  maxScrollbarLength: 150
-}
-
 
 const faqSec = () => {
   const faqSecNode = document.querySelector('section.sec-faq')
-
-  faqSecNode.querySelectorAll('.js-scroll-x').forEach(el => new PerfectScrollbar(el, {
-    ...customScrollBarOptions,
-    suppressScrollY: true
-  }))
-  faqSecNode.querySelectorAll('.js-scroll-y').forEach(el => new PerfectScrollbar(el, {
-    ...customScrollBarOptions,
-    suppressScrollX: true
-  }))
 
   const formNode = faqSecNode.querySelector('.sec-faq__form');
   const tabs = 'sec-faq-tabs',
