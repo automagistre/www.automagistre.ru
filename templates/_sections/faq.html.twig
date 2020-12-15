@@ -85,7 +85,7 @@
             <div class="sec-faq__row">
                 <div class="sec-faq__col-lt">
                     <div class="sec-faq__tabs">
-                        <nav class="sec-faq__tabs-head" id="sec-faq-tabs">
+                        <nav class="sec-faq__tabs-head js-scroll-x" id="sec-faq-tabs">
                             {% for question in questions %}
                                 <a class="sec-faq__tabs-btn js-tabs-btn {{ question.isActive|default(false) ? 'is-active' : '' }}"
                                    data-tab="faq-tab-{{ question.num }}"
