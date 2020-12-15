@@ -4,6 +4,7 @@ import ServerData from '../helpers/ServerData';
 import {declOfNum} from '../lib';
 
 const GROUP_COUNT = 5
+const PAUSE_GROUP_COUNT = 2
 
 class reviewsGrid {
   constructor(selector) {
@@ -12,27 +13,48 @@ class reviewsGrid {
       useRecycle: false,
       transitionDuration: 0.3
     }
+
     const onAppend = async e => {
       if (this._ig.isProcessing()) return
-      const nextGroupKey = +e.groupKey || 0;
+      this._nextGroupKey = +e.groupKey || 0;
+      if (this._nextGroupKey % PAUSE_GROUP_COUNT === 0 && this._nextGroupKey !== 0){
+        this.pause()
+      }
       this.startLoading()
-      const nextGroup = await this.getNextReviews(nextGroupKey, GROUP_COUNT);
+      const nextGroup = await this.getNextReviews(this._nextGroupKey, GROUP_COUNT);
       if (nextGroup.length) {
-        this._ig.append(nextGroup, nextGroupKey + 1)
+        this._ig.append(nextGroup, this._nextGroupKey + 1)
       } else {
-        this._ig.off('append', onAppend)
+        this.pause()
       }
       this.endLoading()
-    };
+    }
 
-    this._ig = new InfiniteGrid(selector, options);
+    this._ig = new InfiniteGrid(selector, options)
     this._ig.setLayout(GridLayout);
-    this._ig.on('append', onAppend);
+    this.appendhandeler = onAppend.bind(this)
+    this._ig.on('append', this.appendhandeler)
+  }
+
+
+  pause() {
+    this._ig.off('append', this.appendhandeler)
+    this.onPause()
+  }
+
+  onPause() { }
+
+  start() {
+    this._ig.on('append', this.appendhandeler)
     this._ig.on('layoutComplete',
         e=> e.target.forEach(review => {
           setTimeout(()=> review.el.classList.toggle('just-loaded', false), 700)
         }))
+    this._ig.layout()
+    this.onStart()
   }
+
+  onStart() { }
 
   startLoading() {
     this._ig.startLoading()
@@ -45,10 +67,6 @@ class reviewsGrid {
   }
 
   onLoading(status) {}
-
-  layout() {
-    this._ig.layout()
-  }
 
   destroy() {
     return new Promise(resolve => {
@@ -100,7 +118,12 @@ const reviewPage = async () => {
     loadingNode.classList.toggle('is-loading', status)
   }
 
-  ig.layout();
+  const continueBtn = document.querySelector('#js-more-load-data')
+  continueBtn.addEventListener('click', ()=> ig.start())
+  ig.onStart = ()=> continueBtn.classList.toggle('is-hidden', true)
+  ig.onPause = ()=> continueBtn.classList.toggle('is-hidden', false)
+
+  ig.start();
 }
 
 export default reviewPage;
