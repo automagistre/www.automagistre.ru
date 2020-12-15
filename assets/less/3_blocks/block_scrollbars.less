@@ -1,0 +1,28 @@
+@import "../0_helpers/variables";
+
+.js-scroll-y::-webkit-scrollbar,
+.js-scroll-x::-webkit-scrollbar{
+  background: #FFFFFF;
+}
+
+.js-scroll-y::-webkit-scrollbar-thumb,
+.js-scroll-x::-webkit-scrollbar-thumb
+{
+  background-color: @red;
+  border-radius: 5px;
+  border: 1px solid #FFFFFF;
+}
+
+.js-scroll-x::-webkit-scrollbar {
+  height: 8px;
+}
+
+.js-scroll-y::-webkit-scrollbar {
+  width: 8px;
+}
+
+.js-scroll-x,
+.js-scroll-y {
+  scrollbar-color: @red #FFFFFF ;
+  scrollbar-width: thin;
+}

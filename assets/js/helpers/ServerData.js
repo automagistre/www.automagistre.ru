@@ -11,6 +11,7 @@ import {
 import CarCase from '../ui/SelectCarModal/CarCase';
 
 const SERVER_URL = APOLLO_URL
+// const SERVER_URL = 'http://localhost:3000'
 
 class ServerData {
 
@@ -136,7 +137,7 @@ class ServerData {
             manufacturer: '',
             model: '',
             content: review.content,
-            source: '',
+            source: 'Я.карты',
             publish_at: new Date(review.publishAt)
           };
         })
@@ -162,7 +163,7 @@ class ServerData {
             manufacturer: '',
             model: '',
             content: review.content,
-            source: '',
+            source: 'Я.карты',
             publish_at: new Date(review.publishAt)
           };
         })
