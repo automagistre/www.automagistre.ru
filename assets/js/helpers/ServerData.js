@@ -10,8 +10,8 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-// const SERVER_URL = APOLLO_URL
-const SERVER_URL = 'http://localhost:3000'
+const SERVER_URL = APOLLO_URL
+// const SERVER_URL = 'http://localhost:3000'
 
 class ServerData {
 
