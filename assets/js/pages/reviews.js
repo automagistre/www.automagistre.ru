@@ -13,10 +13,10 @@ class reviewsGrid {
       transitionDuration: 0.3
     }
     const onAppend = async e => {
-      const nextGroupKey = (+e.groupKey || 0) + 1,
+      const nextGroupKey = +e.groupKey || 0,
           nextGroup = await this.getNextReviews(nextGroupKey, GROUP_COUNT);
       if (nextGroup.length) {
-        this._ig.append(nextGroup, nextGroupKey);
+        this._ig.append(nextGroup, nextGroupKey + 1);
       } else {
         this._ig.off('append', onAppend);
       }
