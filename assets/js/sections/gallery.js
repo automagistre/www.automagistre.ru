@@ -7,6 +7,7 @@ const gallerySec = () => {
         'bgOpacity': 0.85,
         'scaleBase': 0.6,
     });
+    console.log('Hui');
     nodesObserver(document.querySelectorAll('section.sec-gallery'),
         () => {
             zooming.listen('.sec-gallery__img');
