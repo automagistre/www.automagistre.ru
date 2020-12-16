@@ -251,6 +251,32 @@
     transition: box-shadow .6s;
     z-index: 10;
   }
+
+  &-car-change-big {
+    display: none;
+    position: fixed;
+    right: -40px;
+    bottom: -40px;
+    width: 120px;
+    height: 120px;
+    background: @red-dark no-repeat 32px 24px data-uri("@{img-dir}icons/icon_car_white.svg");
+    background-size: 38px auto;
+    border: 3px solid rgba(128, 128, 128, .2);
+    border-radius: 60px 0 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, .3);
+    transition: box-shadow .6s;
+    z-index: 10;
+  }
+}
+
+/* ---------- ADAPTIVE < 1330 ------------------------------------------------*/
+@media (max-width: 1330px) {
+  .sf {
+
+    &-car-change-big {
+      display: block;
+    }
+  }
 }
 
 /* ---------- ADAPTIVE < 1220 ------------------------------------------------*/
@@ -341,6 +367,10 @@
 
     &-car-change {
       display: block;
+    }
+
+    &-car-change-big {
+      display: none;
     }
   }
 }
