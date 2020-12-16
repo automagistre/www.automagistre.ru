@@ -46,6 +46,7 @@ module.exports = {
         minimizer:[
             new TerserPlugin({
                 extractComments: false,
+                sourceMap: true,
                 parallel: true,
                 terserOptions: {
                     extractComments: 'all',
@@ -143,7 +144,8 @@ module.exports = {
     watchOptions: {
         aggregateTimeout: 100
     },
-    devtool: isDev ? "eval-cheap-source-map" : false,
+
+    devtool: false,
 
     plugins: [
         new webpack.ProvidePlugin({
@@ -194,7 +196,8 @@ module.exports = {
         new ManifestPlugin(),
         new webpack.SourceMapDevToolPlugin({
             filename: PATHS.assets + '[name].[hash].js.map',
-            exclude: ['vendors.js']
+            exclude: ['vendors.js'],
+            fileContext: 'public',
         })
     ],
 };
