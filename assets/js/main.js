@@ -1,7 +1,6 @@
 import './hoc/service'
 import {mobChecker, nodesObserver} from "./lib";
 import inDevPopup from './ui/Popups/InDevPopup';
-import ServerData from './helpers/ServerData';
 
 const BODY = document.body;
 
@@ -33,3 +32,8 @@ document.querySelectorAll('.js-in-dev').forEach(link => {
         popup.open()
     })
 })
+
+setTimeout(function() {
+    document.querySelectorAll('[loading="lazy"]').forEach(node => node.loading = 'auto')
+
+}, 3000)
