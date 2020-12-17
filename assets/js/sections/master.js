@@ -1,28 +1,26 @@
-import $ from 'jquery';
-import 'slick-carousel'
-
-const initSlickSlider = () => {
-  const slickOptions = {
-    arrows: true,
-    dots: true,
-    infinite: true,
-    speed: 800,
-    autoplay: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-    nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
-    responsive: [
-      {breakpoint: 760, settings: {arrows: false}},
-    ],
-  };
-  const $masterSlider = $('#sec-master-slider');
-  if ($masterSlider.length) $masterSlider.slick(slickOptions)
-};
-
+import Swiper, {Pagination, Navigation} from 'swiper';
+import '../../less/2_plugins/swiper'
 
 const secMaster = () => {
-  initSlickSlider()
+  const startSlide = Math.floor(Math.random() * Math.floor(5))
+  Swiper.use([Navigation, Pagination])
+  const swiper = new Swiper(document.getElementById('sec-master-slider'), {
+    speed: 800,
+    loop: true,
+    initialSlide: startSlide,
+    navigation: {
+      nextEl: '.slick-next',
+      prevEl: '.slick-prev',
+    },
+  })
 }
 
 export default secMaster;
+
+//
+// arrows: true,
+//     dots: true,
+//     responsive: [
+//   {breakpoint: 760, settings: {arrows: false}},
+// ],
+// }

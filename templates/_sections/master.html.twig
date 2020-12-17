@@ -58,35 +58,38 @@
     <div class="sec-master__back lazy"></div>
     <div class="sec-master__front">
         <h2 class="sec-master__title">Наши мастера</h2>
-        <div class="sec-master__slider" id="sec-master-slider">
-            {% for master in masters %}
-                <div class="sec-master__slide">
-                    <div class="container sec-master__slide-row">
-                        <div class="sec-master__slide-lt">
-                            <img class="sec-master__slide-img lazyload"
-                                 data-src="{{ master.photo }}"
-                                 loading="lazy" alt="{{ master.altName }}"
-                                 >
-                        </div>
-                        <div class="sec-master__slide-rt">
-                            <div class="sec-master__slide-text js-scroll-y">
-                                <h4 class="sec-master__slide-title">{{ master.name }}</h4>
-                                <dl class="sec-master__slide-list">
-                                    <dt>{{ master.profession }}</dt>
-                                    <dd>Стаж работы по специальности: {{ master.experience }}</dd>
-                                    <dt>Основной профиль:</dt>
-                                    <dd>{{ master.skills }}</dd>
-                                    <dt>Дополнительный профиль:</dt>
-                                    <dd>{{ master.secondarySkills }}</dd>
-                                    <dt>Информация о специалисте:</dt>
-                                    <dd>{{ master.note }}</dd>
-                                </dl>
+        <div class="sec-master__slider swiper-container" id="sec-master-slider">
+            <div class="swiper-wrapper">
+                {% for master in masters %}
+                    <div class="sec-master__slide swiper-slide">
+                        <div class="container sec-master__slide-row">
+                            <div class="sec-master__slide-lt">
+                                <img class="sec-master__slide-img lazyload"
+                                     data-src="{{ master.photo }}"
+                                     loading="lazy" alt="{{ master.altName }}"
+                                     >
+                            </div>
+                            <div class="sec-master__slide-rt">
+                                <div class="sec-master__slide-text js-scroll-y">
+                                    <h4 class="sec-master__slide-title">{{ master.name }}</h4>
+                                    <dl class="sec-master__slide-list">
+                                        <dt>{{ master.profession }}</dt>
+                                        <dd>Стаж работы по специальности: {{ master.experience }}</dd>
+                                        <dt>Основной профиль:</dt>
+                                        <dd>{{ master.skills }}</dd>
+                                        <dt>Дополнительный профиль:</dt>
+                                        <dd>{{ master.secondarySkills }}</dd>
+                                        <dt>Информация о специалисте:</dt>
+                                        <dd>{{ master.note }}</dd>
+                                    </dl>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
-
+                {% endfor %}
+            </div>
+            <div class="swiper-button-prev slick-arrow slick-prev"></div>
+            <div class="slick-arrow slick-next"></div>
         </div>
     </div>
 </section>
