@@ -188,10 +188,10 @@ module.exports = {
             ],
         }),
         new ManifestPlugin(),
-        new webpack.SourceMapDevToolPlugin({
-            filename: PATHS.assets + '[name].[hash].js.map',
-            exclude: ['vendors.js'],
-            fileContext: 'public',
-        })
+        // new webpack.SourceMapDevToolPlugin({
+        //     filename: PATHS.assets + '[name].[hash].js.map',
+        //     exclude: ['vendors.js'],
+        //     fileContext: 'public',
+        // })
     ],
 };
