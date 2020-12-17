@@ -37,7 +37,7 @@ class ServerData {
                   name: vehicle.name,
                   manufacturer: vehicle.manufacturer.name,
                   manufacturerID: vehicle.manufacturer.id,
-                  yearFrom: vehicle.production.from,
+                  yearFrom: vehicle.production.from || 1990,
                   yearTill: vehicle.production.till
                 }, this))
       }
