@@ -2,27 +2,27 @@
     {
         'num': '01',
         'title': 'Ремонт головки блока цилиндров(ГБЦ)',
-        'preview': asset('images/sec-expert/poster_engine_head_760x460.jpg'),
+        'preview': asset('images/sec-expert/poster_engine_head.jpg'),
         'youtubeID': 'OFc8K23JNSs',
     },{
         'num': '02',
         'title': 'Устройстве АКПП',
-        'preview': asset('images/sec-expert/poster_akpp_760x460.jpg'),
+        'preview': asset('images/sec-expert/poster_akpp.jpg'),
         'youtubeID': 'hfCmcsCTwYU',
     },{
         'num': '03',
         'title': 'Система охлаждения двигателя',
-        'preview': asset('images/sec-expert/poster_coolint_system_760x460.jpg'),
+        'preview': asset('images/sec-expert/poster_coolint_system.jpg'),
         'youtubeID': 'BY46TxGCUsA',
     },{
         'num': '04',
         'title': 'Эксплуатация Nissan Qashqai',
-        'preview': asset('images/sec-expert/poster_quashgai_760x460.jpg'),
+        'preview': asset('images/sec-expert/poster_quashgai.jpg'),
         'youtubeID': 'YRDd-sxDMF0',
     },{
         'num': '05',
         'title': 'Тормозной суппорт. Устройство и обслуживание',
-        'preview': asset('images/sec-expert/poster_support_760x460.jpg'),
+        'preview': asset('images/sec-expert/poster_support.jpg'),
         'youtubeID': 'YSoc_OWcN-I',
     }
 ] %}
@@ -69,7 +69,7 @@
                                 <nav class="sec-expert__nav">
                                     {% for videoNav in videos %}
                                         {% if videoNav != video %}
-                                            <a class="sec-expert__btn js-expert-btn" data-num="{{ videoNav.num }}">{{ videoNav.title }}</a>
+                                            <a class="sec-expert__btn js-expert-btn" data-num="{{ videoNav.num }}" role="button">{{ videoNav.title }}</a>
                                         {% endif %}
                                     {% endfor %}
                                 </nav>
