@@ -1,0 +1,182 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+}
+
+"An object with an ID."
+interface Node {
+    "ID of the object."
+    id: ID!
+}
+
+type Engine {
+    airIntake: AirIntake
+    capacity: String
+    injection: Injection
+    name: String
+    type: Fuel
+}
+
+type Maintenance implements Node {
+    engine: Engine
+    id: ID!
+    transmission: Transmission
+    vehicle: Vehicle
+    wheelDrive: WheelDrive
+    works: [Work]
+}
+
+type Manufacturer implements Node {
+    id: ID!
+    localizedName: String
+    name: String
+}
+
+type Money {
+    amount: String!
+    currency: String!
+}
+
+type PageInfo {
+    "When paginating forwards, the cursor to continue."
+    endCursor: String
+    "When paginating forwards, are there more items?."
+    hasNextPage: Boolean!
+}
+
+type Part implements Node {
+    discount: Money!
+    id: ID!
+    manufacturer: Manufacturer!
+    name: String!
+    number: String!
+    price: Money!
+    universal: Boolean!
+}
+
+type PartItem {
+    part: Part!
+    quantity: Int!
+    recommended: Boolean!
+}
+
+type Production {
+    from: year
+    till: year
+}
+
+type Query {
+    maintenances(vehicleId: Uuid!): [Maintenance]
+    part(id: Uuid!): Part
+    reviews(after: Uuid, first: Int = 10): ReviewConnection
+    vehicle(id: Uuid!): Vehicle!
+    vehicles(manufacturerId: Uuid!): [Vehicle]
+    works(maintenanceId: Uuid!): [Work]
+}
+
+type Review implements Node {
+    author: String
+    content: String
+    id: ID!
+    publishAt: Date
+    source: ReviewSource
+}
+
+type ReviewConnection {
+    nodes: [Review]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type Vehicle implements Node {
+    caseName: String
+    id: ID!
+    localizedName: String
+    manufacturer: Manufacturer!
+    name: String!
+    production: Production
+}
+
+type Work implements Node {
+    description: String
+    id: ID!
+    name: String!
+    parts: [PartItem]
+    period: Int!
+    position: Int!
+    price: Money!
+    recommended: Boolean!
+}
+
+enum AirIntake {
+    "Атмосферный"
+    atmo
+    "Турбированный"
+    turbo
+    "Неопределён"
+    unknown
+}
+
+enum Fuel {
+    "Дизель"
+    diesel
+    "Электрический"
+    electric
+    "Этанол"
+    ethanol
+    "Бензин"
+    petrol
+    "Неопределён"
+    unknown
+}
+
+enum Injection {
+    "Классический"
+    classic
+    "Непосредственный впрыск"
+    direct
+    "Неопределён"
+    unknown
+}
+
+enum ReviewSource {
+    club
+    google
+    yandex
+}
+
+enum Transmission {
+    "Робот"
+    AMT
+    "Автоматическая"
+    AT
+    "Автоматическая (5 ступеней)"
+    AT5
+    "Автоматическая (7 ступеней)"
+    AT7
+    "Вариатор"
+    CVT
+    "Механическая"
+    MT
+    "Неопределена"
+    unknown
+}
+
+enum WheelDrive {
+    "Полный"
+    AWD
+    "Передний"
+    FWD
+    "Задний"
+    RWD
+    "Неопределён"
+    unknown
+}
+
+
+scalar Uuid
+
+scalar Date
+
+scalar year

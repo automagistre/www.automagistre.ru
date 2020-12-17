@@ -1,0 +1,15 @@
+{
+  "name": "FrontEnd Schema",
+  "schemaPath": "remote-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "FrontEnd Remote SWAPI GraphQL Endpoint": {
+        "url": "http://msk.automagistre.local/api/www",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": true
+      }
+    }
+  }
+}
