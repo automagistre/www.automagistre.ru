@@ -51,6 +51,7 @@ export const odometer = odNode => {
 
 export const initTabs = (tabsID, bodyID) => {
     const changeTab = event => {
+        event.preventDefault()
         const secID = event.currentTarget.dataset.tab;
         tabsBtns.forEach(btn => btn.classList.remove('is-active'));
         event.currentTarget.classList.add('is-active');
