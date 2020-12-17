@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
 export const getVehiclesByManufacturerID = gql`
-    query getVehiclesByManufacturerID($manufacturerID: String) {
-      getVehiclesByManufacturerID(manufacturerID: $manufacturerID) {
-          _id
+    query getVehiclesByManufacturerID($manufacturerID: Uuid!) {
+        vehicles(manufacturerId: $manufacturerID) {
+          id
           caseName
           localizedName
           manufacturer {
@@ -11,8 +11,10 @@ export const getVehiclesByManufacturerID = gql`
               name
           }
           name
-          yearFrom
-          yearTill
+          production {
+              till
+              from
+          }
     }}`
 
 

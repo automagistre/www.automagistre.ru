@@ -10,8 +10,9 @@ import {
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
-const SERVER_URL = APOLLO_URL
+// const SERVER_URL = APOLLO_URL
 // const SERVER_URL = 'http://localhost:3000'
+const SERVER_URL = 'http://msk.automagistre.local/api/www'
 
 class ServerData {
 
@@ -29,15 +30,15 @@ class ServerData {
         variables: {manufacturerID}})
       return {
         'response': 200,
-        'data': data.getVehiclesByManufacturerID
+        'data': data.vehicles
                 .map(vehicle =>  new CarCase({
                   id: vehicle._id,
                   caseName: vehicle.caseName,
                   name: vehicle.name,
                   manufacturer: vehicle.manufacturer.name,
                   manufacturerID: vehicle.manufacturer.id,
-                  yearFrom: vehicle.yearFrom,
-                  yearTill: vehicle.yearTill
+                  yearFrom: vehicle.production.from,
+                  yearTill: vehicle.production.till
                 }, this))
       }
 
