@@ -32,7 +32,7 @@ class ServerData {
         'response': 200,
         'data': data.vehicles
                 .map(vehicle =>  new CarCase({
-                  id: vehicle._id,
+                  id: vehicle.id,
                   caseName: vehicle.caseName,
                   name: vehicle.name,
                   manufacturer: vehicle.manufacturer.name,
@@ -57,20 +57,20 @@ class ServerData {
       variables: {id}})
     return {
       'response': 200,
-      'data': data.maintenancesByVehicleID
+      'data': data.maintenances
       .map(eq => {
         const mileageRepeat = Math.min(...eq.works.map(work => +work.period))
         let engineType = eq.engine.type || '',
             airIntakeType = eq.engine.airIntake || ''
-        engineType = engineType.toLowerCase() === 'дизель' ? 'D' : ''
-        airIntakeType = airIntakeType.toLowerCase() === 'турбированный' ? 'T' : ''
+        engineType = engineType.toLowerCase() === 'diesel' ? 'D' : ''
+        airIntakeType = airIntakeType.toLowerCase() === 'turbo' ? 'T' : ''
         return {
           id: eq.id,
           name: `${eq.engine.capacity}${airIntakeType}${engineType} ${eq.transmission} ${eq.wheelDrive}`,
           mileageRepeat,
           works: eq.works.map(work => {
             return {
-              id: work._id,
+              id: work.id,
               name: work.name,
               price: work.price.amount / 100,
               repeat: work.period,
@@ -109,12 +109,12 @@ class ServerData {
       return {
         'response': 200,
         'data': {
-          id: data.getVehicleByID._id,
-          caseName: data.getVehicleByID.caseName,
-          name: data.getVehicleByID.name,
-          manufacturer: data.getVehicleByID.manufacturer.name,
-          yearFrom: data.getVehicleByID.yearFrom,
-          yearTill: data.getVehicleByID.yearTill
+          id: data.vehicle._id,
+          caseName: data.vehicle.caseName,
+          name: data.vehicle.name,
+          manufacturer: data.vehicle.manufacturer.name,
+          yearFrom: data.vehicle.production.from,
+          yearTill: data.vehicle.production.till
         }
       }
     } catch (e) {
