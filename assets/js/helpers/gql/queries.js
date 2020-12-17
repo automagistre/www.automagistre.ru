@@ -19,8 +19,8 @@ export const getVehiclesByManufacturerID = gql`
 
 
 export const maintenancesByVehicleID = gql`  
-    query maintenancesByVehicleID($id: String) {
-      maintenancesByVehicleID(id: $id) {
+    query maintenancesByVehicleID($id: Uuid!) {
+        maintenances(vehicleId: $id) {
           id
           engine {
               name
@@ -32,7 +32,7 @@ export const maintenancesByVehicleID = gql`
           transmission
           wheelDrive
           works {
-              _id
+              id
               description
               name
               parts {
@@ -68,17 +68,19 @@ export const maintenancesByVehicleID = gql`
       }}`
 
 export const getVehicleByID = gql`
-  query getVehicleByID($id: String) {
-      getVehicleByID(id: $id) {
-          _id
+  query getVehicleByID($id: Uuid!) {
+      vehicle(id: $id) {
+          id
           caseName
           localizedName
           manufacturer {
               name
           }
           name
-          yearFrom
-          yearTill
+          production {
+              till
+              from
+          }
       }
   }
 `
