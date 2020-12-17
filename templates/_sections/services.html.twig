@@ -70,7 +70,7 @@
                         {% for block in secData %}
                             <li class="sec-services__kind js-services-kind {{ block.active|default(false) ? 'is-active' : '' }}" data-kind="{{ block.num }}">
                                 <h4 class="sec-services__kind-title">
-                                    <a class="sec-services__kind-btn js-services-btn">{{ block.title }}</a>
+                                    <a class="sec-services__kind-btn js-services-btn" role="button">{{ block.title }}</a>
                                 </h4>
                                 <div class="sec-services__kind-text">{{ block.text }}</div>
                                 <a class="btn btn_arrow-rt sec-services__kind-more" href="{{ block.path }}">Подробнее</a>
