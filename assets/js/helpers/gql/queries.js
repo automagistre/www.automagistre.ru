@@ -84,30 +84,29 @@ export const getVehicleByID = gql`
       }
   }
 `
-export const getLastReviews = gql`
-    query getLastReviews($count: Int) {
-        getLastReviews(count: $count) {
-            _id
-            author
-            content
-            publishAt
-        }
-    }
-`
-
-export const getReviewsByPageNumber = gql`
-    query getReviewsByPageNumber($count: Int, $page: Int) {
-        getReviewsByPageNumber(count: $count, page: $page) {
-            _id
-            author
-            content
-            publishAt
+export const getReviews = gql`
+    query getLastReviews($count: Int, $after: Uuid) {
+        reviews(first: $count, after: $after) {
+            nodes{
+                id
+                author
+                content
+                source
+                publishAt
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+            totalCount
         }
     }
 `
 
 export const getCountOfReviews = gql`
     query getCountOfReviews {
-        getCountOfReviews
+        reviews{
+            totalCount
+        }
     }
 `

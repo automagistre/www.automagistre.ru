@@ -83,35 +83,42 @@ class reviewsGrid {
 }
 
 class ReviewsGridAll  extends reviewsGrid {
+
+  _lastUUID = undefined
+
   constructor(selector) {
     super(selector)
     this._server = new ServerData()
   }
 
   async getNextReviews(groupKey, count) {
-    const response  = await this._server.getReviewsByPageNumber(count, groupKey)
-    if (response.response === 200) {
-      return  response.data.map(reviewObj => {
-        const node =  document.createElement('div');
-        node.className = 'reviews-list__item just-loaded';
-        node.append(new Review(reviewObj).render({isOpen: true}))
-        return node;
-      })
-    } else {
-      return []
-    }
+    const {response, data: {reviews, pageInfo: {endCursor, hasNextPage}} } =
+           await this._server.getReviewsByPageNumber(count, this._lastUUID)
+
+    if (!hasNextPage || response !== 200) return []
+
+    this._lastUUID = endCursor
+    return  reviews.map(reviewObj => {
+      const node =  document.createElement('div');
+      node.className = 'reviews-list__item just-loaded';
+      node.append(new Review(reviewObj).render({isOpen: true}))
+      return node;
+    })
   }
 }
 
 
-const reviewPage = async () => {
+const reviewPage =  () => {
   const serverData = new ServerData()
   const titleNode = document.querySelector('.page__title')
-  const reviewsCount = await serverData.getCountOfReviews()
-  if (reviewsCount.response === 200) {
-    titleNode.textContent = `${reviewsCount.data} ${declOfNum(+reviewsCount.data, ['отзыв', 'отзыва', 'отзывов'])}`
-  }
-  await import('../../less/3_blocks/block_reviews-list')
+
+  serverData.getCountOfReviews().then(({response, data: reviewsCount }) => {
+    if (response === 200) {
+      titleNode.textContent = `${reviewsCount} ${declOfNum(+reviewsCount, ['отзыв', 'отзыва', 'отзывов'])}`
+    }
+  })
+
+  import('../../less/3_blocks/block_reviews-list')
   const ig = new ReviewsGridAll('#reviews-grid'),
         loadingNode = document.querySelector('#js-auto-load-reviews')
   ig.onLoading = status =>{
