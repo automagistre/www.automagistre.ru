@@ -18,9 +18,9 @@ const PATHS = {
 const isDev = NODE_ENV === "development";
 
 const resolveAssetsPath = (resourcePath) => {
-    const pathSplited = resourcePath.split('/').reverse()
-    const assetIndex = pathSplited.findIndex((element) => element=== 'assets')
-    const path = pathSplited.slice(0, assetIndex)
+    const pathSplit = resourcePath.split('/').reverse()
+    const assetIndex = pathSplit.findIndex((element) => element=== 'assets')
+    const path = pathSplit.slice(0, assetIndex)
     return `/${path.reverse().join('/')}`
 }
 
@@ -29,7 +29,6 @@ module.exports = {
     entry: {
         main: ['babel-polyfill', PATHS.src + "/js/main"],
         styles: PATHS.src + "/less/main",
-        fonts: PATHS.src + "/less/1_base/fonts"
     },
     output: {
         filename: PATHS.assets + "[name].[hash].js",
@@ -46,12 +45,12 @@ module.exports = {
         minimizer:[
             new TerserPlugin({
                 extractComments: false,
-                sourceMap: true,
+                sourceMap: isDev,
                 parallel: true,
                 terserOptions: {
                     extractComments: 'all',
                     compress: {
-                        drop_console: true,
+                        drop_console: !isDev,
                     },
                 },
             })
@@ -114,10 +113,10 @@ module.exports = {
             loader: "file-loader",
             options: {
                 name: "[name].[ext]",
-                outputPath(url, resourcePath, context){
+                outputPath(url, resourcePath){
                     return resolveAssetsPath(resourcePath)
                 },
-                publicPath(url, resourcePath, context) {
+                publicPath(url, resourcePath) {
                     return resolveAssetsPath(resourcePath)
                 }
             }
@@ -126,10 +125,10 @@ module.exports = {
             loader: "file-loader",
             options: {
                 name: "[name].[ext]",
-                outputPath(url, resourcePath, context){
+                outputPath(url, resourcePath){
                     return resolveAssetsPath(resourcePath)
                 },
-                publicPath(url, resourcePath, context) {
+                publicPath(url, resourcePath) {
                     return resolveAssetsPath(resourcePath)
                 }
             }
@@ -148,11 +147,6 @@ module.exports = {
     devtool: false,
 
     plugins: [
-        new webpack.ProvidePlugin({
-            "$":"jquery",
-            "jQuery":"jquery",
-            "window.jQuery":"jquery"
-        }),
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
