@@ -130,14 +130,17 @@
                 </div>
                 <div class="sh-mob__drop" id="mob-drop">
                     <nav class="sh-mob__menu">
-                        <a class="sh-mob__link" href="{{ path('service') }}">Автосервис в Москве</a>
                         {#<a class="sh-mob__link" href="#">Магазин запчастей</a>#}
                         {#<a class="sh-mob__link" href="#">Мой гараж</a>#}
-                        <a class="sh-mob__link" href="{{ path('contacts') }}">Контакты</a>
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'toyota'}) }}">Клубный автосервис: Toyota</a>
                         <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'nissan'}) }}">Клубный автосервис: Nissan</a>
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'lexus'}) }}">Клубный автосервис: Lexus</a>
                         <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'infiniti'}) }}">Клубный автосервис: Infiniti</a>
+                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'toyota'}) }}">Клубный автосервис: Toyota</a>
+                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'lexus'}) }}">Клубный автосервис: Lexus</a>
+                        <a class="sh-mob__link" href="{{ path('corporates') }}">Корпоративным клиентам</a>
+                        <a class="sh-mob__link" href="{{ path('maintenance') }}">Калькулятор ТО</a>
+                        <a class="sh-mob__link" href="{{ path('tire') }}">Шиномонтаж</a>
+                        <a class="sh-mob__link" href="{{ path('blog_index') }}">Блог</a>
+                        <a class="sh-mob__link" href="{{ path('contacts') }}">Контакты</a>
                     </nav>
                 </div>
             </header><!-- END site-header -->
