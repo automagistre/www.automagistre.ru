@@ -12,6 +12,14 @@ import CarCase from '../ui/SelectCarModal/CarCase';
 // const SERVER_URL = 'http://localhost:3000'
 const SERVER_URL = 'http://msk.automagistre.local/api/www'
 
+const engineType = {
+  'diesel': 'D'
+}
+
+const airIntakeType = {
+  'turbo': 'T'
+}
+
 class ServerData {
 
   constructor() {
@@ -23,23 +31,20 @@ class ServerData {
 
   async getVehiclesByManufacturerID(manufacturerID) {
     try {
-      const {data} = await this.client.query({
+      const {data: {vehicles}} = await this.client.query({
         query: getVehiclesByManufacturerID,
         variables: {manufacturerID}})
       return {
         'response': 200,
-        'data': data.vehicles
-                .map(vehicle =>  new CarCase({
-                  id: vehicle.id,
-                  caseName: vehicle.caseName,
-                  name: vehicle.name,
-                  manufacturer: vehicle.manufacturer.name,
-                  manufacturerID: vehicle.manufacturer.id,
-                  yearFrom: vehicle.production.from || 1990,
-                  yearTill: vehicle.production.till
-                }, this))
+        'data': vehicles.map( vehicle => {
+          const { id, caseName, name,
+                  manufacturer: {name: manufacturer, id: manufacturerID},
+                  production: {from, till}} = vehicle
+          return new CarCase({
+            id, caseName, name, manufacturer, manufacturerID,
+            yearFrom: from || 1990,
+            yearTill: till }, this)})
       }
-
     } catch (error) {
       return {
         'response': 500,
@@ -48,41 +53,33 @@ class ServerData {
     }
   }
 
-  async maintenancesByVehicleID(id) {
+  async maintenancesByVehicleID(vehicleId) {
     try {
-    const {data} = await  this.client.query({
+    const {data: {maintenances}} = await  this.client.query({
       query: maintenancesByVehicleID,
-      variables: {id}})
+      variables: {id: vehicleId}})
     return {
       'response': 200,
-      'data': data.maintenances
-      .map(eq => {
-        const mileageRepeat = Math.min(...eq.works.map(work => +work.period))
-        let engineType = eq.engine.type || '',
-            airIntakeType = eq.engine.airIntake || ''
-        engineType = engineType.toLowerCase() === 'diesel' ? 'D' : ''
-        airIntakeType = airIntakeType.toLowerCase() === 'turbo' ? 'T' : ''
+      'data': maintenances
+      .map(({id, works, engine, transmission, wheelDrive}) => {
+        const mileageRepeat = Math.min(...works.map(work => +work.period))
         return {
-          id: eq.id,
-          name: `${eq.engine.capacity}${airIntakeType}${engineType} ${eq.transmission} ${eq.wheelDrive}`,
-          mileageRepeat,
-          works: eq.works.map(work => {
+          id, mileageRepeat,
+          name: `${engine.capacity}${engineType[engine.type] || ''}${airIntakeType[engine.airIntake] || ''} ${transmission} ${wheelDrive}`,
+          works: works.map(work => {
+            const {id, name, period: repeat, recommended, description: note, position, parts, price:{amount: price}} = work
             return {
-              id: work.id,
-              name: work.name,
-              price: work.price.amount / 100,
-              repeat: work.period,
-              type: work.recommended ? 'recommendation' : 'work',
-              note: work.description,
-              position: work.position === 0 ? 9999 : work.position,
-              parts: work.parts.map(part => {
+              id, name, repeat, note,
+              price: price / 100,
+              type: recommended ? 'recommendation' : 'work',
+              position: position === 0 ? Infinity : position,
+              parts: parts.map(part => {
+                const {quantity,
+                  part: {id, name, unit = 'шт', price:{amount: price}, manufacturer: {name: manufacture}}} = part
                 return {
-                  id: part.part.id,
-                  name: part.part.name,
-                  manufacture: part.part.manufacturer.name,
-                  unit: 'шт',
-                  count: part.quantity / 100,
-                  price: part.part.price.amount / 100
+                  id, name, manufacture, unit,
+                  count: quantity / 100,
+                  price: price / 100
                 }
               })
             }
@@ -99,21 +96,19 @@ class ServerData {
     }
   }
 
-  async getVehicleByID(id) {
+  async getVehicleByID(vehicleId) {
     try {
-      const {data} = await this.client.query({
+      const {data: {vehicle: {
+          id, caseName, name,
+          manufacturer: {name: manufacturer},
+          production: {from: yearFrom, till: yearTill}
+      }}} = await this.client.query({
         query: getVehicleByID,
-        variables: {id}})
+        variables: {id: vehicleId}})
+
       return {
         'response': 200,
-        'data': {
-          id: data.vehicle._id,
-          caseName: data.vehicle.caseName,
-          name: data.vehicle.name,
-          manufacturer: data.vehicle.manufacturer.name,
-          yearFrom: data.vehicle.production.from,
-          yearTill: data.vehicle.production.till
-        }
+        'data': {id, caseName, name, manufacturer, yearFrom, yearTill}
       }
     } catch (e) {
       return {
