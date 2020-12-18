@@ -4,9 +4,7 @@ import {
     maintenancesByVehicleID,
     getVehicleByID,
     getCountOfReviews,
-    getLastReviews,
-    getReviewsByPageNumber
-
+    getReviews
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
@@ -125,49 +123,28 @@ class ServerData {
     }
   }
 
-  async getLastReviews(count) {
-    try {
-      const {data} = await this.client.query({
-        query: getLastReviews,
-        variables: {count}})
-      return {
-        'response': 200,
-        'data': data.getLastReviews.map(review => {
-          return {
-            author: review.author,
-            manufacturer: '',
-            model: '',
-            content: review.content,
-            source: 'Я.карты',
-            publish_at: new Date(review.publishAt)
-          };
-        })
-      }
-    } catch (e) {
-      return {
-        'response': 500,
-        'data': []
-      }
-    }
-  }
 
-  async getReviewsByPageNumber(count, page) {
+  async getReviewsByPageNumber(count, after) {
     try {
-      const {data} = await this.client.query({
-        query: getReviewsByPageNumber,
-        variables: {count, page}})
+      const {data: {reviews: {nodes, pageInfo, totalCount}}} = await this.client.query({
+        query: getReviews,
+        variables: {count, after}})
       return {
         'response': 200,
-        'data': data.getReviewsByPageNumber.map(review => {
-          return {
-            author: review.author,
-            manufacturer: '',
-            model: '',
-            content: review.content,
-            source: 'Я.карты',
-            publish_at: new Date(review.publishAt)
-          };
-        })
+        'data': {
+          pageInfo,
+          totalCount,
+          reviews: nodes.map(({
+            author, content, source, publishAt
+          }) => {
+            return {
+              author, content, source,
+              publish_at: new Date(publishAt),
+              manufacturer: '',
+              model: '',
+            }
+          }),
+        }
       }
     } catch (e) {
       return {
@@ -179,17 +156,17 @@ class ServerData {
 
   async getCountOfReviews() {
     try {
-      const {data} = await this.client.query({
+      const {data:{reviews:{totalCount}}} = await this.client.query({
         query: getCountOfReviews,
       })
       return {
         'response': 200,
-        'data': data.getCountOfReviews
+        'data': totalCount
       }
     } catch (e) {
       return {
         'response': 500,
-        'data': 376
+        'data': undefined
       }
     }
   }

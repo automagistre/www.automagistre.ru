@@ -35,18 +35,19 @@ const reviewSec = async () => {
   const serverData = new ServerData()
   const $reviewsNode = $('#sec-reviews-slider')
   if ($reviewsNode) {
-    const reviews10 = await serverData.getLastReviews(8)
-    const reviewsCountResponse = await serverData.getCountOfReviews()
-    const reviewsCount = Math.floor(reviewsCountResponse.data / 10) * 10
-    if (reviews10.response !== 200) return
-    reviewsBTN.textContent = `Посмотреть более ${reviewsCount} отзывов`
-    reviews10.data.forEach(reviewObj => {
-      const node = document.createElement('div')
-      node.className = 'sec-reviews__slide'
-      node.append(new Review(reviewObj).render())
-      $reviewsNode.append(node)
-    })
-    initSlick()
+    const {response, data: {totalCount, reviews}} = await serverData.getReviewsByPageNumber(8)
+    if (response === 200) {
+      if (totalCount){
+        reviewsBTN.textContent = `Посмотреть более ${Math.floor(totalCount / 10) * 10} отзывов`
+      }
+      reviews.forEach(reviewObj => {
+        const node = document.createElement('div')
+        node.className = 'sec-reviews__slide'
+        node.append(new Review(reviewObj).render())
+        $reviewsNode.append(node)
+      })
+      initSlick()
+    }
   }
 }
 
