@@ -101,7 +101,12 @@
       background-image: data-uri("@{img-dir}icons/icons_slider-arrows.svg");
       background-size: 200% 200%;
     }
+
+    &.is-hidden {
+      display: none;
+    }
   }
+
   &-prev {
     &:before { background-position: 0 0 }
     &:hover:before { background-position: 100% 0 }
