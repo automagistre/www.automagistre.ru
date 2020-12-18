@@ -30,7 +30,8 @@
 {#    <link rel="preload" href="/assets/fonts/alsrubl/alsrubl-webfont.woff" as="font" type="font/woff" crossorigin="anonymous"/>#}
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
     <script>
-        let APOLLO_URL = '{{ apollo_url() }}';
+        let APOLLO_URL = '{{ graphql_url() }}';
+        let GRAPHQL_URL = '{{ graphql_url() }}';
         let API_URL = '{{ api_url() }}';
     </script>
 </head>

@@ -29,7 +29,7 @@ services:
         image: automagistre/www-app:${DRONE_BUILD_NUMBER}
         environment:
             APP_SECRET: ${APP_SECRET}
-            APOLLO_URL: https://msk.automagistre.ru/api/www
+            GRAPHQL_URL: https://msk.automagistre.ru/api/www
             API_URL: https://msk.automagistre.ru/api/v1
         deploy:
             mode: replicated
@@ -74,40 +74,6 @@ services:
                 - "traefik.protocol=http"
                 - "traefik.backend.loadbalancer.method=drr"
 
-    apollo:
-        image: automagistre/www-apollo:${DRONE_BUILD_NUMBER}
-        environment:
-            MONGO_URL: mongodb://mongo/www
-            SERVER_URL: 0.0.0.0
-        networks:
-            - ingress
-            - mongo
-        deploy:
-            mode: replicated
-            replicas: 1
-            endpoint_mode: dnsrr
-            restart_policy:
-                condition: on-failure
-            update_config:
-                parallelism: 1
-                delay: 10s
-                order: start-first
-            labels:
-                - "traefik.docker.network=proxy"
-                - "traefik.enable=true"
-                - "traefik.frontend.rule=Host:www.automagistre.ru,www.rc.automagistre.ru;Path: /graphql"
-                - "traefik.frontend.priority=15"
-                - "traefik.port=3000"
-                - "traefik.protocol=http"
-                - "traefik.backend.loadbalancer.method=drr"
-
-    mongo:
-        image: mongo:4.2.6
-        command: --serviceExecutor adaptive
-        networks:
-            - mongo
-            - tenant
-
 networks:
     ingress:
         external: true
@@ -115,9 +81,6 @@ networks:
     default:
         driver: overlay
         name: www_am
-    mongo:
-        driver: overlay
-        name: www_mongo
     tenant:
         external: true
         name: tenant_msk

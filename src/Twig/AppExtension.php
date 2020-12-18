@@ -16,7 +16,7 @@ final class AppExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('apollo_url', fn (): string => self::env('APOLLO_URL')),
+            new TwigFunction('graphql_url', fn (): string => self::env('GRAPHQL_URL')),
             new TwigFunction('api_url', fn (): string => self::env('API_URL')),
         ];
     }
