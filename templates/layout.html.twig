@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equivgut="X-UA-Compatible" content="IE=edge">
     <!-- SEO basic pages settings ================================================================ -->
-{#    <meta name="robots" content="noindex, nofollow">#}
     <meta name="robots"   content="all">
     <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика">
     <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание авторемонт.">
@@ -27,7 +26,9 @@
     <link rel="preload" href="{{ asset('fonts/circe/300/circe_light.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/circe/400/circe_regular.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/circe/700/circe_bold.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
-{#    <link rel="preload" href="/assets/fonts/alsrubl/alsrubl-webfont.woff" as="font" type="font/woff" crossorigin="anonymous"/>#}
+    <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot') }}" as="font" type="font/woff" crossorigin="anonymous"/>
+    <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot?#iefix') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
     <script>
         let APOLLO_URL = '{{ apollo_url() }}';
