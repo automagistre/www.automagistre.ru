@@ -1,40 +1,26 @@
 import Review from '../ui/Review'
-import $ from 'jquery'
-import 'slick-carousel'
 import ServerData from '../helpers/ServerData'
+import Swiper, {Pagination, Navigation} from 'swiper';
+import '../../less/2_plugins/swiper/swiper'
+import '../../less/2_plugins/swiper/pagination'
 
-
-const initSlick = () => {
-  const $slider = $('#sec-reviews-slider'),
-        options = {
-          arrows: true,
-          dots: true,
-          infinite: true,
-          speed: 800,
-          autoplay: false,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-          nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
-          responsive: [
-            {breakpoint: 1100, settings: {slidesToShow: 2}},
-            {breakpoint: 760, settings: {slidesToShow: 2, arrows: false}},
-            {breakpoint: 540, settings: {slidesToShow: 1, arrows: false}},
-          ],
-        };
-  if ($slider.length) {
-    $slider.slick(options)
-    return true
-  }
-  return false
-}
 
 const reviewSec = async () => {
+  Swiper.use([Pagination, Navigation])
   const secReviewNode = document.querySelector('section.sec-reviews'),
-        reviewsBTN = secReviewNode.querySelector('.sec-reviews__more-btn')
-  const serverData = new ServerData()
-  const $reviewsNode = $('#sec-reviews-slider')
-  if ($reviewsNode) {
+        reviewsBTN = secReviewNode.querySelector('.sec-reviews__more-btn'),
+        serverData = new ServerData(),
+        swiperNode = secReviewNode.querySelector('.swiper-container'),
+        swiperPrevBtn = secReviewNode.querySelector('.slick-prev'),
+        swiperNextBtn = secReviewNode.querySelector('.slick-next'),
+        swiperPaginationNode = secReviewNode.querySelector('.slick-dots')
+
+  const checkArrow = btns => {
+    for (let btn of btns)
+      btn.classList.toggle('is-hidden', window.innerWidth <= 760)
+  }
+
+  if (swiperNode) {
     const {response, data: {totalCount, reviews}} = await serverData.getReviewsByPageNumber(8)
     if (response === 200) {
       if (totalCount){
@@ -42,11 +28,40 @@ const reviewSec = async () => {
       }
       reviews.forEach(reviewObj => {
         const node = document.createElement('div')
-        node.className = 'sec-reviews__slide'
+        node.className = 'sec-reviews__slide swiper-slide'
         node.append(new Review(reviewObj).render())
-        $reviewsNode.append(node)
+        swiperNode.firstElementChild.append(node)
       })
-      initSlick()
+      new Swiper(swiperNode, {
+        loop: true,
+        pagination: {
+          el: swiperPaginationNode,
+          clickable: true,
+          bulletElement: 'li',
+          bulletClass: 'pagination-btn',
+          bulletActiveClass: 'slick-active',
+          renderBullet: () => `<li class="pagination-btn" role="presentation">
+                                <button  type="button" role="tab"></button>
+                               </li>`
+        },
+        navigation: {
+          prevEl: swiperPrevBtn,
+          nextEl: swiperNextBtn,
+          hiddenClass: 'is-hidden'
+        },
+        breakpoints: {
+          1100: {
+            slidesPerView: 3
+          },
+          540: {
+            slidesPerView: 2
+          }
+        },
+        on:{
+          init: () => checkArrow([swiperPrevBtn, swiperNextBtn]),
+          resize: () => checkArrow([swiperPrevBtn, swiperNextBtn])
+        }
+      })
     }
   }
 }
