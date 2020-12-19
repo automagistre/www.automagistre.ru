@@ -23,6 +23,8 @@ const initPartnersSec = secNode => {
     speed: 800,
     loop: true,
     slidesPerView: 'auto',
+    centeredSlides: true,
+    roundLengths: true,
     autoplay: {
       delay: 2000,
     },
