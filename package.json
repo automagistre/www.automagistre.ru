@@ -26,7 +26,7 @@
     "babel-runtime": "^6.26.0",
     "browser-sync": "^2.26.12",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.0.3",
+    "copy-webpack-plugin": "^6.4.1",
     "css-loader": "^3.6.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
