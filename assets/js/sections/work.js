@@ -1,43 +1,54 @@
-import $ from 'jquery';
-import 'slick-carousel';
+import Swiper, {Pagination, Autoplay} from 'swiper';
+import '../../less/2_plugins/swiper/swiper'
+import '../../less/2_plugins/swiper/pagination'
 import Odometer from 'odometer';
 
 const workSec = () => {
-    const $secWorkSlider = $('#sec-work-slider'),
-          workFilterBtn = document.querySelectorAll('.js-work-filter');
-    const slickOptions = {
-        arrows: false,
-        dots: true,
-        infinite: true,
+    Swiper.use([Pagination, Autoplay])
+    const secWorkNode = document.querySelector('section.sec-work'),
+          secWorkSlider = document.getElementById('sec-work-slider'),
+          workFilterBtn = secWorkNode.querySelectorAll('.js-work-filter'),
+          workCounter = secWorkNode.querySelector('#sec-work-count')
+    const odometerOptions = {
+        el: workCounter,
+        duration: 300,
+        value: 101,
+        format: '(dd)',
+    }
+    const swiperOptions = {
+        loop: true,
         speed: 600,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-    };
+        observer: true,
+        autoplay: {
+            delay: 5000
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'bullets',
+            clickable: true
+        }
+    }
+
+    const od = new Odometer(odometerOptions);
+    let swiper = new Swiper(secWorkSlider, swiperOptions)
+
     const changeSlide = event => {
         const target = event.currentTarget;
         workFilterBtn.forEach(btn => btn.classList.remove('is-active'));
         target.classList.add('is-active');
-        secWorkFilter(`js-type-${target.dataset.key}`, target.dataset.key)
+        secWorkFilter(target.dataset.key)
     };
-    const secWorkFilter = (keyClassName, key) => {
-        let $workCounter = $('#sec-work-count'),
-            valueStart = +key === 1 ? 101 : +key;
-        const odometerOptions = {
-            el: $workCounter[0],
-            duration: 300,
-            value: valueStart,
-            format: '(dd)',
-        };
-        $secWorkSlider.slick('slickUnfilter');
-        $secWorkSlider.slick('slickFilter', function() { return $(`.${keyClassName}`, this).length === 1; });
-
-        const od = new Odometer(odometerOptions);
+    const secWorkFilter = (key) => {
+        secWorkNode.querySelectorAll('.sec-work__slide').forEach(node => {
+            node.className = `sec-work__slide swiper-slide${+node.dataset.groupKey === +key ? '': '-hidden'}`
+        })
+        swiper.destroy()
+        swiper = new Swiper(secWorkSlider, swiperOptions)
+        swiper.autoplay.start()
         od.update(+key + 100);
     };
-    $secWorkSlider.slick(slickOptions);
-    secWorkFilter('js-type-01', '01'); // Init slider
+
+    secWorkFilter(1); // Init slider
     workFilterBtn.forEach(element => element.addEventListener('click', changeSlide));
 };
 
