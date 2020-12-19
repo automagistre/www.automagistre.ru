@@ -4,7 +4,8 @@ import '../../less/2_plugins/swiper/pagination'
 import '../../less/2_plugins/swiper/navigation'
 import {nodesObserver} from '../lib';
 
-const partnersSec = () => {
+
+const initPartnersSec = secNode => {
   Swiper.use([Navigation, Pagination, Autoplay])
 
   const checkArrow = btns => {
@@ -12,8 +13,7 @@ const partnersSec = () => {
       btn.classList.toggle('is-hidden', window.innerWidth <= 1024)
   }
 
-  const secNode = document.querySelector('section.sec-partners')
-  const swiperNode = document.getElementById('sec-partners-slider')
+  const swiperNode = secNode.querySelector('.js-partners-swiper')
 
   const prevBtn = secNode.querySelector('.slick-prev')
   const nextBtn = secNode.querySelector('.slick-next')
@@ -44,6 +44,11 @@ const partnersSec = () => {
   swiper.autoplay.stop()
 
   nodesObserver([secNode], ()=> swiper.autoplay.start())
+}
+
+const partnersSec = () => {
+  const secNodes = document.querySelectorAll('section.sec-partners')
+  secNodes.forEach(secNode => initPartnersSec(secNode))
 
 };
 
