@@ -39,9 +39,3 @@ const secMaster = () => {
 }
 
 export default secMaster;
-
-//
-
-//     dots: true,
-
-// }
