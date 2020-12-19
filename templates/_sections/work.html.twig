@@ -1,6 +1,6 @@
 {% set works = [
     {
-        'key': '01',
+        'key': 1,
         'isActive': true,
         'title': 'Обслуживание (TO)',
         'icon': 'service',
@@ -25,7 +25,7 @@
                 'bigImgTitle': 'Компьютерная диагностика'
             }]
     },{
-        'key': '02',
+        'key': 2,
         'title': 'Подвеска',
         'icon': 'suspend',
         'images': [
@@ -43,7 +43,7 @@
                 'bigImgTitle': 'Замена рычагов'
             }]
     },{
-        'key': '03',
+        'key': 3,
         'title': 'Тормозная система',
         'icon': 'braking',
         'images': [
@@ -61,7 +61,7 @@
                 'bigImgTitle': 'Замена дисков'
             }],
     },{
-        'key': '04',
+        'key': 4,
         'title': 'Двигатель',
         'icon': 'engine',
         'images': [
@@ -85,7 +85,7 @@
                 'bigImgTitle': 'Регулировка клапанов'
             }]
     },{
-        'key': '05',
+        'key': 5,
         'title': 'Управление',
         'icon': 'control',
         'images': [
@@ -103,7 +103,7 @@
                 'bigImgTitle': 'Замена рулевых наконечников'
             }]
     },{
-        'key': '06',
+        'key': 6,
         'title': 'Коробка передач',
         'icon': 'starter',
         'images': [
@@ -146,26 +146,29 @@
                     </ul>
                 </div>
                 <div class="sec-work__col-rt">
-                    <div class="sec-work__slider" id="sec-work-slider">
-                        {% for work in works %}
-                            {% for image in work.images %}
-                                <div class="sec-work__slide js-type-{{ work.key }}">
-                                    <div class="sec-work__slide-back">
-                                        <img class="sec-work__slide-min lazyload"
-                                             data-src="{{ image.small }}"
-                                             loading="lazy"
-                                             alt="{{ image.smallImgTitle }}">
+                    <div class="sec-work__slider swiper-container" id="sec-work-slider">
+                        <div class="swiper-wrapper">
+                            {% for work in works %}
+                                {% for image in work.images %}
+                                    <div class="sec-work__slide swiper-slide" data-group-key="{{ work.key }}">
+                                        <div class="sec-work__slide-back">
+                                            <img class="sec-work__slide-min lazyload"
+                                                 data-src="{{ image.small }}"
+                                                 loading="lazy"
+                                                 alt="{{ image.smallImgTitle }}">
+                                        </div>
+                                        <div class="sec-work__slide-front">
+                                            <img class="sec-work__slide-big lazyload"
+                                                 data-src="{{ image.big }}"
+                                                 loading="lazy"
+                                                 alt="{{ image.bigImgTitle }}">
+                                            <div class="sec-work__slide-note"><span>{{ image.title }}</span></div>
+                                        </div>
                                     </div>
-                                    <div class="sec-work__slide-front">
-                                        <img class="sec-work__slide-big lazyload"
-                                             data-src="{{ image.big }}"
-                                             loading="lazy"
-                                             alt="{{ image.bigImgTitle }}">
-                                        <div class="sec-work__slide-note"><span>{{ image.title }}</span></div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
+                        </div>
+                        <div class="swiper-pagination"></div>
                     </div>
                     <div class="sec-work__count" id="sec-work-count">01</div>
                 </div>

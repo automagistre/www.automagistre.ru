@@ -148,23 +148,8 @@
   &__slider {
     position: relative;
 
-    .slick-dots {
-      left: 280px;
-      transform: none;
-
-      li {
-        margin: 0 8px;
-      }
-
-      button {
-        width: 20px;
-        height: 20px;
-
-        &:before {
-          width: 12px;
-          height: 12px;
-        }
-      }
+    .swiper-pagination {
+      left: -90px !important;
     }
   }
 
@@ -264,6 +249,7 @@
     text-shadow: 0 5px 40px rgba(0,0,0, .1);
     user-select: none;
     overflow: hidden;
+    z-index: 5;
 
     .odometer {
 
@@ -294,8 +280,8 @@
   }
 }
 
-.slick-active {
-  .sec-work__slide {
+.swiper-slide-active {
+  &.sec-work__slide {
 
     .sec-work__slide-back {
       opacity: 1;
@@ -406,6 +392,10 @@
         height: 50px;
         margin: -25px 0 0 -25px;
       }
+    }
+
+    &__slider .swiper-pagination {
+      left: 0!important;
     }
 
     &__slide {
