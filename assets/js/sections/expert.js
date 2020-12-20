@@ -1,33 +1,31 @@
-import { initParallaxAnimation, nodesObserver } from '../lib';
-import $ from "jquery";
-import "slick-carousel";
-import 'modal-video/js/jquery-modal-video';
+import { initParallaxAnimation, nodesObserver } from '../lib'
+import Swiper, {Navigation} from 'swiper'
+import '../../less/2_plugins/swiper/swiper'
+import '../../less/2_plugins/swiper/pagination'
+import $ from "jquery"
+import 'modal-video/js/jquery-modal-video'
 
 
-const initSlickSlider = () => {
-    const slickOptions = {
-        arrows: true,
-        dots: true,
-        infinite: true,
+const initSlider = node => {
+    Swiper.use([Navigation])
+    const nextArrow = node.querySelector('.slick-next'),
+          prevArrow = node.querySelector('.slick-prev')
+
+    const secExpertSliderNode = node.querySelector('#sec-expert-slider')
+
+    const swiper = new Swiper(secExpertSliderNode, {
         speed: 800,
-        autoplay: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-        nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
-    };
-    const $secExpertSlider = $('#sec-expert-slider'),
-        expertBtn = document.querySelectorAll('.js-expert-btn');
-    const changeSlide = event => {
-        const target = event.currentTarget;
-        $secExpertSlider.slick('slickGoTo', +target.dataset.num - 1, false);
-    };
-    if ($secExpertSlider.length) {
-        $secExpertSlider.slick(slickOptions);
-        expertBtn.forEach(btn => btn.addEventListener('click', changeSlide));
-    } else {
-        throw new Error('Fail init slick slider on sec-expert');
-    }
+        navigation: {
+            prevEl: prevArrow,
+            nextEl: nextArrow,
+            disabledClass: 'is-disable'
+        }
+    })
+
+    node.querySelectorAll('.js-expert-btn').forEach(btn =>
+            btn.addEventListener('click', (event)=>
+                swiper.slideTo(+event.target.dataset.num)))
+
     import('../../less/2_plugins/modal-video.min').then(()=>{
         const modalVideoOptions = {
             'channel': 'youtube',
@@ -38,10 +36,11 @@ const initSlickSlider = () => {
             'nocookie': true,};
         $('.js-expert-video').modalVideo(modalVideoOptions);
     })
-};
+}
 
 const expertSec = () => {
-    const expertBackNode = document.querySelector('#sec-expert-back')
+    const expertBackNode = document.querySelector('#sec-expert-back'),
+          expertSecNode = document.querySelector('section.sec-expert')
     const expertBackImages = [
         {
             node: expertBackNode.querySelector('.sec-expert__lt-img_01'),
@@ -119,7 +118,7 @@ const expertSec = () => {
         }
         Promise.all(imgPromises).then(()=>{initParallaxAnimation(expertBackNode, expertBackImages)})
     })
-    initSlickSlider()
+    initSlider(expertSecNode)
 };
 
 export default expertSec;

@@ -1,26 +1,26 @@
 {% set videos = [
     {
-        'num': '01',
+        'num': 0,
         'title': 'Ремонт головки блока цилиндров(ГБЦ)',
         'preview': asset('images/sec-expert/poster_engine_head.jpg'),
         'youtubeID': 'OFc8K23JNSs',
     },{
-        'num': '02',
+        'num': 1,
         'title': 'Устройстве АКПП',
         'preview': asset('images/sec-expert/poster_akpp.jpg'),
         'youtubeID': 'hfCmcsCTwYU',
     },{
-        'num': '03',
+        'num': 2,
         'title': 'Система охлаждения двигателя',
         'preview': asset('images/sec-expert/poster_coolint_system.jpg'),
         'youtubeID': 'BY46TxGCUsA',
     },{
-        'num': '04',
+        'num': 3,
         'title': 'Эксплуатация Nissan Qashqai',
         'preview': asset('images/sec-expert/poster_quashgai.jpg'),
         'youtubeID': 'YRDd-sxDMF0',
     },{
-        'num': '05',
+        'num': 4,
         'title': 'Тормозной суппорт. Устройство и обслуживание',
         'preview': asset('images/sec-expert/poster_support.jpg'),
         'youtubeID': 'YSoc_OWcN-I',
@@ -49,35 +49,41 @@
     </div>
     <div class="sec-expert__front">
         <h2 class="sec-expert__title">Убедитесь в нашей экспертности сами</h2>
-        <div class="sec-expert__slider" id="sec-expert-slider">
-            {% for video in videos %}
-                <div class="sec-expert__slide">
-                    <div class="container">
-                        <h4 class="sec-expert__subtitle"><span>{{ video.title }}</span></h4>
-                        <div class="sec-expert__row">
-                            <div class="sec-expert__col-lt">
-                                <div class="video-unit sec-expert__video">
-                                  <div class="video-unit__screen">
-                                    <div class="video-unit__poster js-youtube-init">
-                                      <img class="video-unit__img lazyload" data-src="{{ video.preview }}" loading="lazy" alt="{{ video.title}}">
-                                      <a class="video-unit__start js-expert-video" data-video-id="{{ video.youtubeID }}" role="button"></a>
+        <div class="sec-expert__slider">
+            <div class="swiper-container" id="sec-expert-slider">
+                <div class="swiper-wrapper">
+                    {% for video in videos %}
+                        <div class="sec-expert__slide swiper-slide">
+                            <div class="container">
+                                <h4 class="sec-expert__subtitle"><span>{{ video.title }}</span></h4>
+                                <div class="sec-expert__row">
+                                    <div class="sec-expert__col-lt">
+                                        <div class="video-unit sec-expert__video">
+                                          <div class="video-unit__screen">
+                                            <div class="video-unit__poster js-youtube-init">
+                                              <img class="video-unit__img lazyload" data-src="{{ video.preview }}" loading="lazy" alt="{{ video.title}}">
+                                              <a class="video-unit__start js-expert-video" data-video-id="{{ video.youtubeID }}" role="button"></a>
+                                            </div>
+                                          </div>
+                                        </div>
                                     </div>
-                                  </div>
+                                    <div class="sec-expert__col-rt">
+                                        <nav class="sec-expert__nav">
+                                            {% for videoNav in videos %}
+                                                {% if videoNav != video %}
+                                                    <a class="sec-expert__btn js-expert-btn" data-num="{{ videoNav.num }}">{{ videoNav.title }}</a>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="sec-expert__col-rt">
-                                <nav class="sec-expert__nav">
-                                    {% for videoNav in videos %}
-                                        {% if videoNav != video %}
-                                            <a class="sec-expert__btn js-expert-btn" data-num="{{ videoNav.num }}" role="button">{{ videoNav.title }}</a>
-                                        {% endif %}
-                                    {% endfor %}
-                                </nav>
-                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
+            </div>
+            <div class="slick-arrow slick-prev"></div>
+            <div class="slick-arrow slick-next"></div>
         </div>
         <img class="sec-expert__worker lazyload" data-src="{{ asset('images/sec-expert/worker.png') }}" loading="lazy" alt="Авторемонтник">
     </div>
