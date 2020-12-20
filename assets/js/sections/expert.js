@@ -1,9 +1,7 @@
 import { initParallaxAnimation, nodesObserver } from '../lib'
 import Swiper, {Navigation} from 'swiper'
 import '../../less/2_plugins/swiper/swiper'
-import '../../less/2_plugins/swiper/pagination'
-import $ from "jquery"
-import 'modal-video/js/jquery-modal-video'
+import VideoPopup from '../ui/Popups/VideoPopup';
 
 
 const initSlider = node => {
@@ -24,18 +22,14 @@ const initSlider = node => {
 
     node.querySelectorAll('.js-expert-btn').forEach(btn =>
             btn.addEventListener('click', (event)=>
-                swiper.slideTo(+event.target.dataset.num)))
+                swiper.slideTo(+event.currentTarget.dataset.num)))
 
-    import('../../less/2_plugins/modal-video.min').then(()=>{
-        const modalVideoOptions = {
-            'channel': 'youtube',
-            'autoplay': 1,
-            'controls': 0,
-            'enablejsapi': 1,
-            'showinfo': 0,
-            'nocookie': true,};
-        $('.js-expert-video').modalVideo(modalVideoOptions);
-    })
+    node.querySelectorAll('.js-expert-video')
+        .forEach(videoBtn => videoBtn.addEventListener('click', event=> {
+        const videoPopup = new VideoPopup(event.currentTarget.dataset.videoId)
+        videoPopup.open()
+        })
+    )
 }
 
 const expertSec = () => {
