@@ -34,6 +34,7 @@ const reviewSec = async () => {
       })
       new Swiper(swiperNode, {
         loop: true,
+        speed: 800,
         pagination: {
           el: swiperPaginationNode,
           clickable: true,
