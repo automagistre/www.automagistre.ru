@@ -33,7 +33,7 @@
   &__wrap {
     position: relative;
     flex: 0 0 740px;
-    min-width: 0;
+    min-width: min-content;
     margin: auto;
     padding: 50px;
     animation: modal_theme_normal__content .3s ease-in-out;
@@ -44,10 +44,12 @@
     position: absolute;
     top: 38px;
     right: 38px;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background: no-repeat center data-uri("@{img-dir}icons/icon_cross_white.svg");
-    background-size: 8px 8px;
+    background-size: 15px 15px;
+    background-color: @red;
+    border: 1px solid @gray;
     border-radius: 50%;
     opacity: .6;
     transition: all .3s;
@@ -127,6 +129,12 @@
   }
   to {
     transform: scale(1)
+  }
+}
+
+.for_video {
+  .popup__body {
+    background-color: rgba(154, 156, 158, 0.1);
   }
 }
 
