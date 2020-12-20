@@ -107,17 +107,27 @@
     }
     &.is-disable{
       opacity: 0.2;
+
+      &:hover {
+        border-color: #858585;
+      }
     }
   }
 
   &-prev {
     &:before { background-position: 0 0 }
     &:hover:before { background-position: 100% 0 }
+    &.is-disable {
+      &:hover:before { background-position: 0 0 }
+    }
   }
 
   &-next {
     &:before { background-position: 100% 100% }
     &:hover:before { background-position: 0 100% }
+    &.is-disable {
+      &:hover:before { background-position: 100% 100% }
+    }
   }
 
   &-disabled {
