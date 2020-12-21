@@ -74,6 +74,7 @@ services:
                 - "traefik.enable=true"
                 - "traefik.frontend.rule=Host:www.old.automagistre.ru,old.automagistre.ru"
                 - "traefik.frontend.priority=10"
+                - "traefik.frontend.headers.customResponseHeaders=X-Robots-Tag:none"
                 - "traefik.port=80"
                 - "traefik.protocol=http"
                 - "traefik.backend.loadbalancer.method=drr"
