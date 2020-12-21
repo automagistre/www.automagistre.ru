@@ -31,6 +31,8 @@ services:
         image: automagistre/www-app:${DRONE_BUILD_NUMBER}
         environment:
             APP_SECRET: ${APP_SECRET}
+            SENTRY_DSN: ${SENTRY_DSN}
+            SENTRY_DSN_BROWSER: ${SENTRY_DSN_BROWSER}
             GRAPHQL_URL: https://msk.automagistre.ru/api/www
             API_URL: https://msk.automagistre.ru/api/v1
         deploy:

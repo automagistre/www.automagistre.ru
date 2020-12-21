@@ -15,6 +15,7 @@
         <env name="APP_DEBUG" value="1" force="true" />
         <env name="GRAPHQL_URL" value="" force="true" />
         <env name="API_URL" value="" force="true" />
+        <env name="SENTRY_DSN_BROWSER" value="" force="true" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
     </php>
 

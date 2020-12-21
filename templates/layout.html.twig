@@ -264,5 +264,11 @@
 <script src="{{ asset('main.js') }}"></script>
 {#<script src="{{ asset('fonts.js') }}"></script>#}
 
+{% set sentryDsn = sentry_dsn() %}
+{% if sentryDsn is not empty %}
+    <script src="https://browser.sentry-cdn.com/5.5.0/bundle.min.js" crossorigin="anonymous" defer>
+      Sentry.init({dsn: '{{ sentryDsn }}'});
+    </script>
+{% endif %}
 </body>
 </html>
