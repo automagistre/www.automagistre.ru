@@ -20,26 +20,32 @@
             <div class="container">
                 <h2 class="sec-announces__title">Похожие статьи</h2>
                 <div class="sec-announces__slider js-announces-slider">
-                    {% for item in blogItems %}
-                        {% if article.title != item.title and article.theme == item.theme %}
-                            <div class="sec-announces__slide">
-                                <div class="blog-card">
-                                    <a class="blog-card__pict" href="{{ item.url }}">
-                                        <img class="blog-card__img lazyload" data-src="{{ asset(item.img) }}" loading="lazy" alt="{{ item.title }}">
-                                    </a>
-                                    <div class="blog-card__text">
-                                        <h3 class="blog-card__title">{{ item.title }}</h3>
-                                        <div class="blog-card__theme">{{ item.theme }}</div>
-                                        <div class="blog-card__note">{{ item.note }}</div>
-                                        <div class="blog-card__date">{{ item.date }}</div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                        {% for item in blogItems %}
+                            {% if article.title != item.title and article.theme == item.theme %}
+                                <div class="sec-announces__slide swiper-slide">
+                                    <div class="blog-card">
+                                        <a class="blog-card__pict" href="{{ item.url }}">
+                                            <img class="blog-card__img lazyload" data-src="{{ asset(item.img) }}" loading="lazy" alt="{{ item.title }}">
+                                        </a>
+                                        <div class="blog-card__text">
+                                            <h3 class="blog-card__title">{{ item.title }}</h3>
+                                            <div class="blog-card__theme">{{ item.theme }}</div>
+                                            <div class="blog-card__note">{{ item.note }}</div>
+                                            <div class="blog-card__date">{{ item.date }}</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                    <div class="slick-arrow slick-prev"></div>
+                    <div class="slick-arrow slick-next"></div>
                 </div>
             </div>
         </section>
-
     </main>
 {% endblock %}
