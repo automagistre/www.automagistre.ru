@@ -1,0 +1,25 @@
+{% extends 'layout_white.html.twig' %}
+
+{% block content %}
+    <main class="site-main error-page">
+        <div class="error-page__body">
+            <div class="error-page__back">
+                {{ status_code }}
+            </div>
+            <div class="error-page__front">
+                <div class="container">
+                    <h1 class="error-page__title">
+                        {% block error_massage %}{% endblock %}
+                    </h1>
+                    <div class="error-page__note">
+                        Но вам, возможно, будут интересны следующие страницы:
+                    </div>
+                    <nav class="error-page__nav">
+                        <a class="btn btn_shmatn error-page__btn" href="#"><i class="icon-gear"></i>АВТОСЕРВИС В МОСКВЕ</a>
+{#                        <a class="btn btn_shmatn error-page__btn" href="#"><i class="icon-belt"></i>МАГАЗИН ЗАПЧАСТЕЙ</a>#}
+                    </nav>
+                </div>
+            </div><!-- END container -->
+        </div><!-- END page__body -->
+    </main><!-- END site-main -->
+{% endblock %}
