@@ -1,32 +1,36 @@
-import $ from 'jquery'
-import 'slick-carousel'
+import Swiper, {Navigation} from 'swiper';
+import '../../less/2_plugins/swiper/swiper'
+import '../../less/2_plugins/swiper/pagination'
 import '../../less/user-content'
 import '../../less/4_sections/sec_announces'
 import '../../less/5_pages/page_article'
-import 'zooming'
 import Zooming from 'zooming';
+import {mobChecker} from '../lib';
 
 const articlePage = () => {
-  $('.js-ucs-gallery').slick({
-    arrows: true,
-    dots: false,
-    infinite: true,
-    speed: 800,
-    autoplay: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-    nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
+  Swiper.use([Navigation])
+
+  document.querySelectorAll('.js-ucs-gallery').forEach(node => {
+    new Swiper(node, {
+      loop: true,
+      speed: 800,
+      navigation: {
+        nextEl: '.slick-next',
+        prevEl: '.slick-prev'
+      }
+    })
   })
 
-  const zooming = new Zooming({
-    'bgOpacity': 0.85,
-    'scaleBase': 0.6,
-  });
+  if(!mobChecker(1025)) {
+    const zooming = new Zooming({
+      'bgOpacity': 0.85,
+      'scaleBase': 0.6,
+    });
 
-  document.querySelectorAll('[data-action="zoom"]').forEach(pic => {
-    zooming.listen(pic)
-  })
+    document.querySelectorAll('[data-action="zoom"]').forEach(pic => {
+      zooming.listen(pic)
+    })
+  }
 }
 
 export default articlePage
