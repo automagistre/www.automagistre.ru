@@ -29,6 +29,7 @@ services:
             MYSQL_PASSWORD: 'db'
             GRAPHQL_URL: http://msk.automagistre.local/api/www
             API_URL: http://msk.automagistre.local/api/v1
+            SENTRY_DSN_BROWSER:
 
     memcached:
         image: memcached:1.5.20-alpine
