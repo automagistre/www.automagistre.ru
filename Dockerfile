@@ -144,7 +144,7 @@ COPY --from=node /usr/local/app/public/images images
 COPY --from=node /usr/local/app/public/img img
 COPY --from=node /usr/local/app/public/assets assets
 COPY --from=node /usr/local/app/public/fonts fonts
-COPY --from=node /usr/local/app/public/robots.txt .
+COPY --from=app /usr/local/app/public/robots.txt .
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
 
