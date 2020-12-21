@@ -21,6 +21,8 @@ services:
                 - "traefik.enable=true"
                 - "traefik.frontend.rule=Host:www.automagistre.ru,automagistre.ru"
                 - "traefik.frontend.priority=5"
+                - "traefik.frontend.redirect.regex=^(.*)://automagistre.ru(.*)"
+                - "traefik.frontend.redirect.replacement=$$1://www.automagistre.ru$$2"
                 - "traefik.port=80"
                 - "traefik.protocol=http"
                 - "traefik.backend.loadbalancer.method=drr"
