@@ -23,6 +23,7 @@ return static function (RoutingConfigurator $routes): void {
         '/shinomontazh-tekstilschiki' => '/service/nissan/tire',
         '/kompjuternaja-diagnostika-avto' => '/service/nissan/diagnostics/comp',
         '/online' => '/service/nissan/maintenance',
+        '/contacts' => '/service/nissan/contacts',
     ] as $old => $new) {
         $routes->add('old_redirect_'.\md5($old), $old)
             ->controller(RedirectController::class)
