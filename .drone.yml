@@ -8,7 +8,7 @@ clone:
 
 steps:
     -   name: build base
-        image: docker:19.03.5
+        image: docker:20.10.1
         volumes:
             -   name: docker.sock
                 path: /var/run/docker.sock
@@ -18,7 +18,7 @@ steps:
             - docker build -t "automagistre/www-nginx:base" --target nginx-base .
 
     -   name: push base
-        image: docker:19.03.5
+        image: docker:20.10.1
         volumes:
             -   name: docker.sock
                 path: /var/run/docker.sock
@@ -147,7 +147,7 @@ steps:
             - install assets
 
     -   name: build
-        image: docker:19.03.5
+        image: docker:20.10.1
         volumes:
             -   name: docker.sock
                 path: /var/run/docker.sock
