@@ -148,8 +148,9 @@ COPY --from=app /usr/local/app/public/robots.txt .
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
 
-RUN find . \
-    -type f \
+RUN set -ex \
+    && ln -s img/favicons/favicon-32x32.png favicon.png \
+    && find . -type f \
     \( \
         -name "*.css" \
         -or -name "*.eot" \
