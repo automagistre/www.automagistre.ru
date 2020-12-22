@@ -1,8 +1,9 @@
 import CalcItem from './CalcItem';
 
 class Part extends CalcItem {
-  constructor(item) {
+  constructor(item, parent=undefined) {
     super(item);
+    this._parent = parent
   }
 
   get id() {
@@ -27,6 +28,9 @@ class Part extends CalcItem {
 
   set isSelected(value) {
     super.isSelected = value;
+    if (this._parent && value) {
+      if (!this._parent.isSelected) this._parent.isSelected = true
+    }
     this.onChange();
   }
 
@@ -39,7 +43,6 @@ class Part extends CalcItem {
   }
 
   set isDisabled(value) {
-    if (value) this.isSelected = false;
     this._node.disabled = value;
   }
 

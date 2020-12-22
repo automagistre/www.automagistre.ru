@@ -73,7 +73,7 @@ class CalculatorSecondStep extends CalculatorSteps {
             partsNode.className = 'cg-price__list';
 
             for (let part of parts){
-              const partEntity = new Part(part);
+              const partEntity = new Part(part, workEntity);
               partEntity.onChange = onChange;
 
               const partNode = partEntity.render();

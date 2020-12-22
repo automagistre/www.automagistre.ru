@@ -30,7 +30,6 @@ class Work extends CalcItem {
     super.isSelected = status;
     this._parts.forEach(part => {
       part.isSelected = status;
-      part.isDisabled = !status;
     });
     this.onChange();
   }
