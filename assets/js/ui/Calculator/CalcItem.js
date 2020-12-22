@@ -1,3 +1,5 @@
+import Dinero from 'dinero.js/src/dinero';
+
 class CalcItem {
 
   constructor(item) {
@@ -16,7 +18,8 @@ class CalcItem {
   }
 
   get price() {
-    return this._item.price
+    const {amount, currency} = this._item.price
+    return Dinero({amount: +amount, currency})
   }
 
   get totalPrice() { }
@@ -33,7 +36,7 @@ class CalcItem {
   toString() {
     const count = +this._item.count,
         unit = this._item.unit || 'шт',
-        totalPrice = this.totalPrice;
+        totalPrice = this.totalPrice.toFormat();
     return ` ${count > 1 ? count + ' ' + unit + ' - ' : ''}${totalPrice}`
   }
 

@@ -163,13 +163,13 @@ class FormCalculatorData extends FormData {
 
     this._data.equipmentId = calculator.equipment.id
     this._data.mileage = calculator.mileage
-    this._data.total = calculator.totalPrice
+    this._data.total = calculator.totalPrice.toUnit() * 100
 
     for (let work of calculator.works) {
       const workData = {
         id: work.id,
         name: work.name,
-        price: work.price * 100,
+        price: work.price.toUnit() * 100,
         type: work.type,
         isSelected: work.isSelected,
         parts: []
@@ -178,7 +178,7 @@ class FormCalculatorData extends FormData {
         const partData = {
           id: part.id,
           name: part.name,
-          price: part.price * 100,
+          price: part.price.toUnit() * 100,
           count: part.count,
           isSelected: part.isSelected
         }

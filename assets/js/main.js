@@ -1,6 +1,11 @@
 import './hoc/service'
 import {mobChecker, nodesObserver} from "./lib";
 import inDevPopup from './ui/Popups/InDevPopup';
+import Dinero from 'dinero.js/src/dinero';
+
+Dinero.globalLocale = 'ru-RU'
+Dinero.defaultCurrency = 'RUB'
+Dinero.globalFormat = '0,0'
 
 const BODY = document.body;
 

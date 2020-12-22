@@ -65,19 +65,19 @@ class ServerData {
           id, mileageRepeat,
           name: `${engine.capacity}${engineType[engine.type] || ''}${airIntakeType[engine.airIntake] || ''} ${transmission} ${wheelDrive}`,
           works: works.map(work => {
-            const {id, name, period: repeat, recommended, description: note, position, parts, price:{amount: price}} = work
+            const {id, name, period: repeat, recommended, description: note, position, parts, price} = work
             return {
               id, name, repeat, note,
-              price: price / 100,
+              price: price,
               type: recommended ? 'recommendation' : 'work',
               position: position === 0 ? Infinity : position,
               parts: parts.map(part => {
                 const {quantity,
-                  part: {id, name, unit = 'шт', price:{amount: price}, manufacturer: {name: manufacture}}} = part
+                  part: {id, name, unit = 'шт', price, manufacturer: {name: manufacture}}} = part
                 return {
                   id, name, manufacture, unit,
                   count: quantity / 100,
-                  price: price / 100
+                  price: price
                 }
               })
             }
