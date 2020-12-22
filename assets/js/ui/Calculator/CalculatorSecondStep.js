@@ -1,6 +1,7 @@
 import Work from './Work';
 import Part from './Part';
 import CalculatorSteps from './CalculatorSteps';
+import Dinero from 'dinero.js/src/dinero';
 
 class CalculatorSecondStep extends CalculatorSteps {
   _works = [];
@@ -28,7 +29,7 @@ class CalculatorSecondStep extends CalculatorSteps {
   }
 
   get totalPrice() {
-    return this.worksPrice + this.recommendationsPrice;
+    return this.worksPrice.add(this.recommendationsPrice);
   }
 
   get works() {
@@ -90,10 +91,9 @@ class CalculatorSecondStep extends CalculatorSteps {
   }
 
   _calculateTotalsPrices(type) {
-    let total = 0;
+    let total = Dinero({amount:0});
     for (let work of this._works.filter( work => work.type === type)) {
-      total += work.totalPrice;
-      total += work.parts.reduce((acc, part) => acc + part.totalPrice, 0)
+      total = total.add(work.totalPrice).add(work.parts.reduce((acc, part) => acc.add(part.totalPrice), Dinero({amount:0})))
     }
     return total;
   }
@@ -102,9 +102,9 @@ class CalculatorSecondStep extends CalculatorSteps {
     const worksNode = this.worksTotalNode,
           recommendationsNode = this.totalNode;
     worksNode.innerHTML =
-        `${this.worksPrice}<i class="icon-rub">a</i></div>`;
+        `${this.worksPrice.toFormat()}<i class="icon-rub">a</i></div>`;
     recommendationsNode.innerHTML =
-        `${this.totalPrice}<i class="icon-rub">a</i></div>`;
+        `${this.totalPrice.toFormat()}<i class="icon-rub">a</i></div>`;
   }
 
   render (equipment, range) {

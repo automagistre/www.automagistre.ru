@@ -1,4 +1,5 @@
 import CalcItem from './CalcItem';
+import Dinero from 'dinero.js/src/dinero';
 
 class Work extends CalcItem {
   _parts = [];
@@ -39,7 +40,7 @@ class Work extends CalcItem {
   }
 
   get totalPrice() {
-    return this.isSelected ? +this._item.price : 0;
+    return this.isSelected ? this.price : Dinero({amount:0});
   }
 }
 

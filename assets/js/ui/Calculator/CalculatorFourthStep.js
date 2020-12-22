@@ -46,8 +46,7 @@ class CalculatorFourthStep extends CalculatorSteps {
 
   set totalPrice(value) {
     this._totalPrice = value;
-    this._cgStatusTotalNode.innerHTML = value.toString()
-    .replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ') + '<i class="icon-rub">a</i>';;
+    this._cgStatusTotalNode.innerHTML = value.toFormat() + '<i class="icon-rub">a</i>';
   }
 
   get totalPrice() {

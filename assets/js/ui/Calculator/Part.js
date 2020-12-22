@@ -1,4 +1,5 @@
 import CalcItem from './CalcItem';
+import Dinero from 'dinero.js/src/dinero';
 
 class Part extends CalcItem {
   constructor(item, parent=undefined) {
@@ -23,7 +24,7 @@ class Part extends CalcItem {
   }
 
   get totalPrice() {
-    return this.isSelected ? +this._item.count * +this._item.price : 0;
+    return this.isSelected ? this.price.multiply(+this._item.count) : Dinero({amount:0});
   }
 
   set isSelected(value) {
