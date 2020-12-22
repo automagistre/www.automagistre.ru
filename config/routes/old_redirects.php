@@ -24,6 +24,11 @@ return static function (RoutingConfigurator $routes): void {
         '/kompjuternaja-diagnostika-avto' => '/service/nissan/diagnostics/comp',
         '/online' => '/service/nissan/maintenance',
         '/contacts' => '/service/nissan/contacts',
+        '/stoimost-comp-diagnostiki' => '/service/nissan/diagnostics/comp',
+        '/manuals' => '/blog',
+        '/video' => '/blog',
+        '/review_us' => '/service/nissan/reviews',
+        '/corporate' => '/service/nissan/corporates',
     ] as $old => $new) {
         $routes->add('old_redirect_'.\md5($old), $old)
             ->controller(RedirectController::class)
