@@ -29,6 +29,9 @@ return static function (RoutingConfigurator $routes): void {
         '/video' => '/blog',
         '/review_us' => '/service/nissan/reviews',
         '/corporate' => '/service/nissan/corporates',
+        '/price' => '/service/nissan/maintenance',
+        '/parts/price' => '/service/nissan/maintenance',
+        '/news' => '/blog',
     ] as $old => $new) {
         $routes->add('old_redirect_'.\md5($old), $old)
             ->controller(RedirectController::class)
