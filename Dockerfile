@@ -150,6 +150,7 @@ COPY etc/nginx.conf /etc/nginx/nginx.conf
 
 RUN set -ex \
     && ln -s img/favicons/favicon-32x32.png favicon.png \
+    && ln -s img/favicons/apple-touch-icon-152x152.png apple-touch-icon.png \
     && find . -type f \
     \( \
         -name "*.css" \
