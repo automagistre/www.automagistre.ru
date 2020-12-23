@@ -1,10 +1,9 @@
-import $ from 'jquery'
-import 'slick-carousel'
+import Swiper, {Navigation} from 'swiper'
+import '../../less/2_plugins/swiper/swiper'
 
-
-
-const initSlickSlider = () => {
-    const $secStartSlider = $('#sec-start-slider');
+const initSlider = () => {
+    Swiper.use([Navigation])
+    const secStartSlider = document.getElementById('sec-start-slider')
     const slickOptions = {
         arrows: true,
         dots: false,
@@ -19,19 +18,24 @@ const initSlickSlider = () => {
         responsive: [
             {breakpoint: 768, settings: {arrows: false}}
         ]};
-    if ($secStartSlider) {
-        $secStartSlider.slick(slickOptions);
+    if (secStartSlider) {
+        const swiper = new Swiper(secStartSlider, {
+            loop: false,
+            effect: 'cube',
+            slideActiveClass: 'slick-active',
+            slideClass: 'slick-slide',
+            speed: 0,
+            setWrapperSize: true,
+        })
         document.querySelectorAll('.js-set-start-slide').
             forEach(el => el.addEventListener('click', () => {
-                $secStartSlider.slick('slickGoTo', el.dataset.slide, false);
+                swiper.slideTo(+el.dataset.slide, 0);
             }));
-    } else {
-        throw new Error('Fail init SlickSlider on startSec');
     }
-};
+}
 
 const startSec = () => {
-    initSlickSlider();
+    initSlider();
     document.querySelectorAll('.js-sec-start-slider-freeze').
         forEach(el => el.addEventListener('click', () =>{
             document.querySelector('#sec-start-select').
