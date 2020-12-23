@@ -6,6 +6,20 @@
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
+{% block title %}
+    <title>Автомагистр - Бесплатная диагностика {{ brand }} в Москве</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, авторемонт, диагностика, бесплатная диагностика">
+    <meta name="description" content="Автомагистр - клубный автосервис {{ brand }}. Бесплатная диагностика подвески в Москве">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Бесплатная диагностика {{ brand }} в Москве">
+    <meta property="og:description" content="Проводим комплексную диагностику автомобиля более чем по 70 пунктам">
+{% endblock %}
+
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">

@@ -6,6 +6,21 @@
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
 {% set features = ['suspension', 'speed', 'piggy', 'binocul',] %}
 
+{% block title %}
+    <title>Автомагистр - Компьютерная диагностика {{ brand }} в Москве</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис в Москве, компьютерная диагностика, {{ brand }}">
+    <meta name="description" content="Автомагистр - компьютерная диагностика {{ brand }} в Москве">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Компьютерная диагностика {{ brand }} в Москве">
+    <meta property="og:description" content="Мы используем только проффесиональное диагностическое оборудование для {{ brand }}: Launch, Bosch, Bars Pro и Vector. ">
+{% endblock %}
+
+
 {% block content %}
     <main class="site-main">
 
