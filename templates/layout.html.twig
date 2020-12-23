@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="ru" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>Автомагистр - Ремонт и обслуживание Nissan в Москве</title>
+    {% block title %}
+            <title>Автомагистр - Клубный автосервис в Москве</title>
+    {% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equivgut="X-UA-Compatible" content="IE=edge">
     <meta name="robots"   content="all">
-    <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика">
-    <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание авторемонт.">
-
-    <meta property="og:url" content="https://www.automagistre.ru">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
-    <meta property="og:image" content="https://www.automagistre.ru/og-image_1200x1200.jpg">
-    <meta property="og:site_name" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
-    <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
-
+    {% block meta_seo %}
+            <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика">
+            <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание и авторемонт">
+    {% endblock %}
+    {% block meta_og %}
+            <meta property="og:url" content="https://www.automagistre.ru">
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="Автомагистр - Клубный автосервис в Москве">
+            <meta property="og:image" content="{{ asset('img/og-image_1200x1200.jpg') }}">
+            <meta property="og:site_name" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
+            <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
+    {% endblock %}
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-16x16.png') }}" sizes="16x16"/>
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon-152x152.png') }}" sizes="152x152"/>
