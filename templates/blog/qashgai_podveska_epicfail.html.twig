@@ -1,5 +1,19 @@
 {% extends 'blog/layout_article.html.twig' %}
 
+{% block title %}
+    <title>Автомагистр - Ремонт подвески Nissan Qashqai</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис, Nissan, Ниссан, Qashqai, X-Trail, J10, T31, Кашкай, Икс-Трейл, ремонт, подвеска, эксплуатация, обслуживание">
+    <meta name="description" content="Ремонт типичных проблем подвески Ниссан Кашкай. Опыт автосервиса">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Ремонт подвески Nissan Qashqai">
+    <meta property="og:description" content="Ремонт типичных проблем подвески Ниссан Кашкай. Опыт автосервиса">
+{% endblock %}
+
 {% set article = {
     'title': 'Ремонт типичных проблем подвески Ниссан Кашкай',
     'background': 'article_pic_07.jpeg',

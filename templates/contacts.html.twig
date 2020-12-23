@@ -2,6 +2,22 @@
 
 {% set white_header = true %}
 
+{% set brand = app.request.attributes.get('brand')|capitalize %}
+
+{% block title %}
+    <title>Автомагистр - Контакты</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, авторемонт, диагностика, бесплатная диагностика, шиномонтаж">
+    <meta name="description" content="Автомагистр - клубный автосервис {{ brand }}. Контакты">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Автомагистр. +7(495) 984 8182">
+    <meta property="og:description" content="г. Москва, Остаповский проезд, д.17. C 10-00 до 23-00 без выходных.">
+{% endblock %}
+
 {% block content %}
     <main class="site-main ">
         {{ include('_sections/map.html.twig') }}

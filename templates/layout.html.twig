@@ -9,17 +9,22 @@
     <meta http-equivgut="X-UA-Compatible" content="IE=edge">
     <meta name="robots"   content="all">
     {% block meta_seo %}
-            <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика">
-            <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание и авторемонт">
+        <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика, Nissan, Toyota, Lexus, Infiniti">
+        <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание ремонт и шиномонтаж">
     {% endblock %}
     {% block meta_og %}
-            <meta property="og:url" content="https://www.automagistre.ru">
-            <meta property="og:type" content="website">
-            <meta property="og:title" content="Автомагистр - Клубный автосервис в Москве">
-            <meta property="og:image" content="{{ asset('img/og-image_1200x1200.jpg') }}">
-            <meta property="og:site_name" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
-            <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
+        <meta property="og:url" content="https://www.automagistre.ru">
+        <meta property="og:title" content="Автомагистр - Клубный автосервис в Москве">
+        <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
     {% endblock %}
+    {% block meta_og_image %}
+        <meta property="og:image" content="{{ app.request.schemeAndHttpHost ~ asset('img/og-image_1200x600.jpg') }}">
+        <meta property="vk:image" content="{{ app.request.schemeAndHttpHost ~ asset('img/og-image_510x228.jpg') }}">
+        <meta property="twitter:image" content="{{ app.request.schemeAndHttpHost ~ asset('img/og-image_1200x600.jpg') }}">
+    {% endblock %}
+    <meta property="og:url" content="{{ app.request.schemeAndHttpHost ~ app.request.requestUri }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Автомагистр - Клубный Автосервис">
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-16x16.png') }}" sizes="16x16"/>
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon-152x152.png') }}" sizes="152x152"/>

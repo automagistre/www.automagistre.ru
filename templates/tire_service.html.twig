@@ -2,6 +2,23 @@
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
+{% block title %}
+    <title>Автомагистр - Шиномонтаж {{ brand }} в Москве</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, авторемонт, шиномонтаж, runflat">
+    <meta name="description" content="Автомагистр - клубный автосервис {{ brand }}. Шиномонтаж на профессиональном оборудовании">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Шиномотаж без очередей">
+    <meta property="og:description" content="Полностью компьютеризированное автоматическое оборудование. Шиномотаж любой сложности">
+{% endblock %}
+
+{% from '_sections/chunks/features_items.twig' import renderFeatures %}
+{% set features = ['star', 'speed', 'search', 'binocul'] %}
+
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
 {% set features = ['speed', 'heart', 'tire', 'binocul'] %}
 {% set types = {

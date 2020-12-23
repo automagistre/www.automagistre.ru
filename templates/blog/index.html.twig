@@ -1,5 +1,19 @@
 {% extends 'blog/layout.html.twig' %}
 
+{% block title %}
+    <title>Автомагистр - Блог</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, автосервис, блог, статьи, ремонт автомобилей">
+    <meta name="description" content="Автомагистр - клубный автосервис. Наш блог">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Автомагистр Статьи">
+    <meta property="og:description" content="Информация об ослуживание автомобилей, делимся опытом автосервиса">
+{% endblock %}
+
 {% block content %}
     <main class="site-main page bg-gray" id="site-main">
         <div class="page__head">

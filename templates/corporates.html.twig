@@ -4,6 +4,22 @@
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
 {% set features = ['suspension', 'success', 'speed', 'star'] %}
 
+{% set brand = app.request.attributes.get('brand')|capitalize %}
+
+{% block title %}
+    <title>Автомагистр - Обслуживание автопарков в Москве</title>
+{% endblock %}
+
+{% block meta_seo %}
+    <meta name="keywords" content="Автомагистр, техцентр в Москве, авторемонт, автопарки, обслуживание юридических лиц, b2b">
+    <meta name="description" content="Автомагистр - обслуживание автопарков юридических лиц">
+{% endblock %}
+
+{% block meta_og %}
+    <meta property="og:title" content="Обслуживание Автопарков">
+    <meta property="og:description" content="Профессиональное и прозрачное обслуживание вашего автопарка. Постоплата">
+{% endblock %}
+
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">
