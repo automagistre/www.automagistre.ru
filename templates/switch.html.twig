@@ -31,28 +31,30 @@
             <div class="sec-start__select" id="sec-start-select">
                 <a class="btn btn_gray btn_arrow-lt sec-start__back js-sec-start-slider-unfreeze" role="button">Назад</a>
                 <h1 class="sec-start__title">Выберите <br> интересующее направление:</h1>
-                <div class="sec-start__slider" id="sec-start-slider">
-                    {% for brand in brands %}
-                        <div class="sec-start__slide st-{{ brand.classPref }}">
-                            <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo lazy"></div>
-                            <div class="sec-start__slide-car st-{{ brand.classPref }}__car lazy">
-                                <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt lazy"></div>
-                                <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt lazy"></div>
-                                <div class="sec-start__slide-btns">
-                                    <a class="btn btn_shmatn sec-start__btn" href="{{ path('service', {'brand': brand.name|lower}) }}">
-                                        <i class="icon-gear"></i>АВТОСЕРВИС В МОСКВЕ
-                                    </a>
-                                    {#<a class="btn btn_shmatn sec-start__btn" href="{{ path('shop_index') }}">#}
-                                    {#<i class="icon-belt"></i>МАГАЗИН ЗАПЧАСТЕЙ#}
-                                    {#</a>#}
+                <div class="sec-start__slider swiper-container slick-initialized" id="sec-start-slider">
+                    <div class="swiper-wrapper">
+                        {% for brand in brands %}
+                            <div class="sec-start__slide slick-slide swiper-slide st-{{ brand.classPref }}">
+                                <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo lazy"></div>
+                                <div class="sec-start__slide-car st-{{ brand.classPref }}__car lazy">
+                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt lazy"></div>
+                                    <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt lazy"></div>
+                                    <div class="sec-start__slide-btns">
+                                        <a class="btn btn_shmatn sec-start__btn" href="{{ path('service', {'brand': brand.name|lower}) }}">
+                                            <i class="icon-gear"></i>АВТОСЕРВИС В МОСКВЕ
+                                        </a>
+                                        {#<a class="btn btn_shmatn sec-start__btn" href="{{ path('shop_index') }}">#}
+                                        {#<i class="icon-belt"></i>МАГАЗИН ЗАПЧАСТЕЙ#}
+                                        {#</a>#}
+                                    </div>
+                                </div>
+                                <div class="sec-start__slide-btm">
+                                    <a class="btn btn_big sec-start__slide-btn js-sec-start-slider-freeze" role="button">У меня
+                                        {{ brand.name|upper }}</a>
                                 </div>
                             </div>
-                            <div class="sec-start__slide-btm">
-                                <a class="btn btn_big sec-start__slide-btn js-sec-start-slider-freeze" role="button">У меня
-                                    {{ brand.name|upper }}</a>
-                            </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
                 <nav class="sec-start__nav">
                     {% for brand in brands %}
