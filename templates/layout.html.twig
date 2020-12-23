@@ -1,35 +1,32 @@
 <!DOCTYPE html>
 <html lang="ru" prefix="og: http://ogp.me/ns#">
 <head>
-    <!-- Pages tittle ============================================================================ -->
     <title>Автомагистр - Ремонт и обслуживание Nissan в Москве</title>
-    <!-- Necessary pages settings ================================================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <meta http-equivgut="X-UA-Compatible" content="IE=edge">
-    <!-- SEO basic pages settings ================================================================ -->
     <meta name="robots"   content="all">
     <meta name="keywords" content="Автомагистр, автосервис в Москве, магазин автозапчастей, авторемонт, диагностика">
     <meta name="description" content="Автомагистр - автосервис в Москве, магазин автозапчастей. Диагностика, техническое обслуживание авторемонт.">
-    <!-- SEO advanced pages settings ============================================================= -->
+
     <meta property="og:url" content="https://www.automagistre.ru">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
     <meta property="og:image" content="https://www.automagistre.ru/og-image_1200x1200.jpg">
     <meta property="og:site_name" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
     <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
-    <!-- Favicon ================================================================================= -->
+
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-16x16.png') }}" sizes="16x16"/>
     <link rel="icon" type="img/png" href="{{ asset('img/favicons/favicon-32x32.png') }}" sizes="32x32"/>
     <link rel="apple-touch-icon" href="{{ asset('img/favicons/apple-touch-icon-152x152.png') }}" sizes="152x152"/>
-    <!-- Styles ================================================================================== -->
+
     <link rel="preload" href="{{ asset('fonts/circe/300/circe_light.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/circe/400/circe_regular.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/circe/700/circe_bold.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.woff') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot?#iefix') }}" as="font" type="font/woff" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{{ asset('styles.css') }}"/><!-- Main styles from .less -->
+    <link rel="stylesheet" href="{{ asset('styles.css') }}"/>
     <script>
         let APOLLO_URL = '{{ graphql_url() }}';
         let GRAPHQL_URL = '{{ graphql_url() }}';
@@ -37,7 +34,7 @@
     </script>
 
     {% if not app.debug %}
-        <!-- Yandex.Metrika counter -->
+
         <script type="text/javascript">
           (function(m, e, t, r, i, k, a) {
             m[i] = m[i] || function() {(m[i].a = m[i].a || []).push(arguments);};
@@ -57,7 +54,7 @@
         <noscript>
             <div><img src="https://mc.yandex.ru/watch/70701580" style="position:absolute; left:-9999px;" alt=""/></div>
         </noscript>
-        <!-- /Yandex.Metrika counter -->
+
     {% endif %}
 </head>
 
@@ -168,7 +165,7 @@
                         <a class="sh-mob__link" href="{{ path('contacts') }}">Контакты</a>
                     </nav>
                 </div>
-            </header><!-- END site-header -->
+            </header>
         {% endblock %}
 
         {% block aside %}
@@ -189,7 +186,7 @@
                         <a class="navbar__link icon_n-serv" href="{{ path('maintenance') }}">Техническое обслуживание</a>
                     </li>
                 </ul>
-            </aside><!-- END site-side-->
+            </aside>
         {% endblock %}
 
         {%- block content %}{% endblock -%}
@@ -237,7 +234,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div><!-- END container -->
+                    </div>
                 </div>
                 <div class="sf-btm">
                     <div class="container">
@@ -247,19 +244,18 @@
                                 <a href="{{ path('privacy-policy') }}">Политика конфиденциальности</a>
                             </div>
                         </div>
-                    </div><!-- END container -->
+                    </div>
                 </div>
                 <a class="sf-car-change icon_n-cars js-show-modal" role="button" title="Выбрать машину"></a>
                 <a class="sf-car-change-big icon_n-cars js-show-modal" role="button" title="Выбрать машину"></a>
-            </footer><!-- END site-footer -->
+            </footer>
         {% endblock %}
 
         {%- include '_includes/modals.html.twig' -%}
 
     {% endblock %}
-</div><!-- END site-wrapper -->
+</div>
 
-<!-- SCRIPTS =============================================================== -->
 <script src="{{ asset('vendors.js') }}"></script>
 <script src="{{ asset('main.js') }}"></script>
 {#<script src="{{ asset('fonts.js') }}"></script>#}

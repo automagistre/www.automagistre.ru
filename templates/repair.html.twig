@@ -6,7 +6,7 @@
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
 {% block content %}
-    <!-- MAIN ================================================================== -->
+
     <main class="site-main">
 
         <section class="sec-intro">
@@ -20,7 +20,7 @@
                     {{ renderFeatures(features, "sec-intro__features") }}
                 </div>
             </div>
-        </section><!-- END sec-intro -->
+        </section>
 
         {{ include('_sections/work.html.twig') }}
 
@@ -35,7 +35,6 @@
         {{ include('_sections/faq.html.twig') }}
 
         {{ include('_sections/map.html.twig') }}
-    </main><!-- END site-main -->
+    </main>
 {% endblock %}
-
 

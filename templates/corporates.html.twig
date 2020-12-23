@@ -4,7 +4,6 @@
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
 {% set features = ['suspension', 'success', 'speed', 'star'] %}
 
-
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">
@@ -20,7 +19,7 @@
 
                 </div>
             </div>
-        </section><!-- END sec-intro -->
+        </section>
 
         {{ include('_sections/partners.html.twig') }}
 
@@ -32,5 +31,5 @@
 
         {{ include('_sections/faq.html.twig') }}
 
-    </main><!-- END site-main -->
+    </main>
 {% endblock %}

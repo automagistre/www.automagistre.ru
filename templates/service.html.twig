@@ -45,13 +45,13 @@
                         <div class="panel__note">{{ panel.note | raw }}</div>
                         <div class="panel__more">
                             <a class="panel__btn panel__btn_red" href="{{ panel.path }}">Подробнее</a>
-                            <!--a class="panel__btn panel__btn_clear" href="#">Записаться</a-->
+
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </section><!-- END sec-intro -->
+    </section>
 
     {{ include('_sections/features.html.twig')  }}
     {{ include('_sections/gallery.html.twig') }}
@@ -81,6 +81,6 @@
                 </div>
             </div>
         </div>
-    </section><!-- END sec-map -->
+    </section>
     </main>
 {% endblock %}

@@ -10,7 +10,6 @@
     'minibus': 'Микроавтобус'
 } %}
 
-
 {% block content %}
     <main class="site-main">
         <section class="sec-intro">
@@ -25,7 +24,7 @@
 
                 </div>
             </div>
-        </section><!-- END sec-intro -->
+        </section>
 
         <section class="sec-about" id="tire-service">
             <div class="container">
@@ -41,7 +40,7 @@
                             <div class="sec-about__filter">
                                 <div class="sec-about__filter-col">
                                     <div class="selector js-tire-selector">
-                                        <input type="hidden" value="10"><!-- Выставление правильного предзаданного значения в селекте -->
+                                        <input type="hidden" value="10">
                                         <div class="selector__val" data-val="0">Выбрать радиус</div>
                                         <div class="selector__drop">
                                             <ul class="selector__list">
@@ -54,7 +53,7 @@
                                 </div>
                                 <div class="sec-about__filter-col">
                                     <div class="selector js-car-selector">
-                                        <input type="hidden" value="0"><!-- Выставление правильного предзаданного значения в селекте -->
+                                        <input type="hidden" value="0">
                                         <div class="selector__val" data-val="0">Вид машины</div>
                                         <div class="selector__drop">
                                             <ul class="selector__list">
@@ -90,8 +89,8 @@
                         </form>
                     </div>
                 </div>
-            </div><!-- END container -->
-        </section><!-- END sec-about -->
+            </div>
+        </section>
 
         {{ include('_sections/experience.html.twig') }}
 
@@ -104,6 +103,6 @@
         {{ include('_sections/faq.html.twig') }}
 
         {{ include('_sections/map.html.twig') }}
-    </main><!-- END site-main -->
+    </main>
 {% endblock %}
 
