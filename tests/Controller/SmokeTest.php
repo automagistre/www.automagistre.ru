@@ -49,7 +49,17 @@ final class SmokeTest extends WebTestCase
     public function blogs(): Generator
     {
         yield ['/blog', 200];
-        yield ['/blog/show-show', 200];
+        yield ['/blog/head-of-mr20de-problem', 200];
+        yield ['/blog/qashgai-podveska-epicfail', 200];
+        yield ['/blog/micra-k12-note-e10-maintenance', 200];
+        yield ['/blog/murano-chain', 200];
+        yield ['/blog/adjustment-of-valves-and-gbo-kaput', 200];
+        yield ['/blog/nissan-qashgai-xtrail-maintenance', 200];
+        yield ['/blog/nissan-almera-classic-maintenance', 200];
+        yield ['/blog/break-timing-belt-2jzge', 200];
+        yield ['/blog/samodiagnostika-nissan', 200];
+        yield ['/blog/obuchenie-drosselja-nissan', 200];
+        yield ['/blog/obuchenie-drosselja-toyota', 200];
         yield ['/blog/fuck', 404];
     }
 
