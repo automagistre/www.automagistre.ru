@@ -3,17 +3,17 @@
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
 {% block title %}
-    <title>Автомагистр - Отзывы</title>
+    <title>Отзывы</title>
 {% endblock %}
 
 {% block meta_seo %}
-    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, авторемонт, отзывы">
-    <meta name="description" content="Автомагистр - клубный автосервис {{ brand }}. Все отзывы">
+    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, отзывы">
+    <meta name="description" content="Автомагистр — клубный автосервис {{ brand }}. Все отзывы">
 {% endblock %}
 
 {% block meta_og %}
     <meta property="og:title" content="Автомагистр Отзывы">
-    <meta property="og:description" content="Все отзвы о работе клубного автосервиса Автомагистр">
+    <meta property="og:description" content="Все отзывы о работе клубного автосервиса Автомагистр">
 {% endblock %}
 
 {% block content %}
