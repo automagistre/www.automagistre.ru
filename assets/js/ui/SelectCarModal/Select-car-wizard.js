@@ -1,11 +1,11 @@
-import $ from 'jquery'
-import 'slick-carousel'
 import ServerData from '../../helpers/ServerData';
 import Selector from '../Selector';
 import LocalStorageManager from '../../helpers/Local-storage-manager';
 import LoadingSpinner from '../LoadingSpinner';
 import errorMessages from '../../Errors/ErrorMassges';
 import {manufacturerID} from '../../vars/manufactirerID';
+import {initModalSlider} from '../../sections/start';
+
 
 const manufacturerStepList = {
   'nissan': 0,
@@ -42,6 +42,12 @@ class SelectCarWizard {
       this.steps[1].renderModels(manufacturerID[data.manufacturer.toLowerCase()])
     }
     document.querySelector('#modal-head').classList.toggle('on-step-two', num === 1)
+  }
+
+  onOpen() {
+    this.steps[0]._slider.update()
+    this.steps[0]._slider.lazy.load()
+    console.log("Загружаю");
   }
 }
 
@@ -80,35 +86,12 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
 
   constructor(node) {
     super()
-    const options = {
-      arrows: true,
-      dots: false,
-      infinite: true,
-      speed: 0,
-      fade: true,
-      autoplay: false,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-      nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
-      responsive: [
-        {breakpoint: 768, settings: {arrows: false}},
-      ],
-    }
-
     const localData = new LocalStorageManager()
-
     this._selectedContent.manufacturer = localData.manufacturer
 
     this._node = node.querySelector('#modal-tab_01')
-    this.$slider = $('#select-car-slider').slick(options)
-
-    node.querySelectorAll('.js-set-start-slide').forEach(btnNode => {
-      const sliderToGo = btnNode.dataset.slide || 0;
-      btnNode.addEventListener('click', ()=> {
-        this.$slider.slick('slickGoTo', sliderToGo, false)
-      })
-    })
+    this._sliderNode = this._node.querySelector('#select-car-slider')
+    this._slider = initModalSlider(this._sliderNode)
 
     this._node.querySelectorAll('.js-select-manufacturer').forEach( node => {
       node.addEventListener('click', () => this._selectedContent.manufacturer = node.dataset.manufactirer)
@@ -117,7 +100,7 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
 
     const currentManufacturer = localData.manufacturer
     if (currentManufacturer) {
-      this.$slider.slick('slickGoTo', manufacturerStepList[currentManufacturer], false)
+      this._slider.slideToLoop(manufacturerStepList[currentManufacturer], 500)
     }
   }
 }
