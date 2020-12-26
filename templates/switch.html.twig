@@ -35,8 +35,8 @@
                     <div class="swiper-wrapper">
                         {% for brand in brands %}
                             <div class="sec-start__slide slick-slide swiper-slide st-{{ brand.classPref }}">
-                                <div class="sec-start__slide-logo st-{{ brand.classPref }}__logo lazy"></div>
-                                <div class="sec-start__slide-car st-{{ brand.classPref }}__car lazy">
+                                <div class="sec-start__slide-logo swiper-lazy" data-background="{{ asset('/img/sec-start/logo_'~brand.classPref~'.png') }}"></div>
+                                <div class="sec-start__slide-car st-{{ brand.classPref }}__car swiper-lazy" data-background="{{ asset('/img/sec-start/car_'~brand.classPref~'.png') }}">
                                     <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-lt lazy"></div>
                                     <div class="sec-start__slide-wheel st-{{ brand.classPref }}__wheel-rt lazy"></div>
                                     <div class="sec-start__slide-btns">
@@ -55,6 +55,8 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="slick-arrow slick-prev"></div>
+                    <div class="slick-arrow slick-next"></div>
                 </div>
                 <nav class="sec-start__nav">
                     {% for brand in brands %}

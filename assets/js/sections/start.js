@@ -1,35 +1,36 @@
-import Swiper, {Navigation} from 'swiper'
+import Swiper, {Navigation, EffectFade, Lazy} from 'swiper'
 import '../../less/2_plugins/swiper/swiper'
+import '../../less/2_plugins/swiper/effect-fade'
 
 const initSlider = () => {
-    Swiper.use([Navigation])
-    const secStartSlider = document.getElementById('sec-start-slider')
-    const slickOptions = {
-        arrows: true,
-        dots: false,
-        infinite: true,
-        speed: 0,
-        fade: true,
-        autoplay: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: '<button type=\'button\' class=\'slick-arrow slick-prev\'></button>',
-        nextArrow: '<button type=\'button\' class=\'slick-arrow slick-next\'></button>',
-        responsive: [
-            {breakpoint: 768, settings: {arrows: false}}
-        ]};
+    Swiper.use([Navigation, EffectFade, Lazy])
+    const secStartSlider = document.getElementById('sec-start-slider'),
+          secStartNode = document.querySelector('section.sec-start'),
+          nextEl = secStartNode.querySelector('.slick-next'),
+          prevEl = secStartNode.querySelector('.slick-prev')
+
     if (secStartSlider) {
         const swiper = new Swiper(secStartSlider, {
-            loop: false,
-            effect: 'cube',
+            loop:true,
+            effect: 'fade',
             slideActiveClass: 'slick-active',
             slideClass: 'slick-slide',
-            speed: 0,
+            speed: 500,
             setWrapperSize: true,
+            fadeEffect: {
+                crossFade: true
+            },
+            navigation: {
+                nextEl, prevEl
+            },
+            preloadImages: false,
+            lazy: {
+                loadPrevNext: true,
+            }
         })
         document.querySelectorAll('.js-set-start-slide').
             forEach(el => el.addEventListener('click', () => {
-                swiper.slideTo(+el.dataset.slide, 0);
+                swiper.slideToLoop(+el.dataset.slide, 500);
             }));
     }
 }
