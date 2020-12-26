@@ -59,9 +59,14 @@ module.exports = {
             cacheGroups: {
                 vendors: {
                     name: 'vendors',
-                    test: /node_modules/,
+                    test: /[\\/]node_modules[\\/]/,
                     chunks: 'all',
                     enforce: true,
+                },
+                commons: {
+                    name: 'commons',
+                    chunks: 'initial',
+                    minChunks: 2
                 }
             }
         }
@@ -188,10 +193,10 @@ module.exports = {
             ],
         }),
         new ManifestPlugin(),
-        // new webpack.SourceMapDevToolPlugin({
-        //     filename: PATHS.assets + '[name].[hash].js.map',
-        //     exclude: ['vendors.js'],
-        //     fileContext: 'public',
-        // })
+        new webpack.SourceMapDevToolPlugin({
+            filename: PATHS.assets + '[name].[hash].js.map',
+            exclude: ['vendors.js'],
+            fileContext: 'public',
+        })
     ],
 };
