@@ -42,6 +42,8 @@
     <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="preload" href="{{ asset('fonts/alsrubl/alsrubl-webfont.eot?#iefix') }}" as="font" type="font/woff" crossorigin="anonymous"/>
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('main.css') }}"/>
+
     <script>
         let APOLLO_URL = '{{ graphql_url() }}';
         let GRAPHQL_URL = '{{ graphql_url() }}';
@@ -273,6 +275,7 @@
 
 <script src="{{ asset('vendors.js') }}"></script>
 <script src="{{ asset('main.js') }}"></script>
+<script src="{{ asset('styles.js') }}"></script>
 {#<script src="{{ asset('fonts.js') }}"></script>#}
 
 {% set sentryDsn = sentry_dsn() %}
