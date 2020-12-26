@@ -63,11 +63,6 @@ module.exports = {
                     chunks: 'all',
                     enforce: true,
                 },
-                commons: {
-                    name: 'commons',
-                    chunks: 'initial',
-                    minChunks: 2
-                }
             }
         }
     },
