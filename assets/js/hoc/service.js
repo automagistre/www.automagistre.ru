@@ -1,6 +1,3 @@
-import $ from "jquery";
-import 'jquery-scrollify'
-import {mobChecker} from "../lib";
 import '../sections/start'
 import Header from '../ui/Header';
 import ScrollToTop from '../ui/ScrollToTop';
@@ -8,6 +5,7 @@ import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
 import LocalStorageManager from '../helpers/Local-storage-manager';
+
 
 const localStorageManager = new LocalStorageManager()
 const manufacturer = document.location.pathname.split('/')[2]
@@ -24,7 +22,6 @@ Header.instance;
 
 new ScrollToTop();
 
-
 initSections();
 
 const goToButtons = document.querySelectorAll('[data-scrollTo]');
@@ -32,10 +29,6 @@ goToButtons.forEach(btn => {
     const scrollTarget = document.querySelector(btn.dataset.scrollto);
     if (scrollTarget)
         btn.addEventListener('click', ()=>animateScrollTo(scrollTarget))
-});
-
-$(window).on('load', ()=> {
-    $(window).resize(() => mobChecker(1024) ? $.scrollify.disable() : $.scrollify.enable());
 });
 
 if (document.querySelector('#modal')) {
