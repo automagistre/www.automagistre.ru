@@ -1,8 +1,6 @@
 import Review from '../ui/Review'
 import ServerData from '../helpers/ServerData'
 import Swiper, {Pagination, Navigation} from 'swiper';
-import '../../less/2_plugins/swiper/swiper'
-import '../../less/2_plugins/swiper/pagination'
 
 
 const reviewSec = async () => {
