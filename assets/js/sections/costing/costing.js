@@ -1,31 +1,27 @@
-import $ from 'jquery'
-import 'slick-carousel'
 import Calculator from '../../ui/Calculator/Calculator';
 import Header from '../../ui/Header';
 import ServerDataSender from '../../helpers/server-data-sender';
 import ErrorFeedBackPopup from '../../ui/Popups/ErrorFeedBackPopup';
+import Swiper from 'swiper'
 
 
-const initSlick = node => {
-  const slickOptions = {
-    arrows: false,
-    dots: false,
-    draggable: false,
-    adaptiveHeight: true,
+const initSlider = node => {
+  const options = {
+    allowTouchMove: false,
+    preventInteractionOnTransition: true,
+    autoHeight: true,
+    roundLengths: true,
     swipe: false,
-    infinite: false,
     speed: 800,
-    autoplay: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
   };
-  node.slick(slickOptions)
+
+  return new Swiper(node, options)
 };
 
 
 const costingSec = () => {
   const costingSectionNode =  document.querySelector('section.sec-costing'),
-        costingSlickNode = $('#costing-steps'),
+        costingSliderNode = document.getElementById('costing-steps'),
         costingStepsNode = costingSectionNode.querySelectorAll('.js-cg-step'),
         costingSvgNode = costingSectionNode.querySelector('#cs-stage'),
         costingFormSubmitNode = costingSectionNode.querySelector('.js-cg-submit'),
@@ -33,14 +29,10 @@ const costingSec = () => {
         topOfSection = document.getElementById('costing')
   let currentStep = 1;
 
-  initSlick(costingSlickNode)
-  const calculatorCallback = () => {
-    costingSlickNode.find(".slick-slide").height("auto")
-    costingSlickNode.slick('reinit')
-    costingSlickNode.slick("setOption", null, null, true)
-  }
+  const swiper = initSlider(costingSliderNode)
+  const calculatorCallback = () => { }
 
-  let calculator = new Calculator(costingSectionNode, calculatorCallback);
+  let calculator = new Calculator(costingSectionNode,calculatorCallback);
 
   const animateSteps = nextStep => {
     const classesMap = {
@@ -73,8 +65,8 @@ const costingSec = () => {
 
   const changeStep = nextStepNumber => {
     const header = Header.instance
-    costingSlickNode.slick('slickGoTo', nextStepNumber - 1, false)
-    calculator.currentStep = costingSlickNode.slick('slickCurrentSlide') + 1
+    swiper.slideTo(nextStepNumber - 1)
+    calculator.currentStep = swiper.activeIndex + 1
     animateSteps(nextStepNumber);
     header.isAlwaysHide = true
     topOfSection.scrollIntoView({behavior: "auto"});
