@@ -94,7 +94,7 @@ class Calculator {
     }
     this.model.equipments = response.data
     firstStep.renderEquipments(this.model.equipments)
-
+    this._reinitSlick()
     fourthStep.car = {
       manufacture: this.model.manufacturer,
       name: this.model.name,
