@@ -30,9 +30,9 @@ const costingSec = () => {
   let currentStep = 1;
 
   const swiper = initSlider(costingSliderNode)
-  const calculatorCallback = () => { }
+  const calculatorCallback = () => { swiper.updateAutoHeight(500) }
 
-  let calculator = new Calculator(costingSectionNode,calculatorCallback);
+  let calculator = new Calculator(costingSectionNode, calculatorCallback);
 
   const animateSteps = nextStep => {
     const classesMap = {
