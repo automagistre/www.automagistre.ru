@@ -77,196 +77,197 @@
 
     <form class="sec-costing__form">
         <div class="sec-costing__steps">
-            <div class="costing" id="costing-steps">
+            <div class="costing swiper-container" id="costing-steps">
+                <div class="swiper-wrapper">
 
-                <div class="costing__step costing__step_01" id="costing-step_01">
-                    <div class="container">
-                        <div class="costing__step-wrap">
-                            <div class="costing__row" >
-                                <div class="costing__col-car">
-                                    <div class="cg-car costing__unit js-show-modal" data-modal-step="1" data-modal-target="costing" id="costing-step_01_model">
+                    <div class="costing__step swiper-slide costing__step_01" id="costing-step_01">
+                        <div class="container">
+                            <div class="costing__step-wrap">
+                                <div class="costing__row" >
+                                    <div class="costing__col-car">
+                                        <div class="cg-car costing__unit js-show-modal" data-modal-step="1" data-modal-target="costing" id="costing-step_01_model">
 
-                                    </div>
-                                </div>
-                                <div class="costing__col-set">
-                                    <div class="cg-set costing__unit costing__blur">
-                                        <h4 class="costing__title cg-set__title">Выберите комплектацию:</h4>
-                                        <div class="cg-set__list" id="costing-step_01_model_equipments">
-                                            <label class="cg-set__radio">
-                                                <input type="radio" name="equipment" disabled value="temp">
-                                                <span>3.0 MT 2WD</span>
-                                            </label>
-                                            <label class="cg-set__radio">
-                                                <input type="radio" name="equipment" disabled value="temp">
-                                                <span>3.5 CVT 2WD</span>
-                                            </label>
-                                            <label class="cg-set__radio">
-                                                <input type="radio" name="equipment" disabled value="temp">
-                                                <span>3.5 AT 4WD</span>
-                                            </label>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="costing__row">
-                                <div class="costing__col-run">
-                                    <div class="cg-run costing__unit costing__blur">
-                                        <h4 class="costing__title cg-run__title">Какой у вас пробег?</h4>
-                                        <ul class="cg-run__line" id="costing-run-line">
-                                            {% for i in 2..17 %}
-                                                <li class="cg-run__step
-                                                            {{ i < 9 ? 'is-before' : '' }}
-                                                            {{ i == 9 ? 'is-active' : '' }}"
-                                                    data-range="{{ i * 15 }}">
-                                                    {{ i * 15 }}
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
-                                        <input class="cg-run__info" id="costing-run-info" type="hidden">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="costing__step-btm costing__step-btm_rt">
-                            <a class="btn costing__btn js-cg-step costing__blur" data-step="2" role="button">Далее</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="costing__step costing__step_02" id="costing-step_02">
-                    <div class="container">
-                        <div class="costing__step-wrap">
-                            <div class="costing__row">
-                                <div class="costing__col-half">
-                                    <div class="cg-price costing__unit js-costing_works_unit">
-                                        <h4 class="costing__title cg-price__title">Регламетное техническое обслуживание:</h4>
-                                        <div class="cg-price__body">
-                                            <ul class="cg-price__list" id="costing-step_02_works">
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="cg-total">
-                                        <div class="cg-total__note">Стоимость обязательного ТО:</div>
-                                        <div class="cg-total__cost" id="costing-step_02_works_total"></div>
-                                    </div>
-                                </div>
-
-                                <div class="costing__col-half">
-                                    <div class="cg-price costing__unit">
-                                        <h4 class="costing__title cg-price__title">Дополнительно рекомендуем:</h4>
-                                        <div class="cg-price__body">
-                                            <ul class="cg-price__list" id="costing-step_02_recommendations">
-
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="cg-total">
-                                        <div class="cg-total__note">Итого с учетом доп. услуг:</div>
-                                        <div class="cg-total__cost" id="costing-step_02_total"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="costing__step-btm costing__step-btm_sb">
-                            <a class="btn costing__btn js-cg-step" data-step="1" role="button">Назад</a>
-                            <a class="btn costing__btn js-cg-step" data-step="3" role="button">Оформить заявку</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="costing__step costing__step_03" id="costing-step_03">
-                    <div class="container">
-                        <div class="costing__step-wrap">
-                            <h4 class="costing__step-title">Теперь вы можете легко оформить заявку:</h4>
-                            <div class="costing__row">
-                                <div class="costing__col-half">
-                                    <div class="cg-order costing__unit js-costing_calendar_unit">
-                                        <div class="cg-order__head">
-                                            <h4 class="costing__title cg-order__title">Выберите удобную дату:</h4>
-                                            <div class="cg-order__date" id="cg-order-date" ></div>
-                                        </div>
-                                        <div class="cg-order__body">
-                                            <div class="cg-calendar js-cg-datepicker" >
-                                                <div data-type="calendar-inline" data-required="false"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="costing__col-half">
-                                    <div class="cg-order costing__unit js-costing_form_unit">
-                                        <div class="cg-order__head cg-order__head_red">
-                                            <h4 class="costing__title cg-order__title">Итого: </h4>
-                                            <div class="cg-order__cost"></div>
-                                        </div>
-                                        <div class="cg-order__body">
-                                            <div class="cg-order__line cg-order__line_name">
-                                                <input class="cg-order__input" data-type="name" type="text" data-required="true" placeholder="Ваше имя и отчество">
-                                            </div>
-                                            <div class="cg-order__line cg-order__line_phon">
-                                                <input class="cg-order__input cg-order__input_phone" data-type="phone" data-required="true" type="tel" placeholder="Телефон">
-                                            </div>
-                                            <div class="cg-order__line cg-order__line_chat">
-                                                <input class="cg-order__input cg-order__input_info" data-type="text" data-required="false" type="text" placeholder="Дополнительная информация">
-                                            </div>
-                                            <div class="cg-order__line">
-                                                <label class="cg-order__check">
-                                                    <input type="checkbox" data-type="license" data-required="true" checked>
-                                                    <span>
-                          Я принимаю <a href="#" target="_blank">условия передачи информации</a>
-                          и согласен с <a href="#" target="_blank">правилами оферты</a>
-                        </span>
+                                    <div class="costing__col-set">
+                                        <div class="cg-set costing__unit costing__blur">
+                                            <h4 class="costing__title cg-set__title">Выберите комплектацию:</h4>
+                                            <div class="cg-set__list" id="costing-step_01_model_equipments">
+                                                <label class="cg-set__radio">
+                                                    <input type="radio" name="equipment" disabled value="temp">
+                                                    <span>3.0 MT 2WD</span>
+                                                </label>
+                                                <label class="cg-set__radio">
+                                                    <input type="radio" name="equipment" disabled value="temp">
+                                                    <span>3.5 CVT 2WD</span>
+                                                </label>
+                                                <label class="cg-set__radio">
+                                                    <input type="radio" name="equipment" disabled value="temp">
+                                                    <span>3.5 AT 4WD</span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="costing__step-btm costing__step-btm_sb">
-                            <a class="btn costing__btn js-cg-step" data-step="2" role="button">Назад</a>
-                            <a class="btn costing__btn sp-ex-right js-cg-submit" data-type="submit" role="button" >
-                                <span>Записаться</span>
-                                <span class="sp sp-ring sp-spin"></span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="costing__step costing__step_04" id="costing-step_04">
-                    <div class="container">
-                        <div class="costing__step-wrap">
-                            <div class="cg-status">
-                                <i class="cg-status__icon"></i>
-                                <h4 class="cg-status__title">Ваша заявка успешно отправлена!</h4>
-                                <div class="cg-status__note">
-
+                                <div class="costing__row">
+                                    <div class="costing__col-run">
+                                        <div class="cg-run costing__unit costing__blur">
+                                            <h4 class="costing__title cg-run__title">Какой у вас пробег?</h4>
+                                            <ul class="cg-run__line" id="costing-run-line">
+                                                {% for i in 2..17 %}
+                                                    <li class="cg-run__step
+                                                            {{ i < 9 ? 'is-before' : '' }}
+                                                            {{ i == 9 ? 'is-active' : '' }}"
+                                                        data-range="{{ i * 15 }}">
+                                                        {{ i * 15 }}
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                            <input class="cg-run__info" id="costing-run-info" type="hidden">
+                                        </div>
+                                    </div>
                                 </div>
-                                <ul class="cg-status__list">
-                                    <li class="cg-status__data">
-                                        <span class="cg-status__data-par">Марка авто</span>
-                                        <span class="cg-status__data-val cg-status__car js-cg-status__car"></span>
-                                    </li>
-                                    <li class="cg-status__data">
-                                        <span class="cg-status__data-par">Дата</span>
-                                        <span class="cg-status__data-val js-cg-status__date"></span>
-                                    </li>
-                                    <li class="cg-status__data">
-                                        <span class="cg-status__data-par">Ваше имя и отчество</span>
-                                        <span class="cg-status__data-val js-cg-status__name"></span>
-                                    </li>
-                                    <li class="cg-status__data">
-                                        <span class="cg-status__data-par">Сумма заказа</span>
-                                        <span class="cg-status__data-val js-cg-status__total"></span>
-                                    </li>
-                                </ul>
-                                <a class="btn costing__btn js-cg-new" role="button">Оформить новую заявку</a>
+                            </div>
+                            <div class="costing__step-btm costing__step-btm_rt">
+                                <a class="btn costing__btn js-cg-step costing__blur" data-step="2" role="button">Далее</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="costing__step swiper-slide costing__step_02" id="costing-step_02">
+                        <div class="container">
+                            <div class="costing__step-wrap">
+                                <div class="costing__row">
+                                    <div class="costing__col-half">
+                                        <div class="cg-price costing__unit js-costing_works_unit">
+                                            <h4 class="costing__title cg-price__title">Регламетное техническое обслуживание:</h4>
+                                            <div class="cg-price__body">
+                                                <ul class="cg-price__list" id="costing-step_02_works">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="cg-total">
+                                            <div class="cg-total__note">Стоимость обязательного ТО:</div>
+                                            <div class="cg-total__cost" id="costing-step_02_works_total"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="costing__col-half">
+                                        <div class="cg-price costing__unit">
+                                            <h4 class="costing__title cg-price__title">Дополнительно рекомендуем:</h4>
+                                            <div class="cg-price__body">
+                                                <ul class="cg-price__list" id="costing-step_02_recommendations">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="cg-total">
+                                            <div class="cg-total__note">Итого с учетом доп. услуг:</div>
+                                            <div class="cg-total__cost" id="costing-step_02_total"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="costing__step-btm costing__step-btm_sb">
+                                <a class="btn costing__btn js-cg-step" data-step="1" role="button">Назад</a>
+                                <a class="btn costing__btn js-cg-step" data-step="3" role="button">Оформить заявку</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="costing__step swiper-slide costing__step_03" id="costing-step_03">
+                        <div class="container">
+                            <div class="costing__step-wrap">
+                                <h4 class="costing__step-title">Теперь вы можете легко оформить заявку:</h4>
+                                <div class="costing__row">
+                                    <div class="costing__col-half">
+                                        <div class="cg-order costing__unit js-costing_calendar_unit">
+                                            <div class="cg-order__head">
+                                                <h4 class="costing__title cg-order__title">Выберите удобную дату:</h4>
+                                                <div class="cg-order__date" id="cg-order-date" ></div>
+                                            </div>
+                                            <div class="cg-order__body">
+                                                <div class="cg-calendar js-cg-datepicker" >
+                                                    <div data-type="calendar-inline" data-required="false"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="costing__col-half">
+                                        <div class="cg-order costing__unit js-costing_form_unit">
+                                            <div class="cg-order__head cg-order__head_red">
+                                                <h4 class="costing__title cg-order__title">Итого: </h4>
+                                                <div class="cg-order__cost"></div>
+                                            </div>
+                                            <div class="cg-order__body">
+                                                <div class="cg-order__line cg-order__line_name">
+                                                    <input class="cg-order__input" data-type="name" type="text" data-required="true" placeholder="Ваше имя и отчество">
+                                                </div>
+                                                <div class="cg-order__line cg-order__line_phon">
+                                                    <input class="cg-order__input cg-order__input_phone" data-type="phone" data-required="true" type="tel" placeholder="Телефон">
+                                                </div>
+                                                <div class="cg-order__line cg-order__line_chat">
+                                                    <input class="cg-order__input cg-order__input_info" data-type="text" data-required="false" type="text" placeholder="Дополнительная информация">
+                                                </div>
+                                                <div class="cg-order__line">
+                                                    <label class="cg-order__check">
+                                                        <input type="checkbox" data-type="license" data-required="true" checked>
+                                                        <span>
+                          Я принимаю <a href="#" target="_blank">условия передачи информации</a>
+                          и согласен с <a href="#" target="_blank">правилами оферты</a>
+                        </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="costing__step-btm costing__step-btm_sb">
+                                <a class="btn costing__btn js-cg-step" data-step="2" role="button">Назад</a>
+                                <a class="btn costing__btn sp-ex-right js-cg-submit" data-type="submit" role="button" >
+                                    <span>Записаться</span>
+                                    <span class="sp sp-ring sp-spin"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="costing__step swiper-slide costing__step_04" id="costing-step_04">
+                        <div class="container">
+                            <div class="costing__step-wrap">
+                                <div class="cg-status">
+                                    <i class="cg-status__icon"></i>
+                                    <h4 class="cg-status__title">Ваша заявка успешно отправлена!</h4>
+                                    <div class="cg-status__note">
+
+                                    </div>
+                                    <ul class="cg-status__list">
+                                        <li class="cg-status__data">
+                                            <span class="cg-status__data-par">Марка авто</span>
+                                            <span class="cg-status__data-val cg-status__car js-cg-status__car"></span>
+                                        </li>
+                                        <li class="cg-status__data">
+                                            <span class="cg-status__data-par">Дата</span>
+                                            <span class="cg-status__data-val js-cg-status__date"></span>
+                                        </li>
+                                        <li class="cg-status__data">
+                                            <span class="cg-status__data-par">Ваше имя и отчество</span>
+                                            <span class="cg-status__data-val js-cg-status__name"></span>
+                                        </li>
+                                        <li class="cg-status__data">
+                                            <span class="cg-status__data-par">Сумма заказа</span>
+                                            <span class="cg-status__data-val js-cg-status__total"></span>
+                                        </li>
+                                    </ul>
+                                    <a class="btn costing__btn js-cg-new" role="button">Оформить новую заявку</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </form>
