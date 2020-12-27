@@ -1,6 +1,4 @@
 import Swiper, {Pagination, Autoplay} from 'swiper';
-import '../../less/2_plugins/swiper/swiper'
-import '../../less/2_plugins/swiper/pagination'
 import Odometer from 'odometer';
 
 const workSec = () => {

@@ -1,7 +1,4 @@
 import Swiper, {Pagination, Navigation, Autoplay} from 'swiper';
-import '../../less/2_plugins/swiper/swiper'
-import '../../less/2_plugins/swiper/pagination'
-import '../../less/2_plugins/swiper/navigation'
 import {nodesObserver} from '../lib';
 
 

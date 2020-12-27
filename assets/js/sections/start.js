@@ -8,7 +8,7 @@ export const initModalSlider = node => {
           prevEl = secStartNode.querySelector('.slick-prev')
 
     const swiper = new Swiper(node, {
-        loop:true,
+        loop: true,
         effect: 'fade',
         slideActiveClass: 'slick-active',
         slideClass: 'slick-slide',
@@ -22,6 +22,7 @@ export const initModalSlider = node => {
         },
         lazy: {
             loadPrevNext: true,
+            loadOnTransitionStart: true
         }
     })
     secStartNode.querySelectorAll('.js-set-start-slide').

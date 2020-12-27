@@ -1,6 +1,5 @@
 import { initParallaxAnimation, nodesObserver } from '../lib'
 import Swiper, {Navigation} from 'swiper'
-import '../../less/2_plugins/swiper/swiper'
 import VideoPopup from '../ui/Popups/VideoPopup';
 
 

@@ -1,6 +1,4 @@
 import Swiper, {Navigation} from 'swiper';
-import '../../less/2_plugins/swiper/swiper'
-import '../../less/2_plugins/swiper/pagination'
 import '../../less/user-content'
 import '../../less/4_sections/sec_announces'
 import '../../less/5_pages/page_article'

@@ -47,7 +47,6 @@ class SelectCarWizard {
   onOpen() {
     this.steps[0]._slider.update()
     this.steps[0]._slider.lazy.load()
-    console.log("Загружаю");
   }
 }
 
