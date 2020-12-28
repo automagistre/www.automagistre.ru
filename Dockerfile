@@ -156,7 +156,7 @@ COPY --from=node /usr/local/app/public/img img
 COPY --from=node /usr/local/app/public/assets assets
 COPY --from=node /usr/local/app/public/fonts fonts
 COPY --from=php /usr/local/app/public/robots.txt .
-COPY --from=sitemap /usr/local/app/public/sitemap.* .
+COPY --from=sitemap /usr/local/app/public/sitemap.* ./
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
 
