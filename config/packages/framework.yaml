@@ -1,6 +1,5 @@
 framework:
     secret:          "%env(APP_SECRET)%"
-    form:            ~
     csrf_protection: ~
     trusted_hosts:   ~
     session:
