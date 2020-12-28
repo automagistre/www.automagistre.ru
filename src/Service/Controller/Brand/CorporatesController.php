@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Service\Controller\Brand;
 
-use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,17 +16,16 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Konstantin Grachev <me@grachevko.ru>
  */
-final class DiagnosticController extends AbstractController
+final class CorporatesController extends AbstractController
 {
     /**
-     * @Route("/diagnostics/{type}", name="diagnostics", requirements={"type": "free|comp"})
+     * @Route("/corporates", name="corporates")
      */
-    public function __invoke(Request $request, MailerInterface $mailer, string $type): Response
+    public function __invoke(Request $request, MailerInterface $mailer): Response
     {
         $form = $this->createFormBuilder()
             ->add('name')
             ->add('telephone')
-            ->add('date')
             ->add('checkbox', CheckboxType::class)
             ->getForm()
             ->handleRequest($request);
@@ -38,14 +36,10 @@ final class DiagnosticController extends AbstractController
             $message = (new Email())
                 ->from(new Address('no-reply@automagistre.ru', 'Автомагистр'))
                 ->to('info@automagistre.ru')
-                ->subject(\sprintf('Запись на %s диагностику', [
-                    'free' => 'бесплатную',
-                    'comp' => 'компьютерную',
-                ][$type]))
+                ->subject('Запись на корпоративное обслуживание')
                 ->text(<<<TEXT
                     Имя: {$data->name}
                     Телефон: {$data->telephone}
-                    Дата: {$data->date}
                     TEXT
                 );
 
@@ -60,18 +54,8 @@ final class DiagnosticController extends AbstractController
             ]);
         }
 
-        if ('comp' === $type) {
-            return $this->render('diagnostics_comp.html.twig', [
-                'form' => $form->createView(),
-            ]);
-        }
-
-        if ('free' === $type) {
-            return $this->render('diagnostics_free.html.twig', [
-                'form' => $form->createView(),
-            ]);
-        }
-
-        throw new LogicException('Unreachable statement');
+        return $this->render('corporates.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

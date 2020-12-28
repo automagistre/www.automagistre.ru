@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Shop\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +11,13 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Konstantin Grachev <me@grachevko.ru>
  */
-final class ReviewsController extends AbstractController
+final class ShopController extends AbstractController
 {
     /**
-     * @Route("/reviews", name="reviews")
+     * @Route("/", name="index")
      */
-    public function __invoke(): Response
+    public function index(): Response
     {
-        return $this->render('reviews.html.twig', [
-        ]);
+        return $this->render('shop/index.html.twig');
     }
 }

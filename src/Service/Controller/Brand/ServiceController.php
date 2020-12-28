@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Service\Controller\Brand;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Konstantin Grachev <me@grachevko.ru>
  */
-final class RepairController extends AbstractController
+final class ServiceController extends AbstractController
 {
     /**
-     * @Route("/repair", name="repair")
+     * @Route("/", name="service")
      */
     public function __invoke(): Response
     {
-        return $this->render('repair.html.twig', [
+        return $this->render('service.html.twig', [
         ]);
     }
 }

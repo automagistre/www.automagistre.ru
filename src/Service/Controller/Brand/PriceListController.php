@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Shop;
+namespace App\Service\Controller\Brand;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,13 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Konstantin Grachev <me@grachevko.ru>
  */
-final class ShopController extends AbstractController
+final class PriceListController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/price-list", name="price-list")
      */
-    public function index(): Response
+    public function __invoke(): Response
     {
-        return $this->render('shop/index.html.twig');
+        return $this->render('price_list.html.twig', [
+        ]);
     }
 }

@@ -13,10 +13,6 @@ services:
 
     App\:
         resource: '../src'
-    App\Controller\:
-        resource: '../src/Controller'
-        tags:
-            - { name: controller.service_arguments }
 
     App\Router\ListeningRouterDecorator:
         decorates: router

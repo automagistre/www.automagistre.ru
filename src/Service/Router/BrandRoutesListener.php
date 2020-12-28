@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Router;
+namespace App\Service\Router;
 
+use App\Router\RoutePreGenerate;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Route;

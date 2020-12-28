@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\Service;
+namespace App\Garage\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @author Konstantin Grachev <me@grachevko.ru>
  */
-final class PriceListController extends AbstractController
+final class GarageController extends AbstractController
 {
     /**
-     * @Route("/price-list", name="price-list")
+     * @Route(name="index")
      */
-    public function __invoke(): Response
+    public function index(): Response
     {
-        return $this->render('price_list.html.twig', [
+        return $this->render('garage/index.html.twig', [
         ]);
     }
 }

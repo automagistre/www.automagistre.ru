@@ -1,15 +1,15 @@
 _old_redirects:
     resource: 'routes/old_redirects.php'
 
-_service:
-    resource: '../src/Controller/Service'
+_service_brand:
+    resource: '../src/Service/Controller/Brand'
     type: annotation
     prefix: /service/{brand}
     requirements:
         brand: "nissan|toyota|infiniti|lexus"
 
 _shop:
-    resource: '../src/Controller/Shop'
+    resource: '../src/Shop/Controller'
     type: annotation
     name_prefix: shop_
     prefix: /shop
@@ -22,11 +22,11 @@ _blogs:
     type: blog
 
 _garage:
-    resource: '../src/Controller/GarageController.php'
+    resource: '../src/Garage/Controller'
     type: annotation
     name_prefix: garage_
     prefix: /garage
 
 _switcher:
-    resource: '../src/Controller/SwitchController.php'
+    resource: '../src/Service/Controller/SwitchController.php'
     type: annotation
