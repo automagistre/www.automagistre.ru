@@ -1,4 +1,4 @@
-.PHONY: contrib
+.PHONY: contrib test
 
 MAKEFLAGS += --no-print-directory
 
