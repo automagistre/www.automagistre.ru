@@ -5,6 +5,7 @@
     "license": "proprietary",
     "require": {
         "php": ">=7.4",
+        "presta/sitemap-bundle": "^2.3",
         "sensio/framework-extra-bundle": "^5.3",
         "sensiolabs/security-checker": "^6.0",
         "sentry/sentry-symfony": "^3.0",

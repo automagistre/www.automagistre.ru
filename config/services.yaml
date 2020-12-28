@@ -1,11 +1,15 @@
 parameters:
     locale: ru
+    router.request_context.host:   www.automagistre.ru
+    router.request_context.scheme: https
 
 services:
     _defaults:
         public: false
         autowire: true
         autoconfigure: true
+        bind:
+            string $projectDir: '%kernel.project_dir%'
 
     App\:
         resource: '../src'
