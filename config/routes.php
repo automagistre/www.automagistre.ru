@@ -10,6 +10,10 @@ return static function (RoutingConfigurator $routes): void {
     ;
 
     $routes
+        ->import(__DIR__.'/routes/old_gone.php')
+    ;
+
+    $routes
         ->import(__DIR__.'/../src/Service/Controller/Brand', 'annotation')
         ->prefix('/service/{brand}')
         ->requirements([

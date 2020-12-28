@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Controller;
+namespace App\Tests;
 
 use App\Service\Constants;
 use Generator;
@@ -16,6 +16,7 @@ final class SmokeTest extends WebTestCase
     /**
      * @dataProvider pagesProvider
      * @dataProvider blogs
+     * @dataProvider gone
      */
     public function testPages(string $url, int $statusCode): void
     {
@@ -28,9 +29,6 @@ final class SmokeTest extends WebTestCase
         static::assertSame($statusCode, $response->getStatusCode());
     }
 
-    /**
-     * @return Generator<array>
-     */
     public function pagesProvider(): Generator
     {
         yield ['/', 200];
@@ -64,9 +62,41 @@ final class SmokeTest extends WebTestCase
         yield ['/blog/fuck', 404];
     }
 
-    /**
-     * @return Generator<array>
-     */
+    public function redirects(): Generator
+    {
+        yield ['/manuals', 301];
+        yield ['/manuals/', 301];
+        yield ['/news/', 301];
+        yield ['/news', 301];
+        yield ['/video', 301];
+        yield ['/video/', 301];
+        yield ['/articles', 301];
+        yield ['/articles/', 301];
+        yield ['/promo', 301];
+        yield ['/promo/', 301];
+        yield ['/reviews', 301];
+        yield ['/reviews/', 301];
+    }
+
+    public function gone(): Generator
+    {
+        yield ['/clean_your_engine/', 410];
+        yield ['/clubs', 410];
+        yield ['/diagnostika-podveski', 410];
+        yield ['/diagnostika-dvigatelya', 410];
+        yield ['/diagnostika-tex-jidkostei', 410];
+        yield ['/remont-rulevogo-upravlenija', 410];
+        yield ['/prodazha-avtozapchastej', 410];
+        yield ['/manuals/fuck', 410];
+        yield ['/news/fuck', 410];
+        yield ['/video/fuck', 410];
+        yield ['/zapchasti/', 410];
+        yield ['/articles/some-shit', 410];
+        yield ['/promo/promomo', 410];
+        yield ['/reviews/some-shit', 410];
+        yield ['/reviews/some-shit/deeper-shit', 410];
+    }
+
     private function servicesPages(): Generator
     {
         yield ['/repair', 200];
