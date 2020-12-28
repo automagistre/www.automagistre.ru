@@ -28,7 +28,7 @@ services:
                 - "traefik.backend.loadbalancer.method=drr"
 
     php-fpm:
-        image: automagistre/www-app:${DRONE_BUILD_NUMBER}
+        image: automagistre/www-php:${DRONE_BUILD_NUMBER}
         environment:
             APP_SECRET: ${APP_SECRET}
             SENTRY_DSN: ${SENTRY_DSN}

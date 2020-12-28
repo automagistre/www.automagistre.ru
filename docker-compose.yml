@@ -15,12 +15,8 @@ services:
         volumes:
             - ./:/usr/local/app
 
-    app:
-        image: automagistre/www-app:base
-        networks:
-            default:
-                aliases:
-                    - php-fpm
+    php-fpm:
+        image: automagistre/www-php:base
         volumes:
             - ./:/usr/local/app
         environment:

@@ -73,7 +73,7 @@ COPY etc/php-fpm.conf /usr/local/etc/php-fpm.d/automagistre.conf
 ENV PHP_MEMORY_LIMIT 1G
 ENV PHP_OPCACHE_ENABLE 1
 
-FROM base as app
+FROM base as php
 
 ARG APP_ENV
 ENV APP_ENV ${APP_ENV}
@@ -148,7 +148,7 @@ COPY --from=node /usr/local/app/public/images images
 COPY --from=node /usr/local/app/public/img img
 COPY --from=node /usr/local/app/public/assets assets
 COPY --from=node /usr/local/app/public/fonts fonts
-COPY --from=app /usr/local/app/public/robots.txt .
+COPY --from=php /usr/local/app/public/robots.txt .
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
 

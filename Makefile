@@ -48,14 +48,14 @@ down:
 build:
 	$(DEBUG_ECHO) docker build \
 		--target base \
-		--tag automagistre/www-app:base \
+		--tag automagistre/www-php:base \
 		.
 
 APP = $(DEBUG_ECHO) @docker-compose $(if $(EXEC),exec,run --rm )\
 	$(if $(ENTRYPOINT),--entrypoint "$(ENTRYPOINT)" )\
 	$(if $(APP_ENV),-e APP_ENV=$(APP_ENV) )\
 	$(if $(APP_DEBUG),-e APP_DEBUG=$(APP_DEBUG) )\
-	app
+	php-fpm
 
 PERMISSIONS = chown $(shell id -u):$(shell id -g) -R . && chmod 777 -R var/
 permissions:
@@ -95,18 +95,9 @@ cache:
 	$(APP) sh -c 'rm -rf var/cache/$$APP_ENV && console cache:warmup; $(PERMISSIONS)'
 ###< APP ###
 
-###> MEMCACHED ###
-memcached-cli:
-	docker-compose exec memcached sh
-memcached-restart:
-	docker-compose restart memcached
-###< MEMCACHED ###
-
 ###> NODE ###
 npm:
 	docker-compose run --rm node npm install
 node-cli:
 	docker-compose run --rm node sh
-gulp:
-	docker-compose run --rm node ./node_modules/.bin/gulp build:main-script build:scripts build:less
 ###< NODE ###
