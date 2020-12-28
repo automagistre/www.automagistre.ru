@@ -51,6 +51,8 @@ final class SitemapListener implements EventSubscriberInterface
                         'slug' => $slug,
                     ], UrlGeneratorInterface::ABSOLUTE_URL),
                     new DateTimeImmutable('@'.$file->getMTime()),
+                    UrlConcrete::CHANGEFREQ_WEEKLY,
+                    0.9,
                 ),
                 'blog',
             );
