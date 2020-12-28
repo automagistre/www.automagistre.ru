@@ -13,7 +13,7 @@ return static function (RoutingConfigurator $routes): void {
         ->import(__DIR__.'/../src/Service/Controller/Brand', 'annotation')
         ->prefix('/service/{brand}')
         ->requirements([
-            'brand' => 'nissan|toyota|infiniti|lexus',
+            'brand' => \implode('|', App\Service\Constants::BRANDS),
         ])
     ;
 

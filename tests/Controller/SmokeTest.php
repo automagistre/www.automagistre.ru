@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Controller;
 
+use App\Service\Constants;
 use Generator;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -38,7 +39,7 @@ final class SmokeTest extends WebTestCase
 
         foreach ($this->servicesPages() as $page) {
             $path = $page[0];
-            foreach (['nissan', 'lexus', 'infiniti', 'toyota'] as $brand) {
+            foreach (Constants::BRANDS as $brand) {
                 $page[0] = \sprintf('/service/%s', $brand.$path);
 
                 yield $page;
