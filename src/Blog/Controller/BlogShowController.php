@@ -12,7 +12,7 @@ final class BlogShowController extends AbstractController
     public function __invoke(string $slug): Response
     {
         $blog = \str_replace(['-'], ['_'], $slug);
-        $template = "blog/{$blog}.html.twig";
+        $template = "blog/articles/{$blog}.html.twig";
 
         return $this->render($template, [
             'slug' => $slug,
