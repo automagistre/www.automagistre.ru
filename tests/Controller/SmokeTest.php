@@ -72,7 +72,6 @@ final class SmokeTest extends WebTestCase
         yield ['/diagnostics/free', 200];
         yield ['/diagnostics/comp', 200];
         yield ['/tire', 200];
-        yield ['/brands', 200];
         yield ['/corporates', 200];
         yield ['/price-list', 200];
         yield ['/maintenance', 200];
