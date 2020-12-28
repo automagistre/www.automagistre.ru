@@ -22,6 +22,7 @@ services:
         arguments: [ '@session.memcached' ]
 
 parameters:
+    locale: ru
     env(APP_SECRET): '%env(file:APP_SECRET_FILE)%%'
     env(APP_SECRET_FILE): /run/secrets/app_secret
     env(SESSION_MEMCACHED_HOST): 'memcached'
