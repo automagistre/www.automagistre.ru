@@ -34,6 +34,7 @@ final class SmokeTest extends WebTestCase
         yield ['/', 200];
         yield ['/shop/', 200];
         yield ['/garage/', 200];
+        yield ['/privacy-policy', 200];
 
         foreach ($this->servicesPages() as $page) {
             $path = $page[0];
@@ -107,6 +108,5 @@ final class SmokeTest extends WebTestCase
         yield ['/price-list', 200];
         yield ['/maintenance', 200];
         yield ['/contacts', 200];
-        yield ['/privacy-policy', 200];
     }
 }

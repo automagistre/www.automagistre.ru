@@ -41,6 +41,10 @@ return static function (RoutingConfigurator $routes): void {
     ;
 
     $routes
+        ->import(__DIR__.'/../src/Page/Controller')
+    ;
+
+    $routes
         ->import(__DIR__.'/../src/Service/Controller/SwitchController.php', 'annotation')
     ;
 };
