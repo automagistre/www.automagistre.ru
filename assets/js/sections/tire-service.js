@@ -67,7 +67,7 @@ const tireServiceSec = () => {
   const tireService = new TireService(tireServiceNode)
 
   const updateTotalCost = () => {
-    tireServiceTotalNode.innerHTML = `${tireService.totalCost}<i class="icon-rub">a</i>`
+    tireServiceTotalNode.innerHTML = `${tireService.totalCost.toFormat()}<i class="icon-rub">a</i>`
   }
 
   carSelector.onChange = tireSelector.onChange = () =>{

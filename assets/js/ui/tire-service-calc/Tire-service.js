@@ -1,3 +1,6 @@
+import Dinero from 'dinero.js/src/dinero'
+
+
 class TireService {
 
   _priceGroups = []
@@ -28,9 +31,9 @@ class TireService {
   }
 
   get totalCost() {
-    let cost = 0
+    let cost = Dinero({amount: 0})
     for (let group of this._priceGroups) {
-      cost += group.totalCost
+      cost = cost.add(group.totalCost)
     }
     return cost
   }
