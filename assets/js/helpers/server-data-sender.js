@@ -1,35 +1,29 @@
 import LocalStorageManager from './Local-storage-manager';
-import {FormInputs} from '../ui/forms';
+import {ApolloClient, InMemoryCache} from '@apollo/client';
+import {createAppealCooperation} from './gql/mutations';
 
-const SERVER_URL = API_URL
+const SERVER_URL = APOLLO_URL
 
 class FormData {
-  _data = {}
-  _api_url = ''
-  inputs = {}
+
+  query = undefined
+  input = {}
 
   constructor(form) {
     this.form = form
   }
 
-  toJSON() {
-    return JSON.stringify(this._data)
-  }
-
-  get url() {
-    return SERVER_URL + this._api_url
-  }
-
-  showInvalidData(data) {
-    let isInvalidFormInputs = false
-    for (let item of data) {
-      if (this.inputs[item.field] instanceof FormInputs) {
-        this.inputs[item.field].isValid = false
-        isInvalidFormInputs = true
-      }
+  init() {
+    const API_KEYS = Object.keys(this.input)
+    for (let input of this.form.inputs) {
+      if (API_KEYS.includes(input.name))
+        switch (input.name) {
+          case 'name':
+            this.input.name = input.value; break
+          case 'phone':
+            this.input.phone = input.value; break
+        }
     }
-    this.form.showInvalidInputs()
-    return isInvalidFormInputs
   }
 }
 
@@ -101,26 +95,14 @@ class FormQuestionData extends FormData {
 
 class FormCooperationData extends FormData {
 
-  _api_url = '/appeal/cooperation'
-  _data = {
+  query = createAppealCooperation
+  input = {
     name: '',
     phone: ''
   }
 
   constructor (form) {
     super(form);
-    for (let input of form.inputs) {
-      switch (input.name) {
-        case 'name':
-          this._data.name = input.value
-          this.inputs['name'] = input
-          break
-        case 'phone':
-          this._data.phone = `+${input.value.replace(/[^\d]/g, "")}`
-          this.inputs['phone'] = input
-          break
-      }
-    }
   }
 }
 
@@ -235,20 +217,23 @@ class FormTireServiceData extends FormData {
 class FormDataFactory {
 
   getFormData(form) {
+    let formData
     switch (form.type) {
       case 'cooperation':
-        return new FormCooperationData(form)
+        formData = new FormCooperationData(form); break;
       case 'question':
-        return new FormQuestionData(form)
+        formData = new FormQuestionData(form); break;
       case 'schedule':
-        return new FormScheduleData(form)
+        formData = new FormScheduleData(form); break;
       case 'calculator':
-        return new FormCalculatorData(form)
+        formData = new FormCalculatorData(form); break;
       case 'tire-fitting':
-        return new FormTireServiceData(form)
+        formData = new FormTireServiceData(form); break;
       default:
         throw new Error('No API route')
     }
+    formData.init()
+    return formData
   }
 }
 
@@ -256,6 +241,11 @@ class FormDataFactory {
 class ServerDataSender {
 
   constructor() {
+    this.client = new ApolloClient({
+      uri: SERVER_URL,
+      cache: new InMemoryCache()
+    })
+
     this._formFactory = new FormDataFactory()
   }
 
@@ -268,24 +258,17 @@ class ServerDataSender {
     if (form.isSending) return
 
     const formData = this._formFactory.getFormData(form)
-    form.isSending = true
-    const response = await fetch(formData.url, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: formData.toJSON(),
-    })
-    form.isSending = false
-    if (response.ok) {
+    try {
+      form.isSending = true
+      await this.client.mutate({
+        mutation: formData.query,
+        variables: {input: formData.input}})
       this.onSuccess()
-      return
-    }
-    if (response.status === 400){
-      const data = await response.json()
-      if(!formData.showInvalidData(data)) this.onError()
-    }
-    else {
+    } catch (e) {
       this.onError()
+      console.log(e, formData.input);
     }
+    form.isSending = false
   }
 }
 
