@@ -211,7 +211,6 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
     spinner.remove()
     this._isLoading = false
     if (response !== 200) {
-      console.log(response, data);
       if (this._isInit) this.clear()
       this._modelListNode.innerHTML = `
             <div class="modal__errors">
