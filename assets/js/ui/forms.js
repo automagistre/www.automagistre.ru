@@ -273,7 +273,11 @@ class PhoneInput extends FormInputs {
       lazy: true,
       placeholderChar: '_'
     })
-    inputNode.addEventListener('keyup', () => this.value = this.phoneMask.value)
+    inputNode.addEventListener('keyup', () => {
+      const phoneNumber = parsePhoneNumber(this.phoneMask.value, 'RU')
+      if (phoneNumber)
+        this.value = phoneNumber.number
+    })
   }
 
   _validator(value) {
