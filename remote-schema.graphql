@@ -2,6 +2,7 @@
 
 schema {
     query: Query
+    mutation: Mutation
 }
 
 "An object with an ID."
@@ -38,6 +39,14 @@ type Money {
     currency: String!
 }
 
+type Mutation {
+    createAppealCalculator(input: createAppealCalculatorInput!): createAppealOutput
+    createAppealCooperation(input: createAppealCooperationInput!): createAppealOutput
+    createAppealQuestion(input: createAppealQuestionInput!): createAppealOutput
+    createAppealSchedule(input: createAppealScheduleInput!): createAppealOutput
+    createAppealTireFitting(input: createAppealTireFittingInput!): createAppealOutput
+}
+
 type PageInfo {
     "When paginating forwards, the cursor to continue."
     endCursor: String
@@ -52,6 +61,7 @@ type Part implements Node {
     name: String!
     number: String!
     price: Money!
+    unit: Unit!
     universal: Boolean!
 }
 
@@ -109,6 +119,10 @@ type Work implements Node {
     recommended: Boolean!
 }
 
+type createAppealOutput {
+    appealId: Uuid!
+}
+
 enum AirIntake {
     "Атмосферный"
     atmo
@@ -116,6 +130,13 @@ enum AirIntake {
     turbo
     "Неопределён"
     unknown
+}
+
+enum CalculatorWorkType {
+    "Рекомендация"
+    recommendation
+    "Работа"
+    work
 }
 
 enum Fuel {
@@ -146,6 +167,19 @@ enum ReviewSource {
     yandex
 }
 
+enum TireFittingCategory {
+    "Легковая"
+    car
+    "Кроссовер"
+    crossover
+    "Минивен"
+    minivan
+    "Внедорожник"
+    suv
+    "Неопределён"
+    unknown
+}
+
 enum Transmission {
     "Робот"
     AMT
@@ -163,6 +197,25 @@ enum Transmission {
     unknown
 }
 
+enum Unit {
+    "Грамм"
+    gram
+    "Килограмм"
+    kilogram
+    "Литр"
+    liter
+    "Метр"
+    meter
+    "Миллилитр"
+    milliliter
+    "Миллиметр"
+    millimeter
+    "Упаковка"
+    package
+    "Штука"
+    thing
+}
+
 enum WheelDrive {
     "Полный"
     AWD
@@ -174,9 +227,75 @@ enum WheelDrive {
     unknown
 }
 
+input CalculatorWorkInput {
+    id: Uuid!
+    isSelected: Boolean!
+    name: String!
+    parts: [CalculatorWorkPartInput]
+    price: MoneyInput!
+    type: CalculatorWorkType
+}
+
+input CalculatorWorkPartInput {
+    count: Int!
+    id: Uuid!
+    isSelected: Boolean!
+    name: String!
+    price: MoneyInput!
+}
+
+input TireFittingWorkInput {
+    name: String!
+    price: MoneyInput!
+}
+
+input createAppealCalculatorInput {
+    date: Date
+    equipmentId: Uuid!
+    mileage: Int!
+    name: String!
+    note: String
+    phone: PhoneNumber!
+    total: MoneyInput!
+    works: [CalculatorWorkInput]!
+}
+
+input createAppealCooperationInput {
+    name: String!
+    phone: PhoneNumber!
+}
+
+input createAppealQuestionInput {
+    email: Email!
+    name: String!
+    question: String!
+}
+
+input createAppealScheduleInput {
+    date: Date!
+    name: String!
+    phone: PhoneNumber!
+}
+
+input createAppealTireFittingInput {
+    category: TireFittingCategory!
+    diameter: Int
+    name: String!
+    phone: PhoneNumber!
+    total: MoneyInput!
+    vehicleId: Uuid!
+    works: [TireFittingWorkInput]!
+}
+
 
 scalar Uuid
 
 scalar Date
 
 scalar year
+
+scalar PhoneNumber
+
+scalar MoneyInput
+
+scalar Email
