@@ -3,7 +3,7 @@ import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {
   createAppealCooperation,
   createAppealQuestion,
-  createAppealSchedule,
+  createAppealSchedule, createAppealTireFitting,
 } from './gql/mutations';
 
 const SERVER_URL = APOLLO_URL
@@ -147,44 +147,29 @@ class FormCalculatorData extends FormData {
 
 class FormTireServiceData extends FormData {
 
-  _api_url = '/appeal/tire-fitting'
-  _data = {
+  query = createAppealTireFitting
+  input = {
     name: '',  // Name in form
     phone: '', // Phone in form
-    modelId: '', // id model if available
+    vehicleId: '', // id model if available
     diameter: 0, // diameter of tires
-    bodyType: '', // Selected car type
+    category: 'unknown', // Selected car type
     total: 0, // Total cost of order
     works: [ ] // selected works
   }
 
   constructor(form) {
     super(form);
-    for (let input of form.inputs) {
-      switch (input.name) {
-        case 'name':
-          this._data.name = input.value
-          this.inputs['name'] = input
-          break
-        case 'phone':
-          this._data.phone = `+${input.value.replace(/[^\d]/g, "")}`
-          this.inputs['phone'] = input
-          break
-      }
-    }
     const localData = new LocalStorageManager()
-    this._data.modelId = localData.caseID || ''
-    this._data.diameter = form.tireSelector.currentSelect ? +form.tireSelector.currentSelect.value : 0
-    this._data.bodyType = form.carSelector.currentSelect ? form.carSelector.currentSelect.name : ''
-    this._data.total = form.tireService.totalCost * 100 || 0
+    this.input.vehicleId = localData.caseID || undefined
+    this.input.diameter = form.tireSelector.currentSelect ? +form.tireSelector.currentSelect.value : 0
+    this.input.category = form.carSelector.currentSelect ? form.carSelector.currentSelect.value : 'unknown'
+    this.input.total = `${form.tireService.totalCost.getCurrency()} ${form.tireService.totalCost.getAmount()}`
     const works = []
-    for (let work of form.tireService.getSelected()) {
-      works.push({
-        name: work.name,
-        price: work.price * 100
-      })
+    for (let {name, price} of form.tireService.getSelected()) {
+      works.push({name, price: `${price.getCurrency()} ${price.getAmount()}`})
     }
-    this._data.works = works
+    this.input.works = works
   }
 }
 
