@@ -1,6 +1,10 @@
 import LocalStorageManager from './Local-storage-manager';
 import {ApolloClient, InMemoryCache} from '@apollo/client';
-import {createAppealCooperation} from './gql/mutations';
+import {
+  createAppealCooperation,
+  createAppealQuestion,
+  createAppealSchedule,
+} from './gql/mutations';
 
 const SERVER_URL = APOLLO_URL
 
@@ -15,6 +19,8 @@ class FormData {
 
   init() {
     const API_KEYS = Object.keys(this.input)
+    if (Object.keys(this.input).includes('date')) API_KEYS.push('calendar', 'calendar-inline')
+
     for (let input of this.form.inputs) {
       if (API_KEYS.includes(input.name))
         switch (input.name) {
@@ -22,6 +28,12 @@ class FormData {
             this.input.name = input.value; break
           case 'phone':
             this.input.phone = input.value; break
+          case 'email':
+            this.input.email = input.value; break
+          case 'calendar':
+            this.input.date = input.getFormattedDate('Y-m-d'); break
+          case 'calendar-inline':
+            this.input.date = input.getFormattedDate('Y-m-d'); break
         }
     }
   }
@@ -29,43 +41,19 @@ class FormData {
 
 class FormScheduleData extends FormData {
 
-  _api_url = '/appeal/schedule'
-  _data = {
+  query = createAppealSchedule
+  input = {
     name: '',
     phone: '',
     date: ''
-  }
-
-  constructor(form) {
-    super(form);
-    for (let input of form.inputs) {
-      switch (input.name) {
-        case 'name':
-          this._data.name = input.value
-          this.inputs['name'] = input
-          break
-        case 'phone':
-          this._data.phone = `+${input.value.replace(/[^\d]/g, "")}`
-          this.inputs['phone'] = input
-          break
-        case 'calendar':
-          this._data.date = input.getFormattedDate('Y-m-d')
-          this.inputs['date'] = input
-          break
-        case 'calendar-inline':
-          this._data.date = input.getFormattedDate('Y-m-d')
-          this.inputs['date'] = input
-          break
-      }
-    }
   }
 }
 
 
 class FormQuestionData extends FormData {
 
-  _api_url = '/appeal/question'
-  _data = {
+  query = createAppealQuestion
+  input = {
     name: '',
     email: '',
     question: ''
@@ -74,19 +62,9 @@ class FormQuestionData extends FormData {
   constructor (form) {
     super(form);
     for (let input of form.inputs) {
-      switch (input.name) {
-        case 'name':
-          this._data.name = input.value
-          this.inputs['name'] = input
-          break
-        case 'email':
-          this._data.email = input.value
-          this.inputs['email'] = input
-          break
-        case 'text':
-          this._data.question = input.value
-          this.inputs['question'] = input
-          break
+      if (input.name === 'text') {
+        this.input.question = input.value
+        break
       }
     }
   }
@@ -99,10 +77,6 @@ class FormCooperationData extends FormData {
   input = {
     name: '',
     phone: ''
-  }
-
-  constructor (form) {
-    super(form);
   }
 }
 
@@ -266,7 +240,7 @@ class ServerDataSender {
       this.onSuccess()
     } catch (e) {
       this.onError()
-      console.log(e, formData.input);
+      console.log(e, formData);
     }
     form.isSending = false
   }
