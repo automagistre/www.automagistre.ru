@@ -77,6 +77,7 @@ class ServerData {
                 return {
                   id, name, manufacture, unit,
                   count: quantity / 100,
+                  serverCount: quantity,
                   price: price
                 }
               })

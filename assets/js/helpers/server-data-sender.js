@@ -1,9 +1,11 @@
 import LocalStorageManager from './Local-storage-manager';
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {
+  createAppealCalculator,
   createAppealCooperation,
   createAppealQuestion,
-  createAppealSchedule, createAppealTireFitting,
+  createAppealSchedule,
+  createAppealTireFitting,
 } from './gql/mutations';
 
 const SERVER_URL = APOLLO_URL
@@ -82,8 +84,8 @@ class FormCooperationData extends FormData {
 
 class FormCalculatorData extends FormData {
 
-  _api_url = '/appeal/calc'
-  _data = {
+  query = createAppealCalculator
+  input = {
     name: '',  // Name in form
     phone: '', // Phone in form
     note: '',  // Message from user
@@ -97,50 +99,30 @@ class FormCalculatorData extends FormData {
   constructor(calculator) {
     super(calculator.steps[3].form)
     for (let input of calculator.inputs) {
-      switch (input.name) {
-        case 'name':
-          this._data.name = input.value
-          this.inputs['name'] = input
-          break
-        case 'phone':
-          this._data.phone = `+${input.value.replace(/[^\d]/g, "")}`
-          this.inputs['phone'] = input
-          break
-        case 'text':
-          this._data.note = input.value
-          this.inputs['note'] = input
-          break
-        case 'calendar-inline':
-          this._data.date = input.getFormattedDate('Y-m-d')
-          this.inputs['date'] = input
-          break
+      if (input.name === 'text') {
+        this.input.note = input.value
+        break
       }
     }
 
-    this._data.equipmentId = calculator.equipment.id
-    this._data.mileage = calculator.mileage
-    this._data.total = calculator.totalPrice.toUnit() * 100
+    this.input.equipmentId = calculator.equipment.id
+    this.input.mileage = calculator.mileage
+    this.input.total = `${calculator.totalPrice.getCurrency()} ${calculator.totalPrice.getAmount()}`
 
-    for (let work of calculator.works) {
+    for (let {id, name, price, type, isSelected, parts} of calculator.works) {
       const workData = {
-        id: work.id,
-        name: work.name,
-        price: work.price.toUnit() * 100,
-        type: work.type,
-        isSelected: work.isSelected,
+        id, name, type, isSelected,
+        price: `${price.getCurrency()} ${price.getAmount()}`,
         parts: []
       }
-      for (let part of work.parts) {
+      for (let {id, name, price, serverCount: count, isSelected} of parts) {
         const partData = {
-          id: part.id,
-          name: part.name,
-          price: part.price.toUnit() * 100,
-          count: part.count,
-          isSelected: part.isSelected
+          id, name, count, isSelected,
+          price: `${price.getCurrency()} ${price.getAmount()}`,
         }
         workData.parts.push(partData)
       }
-      this._data.works.push(workData)
+      this.input.works.push(workData)
     }
   }
 }
@@ -225,7 +207,6 @@ class ServerDataSender {
       this.onSuccess()
     } catch (e) {
       this.onError()
-      console.log(e, formData);
     }
     form.isSending = false
   }
