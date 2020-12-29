@@ -17,6 +17,7 @@ final class SmokeTest extends WebTestCase
      * @dataProvider pages
      * @dataProvider blogs
      * @dataProvider gone
+     * @dataProvider redirects
      */
     public function test(string $url, int $statusCode): void
     {
