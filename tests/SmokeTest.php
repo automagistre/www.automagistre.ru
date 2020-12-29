@@ -73,7 +73,6 @@ final class SmokeTest extends WebTestCase
         yield ['/video/', 301];
         yield ['/articles', 301];
         yield ['/articles/', 301];
-        yield ['/promo', 301];
         yield ['/promo/', 301];
         yield ['/reviews', 301];
         yield ['/reviews/', 301];
@@ -83,6 +82,7 @@ final class SmokeTest extends WebTestCase
     {
         yield ['/clean_your_engine/', 410];
         yield ['/clubs', 410];
+        yield ['/promo', 410];
         yield ['/diagnostika-podveski', 410];
         yield ['/diagnostika-dvigatelya', 410];
         yield ['/diagnostika-tex-jidkostei', 410];

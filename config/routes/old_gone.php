@@ -13,6 +13,7 @@ return static function (RoutingConfigurator $routes): void {
         '/remont-rulevogo-upravlenija',
         '/prodazha-avtozapchastej',
         '/comrades',
+        '/promo',
     ] as $old) {
         $routes
             ->add('old_gone_'.\md5($old), $old)
