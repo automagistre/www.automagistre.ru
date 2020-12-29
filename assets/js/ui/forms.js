@@ -2,7 +2,7 @@ import isEmail from 'is-email'
 import IMask from 'imask'
 import Flatpickr from 'flatpickr'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
-import parsePhoneNumber from 'libphonenumber-js';
+import parsePhoneNumber from 'libphonenumber-js/max';
 
 
 class Form {
