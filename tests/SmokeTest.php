@@ -14,11 +14,11 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 final class SmokeTest extends WebTestCase
 {
     /**
-     * @dataProvider pagesProvider
+     * @dataProvider pages
      * @dataProvider blogs
      * @dataProvider gone
      */
-    public function testPages(string $url, int $statusCode): void
+    public function test(string $url, int $statusCode): void
     {
         $client = self::createClient();
         $client->setServerParameter('HTTP_HOST', 'www.automagistre.ru');
@@ -29,14 +29,14 @@ final class SmokeTest extends WebTestCase
         static::assertSame($statusCode, $response->getStatusCode());
     }
 
-    public function pagesProvider(): Generator
+    public function pages(): Generator
     {
         yield ['/', 200];
         yield ['/shop/', 200];
         yield ['/garage/', 200];
         yield ['/privacy-policy', 200];
 
-        foreach ($this->servicesPages() as $page) {
+        foreach ($this->services() as $page) {
             $path = $page[0];
             foreach (Constants::BRANDS as $brand) {
                 $page[0] = \sprintf('/service/%s', $brand.$path);
@@ -98,7 +98,7 @@ final class SmokeTest extends WebTestCase
         yield ['/reviews/some-shit/deeper-shit', 410];
     }
 
-    private function servicesPages(): Generator
+    private function services(): Generator
     {
         yield ['/repair', 200];
         yield ['/diagnostics/free', 200];
