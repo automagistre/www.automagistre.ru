@@ -2,6 +2,7 @@ import isEmail from 'is-email'
 import IMask from 'imask'
 import Flatpickr from 'flatpickr'
 import { Russian } from "flatpickr/dist/l10n/ru.js"
+import parsePhoneNumber from 'libphonenumber-js';
 
 
 class Form {
@@ -266,7 +267,7 @@ class PhoneInput extends FormInputs {
     this.name = 'phone'
     this._value = ''
 
-    const phonePattern = '+{7}(000)000-00-00'
+    const phonePattern = '+{7} (000) 000-00-00'
     this.phoneMask = new IMask(inputNode, {
       mask: phonePattern,
       lazy: true,
@@ -276,7 +277,8 @@ class PhoneInput extends FormInputs {
   }
 
   _validator(value) {
-    return /\+7\(\d{3}\)\d{3}-\d{2}-\d{2}/.test(value)
+    const phoneNumber = parsePhoneNumber(this.value, 'RU')
+    return phoneNumber ? phoneNumber.isValid() : false
   }
 
   clear() {
