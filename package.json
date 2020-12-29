@@ -64,6 +64,7 @@
     "graphql-tag": "^2.11.0",
     "gsap": "^2.1.3",
     "install": "^0.13.0",
+    "libphonenumber-js": "^1.9.6",
     "npm": "^6.14.8",
     "odometer": "github:hubspot/odometer",
     "react": "^16.13.1",
