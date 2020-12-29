@@ -23,6 +23,10 @@ class Part extends CalcItem {
     return this._item.count || 0
   }
 
+  get serverCount() {
+    return this._item.serverCount || 0
+  }
+
   get totalPrice() {
     return this.isSelected ? this.price.multiply(+this._item.count) : Dinero({amount:0});
   }
