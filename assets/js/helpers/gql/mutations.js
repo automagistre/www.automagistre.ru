@@ -31,3 +31,10 @@ export const createAppealTireFitting = gql`
         }
     }
 `
+export const createAppealCalculator = gql`
+    mutation createAppealCalculator($input: createAppealCalculatorInput!) {
+        createAppealCalculator(input: $input) {
+            appealId
+        }
+    }
+`
