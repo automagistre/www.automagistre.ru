@@ -319,7 +319,7 @@ class CalendarInput extends FormInputs {
   }
 
   getFormattedDate(format) {
-    return this.value ? this._calendar.formatDate(this.value, format) : ''
+    return this.value ? this._calendar.formatDate(this.value, format) : undefined
   }
 
 }
@@ -347,7 +347,7 @@ class CalendarInlineInput extends FormInputs {
   }
 
   getFormattedDate(format) {
-    return this.value ? this._calendar.formatDate(this.value, format) : ''
+    return this.value ? this._calendar.formatDate(this.value, format) : undefined
   }
 }
 
