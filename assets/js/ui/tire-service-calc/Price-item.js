@@ -1,9 +1,11 @@
 import PriceCalculatorFactory from './Price-calculator';
+import Dinero from 'dinero.js/src/dinero'
+
 
 class PriceItem {
 
   _name = undefined
-  _price = undefined
+  _price = Dinero({amount: 0})
 
   constructor(item) {
     this._name = item.name
@@ -23,7 +25,7 @@ class PriceItem {
                                 </label>
                             </div>
                             <div class="prices__note">${this.name}</div>
-                            <div class="prices__cost">${this.price}<i class="icon-rub">a</i></div>
+                            <div class="prices__cost">${this.price.toFormat()}<i class="icon-rub">a</i></div>
                          </div>`
     return wrapper.firstElementChild
   }
@@ -41,12 +43,13 @@ class PriceItem {
   }
 
   set price(value) {
-    this._price = +value
-    this._node.querySelector('.prices__cost').innerHTML = `${this.price}<i class="icon-rub">a</i>`
+    this._price = value
+    this._node.querySelector('.prices__cost').innerHTML = `${this.price.toFormat()}<i class="icon-rub">a</i>`
   }
 
   updatePrice(tireSelector, carSelector) {
     this.price = this._calculator.getPrice(tireSelector, carSelector)
+    console.log(this.price.getAmount(), Dinero(5));
   }
 
   render(node) {

@@ -1,3 +1,6 @@
+import Dinero from 'dinero.js/src/dinero';
+
+
 class PriceCalculatorFactory {
 
   static getPriceCalculator(id) {
@@ -48,9 +51,12 @@ class FormulaPriceCalculator extends PriceCalculator {
   getPrice(tireSelector, carSelector) {
     const tireDiameter = +tireSelector.value,
           carType = carSelector.value
-    const tireExtraPrice = this.TIRE_EXTRA_PRICE * (tireDiameter - 13)
-    const carExtraPrice = this.CAR_EXTRA_PRICE[carType] || 0
-    return this.BASE_PRICE + tireExtraPrice + carExtraPrice
+    const tireExtraPrice = Dinero({amount: this.TIRE_EXTRA_PRICE * 100}),
+          carExtraPrice = Dinero({amount: this.CAR_EXTRA_PRICE[carType] * 100 || 0}),
+          carBasePrice = Dinero({amount: this.BASE_PRICE * 100})
+    tireExtraPrice.multiply(tireDiameter - 13)
+
+    return carBasePrice.add(tireExtraPrice).add(carExtraPrice)
   }
 }
 
@@ -73,7 +79,8 @@ class ReplaceBalanceWheelsPriceCalculator extends FormulaPriceCalculator{
   CAR_EXTRA_PRICE = {
     car: 0,
     suv: 400,
-    minibus: 100
+    minivan: 100,
+    crossover: 100
   }
 
 }
@@ -85,7 +92,8 @@ class FullReplaceWheelsPriceCalculator extends FormulaPriceCalculator{
   CAR_EXTRA_PRICE = {
     car: 0,
     suv: 400,
-    minibus: 200
+    minivan: 200,
+    crossover: 200
   }
 
 }
@@ -99,8 +107,8 @@ class ListPriceCalculator extends PriceCalculator {
   getPrice(tireSelector) {
     const tireDiameter = +tireSelector.value
     return this.PRICE.hasOwnProperty(tireDiameter) ?
-        this.PRICE[tireDiameter] :
-        this.PRICE.default
+        Dinero({amount: this.PRICE[tireDiameter] * 100}) :
+        Dinero({amount: this.PRICE.default * 100})
   }
 }
 
@@ -138,7 +146,7 @@ class FixedPriceCalculator extends PriceCalculator {
   PRICE = 0
   
   getPrice() {
-    return this.PRICE
+    return Dinero({amount: this.PRICE * 100})
   }
 }
 

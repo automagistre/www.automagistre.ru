@@ -1,3 +1,4 @@
+import Dinero from 'dinero.js/src/dinero';
 import PriceItem from './Price-item';
 
 class PriceGroup {
@@ -59,9 +60,9 @@ class PriceGroup {
   }
 
   get totalCost() {
-    let cost = 0
+    let cost = Dinero({amount: 0})
     for (let item of this._items) {
-      if (item.isChecked) cost += item.price
+      if (item.isChecked) cost = cost.add(item.price)
     }
     return cost
   }
