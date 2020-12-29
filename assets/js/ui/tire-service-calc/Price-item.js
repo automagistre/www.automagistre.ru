@@ -49,7 +49,6 @@ class PriceItem {
 
   updatePrice(tireSelector, carSelector) {
     this.price = this._calculator.getPrice(tireSelector, carSelector)
-    console.log(this.price.getAmount(), Dinero(5));
   }
 
   render(node) {
