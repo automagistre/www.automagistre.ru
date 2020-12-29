@@ -23,3 +23,11 @@ export const createAppealQuestion = gql`
         }
     }
 `
+
+export const createAppealTireFitting = gql`
+    mutation createAppealTireFitting($input: createAppealTireFittingInput!) {
+        createAppealTireFitting(input: $input) {
+            appealId
+        }
+    }
+`
