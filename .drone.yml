@@ -29,9 +29,9 @@ steps:
             - docker push automagistre/www-nginx:base
         environment:
             USERNAME:
-                from_secret: HUB_USER
+                from_secret: docker_username
             PASSWORD:
-                from_secret: HUB_TOKEN
+                from_secret: docker_password
         when:
             branch: [ master ]
         depends_on:
