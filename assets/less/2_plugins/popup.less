@@ -219,6 +219,16 @@
 
 }
 
+.popup-map {
+  display: grid;
+  grid-template-columns: 85vw;
+  grid-template-rows: minmax(320px, 80vh);
+
+  &>iframe {
+    border-radius: 10px;
+  }
+}
+
 /* ---------- ADAPTIVE < 760 -------------------------------------------------*/
 @media (max-width: 760px) {
   .popup {

@@ -1,4 +1,5 @@
 import {script} from "../lib"
+import MapPopup from '../ui/Popups/MapPopup';
 
 
 async function createMap(sectionID) {
@@ -33,7 +34,15 @@ async function createMap(sectionID) {
 
 const mapSec = () => {
   import('../../less/2_plugins/YMap.less')
+
   const mapSecNode = document.querySelector('section.sec-map')
+  const routeBtn = mapSecNode.querySelector('a.sec-map__route-btn')
+
+  routeBtn.addEventListener('click', ()=> {
+    const popup = new MapPopup()
+    popup.open()
+  })
+
   if ("IntersectionObserver" in window) {
     const nodeObserver = new IntersectionObserver(entries => {
       entries.forEach(entry => {
