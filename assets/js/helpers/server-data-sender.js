@@ -1,7 +1,7 @@
 import LocalStorageManager from './Local-storage-manager';
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {
-  createAppealCalculator,
+  createAppealCalculator, createAppealCall,
   createAppealCooperation,
   createAppealQuestion,
   createAppealSchedule,
@@ -51,6 +51,13 @@ class FormScheduleData extends FormData {
   }
 }
 
+class FormCallData extends FormData {
+
+  query = createAppealCall
+  input = {
+    phone: '',
+  }
+}
 
 class FormQuestionData extends FormData {
 
@@ -170,6 +177,8 @@ class FormDataFactory {
         formData = new FormCalculatorData(form); break;
       case 'tire-fitting':
         formData = new FormTireServiceData(form); break;
+      case 'call':
+        formData = new FormCallData(form); break;
       default:
         throw new Error('No API route')
     }

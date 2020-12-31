@@ -41,6 +41,7 @@ type Money {
 
 type Mutation {
     createAppealCalculator(input: createAppealCalculatorInput!): createAppealOutput
+    createAppealCall(input: createAppealCallInput!): createAppealOutput
     createAppealCooperation(input: createAppealCooperationInput!): createAppealOutput
     createAppealQuestion(input: createAppealQuestionInput!): createAppealOutput
     createAppealSchedule(input: createAppealScheduleInput!): createAppealOutput
@@ -260,6 +261,10 @@ input createAppealCalculatorInput {
     works: [CalculatorWorkInput]!
 }
 
+input createAppealCallInput {
+    phone: PhoneNumber!
+}
+
 input createAppealCooperationInput {
     name: String!
     phone: PhoneNumber!
@@ -283,7 +288,7 @@ input createAppealTireFittingInput {
     name: String!
     phone: PhoneNumber!
     total: MoneyInput!
-    vehicleId: Uuid!
+    vehicleId: Uuid
     works: [TireFittingWorkInput]!
 }
 
