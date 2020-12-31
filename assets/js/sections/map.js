@@ -1,5 +1,6 @@
 import {mobChecker, script} from '../lib';
 import MapPopup from '../ui/Popups/MapPopup';
+import CallBackPopup from '../ui/Popups/CallBackPopup';
 
 
 async function createMap(sectionID) {
@@ -42,12 +43,21 @@ const mapSec = () => {
     routeBtn.addEventListener('click', ()=> {
       const popup = new MapPopup()
       popup.open()
+
+
     })
   }
 
   const navigatorBtn = mapSecNode.querySelector('a.sec-map__route-navigator')
   if (navigatorBtn) navigatorBtn.classList.toggle('is-hidden', !mobChecker(0))
 
+  const callBtn = mapSecNode.querySelector('a.sec-map__more-btn')
+  if (callBtn) {
+    callBtn.addEventListener('click', ()=>{
+      const popup = new CallBackPopup()
+      popup.open()
+    })
+  }
 
   if ("IntersectionObserver" in window) {
     const nodeObserver = new IntersectionObserver(entries => {

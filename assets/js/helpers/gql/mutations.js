@@ -38,3 +38,11 @@ export const createAppealCalculator = gql`
         }
     }
 `
+
+export const createAppealCall = gql`
+    mutation createAppealCall($input: createAppealCallInput!) {
+        createAppealCall(input: $input) {
+            appealId
+        }
+    }
+`
