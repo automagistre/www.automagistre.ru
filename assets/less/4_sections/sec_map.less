@@ -50,22 +50,45 @@
     line-height: 28px;
   }
 
+  &__route {
+    display: grid;
+    margin: 20px 0 30px;
+  }
+
   &__route-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-self: center;
+    grid-area: ~"1/1/2/2";
     width: 100%;
     height: 80px;
-    margin: 20px 0 35px;
     color: @red-dark;
+    font-size: 1.2em;
     background: #fff no-repeat center data-uri("@{img-dir}backgrounds/bg_route-btn.jpg");
     border-radius: 20px;
-    box-shadow: 0 20px 60px -30px rgba(0, 0, 0, .7);
+    box-shadow: 0 20px 60px -30px rgba(0, 0, 0, .85);
+    display: grid;
+    place-content: center;
 
     &.lazy {
       background-color: #D8D8D8;
       background-image: none;
     }
+  }
+
+  &__route-navigator {
+    align-self: center;
+    grid-area: ~"1/1/2/2";
+    height: 60px;
+    width: 60px;
+    margin: 10px;
+    background: rgba(100%, 100%, 100%, 0.8) no-repeat center data-uri("@{img-dir}icons/YandexNavigatorLogo.svg");
+    border: 1px solid #dbdbdb;
+    border-radius: 10px;
+    z-index: 5;
+
+    &.is-hidden {
+      visibility: hidden;
+    }
+
   }
 
   &__link {
@@ -185,9 +208,10 @@
       text-align: center;
     }
 
-    &__route-btn {
-      max-width: 360px;
+    &__route {
       margin: 30px auto;
+      max-width: 360px;
+
     }
 
     &__more {

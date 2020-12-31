@@ -1,4 +1,4 @@
-import {script} from "../lib"
+import {mobChecker, script} from '../lib';
 import MapPopup from '../ui/Popups/MapPopup';
 
 
@@ -38,10 +38,16 @@ const mapSec = () => {
   const mapSecNode = document.querySelector('section.sec-map')
   const routeBtn = mapSecNode.querySelector('a.sec-map__route-btn')
 
-  routeBtn.addEventListener('click', ()=> {
-    const popup = new MapPopup()
-    popup.open()
-  })
+  if (routeBtn) {
+    routeBtn.addEventListener('click', ()=> {
+      const popup = new MapPopup()
+      popup.open()
+    })
+  }
+
+  const navigatorBtn = mapSecNode.querySelector('a.sec-map__route-navigator')
+  if (navigatorBtn) navigatorBtn.classList.toggle('is-hidden', !mobChecker(0))
+
 
   if ("IntersectionObserver" in window) {
     const nodeObserver = new IntersectionObserver(entries => {
