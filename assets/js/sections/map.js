@@ -51,7 +51,7 @@ const mapSec = () => {
   const navigatorBtn = mapSecNode.querySelector('a.sec-map__route-navigator')
   if (navigatorBtn) navigatorBtn.classList.toggle('is-hidden', !mobChecker(0))
 
-  const callBtn = mapSecNode.querySelector('a.sec-map__more-btn')
+  const callBtn = mapSecNode.querySelector('a.js-callback-me')
   if (callBtn) {
     callBtn.addEventListener('click', ()=>{
       const popup = new CallBackPopup()
