@@ -18,7 +18,6 @@ final class SitemapListener implements EventSubscriberInterface
         'corporates',
         'diagnostic_free',
         'diagnostic_comp',
-        'faq',
         'maintenance',
         'reviews',
         'service',

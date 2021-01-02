@@ -97,6 +97,10 @@ final class SmokeTest extends WebTestCase
         yield ['/promo/promomo', 410];
         yield ['/reviews/some-shit', 410];
         yield ['/reviews/some-shit/deeper-shit', 410];
+        yield ['/service/lexus/faq', 410];
+        yield ['/service/infiniti/faq', 410];
+        yield ['/service/nissan/faq', 410];
+        yield ['/service/toyota/faq', 410];
     }
 
     private function services(): Generator
