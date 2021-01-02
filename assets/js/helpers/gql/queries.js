@@ -85,12 +85,12 @@ export const getVehicleByID = gql`
   }
 `
 export const getReviews = gql`
-    query getLastReviews($count: Int, $after: Uuid) {
+    query getLastReviews($count: Int, $after: String) {
         reviews(first: $count, after: $after) {
             nodes{
                 id
                 author
-                content
+                content: text
                 source
                 publishAt
             }
