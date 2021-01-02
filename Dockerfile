@@ -105,7 +105,7 @@ RUN set -ex \
 #
 # nginx
 #
-FROM nginx:1.19.4-alpine as nginx-base
+FROM nginx:1.19.6-alpine as nginx-base
 
 WORKDIR /usr/local/app/public
 
