@@ -103,12 +103,14 @@ class Review {
                 <b class="review-card__date">${date}</b>
             </div>
          </div>`;
-    wrapper.firstElementChild
-           .querySelector('.review-card__more')
-           .addEventListener('click', ()=> {
-              const popup = new ReviewPopup(this);
-              popup.open();
-           });
+    if (isLong && !isOpen) {
+      wrapper.firstElementChild.querySelectorAll('.review-card__text,.review-card__more').forEach(node => {
+        node.addEventListener('click', ()=> {
+          const popup = new ReviewPopup(this);
+          popup.open();
+        })
+      })
+    }
     this.node = wrapper.firstElementChild;
     return wrapper.firstElementChild;
   }
