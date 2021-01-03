@@ -1,7 +1,7 @@
 import Review from '../ui/Review'
 import ServerData from '../helpers/ServerData'
 import Swiper, {Pagination, Navigation} from 'swiper';
-
+import {declOfNum} from '../lib'
 
 const reviewSec = async () => {
   Swiper.use([Pagination, Navigation])
@@ -22,7 +22,7 @@ const reviewSec = async () => {
     const {response, data: {totalCount, reviews}} = await serverData.getReviewsByPageNumber(8)
     if (response === 200) {
       if (totalCount){
-        reviewsBTN.textContent = `Посмотреть более ${Math.floor(totalCount / 10) * 10} отзывов`
+        reviewsBTN.textContent = `Посмотреть еще ${totalCount} ${declOfNum(+totalCount, ['отзыв', 'отзыва', 'отзывов'])}`
       }
       reviews.forEach(reviewObj => {
         const node = document.createElement('div')
@@ -46,7 +46,7 @@ const reviewSec = async () => {
         navigation: {
           prevEl: swiperPrevBtn,
           nextEl: swiperNextBtn,
-          hiddenClass: 'is-hidden'
+          disabledClass: 'is-disable'
         },
         breakpoints: {
           1100: {
