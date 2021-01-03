@@ -1,10 +1,10 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {
-    getVehiclesByManufacturerID,
-    maintenancesByVehicleID,
-    getVehicleByID,
-    getCountOfReviews,
-    getReviews
+  getVehiclesByManufacturerID,
+  maintenancesByVehicleID,
+  getVehicleByID,
+  getCountOfReviews,
+  getReviews, getStats,
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
 
@@ -161,6 +161,23 @@ class ServerData {
       return {
         'response': 500,
         'data': undefined
+      }
+    }
+  }
+
+  async getStats() {
+    try {
+      const {data:{ stats:{orders, vehicles}}} = await this.client.query({
+        query: getStats,
+      })
+      return {
+        'response': 200,
+        'data': {orders, vehicles}
+      }
+    } catch (e) {
+      return {
+        'response': 500,
+        'data': {orders: undefined, vehicles: undefined}
       }
     }
   }

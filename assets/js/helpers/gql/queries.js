@@ -110,3 +110,12 @@ export const getCountOfReviews = gql`
         }
     }
 `
+
+export const getStats = gql`
+    query getStats {
+        stats {
+            orders
+            vehicles
+        }
+    }
+`
