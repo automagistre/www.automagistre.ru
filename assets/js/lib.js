@@ -1,5 +1,6 @@
 import Odometer from 'odometer';
 import TweenMax from 'gsap/TweenMax';
+import ServerData from './helpers/ServerData';
 
 export const mobChecker = (maxWinWidth) =>
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -34,6 +35,21 @@ export const initParallaxAnimation = (features, images) => {
     }
 };
 
+export const updateOdometerData = async node => {
+    const ordersOdometerNode = node.querySelector('[data-type="orders"]'),
+          vehiclesOdometerNode = node.querySelector('[data-type="vehicles"]')
+
+    const serverData = new ServerData()
+    const {response, data: {orders, vehicles}} = await serverData.getStats()
+    if (response === 200) {
+        ordersOdometerNode.dataset.value = orders
+        ordersOdometerNode.innerHTML = `${orders - orders % 50}`
+
+        vehiclesOdometerNode.dataset.value = vehicles
+        vehiclesOdometerNode.innerHTML = `${vehicles - vehicles % 50}`
+    }
+}
+
 export const odometer = odNode => {
     const odometers = odNode.querySelectorAll('.js-odometer')
     nodesObserver(odometers, node => {
@@ -43,7 +59,7 @@ export const odometer = odNode => {
             el: node,
             value: node.innerText,
             format: '( ddd)',
-            duration: 3000
+            duration: 1500
         })
         od.update(node.dataset.value)
     })
