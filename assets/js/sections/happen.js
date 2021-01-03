@@ -1,14 +1,12 @@
-import {odometer} from '../lib';
+import {odometer, updateOdometerData} from '../lib';
 import {SubscribeForm} from '../ui/forms';
 import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
-const happenSec = () => {
+const happenSec = async () => {
   const happenSecNode = document.querySelector('section.sec-happen')
-  odometer(happenSecNode.querySelector('.sec-happen__facts'))
-  const formNode  = document.querySelector('section.sec-happen')
-  .querySelector('.sec-happen__form');
+  const formNode  = happenSecNode.querySelector('.sec-happen__form')
 
   if (!formNode) return
 
@@ -24,6 +22,8 @@ const happenSec = () => {
   formNode.querySelector('a[data-type="submit"]').addEventListener('click', async ()=>{
     if (scheduleForm.isValid) await dataSender.sendForm(scheduleForm)
   })
-};
+  await updateOdometerData(happenSecNode)
+  odometer(happenSecNode)
+}
 
-export default happenSec;
+export default happenSec

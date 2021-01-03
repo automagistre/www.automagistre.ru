@@ -1,8 +1,10 @@
-import {odometer} from '../lib';
+import {odometer, updateOdometerData} from '../lib';
 
 
-const experienceSec = () => {
-  odometer(document.querySelector('.sec-experience__facts'))
-};
+const experienceSec = async () => {
+  const experienceSecNode = document.querySelector('section.sec-experience')
+  await updateOdometerData(experienceSecNode)
+  odometer(experienceSecNode)
+}
 
 export default experienceSec;
