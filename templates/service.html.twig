@@ -53,18 +53,16 @@
     <section class="sec-intro has-panels js-sec-scroll">
         <div class="sec-intro__panels">
             {% for panel in panels %}
-                <div class="panel sec-intro__panel {{ panel.class }}">
-                    <div class="panel__back lazy"></div>
-                    <div class="panel__info">
-                        <div class="panel__num">{{ panel.num }}</div>
-                        <h2 class="panel__title">{{ panel.title | raw }}</h2>
-                        <div class="panel__note">{{ panel.note | raw }}</div>
-                        <div class="panel__more">
-                            <a class="panel__btn panel__btn_red" href="{{ panel.path }}">Подробнее</a>
-
+                <a href="{{ panel.path }}">
+                    <div class="panel sec-intro__panel {{ panel.class }}">
+                        <div class="panel__back lazy"></div>
+                        <div class="panel__info">
+                            <div class="panel__num">{{ panel.num }}</div>
+                            <h2 class="panel__title">{{ panel.title | raw }}</h2>
+                            <div class="panel__note">{{ panel.note | raw }}</div>
                         </div>
                     </div>
-                </div>
+                </a>
             {% endfor %}
         </div>
     </section>
