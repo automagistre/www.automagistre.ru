@@ -94,6 +94,7 @@ class Header {
       const mobileMenuButton = this._headerNode.querySelector('.js-mobmenu-toggle ')
       mobileMenuButton.addEventListener('click', ()=>{
         this.isMobileMenuOpen = !this.isMobileMenuOpen
+        document.body.classList.toggle('is-cut', this.isMobileMenuOpen)
         mobileMenuButton.classList.toggle('is-open', this.isMobileMenuOpen)
         this._headerNode.classList.toggle('is-open', this.isMobileMenuOpen)
 
