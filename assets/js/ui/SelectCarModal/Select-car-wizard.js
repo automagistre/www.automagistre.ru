@@ -175,14 +175,11 @@ class ModelItem {
   async select() {
     this._node.firstElementChild.classList.add('is-selected')
     await new Promise(resolve => setTimeout(()=>resolve(), 200))
-    const path = document.location.pathname.split('/')
     const localStorageManager = new LocalStorageManager()
-    path[2] = this.manufacturer.toLowerCase()
-    if(this._targetID) path[path.length] = '#' + this._targetID
     localStorageManager.manufacturer = this.manufacturer
     localStorageManager.caseName = this.caseName
     localStorageManager.caseID = this.caseID
-    document.location.href = location.origin + path.join('/')
+    document.location.href = `${location.origin}${location.pathname}?brand=${this.manufacturer.toLowerCase()}${this._targetID ? '#' + this._targetID : ''}`
   }
 }
 
