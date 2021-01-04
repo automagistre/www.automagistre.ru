@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /privacy-policy
+Disallow: /gr
 Sitemap: https://www.automagistre.ru/sitemap.xml
