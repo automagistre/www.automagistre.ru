@@ -14,7 +14,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 final class BrandListener implements EventSubscriberInterface
 {
-    private const BRAND_SESSION = '_car_brand';
+    private const BRAND_SESSION = '_brand';
 
     /**
      * {@inheritdoc}
