@@ -25,7 +25,6 @@ final class AppExtension extends AbstractExtension
     {
         return [
             new TwigFunction('graphql_url', fn (): string => self::env('GRAPHQL_URL')),
-            new TwigFunction('api_url', fn (): string => self::env('API_URL')),
             new TwigFunction('sentry_dsn', fn (): ?string => $this->parameterBag->get('env(SENTRY_DSN_BROWSER)')),
         ];
     }
