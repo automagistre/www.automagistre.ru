@@ -311,11 +311,16 @@ class CalendarInput extends FormInputs {
       onReady: ()=> import('../../less/2_plugins/flatpickr_light.css')
     };
     this._calendar = new Flatpickr(inputNode, options)
+    this._calendar.input.addEventListener('click', this._calendar.open)
     inputNode.addEventListener('click', this._calendar.open)
+    const mobileInputNode = inputNode.parentNode.querySelector('.flatpickr-mobile')
+    if (mobileInputNode) {
+      this._inputNode = mobileInputNode
+    }
   }
 
   _validator(value) {
-     return value !== ''
+     return Boolean(value)
   }
 
   getFormattedDate(format) {
