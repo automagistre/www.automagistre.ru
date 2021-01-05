@@ -6,6 +6,8 @@ let singletonEnforcer = Symbol();
 
 class ModalSelectCar {
 
+  isFirstOpen = true
+
   constructor(enforcer) {
     if (enforcer !== singletonEnforcer){
       throw "Instantiation failed: use Singleton.getInstance() instead of new.";
@@ -26,7 +28,10 @@ class ModalSelectCar {
     this._node.classList.add('is-active')
     document.body.classList.add('is-cut')
     this.carSeletWizard.steps[1].targetToScroll = node.dataset.modalTarget
-    this.carSeletWizard.onOpen()
+    if (this.isFirstOpen) {
+      this.isFirstOpen = false
+      this.carSeletWizard.onOpen()
+    }
     if (node.dataset.modalStep) {
       this.carSeletWizard.changeStep(+node.dataset.modalStep)
     } else {
