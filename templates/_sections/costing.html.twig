@@ -93,18 +93,7 @@
                                         <div class="cg-set costing__unit costing__blur">
                                             <h4 class="costing__title cg-set__title">Выберите комплектацию:</h4>
                                             <div class="cg-set__list" id="costing-step_01_model_equipments">
-                                                <label class="cg-set__radio">
-                                                    <input type="radio" name="equipment" disabled value="temp">
-                                                    <span>3.0 MT 2WD</span>
-                                                </label>
-                                                <label class="cg-set__radio">
-                                                    <input type="radio" name="equipment" disabled value="temp">
-                                                    <span>3.5 CVT 2WD</span>
-                                                </label>
-                                                <label class="cg-set__radio">
-                                                    <input type="radio" name="equipment" disabled value="temp">
-                                                    <span>3.5 AT 4WD</span>
-                                                </label>
+
                                             </div>
                                         </div>
                                     </div>
@@ -114,14 +103,7 @@
                                         <div class="cg-run costing__unit costing__blur">
                                             <h4 class="costing__title cg-run__title">Какой у вас пробег?</h4>
                                             <ul class="cg-run__line" id="costing-run-line">
-                                                {% for i in 2..17 %}
-                                                    <li class="cg-run__step
-                                                            {{ i < 9 ? 'is-before' : '' }}
-                                                            {{ i == 9 ? 'is-active' : '' }}"
-                                                        data-range="{{ i * 15 }}">
-                                                        {{ i * 15 }}
-                                                    </li>
-                                                {% endfor %}
+
                                             </ul>
                                             <input class="cg-run__info" id="costing-run-info" type="hidden">
                                         </div>
