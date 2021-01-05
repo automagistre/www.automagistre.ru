@@ -7,8 +7,7 @@ import {
   getReviews, getStats,
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
-
-const SERVER_URL = APOLLO_URL
+import {GRAPHQL_SERVER} from '../vars/globals';
 
 const engineType = {
   'diesel': 'D'
@@ -22,7 +21,7 @@ class ServerData {
 
   constructor() {
     this.client = new ApolloClient({
-      uri: SERVER_URL,
+      uri: GRAPHQL_SERVER,
       cache: new InMemoryCache(),
     })
   }
