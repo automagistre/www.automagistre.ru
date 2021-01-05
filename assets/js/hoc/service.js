@@ -5,13 +5,12 @@ import initSections from './initSections';
 import animateScrollTo from 'animated-scroll-to';
 import ModalSelectCar from '../ui/SelectCarModal/Modal';
 import LocalStorageManager from '../helpers/Local-storage-manager';
-
+import {BRAND_SELECTED} from '../vars/globals';
 
 const localStorageManager = new LocalStorageManager()
-const manufacturer = document.location.pathname.split('/')[2]
+const manufacturer = BRAND_SELECTED
 
 const currentManufacturer = localStorageManager.manufacturer
-
 if (manufacturer) {
     if (currentManufacturer.toLowerCase() !== manufacturer.toLowerCase())
         localStorageManager.removeItems(['caseID', 'caseName'])
