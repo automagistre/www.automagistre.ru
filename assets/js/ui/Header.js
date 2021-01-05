@@ -21,11 +21,6 @@ class Header {
     if (header) {
       this.header = header;
       this.navBarHeight = header.offsetHeight;
-      const pageName = window.location.pathname.split('/').pop().toLowerCase(),
-            whitePages = ['map', 'reviews'];
-      if (whitePages.includes(pageName)){
-        this.whiteColor();
-      }
       document.addEventListener('scroll', ()=> this._toggleHeader());
       this.isInit = true
       this._toggleHeader();
