@@ -7,8 +7,7 @@ import {
   createAppealSchedule,
   createAppealTireFitting,
 } from './gql/mutations';
-
-const SERVER_URL = APOLLO_URL
+import {GRAPHQL_SERVER} from '../vars/globals';
 
 class FormData {
 
@@ -192,7 +191,7 @@ class ServerDataSender {
 
   constructor() {
     this.client = new ApolloClient({
-      uri: SERVER_URL,
+      uri: GRAPHQL_SERVER,
       cache: new InMemoryCache()
     })
 

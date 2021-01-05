@@ -44,9 +44,7 @@
 {#    <link rel="stylesheet" href="{{ asset('main.css') }}"/>#}
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/>
     <script>
-        let APOLLO_URL = '{{ graphql_url() }}';
         let GRAPHQL_URL = '{{ graphql_url() }}';
-        let API_URL = '{{ api_url() }}';
         let BRAND = '{{ app.request.session.get('_brand') }}';
     </script>
 
