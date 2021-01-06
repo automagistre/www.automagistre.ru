@@ -1,8 +1,32 @@
+class LocalStorageEventDispatcher {
+
+  detail = {
+    key: '',
+    oldValue: '',
+    newValue: ''
+  }
+
+  dispatch(detail) {
+    this.detail = detail
+    document.dispatchEvent(new CustomEvent('localDataChanged', { detail: this.detail, bubbles: true }))
+
+  }
+}
+
 class LocalStorageManager {
 
+  constructor() {
+    this.eventDispather = new LocalStorageEventDispatcher()
+  }
+
   set manufacturer(manufacturer) {
-    this.caseName
     localStorage.setItem('manufacturer', manufacturer)
+    const detail = {
+      key: 'manufacturer',
+      oldValue: localStorage.getItem('manufacturer'),
+      newValue: manufacturer
+    }
+    this.eventDispather.dispatch(detail)
   }
 
   get manufacturer() {
@@ -19,6 +43,12 @@ class LocalStorageManager {
 
   set caseID(caseID) {
     localStorage.setItem('caseID', caseID)
+    const detail = {
+      key: 'caseID',
+      oldValue: localStorage.getItem('caseID'),
+      newValue: caseID
+    }
+    this.eventDispather.dispatch(detail)
   }
 
   get caseID() {
