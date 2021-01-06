@@ -65,13 +65,20 @@ class Calculator {
     };
 
     this._renderSpinnerCarModelIcon()
-    let response = await  serverData.getVehicleByID(localData.caseID)
-    if (response.response !== 200) {
-      this._renderErrorCarIconModel()
-      return
-    }
+    firstStep.isFetching = true
 
-    const model = response.data
+    const getVehicle = new Promise(resolve => serverData.getVehicleByID(localData.caseID).then(resolve)),
+          getMaintenances = new Promise(resolve => serverData.maintenancesByVehicleID(localData.caseID).then(resolve))
+    const responses = await Promise.all([getVehicle, getMaintenances])
+    for (const response of responses) {
+      if (response.response !== 200) {
+        this._renderErrorCarIconModel()
+        return
+      }
+    }
+    firstStep.isFetching = false
+
+    const model = responses[0].data
     const carModel = {
       id: model.id,
       manufacturer: localData.manufacturer.toLowerCase(),
@@ -80,21 +87,12 @@ class Calculator {
       startYear: model.yearFrom,
       stopYear: model.yearTill || '',
     }
-
     this.model = {...carModel}
-
     this._renderCurrentModelIcon()
-
-    firstStep.isFetching = true
-    response = await serverData.maintenancesByVehicleID(localData.caseID)
-    firstStep.isFetching = false
-    if (response.response !== 200) {
-      this._renderErrorCarIconModel()
-      return
-    }
-    this.model.equipments = response.data
+    this.model.equipments = responses[1].data
     firstStep.renderEquipments(this.model.equipments)
     this._reinitSlick()
+
     fourthStep.car = {
       manufacture: this.model.manufacturer,
       name: this.model.name,
