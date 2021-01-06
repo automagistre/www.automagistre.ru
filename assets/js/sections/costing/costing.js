@@ -107,6 +107,13 @@ const costingSec = () => {
     calculator = new Calculator(costingSectionNode, calculatorCallback)
     changeStep(1)
   })
+  document.addEventListener('localDataChanged', (e) => {
+    if (e.detail.key === 'caseID') {
+      calculator.destroy();
+      calculator = new Calculator(costingSectionNode, calculatorCallback)
+      changeStep(1)
+    }
+  })
 }
 
 export default costingSec;

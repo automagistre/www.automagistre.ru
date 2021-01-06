@@ -5,7 +5,10 @@ import LoadingSpinner from '../LoadingSpinner';
 import errorMessages from '../../Errors/ErrorMassges';
 import {manufacturerID} from '../../vars/manufactirerID';
 import {initModalSlider} from '../../sections/start';
+import ModalSelectCar from './Modal';
 
+
+const localStorageManager = new LocalStorageManager()
 
 const manufacturerStepList = {
   'nissan': 0,
@@ -85,8 +88,7 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
 
   constructor(node) {
     super()
-    const localData = new LocalStorageManager()
-    this._selectedContent.manufacturer = localData.manufacturer
+    this._selectedContent.manufacturer = localStorageManager.manufacturer
 
     this._node = node.querySelector('#modal-tab_01')
     this._sliderNode = this._node.querySelector('#select-car-slider')
@@ -97,7 +99,7 @@ class SelectCarWizardStepManufacturer extends SelectCarWizardStep {
     })
     this._indicatorNode = node.querySelector('.modal__step[data-step="manufacturer"]')
 
-    const currentManufacturer = localData.manufacturer
+    const currentManufacturer = localStorageManager.manufacturer
     if (currentManufacturer) {
       this._slider.slideToLoop(manufacturerStepList[currentManufacturer], 500)
     }
@@ -172,15 +174,28 @@ class ModelItem {
     this._node.classList.remove('is-hidden')
   }
 
-  async select() {
-    this._node.firstElementChild.classList.add('is-selected')
-    await new Promise(resolve => setTimeout(()=>resolve(), 200))
-    const localStorageManager = new LocalStorageManager()
+  unSelect() {
+    this._node.firstElementChild.classList.remove('is-selected')
+  }
+
+  select() {
+    const prevManufacturer = localStorageManager.manufacturer
     localStorageManager.manufacturer = this.manufacturer
     localStorageManager.caseName = this.caseName
     localStorageManager.caseID = this.caseID
-    document.location.href = `${location.origin}${location.pathname}?brand=${this.manufacturer.toLowerCase()}${this._targetID ? '#' + this._targetID : ''}`
+    this.onSelect()
+    this._node.firstElementChild.classList.add('is-selected')
+    const modal = ModalSelectCar.instance
+    setTimeout(()=> {
+      if (this.manufacturer.toLowerCase() === prevManufacturer.toLowerCase()) {
+        modal.hide()
+      } else {
+        location.href = `${location.origin}${location.pathname}?brand=${this.manufacturer.toLowerCase()}${this._targetID ? '#' + this._targetID : ''}`
+      }
+    }, 300)
   }
+
+  onSelect() {}
 }
 
 
@@ -189,6 +204,7 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
   _isInit = false
   _isLoading = false
   _targetToScroll = ''
+  _models = []
 
   constructor(node) {
     super();
@@ -224,6 +240,11 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       return
     }
     let yearMin = Infinity, yearMax = - Infinity;
+
+    const onSelect = async () => {
+      this._models.forEach(model => model.unSelect())
+    }
+
     this._models = data.sort((a, b) => {
       const aName = a.name.toLowerCase(),
             bName = b.name.toLowerCase(),
@@ -234,7 +255,11 @@ class SelectCarWizardStepModel extends SelectCarWizardStep {
       if (aYear < bYear) return -1
       if (bYear < aYear) return  1
       return 0
-    }).map(model => new ModelItem(model, this.targetToScroll))
+    }).map(model => {
+      const modelEntity = new ModelItem(model, this.targetToScroll)
+      modelEntity.onSelect = onSelect
+      return modelEntity
+    })
 
     this._models.forEach(modelItem => {
       modelItem.render(this._modelListNode)
