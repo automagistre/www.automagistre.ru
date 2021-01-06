@@ -11,5 +11,7 @@ final class Constants
         'lexus',
         'infiniti',
         'toyota',
+        'kia',
+        'hyundai',
     ];
 }

@@ -1,3 +1,26 @@
+{% set activeBrand = app.request.attributes.get('brand') %}
+
+{% set brands = [
+    {
+        "id": 0,
+        "name": "Nissan",
+        "classPref": "nis"
+    },{
+        "id": 1,
+        "name": "Toyota",
+        "classPref": "toy"
+    },{
+        "id": 2,
+        "name": "Infiniti",
+        "classPref": "inf"
+    },{
+        "id": 3,
+        "name": "Lexus",
+        "classPref": "lex"
+    }
+
+] %}
+
 <!DOCTYPE html>
 <html lang="ru" prefix="og: http://ogp.me/ns#">
 <head>
@@ -45,7 +68,7 @@
     <link rel="stylesheet" href="{{ asset('styles.css') }}"/>
     <script>
         let GRAPHQL_URL = '{{ graphql_url() }}';
-        let BRAND = '{{ app.request.session.get('_brand') }}';
+        let BRAND = '{{ activeBrand }}';
     </script>
 
     {% if not app.debug %}
@@ -101,6 +124,7 @@
     </div>
 </noscript>
 
+
 <div class="site-wrapper">
     {% block body %}
         {% block header %}
@@ -117,11 +141,9 @@
                             <div class="sh-drop">
                                 <div class="sh-drop__note">Клубный автосервис:</div>
                                 <nav class="sh-drop__links">
-                                    {% set brand = app.request.attributes.get('brand') %}
-                                    <a class="sh-drop__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'toyota'}) }}">Toyota</a>
-                                    <a class="sh-drop__link {{- 'nissan' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'nissan'}) }}">Nissan</a>
-                                    <a class="sh-drop__link {{- 'lexus' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'lexus'}) }}">Lexus</a>
-                                    <a class="sh-drop__link {{- 'infiniti' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'infiniti'}) }}">Infiniti</a>
+                                    {% for brand in brands %}
+                                        <a class="sh-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name  }) }}">{{ brand.name |capitalize }}</a>
+                                    {% endfor %}
                                 </nav>
                             </div>
                         </div>
@@ -169,10 +191,9 @@
                     <nav class="sh-mob__menu">
                         {#<a class="sh-mob__link" href="#">Магазин запчастей</a>#}
                         {#<a class="sh-mob__link" href="#">Мой гараж</a>#}
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'nissan'}) }}">Клубный автосервис: Nissan</a>
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'infiniti'}) }}">Клубный автосервис: Infiniti</a>
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'toyota'}) }}">Клубный автосервис: Toyota</a>
-                        <a class="sh-mob__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'lexus'}) }}">Клубный автосервис: Lexus</a>
+                        {% for brand in brands %}
+                            <a class="sh-mob__link {{- brand.name|lower == activeBrand|lower ? ' is-active' }}" href="{{ path('service', {'brand': brand.name}) }}">Автосервис {{ brand.name|capitalize }}</a>
+                        {% endfor %}
                         <a class="sh-mob__link" href="{{ path('corporates') }}">Корпоративным клиентам</a>
                         <a class="sh-mob__link" href="{{ path('maintenance') }}">Калькулятор ТО</a>
                         <a class="sh-mob__link" href="{{ path('tire') }}">Шиномонтаж</a>
@@ -219,11 +240,9 @@
                                 <div class="sf-drop">
                                     <div class="sf-drop__note">Клубный автосервис:</div>
                                     <nav class="sf-drop__links">
-                                        {% set brand = app.request.attributes.get('brand') %}
-                                        <a class="sf-drop__link {{- 'toyota' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'toyota'}) }}">Toyota</a>
-                                        <a class="sf-drop__link {{- 'nissan' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'nissan'}) }}">Nissan</a>
-                                        <a class="sf-drop__link {{- 'lexus' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'lexus'}) }}">Lexus</a>
-                                        <a class="sf-drop__link {{- 'infiniti' == brand ? ' is-active' }}" href="{{ path('service', {'brand': 'infiniti'}) }}">Infiniti</a>
+                                        {% for brand in brands %}
+                                            <a class="sf-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name  }) }}">{{ brand.name |capitalize }}</a>
+                                        {% endfor %}
                                     </nav>
                                 </div>
                             </div>
