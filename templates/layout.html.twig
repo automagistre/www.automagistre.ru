@@ -192,7 +192,7 @@
                         {#<a class="sh-mob__link" href="#">Магазин запчастей</a>#}
                         {#<a class="sh-mob__link" href="#">Мой гараж</a>#}
                         {% for brand in brands %}
-                            <a class="sh-mob__link {{- brand.name|lower == activeBrand|lower ? ' is-active' }}" href="{{ path('service', {'brand': brand.name}) }}">Автосервис {{ brand.name|capitalize }}</a>
+                            <a class="sh-mob__link {{- brand.name|lower == activeBrand|lower ? ' is-active' }}" href="{{ path('service', {'brand': brand.name|lower}) }}">Автосервис {{ brand.name|capitalize }}</a>
                         {% endfor %}
                         <a class="sh-mob__link" href="{{ path('corporates') }}">Корпоративным клиентам</a>
                         <a class="sh-mob__link" href="{{ path('maintenance') }}">Калькулятор ТО</a>
