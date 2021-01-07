@@ -142,7 +142,7 @@
                                 <div class="sh-drop__note">Клубный автосервис:</div>
                                 <nav class="sh-drop__links">
                                     {% for brand in brands %}
-                                        <a class="sh-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name  }) }}">{{ brand.name |capitalize }}</a>
+                                        <a class="sh-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name|lower  }) }}">{{ brand.name |capitalize }}</a>
                                     {% endfor %}
                                 </nav>
                             </div>
@@ -241,7 +241,7 @@
                                     <div class="sf-drop__note">Клубный автосервис:</div>
                                     <nav class="sf-drop__links">
                                         {% for brand in brands %}
-                                            <a class="sf-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name  }) }}">{{ brand.name |capitalize }}</a>
+                                            <a class="sf-drop__link {{- brand.name|lower == activeBrand|lower ? ' is-active' -}}" href="{{ path('service', {'brand': brand.name|lower  }) }}">{{ brand.name |capitalize }}</a>
                                         {% endfor %}
                                     </nav>
                                 </div>
