@@ -335,12 +335,14 @@
 .icon-lex { background-image: url("@{img-dir}sec-start/icon_lex.png") }
 .icon-toy { background-image: url("@{img-dir}sec-start/icon_toy.png") }
 .icon-inf { background-image: url("@{img-dir}sec-start/icon_inf.png") }
+.icon-hyundai { background-image: url("@{img-dir}sec-start/icon_hyundai.png") }
 .icon-all { background-image: url("@{img-dir}sec-start/icon_all-brands.png") }
 
 .icon-nis,
 .icon-lex,
 .icon-toy,
 .icon-inf,
+.icon-hyundai,
 .icon-all {
   color: transparent;
   text-align: center;
@@ -349,7 +351,7 @@
   line-height: 120px;
   &.lazy {
     background-image: none;
-    background-color: #8e8e8e;
+    background-color: rgba(145, 145, 145, .6);
     color: #E7E7E7;
   }
 }
@@ -454,22 +456,52 @@
   }
 }
 
+.st-hyundai {
+
+  &__logo {
+    background-image: url("@{img-dir}sec-start/logo_hyundai.png");
+  }
+
+  &__car {
+    width: 754px;
+    height: 298px;
+    margin-left: -384px;
+    background: no-repeat 0 0;
+    background-size: 100% auto;
+  }
+
+  &__wheel-lt {
+    left: 111px;
+    bottom: 11px;
+  }
+
+  &__wheel-rt {
+    right: 99px;
+    bottom: 11px;
+  }
+}
+
+
 .st-nis__logo,
 .st-toy__logo,
 .st-lex__logo,
 .st-inf__logo,
+.st-hyundai__logo,
 .st-nis__car,
 .st-toy__car,
 .st-lex__car,
 .st-inf__car,
+.st-hyundai__car,
 .st-nis__wheel-lt,
 .st-toy__wheel-lt,
 .st-lex__wheel-lt,
 .st-inf__wheel-lt,
+.st-hyundai__wheel-lt,
 .st-nis__wheel-rt,
 .st-toy__wheel-rt,
 .st-lex__wheel-rt,
-.st-inf__wheel-rt {
+.st-inf__wheel-rt,
+.st-hyundai__wheel-rt {
   &.lazy {
     background-image: none;
     background-color: transparent;
@@ -641,6 +673,25 @@
       bottom: 9px;
     }
   }
+
+  .st-hyundai {
+
+    &__car {
+      width: 507px;
+      height: 204px;
+      margin-left: -263px;
+    }
+
+    &__wheel-lt {
+      left: 75px;
+      bottom: 10px;
+    }
+
+    &__wheel-rt {
+      right: 67px;
+      bottom: 10px;
+    }
+  }
 }
 
 
@@ -764,7 +815,7 @@
     &__car {
       width: 295px;
       height: 117px;
-      margin-left: -147px;
+      margin-left: -133px;
     }
 
     &__wheel-lt {
@@ -775,6 +826,25 @@
     &__wheel-rt {
       right: 28px;
       bottom: 6px;
+    }
+  }
+
+  .st-hyundai {
+
+    &__car {
+      width: 332px;
+      height: 133px;
+      margin-left: -170px;
+    }
+
+    &__wheel-lt {
+      left: 49px;
+      bottom: 7px;
+    }
+
+    &__wheel-rt {
+      right: 43px;
+      bottom: 7px;
     }
   }
 }
