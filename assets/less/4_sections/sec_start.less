@@ -336,6 +336,7 @@
 .icon-toy { background-image: url("@{img-dir}sec-start/icon_toy.png") }
 .icon-inf { background-image: url("@{img-dir}sec-start/icon_inf.png") }
 .icon-hyundai { background-image: url("@{img-dir}sec-start/icon_hyundai.png") }
+.icon-kia { background-image: url("@{img-dir}sec-start/icon_kia.png") }
 .icon-all { background-image: url("@{img-dir}sec-start/icon_all-brands.png") }
 
 .icon-nis,
@@ -343,6 +344,7 @@
 .icon-toy,
 .icon-inf,
 .icon-hyundai,
+.icon-kia,
 .icon-all {
   color: transparent;
   text-align: center;
@@ -481,27 +483,58 @@
   }
 }
 
+.st-kia {
+
+  &__logo {
+    background-image: url("@{img-dir}sec-start/logo_kia.png");
+  }
+
+  &__car {
+    width: 820px;
+    height: 264px;
+    margin-left: -411px;
+    background: no-repeat 0 0;
+    background-size: 100% auto;
+  }
+
+  &__wheel-lt {
+    left: 123px;
+    bottom: 10px;
+  }
+
+  &__wheel-rt {
+    right: 95px;
+    bottom: 11px;
+  }
+}
 
 .st-nis__logo,
 .st-toy__logo,
 .st-lex__logo,
 .st-inf__logo,
 .st-hyundai__logo,
+.st-kia__logo,
+
 .st-nis__car,
 .st-toy__car,
 .st-lex__car,
 .st-inf__car,
 .st-hyundai__car,
+.st-kia__car,
+
 .st-nis__wheel-lt,
 .st-toy__wheel-lt,
 .st-lex__wheel-lt,
 .st-inf__wheel-lt,
 .st-hyundai__wheel-lt,
+.st-kia__wheel-lt,
+
 .st-nis__wheel-rt,
 .st-toy__wheel-rt,
 .st-lex__wheel-rt,
 .st-inf__wheel-rt,
-.st-hyundai__wheel-rt {
+.st-hyundai__wheel-rt,
+.st-kia__wheel-rt {
   &.lazy {
     background-image: none;
     background-color: transparent;
@@ -692,6 +725,25 @@
       bottom: 10px;
     }
   }
+
+  .st-kia {
+
+    &__car {
+      width: 569px;
+      height: 187px;
+      margin-left: -295px;
+    }
+
+    &__wheel-lt {
+      left: 87px;
+      bottom: 10px;
+    }
+
+    &__wheel-rt {
+      right: 67px;
+      bottom: 10px;
+    }
+  }
 }
 
 
@@ -844,6 +896,25 @@
 
     &__wheel-rt {
       right: 43px;
+      bottom: 7px;
+    }
+  }
+
+  .st-kia {
+
+    &__car {
+      width: 379px;
+      height: 125px;
+      margin-left: -201px;
+    }
+
+    &__wheel-lt {
+      left: 58px;
+      bottom: 7px;
+    }
+
+    &__wheel-rt {
+      right: 45px;
       bottom: 7px;
     }
   }
