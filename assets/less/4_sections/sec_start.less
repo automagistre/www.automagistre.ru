@@ -985,6 +985,15 @@
 
     &__nav {
       bottom: 70px;
+      display: grid;
+      grid-template-rows: repeat(2, auto);
+      grid-auto-flow: column;
+      column-gap: 10px;
+      justify-content: space-evenly;
+    }
+
+    &__slide-btm {
+      bottom: 115px;
     }
   }
 }
