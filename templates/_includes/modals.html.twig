@@ -52,7 +52,7 @@
                     <nav class="sec-start__nav">
                         {% for brand in brands %}
                             <a class="sec-start__nav-link icon-{{ brand.classPref }} lazy js-set-start-slide"
-                               data-slide="{{ brand.id }}"
+                               data-slide="{{ loop.index }}"
                                data-content="{{ brand.name }}"
                                role="button">{{ brand.name }}
                             </a>
