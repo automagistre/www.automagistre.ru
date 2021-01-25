@@ -38,10 +38,6 @@ export const maintenancesByVehicleID = gql`
               parts {
                   part {
                       id
-                      discount {
-                          amount
-                          currency
-                      }
                       manufacturer {
                           id
                           localizedName
@@ -53,7 +49,7 @@ export const maintenancesByVehicleID = gql`
                           amount
                           currency
                       }
-                      universal
+                      unit
                   }
                   quantity
               }

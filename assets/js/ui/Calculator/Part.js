@@ -16,7 +16,8 @@ class Part extends CalcItem {
   }
 
   get note() {
-    return `Производитель ${this.manufacturer}`
+    return `Производитель ${this.manufacturer}
+            Количество ${this.count} ${this.unit}`
   }
 
   get count() {
@@ -49,6 +50,9 @@ class Part extends CalcItem {
 
   set isDisabled(value) {
     this._node.disabled = value;
+  }
+  get unit() {
+    return this._item.unit || 'шт'
   }
 
 }

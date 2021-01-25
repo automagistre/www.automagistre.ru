@@ -7,15 +7,8 @@ import {
   getReviews, getStats,
 } from './gql/queries';
 import CarCase from '../ui/SelectCarModal/CarCase';
+import {engineType, airIntakeType, unitType} from './enum'
 import {GRAPHQL_SERVER} from '../vars/globals';
-
-const engineType = {
-  'diesel': 'D'
-}
-
-const airIntakeType = {
-  'turbo': 'T'
-}
 
 class ServerData {
 
@@ -60,6 +53,7 @@ class ServerData {
       'data': maintenances
       .map(({id, works, engine, transmission, wheelDrive}) => {
         const mileageRepeat = Math.min(...works.map(work => +work.period))
+        console.log(works);
         return {
           id, mileageRepeat,
           name: `${engine.capacity}${engineType[engine.type] || ''}${airIntakeType[engine.airIntake] || ''} ${transmission} ${wheelDrive}`,
@@ -72,9 +66,10 @@ class ServerData {
               position: position === 0 ? Infinity : position,
               parts: parts.map(part => {
                 const {quantity,
-                  part: {id, name, unit = 'шт', price, manufacturer: {name: manufacture}}} = part
+                  part: {id, name, unit, price, manufacturer: {name: manufacture}}} = part
                 return {
-                  id, name, manufacture, unit,
+                  id, name, manufacture,
+                  unit: unitType[unit].shortName || undefined,
                   count: quantity / 100,
                   serverCount: quantity,
                   price: price

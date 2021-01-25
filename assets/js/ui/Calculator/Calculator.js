@@ -82,7 +82,7 @@ class Calculator {
     const carModel = {
       id: model.id,
       manufacturer: localData.manufacturer.toLowerCase(),
-      name: model.name.toLowerCase(),
+      name: model.name,
       model: model.caseName.toUpperCase(),
       startYear: model.yearFrom,
       stopYear: model.yearTill || '',
