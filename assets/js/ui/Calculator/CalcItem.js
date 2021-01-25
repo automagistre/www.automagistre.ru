@@ -34,10 +34,7 @@ class CalcItem {
   }
 
   toString() {
-    const count = +this._item.count,
-        unit = this._item.unit || 'шт',
-        totalPrice = this.totalPrice.toFormat();
-    return ` ${count > 1 ? count + ' ' + unit + ' - ' : ''}${totalPrice}`
+    return `${this.totalPrice.toFormat()}`
   }
 
   render() {
