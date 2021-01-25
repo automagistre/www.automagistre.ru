@@ -1,5 +1,7 @@
 {% extends 'layout.html.twig' %}
 
+{% set white_header = true %}
+
 {% set brand = app.request.attributes.get('brand')|capitalize %}
 
 {% block title %}
