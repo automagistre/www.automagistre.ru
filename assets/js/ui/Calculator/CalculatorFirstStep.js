@@ -1,13 +1,15 @@
 import CalculatorSteps from './CalculatorSteps';
 import Equipment from './Equipment';
 import LoadingSpinner from '../LoadingSpinner';
-
+import {Swiper, Navigation} from 'swiper';
+import '../../../less/2_plugins/swiper/swiper.less'
 
 class CalculatorFirstStep extends CalculatorSteps {
   equipment = undefined;
   range = 0;
 
   constructor(node) {
+    Swiper.use([Navigation])
     super(node);
 
     this.equipmentsNode = node.querySelector('#costing-step_01_model_equipments')
@@ -83,20 +85,37 @@ class CalculatorFirstStep extends CalculatorSteps {
   renderMileage() {
     this.clearMileage();
 
-    const maxLen = 17,
+    const maxLen = 35,
           mileageNode = this.mileageNode,
-          mileageOnChange = (e) => this.mileageChange(e);
+          mileageOnChange = (e) => {
+            this.mileageChange(e);
+          };
     if (this.equipment) {
-      for (let i = 2; i <= maxLen; i++) {
+      for (let i = 1; i <= maxLen; i++) {
         const wrapper = document.createElement('div'),
               range = i * this.equipment.range;
-        wrapper.innerHTML = `<li class="cg-run__step" data-range="${range}">
-                                ${range + 'к'}
-                             </li>`;
+        wrapper.innerHTML = `<div class="cg-run__step swiper-slide" data-range="${range}">${range + 'к'}</div>`;
         wrapper.firstChild.addEventListener('click', mileageOnChange);
         mileageNode.append(wrapper.firstChild);
       }
     }
+    this.mileageSlider = new Swiper(mileageNode.parentNode, {
+      nested: true,
+      grabCursor: true,
+      height: 60,
+      slidesPerView : 'auto',
+      navigation: {
+        nextEl: '.cg-run__next',
+        prevEl: '.cg-run__prev',
+        disabledClass: 'is-disabled'
+      },
+      breakpoints: {
+        760: {
+          slidesOffsetBefore: 60,
+          slidesOffsetAfter: 60,
+        }
+      }
+    })
   }
 
   showInvalidSelections() {
