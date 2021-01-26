@@ -24,6 +24,10 @@ const resolveAssetsPath = (resourcePath) => {
     return `/${path.reverse().join('/')}`
 }
 
+const progressHandler = (percentage, message, ...args) => {
+    console.info(`${Math.round(percentage * 100)}%`, message, ...args);
+}
+
 module.exports = {
     mode: NODE_ENV,
     entry: {
@@ -147,6 +151,7 @@ module.exports = {
     devtool: false,
 
     plugins: [
+        new webpack.ProgressPlugin(progressHandler),
         new webpack.DefinePlugin({
             NODE_ENV: JSON.stringify(NODE_ENV)
         }),
