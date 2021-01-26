@@ -5,7 +5,7 @@ import {Swiper, Navigation} from 'swiper';
 import '../../../less/2_plugins/swiper/swiper.less'
 
 class CalculatorFirstStep extends CalculatorSteps {
-  equipment = undefined;
+  equipment = {};
   range = 0;
 
   constructor(node) {
@@ -57,10 +57,18 @@ class CalculatorFirstStep extends CalculatorSteps {
   onChangeMileage() { }
 
   equipmentChange(equipment) {
+    const {range: oldRange = undefined} = this.equipment,
+          {range: newRange} = equipment
+
     this.equipment = equipment;
-    this.range = 0;
-    this.renderMileage();
     this.onChangeEquipment();
+
+    if (oldRange !== newRange) {
+      this.range = 0;
+      this.renderMileage();
+    } else {
+      this.onChangeMileage()
+    }
   }
 
   mileageChange(e) {
@@ -69,7 +77,6 @@ class CalculatorFirstStep extends CalculatorSteps {
     this.range = range;
     for (let child of mileageNode.childNodes) {
       const childRange = +child.dataset.range;
-      child.classList.toggle('is-before', childRange < range);
       child.classList.toggle('is-active', childRange === range);
     }
     this.onChangeMileage()
