@@ -1,5 +1,5 @@
 import Odometer from 'odometer';
-import TweenMax from 'gsap/TweenMax';
+import gsap from 'gsap';
 import ServerData from './helpers/ServerData';
 
 export const mobChecker = (maxWinWidth) =>
@@ -25,7 +25,7 @@ export const initParallaxAnimation = (features, images) => {
             let thisOffset = startParallax(features);
             if (thisOffset) {
                 for( let image of images) {
-                    TweenMax.to(image.node,  2, {y: thisOffset / image.position, force3D: true, delay: 0.1});
+                    gsap.to(image.node,{duration: 2, y: thisOffset / image.position, force3D: true, delay: 0.1});
                 }
             }
         };

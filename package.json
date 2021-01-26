@@ -62,7 +62,7 @@
     "flatpickr": "^4.6.6",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
-    "gsap": "^2.1.3",
+    "gsap": "^3.6.0",
     "install": "^0.13.0",
     "libphonenumber-js": "^1.9.6",
     "npm": "^6.14.8",
