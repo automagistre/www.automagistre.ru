@@ -1,5 +1,6 @@
 export const engineType = {
-  'diesel': 'D'
+  'diesel': 'D',
+  'hybrid': 'h'
 }
 
 export const airIntakeType = {
