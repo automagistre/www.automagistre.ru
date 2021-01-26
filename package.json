@@ -57,7 +57,6 @@
     "ajv": "^6.12.4",
     "animated-scroll-to": "^2.0.10",
     "browserslist": "^4.14.0",
-    "caniuse-lite": "^1.0.30001117",
     "dinero.js": "^1.8.1",
     "flatpickr": "^4.6.6",
     "graphql": "^15.3.0",
