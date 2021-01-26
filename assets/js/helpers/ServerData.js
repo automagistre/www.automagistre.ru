@@ -53,7 +53,6 @@ class ServerData {
       'data': maintenances
       .map(({id, works, engine, transmission, wheelDrive}) => {
         const mileageRepeat = Math.min(...works.map(work => +work.period))
-        console.log(works);
         return {
           id, mileageRepeat,
           name: `${engine.capacity}${engineType[engine.type] || ''}${airIntakeType[engine.airIntake] || ''} ${transmission} ${wheelDrive}`,

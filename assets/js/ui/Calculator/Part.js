@@ -16,8 +16,8 @@ class Part extends CalcItem {
   }
 
   get note() {
-    return `Производитель ${this.manufacturer}
-            Количество ${this.count} ${this.unit}`
+    return `Производитель <b>${this.manufacturer}</b><br>
+            Кол-во <b>${this.count} ${this.unit}</b>`
   }
 
   get count() {

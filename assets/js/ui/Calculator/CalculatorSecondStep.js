@@ -66,19 +66,18 @@ class CalculatorSecondStep extends CalculatorSteps {
           parent.append(workNode);
 
           if (work.parts.length) {
-            let parts = work.parts
-            parts = parts.sort((p1, p2) => {
-              return p2.count * p2.price - p1.count * p1.price
-            })
             const partsNode =  document.createElement('ul');
             partsNode.className = 'cg-price__list';
 
-            for (let part of parts){
+            const parts = work.parts.map(part => {
               const partEntity = new Part(part, workEntity);
               partEntity.onChange = onChange;
+              return partEntity
+            }).sort((p1, p2)=> p2.totalPrice.subtract(p1.totalPrice).getAmount())
 
-              const partNode = partEntity.render();
-              workEntity.addPart(partEntity);
+            for (let part of parts){
+              const partNode = part.render();
+              workEntity.addPart(part);
               partsNode.append(partNode);
             }
             workNode.append(partsNode);
