@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin')
 
 const NODE_ENV = process.env.NODE_ENV || "development";
 const PATHS = {
@@ -149,7 +150,10 @@ module.exports = {
     },
 
     devtool: false,
-
+    stats: {
+        entrypoints: false,
+        children: false
+    },
     plugins: [
         new webpack.ProgressPlugin(progressHandler),
         new webpack.DefinePlugin({
@@ -197,6 +201,10 @@ module.exports = {
             filename: PATHS.assets + '[name].[hash].js.map',
             exclude: ['vendors.js'],
             fileContext: 'public',
+        }),
+        new ESLintPlugin({
+            fix: true,
+            exclude: 'node_modules'
         })
     ],
 };
