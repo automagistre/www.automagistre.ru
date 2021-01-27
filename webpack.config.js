@@ -203,7 +203,7 @@ module.exports = {
             fileContext: 'public',
         }),
         new ESLintPlugin({
-            fix: true,
+            fix: isDev,
             exclude: 'node_modules'
         })
     ],
