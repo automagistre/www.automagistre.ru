@@ -37,7 +37,7 @@ module.exports = {
     },
     output: {
         filename: PATHS.assets + "[name].[hash].js",
-        chunkFilename: PATHS.assets + "[id].[hash].js",
+        chunkFilename: PATHS.assets + "[id].[chunkhash].js",
         path: PATHS.dist,
         library: "[name]",
         publicPath: "/"
@@ -46,7 +46,7 @@ module.exports = {
         "extensions": [".js", ".less", ".css"]
     },
     optimization: {
-        minimize: true,
+        minimize: !isDev,
         minimizer:[
             new TerserPlugin({
                 extractComments: false,
