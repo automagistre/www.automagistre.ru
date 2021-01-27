@@ -1,11 +1,10 @@
 import Popup from './Popup';
-import {SubscribeForm} from '../forms';
+import { SubscribeForm } from '../forms';
 import ServerDataSender from '../../helpers/server-data-sender';
 import SuccessFeedBackPopup from './SuccessFeedBackPopup';
 import ErrorFeedBackPopup from './ErrorFeedBackPopup';
 
 class CallBackPopup extends Popup {
-
   renderPopupBody() {
     return `<h4 class="popup__title">Укажите ваш номер телефона</h4>
             <div class="popup-order">
@@ -32,26 +31,27 @@ class CallBackPopup extends Popup {
   }
 
   onOpen() {
-
-    const formNode = this._node.querySelector('form.subscribe')
+    const formNode = this._node.querySelector('form.subscribe');
     const scheduleForm = new SubscribeForm(formNode, formNode.dataset.formType || 'call');
-    const dataSender = new ServerDataSender()
-    const selfForm = this
+    const dataSender = new ServerDataSender();
+    const selfForm = this;
     dataSender.onSuccess = () => {
-      selfForm.onClose((new SuccessFeedBackPopup('Мы получили ваше пожелание')).open())
-      selfForm.close()
-      scheduleForm.clear()
-    }
+      selfForm.onClose((new SuccessFeedBackPopup('Мы получили ваше пожелание')).open());
+      selfForm.close();
+      scheduleForm.clear();
+    };
     dataSender.onError = () => {
-      selfForm.onClose((new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open())
-      selfForm.close()
-    }
-    formNode.querySelector('a[data-type="submit"]').addEventListener('click', async ()=>{
-      if (scheduleForm.isValid) await dataSender.sendForm(scheduleForm)
-      else scheduleForm.showInvalidInputs()
-    })
+      selfForm.onClose((new ErrorFeedBackPopup('Ошибка соединения, повторите попытку')).open());
+      selfForm.close();
+    };
+    formNode.querySelector('a[data-type="submit"]').addEventListener('click', async () => {
+      if (scheduleForm.isValid) {
+        await dataSender.sendForm(scheduleForm);
+      } else {
+        scheduleForm.showInvalidInputs();
+      }
+    });
   }
-
 }
 
-export default CallBackPopup
+export default CallBackPopup;

@@ -1,107 +1,110 @@
 import Selector from '../ui/Selector';
 import TireService from '../ui/tire-service-calc/Tire-service';
 import PriceGroup from '../ui/tire-service-calc/Price-group';
-import {TireServiceForm} from '../ui/forms';
+import { TireServiceForm } from '../ui/forms';
 import ServerDataSender from '../helpers/server-data-sender';
 import SuccessFeedBackPopup from '../ui/Popups/SuccessFeedBackPopup';
 import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 
 const PRICE = {
-  groups:[
+  groups: [
     {
       name: 'Комплесный Шиномонтаж',
       services: [
         {
           id: 'ReplaceWheels',
-          name: 'Переустановка колес'
-        },{
+          name: 'Переустановка колес',
+        }, {
           id: 'ReplaceBalanceWheels',
-          name: 'Переустановка колес c балансировкой'
-        },{
+          name: 'Переустановка колес c балансировкой',
+        }, {
           id: 'FullReplaceWheels',
-          name: 'Полный шиномонтаж'
-        }
+          name: 'Полный шиномонтаж',
+        },
       ],
-      onlyOne: true
-    },{
+      onlyOne: true,
+    }, {
       name: 'Хранение шин',
       services: [
         {
           id: 'TireKeeping',
-          name: 'Хранение шин'
-        },{
+          name: 'Хранение шин',
+        }, {
           id: 'WheelKeeping',
-          name: 'Хранение шин на дисках'
-        }
+          name: 'Хранение шин на дисках',
+        },
       ],
-      onlyOne: true
-    },{
+      onlyOne: true,
+    }, {
       name: 'Допонительно',
       services: [
         {
           id: 'PressureSensor',
-          name: 'Шиномотаж при наличии датчиков давления'
-        },{
+          name: 'Шиномотаж при наличии датчиков давления',
+        }, {
           id: 'ReplaceNipples',
-          name: 'Заменить ниппеля на новые'
-        },{
+          name: 'Заменить ниппеля на новые',
+        }, {
           id: 'NewPackages',
-          name: 'Комплект новых пакетов для колес'
-        }
+          name: 'Комплект новых пакетов для колес',
+        },
       ],
-      onlyOne: false
-    }
-  ]
-}
+      onlyOne: false,
+    },
+  ],
+};
 
 const tireServiceSec = () => {
-  const secNode = document.querySelector('#tire-service'),
-        tireSelectorNode = secNode.querySelector('.js-tire-selector'),
-        carSelectorNode = secNode.querySelector('.js-car-selector'),
-        tireServiceNode = secNode.querySelector('.price-groups'),
-        tireServiceTotalNode = secNode.querySelector('.tire-order__cost'),
-        tireServiceFromNode = secNode.querySelector('.sec-about__form'),
-        submitButton = secNode.querySelector('.js-tire-service-submit'),
-        carSelector = new Selector(carSelectorNode),
-        tireSelector = new Selector(tireSelectorNode)
-  const tireService = new TireService(tireServiceNode)
+  const secNode = document.querySelector('#tire-service');
+  const tireSelectorNode = secNode.querySelector('.js-tire-selector');
+  const carSelectorNode = secNode.querySelector('.js-car-selector');
+  const tireServiceNode = secNode.querySelector('.price-groups');
+  const tireServiceTotalNode = secNode.querySelector('.tire-order__cost');
+  const tireServiceFromNode = secNode.querySelector('.sec-about__form');
+  const submitButton = secNode.querySelector('.js-tire-service-submit');
+  const carSelector = new Selector(carSelectorNode);
+  const tireSelector = new Selector(tireSelectorNode);
+  const tireService = new TireService(tireServiceNode);
 
   const updateTotalCost = () => {
-    tireServiceTotalNode.innerHTML = `${tireService.totalCost.toFormat()}<i class="icon-rub">a</i>`
-  }
+    tireServiceTotalNode.innerHTML = `${tireService.totalCost.toFormat()}<i class="icon-rub">a</i>`;
+  };
 
-  carSelector.onChange = tireSelector.onChange = () =>{
+  carSelector.onChange = tireSelector.onChange = () => {
     if (carSelector.currentSelect && tireSelector.currentSelect) {
-      tireService.updatePrice(tireSelector.currentSelect, carSelector.currentSelect)
-      updateTotalCost()
-      tireService.show()
+      tireService.updatePrice(tireSelector.currentSelect, carSelector.currentSelect);
+      updateTotalCost();
+      tireService.show();
     } else {
-      tireService.hide()
+      tireService.hide();
     }
-  }
+  };
 
-  for(let group of PRICE.groups) {
-    const priceGroup = new PriceGroup(group, updateTotalCost)
-    tireService.addPriceGroup(priceGroup)
+  for (const group of PRICE.groups) {
+    const priceGroup = new PriceGroup(group, updateTotalCost);
+    tireService.addPriceGroup(priceGroup);
   }
-  tireService.render(tireServiceNode)
+  tireService.render(tireServiceNode);
 
-  const form = new TireServiceForm(tireServiceFromNode, tireSelector, carSelector, tireService)
+  const form = new TireServiceForm(tireServiceFromNode, tireSelector, carSelector, tireService);
 
   const dataSender = new ServerDataSender();
   dataSender.onSuccess = () => {
-    (new SuccessFeedBackPopup('Мы получили Ваш заказ!')).open()
-    form.clear()
-  }
+    (new SuccessFeedBackPopup('Мы получили Ваш заказ!')).open();
+    form.clear();
+  };
   dataSender.onError = () => {
-    (new ErrorFeedBackPopup('Нет соединения с сервером, повторите попытку позже')).open()
-  }
+    (new ErrorFeedBackPopup('Нет соединения с сервером, повторите попытку позже')).open();
+  };
 
-  submitButton.addEventListener('click', async (e)=> {
-    e.preventDefault()
-    if (form.isValid) await dataSender.sendForm(form)
-    else form.showInvalidInputs()
-  })
-}
+  submitButton.addEventListener('click', async (e) => {
+    e.preventDefault();
+    if (form.isValid) {
+      await dataSender.sendForm(form);
+    } else {
+      form.showInvalidInputs();
+    }
+  });
+};
 
 export default tireServiceSec;

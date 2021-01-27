@@ -1,7 +1,6 @@
 import Popup from './Popup';
 
-class inDevPopup extends Popup{
-
+class inDevPopup extends Popup {
   _message= '';
 
   constructor() {
@@ -15,7 +14,6 @@ class inDevPopup extends Popup{
   get message() {
     return this._message || '';
   }
-
 
   renderPopupBody() {
     return `<h4 class="popup__title">Страница в разработке</h4>

@@ -7,7 +7,7 @@ class ReadOnlyPropertyError extends CustomError {
    * @param {*} value
    */
   constructor(property, value) {
-    let message = `Cant set readonly property ${property} value: ${value.toString()}`;
+    const message = `Cant set readonly property ${property} value: ${value.toString()}`;
     super(message);
     this.message = message;
   }

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const getVehiclesByManufacturerID = gql`
     query getVehiclesByManufacturerID($manufacturerID: Uuid!) {
@@ -15,8 +15,7 @@ export const getVehiclesByManufacturerID = gql`
               till
               from
           }
-    }}`
-
+    }}`;
 
 export const maintenancesByVehicleID = gql`  
     query maintenancesByVehicleID($id: Uuid!) {
@@ -61,7 +60,7 @@ export const maintenancesByVehicleID = gql`
               recommended
               position
           }
-      }}`
+      }}`;
 
 export const getVehicleByID = gql`
   query getVehicleByID($id: Uuid!) {
@@ -79,7 +78,7 @@ export const getVehicleByID = gql`
           }
       }
   }
-`
+`;
 export const getReviews = gql`
     query getLastReviews($count: Int, $after: String) {
         reviews(first: $count, after: $after) {
@@ -97,7 +96,7 @@ export const getReviews = gql`
             totalCount
         }
     }
-`
+`;
 
 export const getCountOfReviews = gql`
     query getCountOfReviews {
@@ -105,7 +104,7 @@ export const getCountOfReviews = gql`
             totalCount
         }
     }
-`
+`;
 
 export const getStats = gql`
     query getStats {
@@ -114,4 +113,4 @@ export const getStats = gql`
             vehicles
         }
     }
-`
+`;

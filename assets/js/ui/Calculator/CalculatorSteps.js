@@ -8,7 +8,7 @@ class CalculatorSteps {
   }
 
   set isValid(value) {
-    throw new Error('Read only property "isValid". Can`t set value:' + value)
+    throw new Error(`Read only property "isValid". Can\`t set value:${value}`);
   }
 
   async highlightNode(node) {
@@ -21,7 +21,6 @@ class CalculatorSteps {
   onChange() {}
 
   clear() {}
-
 }
 
 export default CalculatorSteps;

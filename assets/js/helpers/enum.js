@@ -1,40 +1,40 @@
 export const engineType = {
-  'diesel': 'D',
-  'hybrid': 'h'
-}
+  diesel: 'D',
+  hybrid: 'h',
+};
 
 export const airIntakeType = {
-  'turbo': 'T'
-}
+  turbo: 'T',
+};
 
 export const unitType = {
 
   gram: {
-    name: "Грамм",
-    shortName: 'г'
+    name: 'Грамм',
+    shortName: 'г',
   },
   kilogram: {
-    name: "Килограмм",
-    shortName: "кг"
+    name: 'Килограмм',
+    shortName: 'кг',
   },
   liter: {
-    name: "Литр",
-    shortName: "л"
+    name: 'Литр',
+    shortName: 'л',
   },
   meter: {
-    name: "Метр",
-    shortName: 'м'
+    name: 'Метр',
+    shortName: 'м',
   },
   milliliter: {
-    name: "Миллилитр",
-    shortName: "мм"
+    name: 'Миллилитр',
+    shortName: 'мм',
   },
   package: {
-    name: "Упаковка",
-    shortName: "уп"
+    name: 'Упаковка',
+    shortName: 'уп',
   },
   thing: {
-    name:"Штука",
-    shortName: "шт"
-  }
-}
+    name: 'Штука',
+    shortName: 'шт',
+  },
+};

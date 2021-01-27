@@ -1,20 +1,20 @@
+import { Swiper, Navigation } from 'swiper';
 import CalculatorSteps from './CalculatorSteps';
 import Equipment from './Equipment';
 import LoadingSpinner from '../LoadingSpinner';
-import {Swiper, Navigation} from 'swiper';
-import '../../../less/2_plugins/swiper/swiper.less'
+import '../../../less/2_plugins/swiper/swiper.less';
 
 class CalculatorFirstStep extends CalculatorSteps {
   equipment = {};
+
   range = 0;
 
   constructor(node) {
-    Swiper.use([Navigation])
+    Swiper.use([Navigation]);
     super(node);
 
-    this.equipmentsNode = node.querySelector('#costing-step_01_model_equipments')
-    this.mileageNode = node.querySelector('#costing-run-line')
-
+    this.equipmentsNode = node.querySelector('#costing-step_01_model_equipments');
+    this.mileageNode = node.querySelector('#costing-run-line');
   }
 
   get isValid() {
@@ -22,11 +22,11 @@ class CalculatorFirstStep extends CalculatorSteps {
   }
 
   renderEquipments(equipments) {
-    const equipmentsNode = this.equipmentsNode;
+    const { equipmentsNode } = this;
     if (equipmentsNode) {
-      for (let entity of equipments) {
-        const equipment = new Equipment(entity),
-              node = equipment.render();
+      for (const entity of equipments) {
+        const equipment = new Equipment(entity);
+        const node = equipment.render();
         equipment.onClick = () => this.equipmentChange(equipment);
 
         equipmentsNode.append(node);
@@ -35,20 +35,24 @@ class CalculatorFirstStep extends CalculatorSteps {
   }
 
   clearEquipment() {
-    const equipmentsNode = this.equipmentsNode;
+    const { equipmentsNode } = this;
     while (equipmentsNode.firstChild) {
       equipmentsNode.removeChild(equipmentsNode.firstChild);
     }
   }
 
   set isFetching(status) {
-    this.clear()
+    this.clear();
     if (status) {
       (new LoadingSpinner(this.mileageNode)).show();
       (new LoadingSpinner(this.equipmentsNode)).show();
     } else {
-      while (this.mileageNode.firstChild) this.mileageNode.firstChild.remove()
-      while (this.equipmentsNode.firstChild) this.equipmentsNode.firstChild.remove()
+      while (this.mileageNode.firstChild) {
+        this.mileageNode.firstChild.remove();
+      }
+      while (this.equipmentsNode.firstChild) {
+        this.equipmentsNode.firstChild.remove();
+      }
     }
   }
 
@@ -57,8 +61,8 @@ class CalculatorFirstStep extends CalculatorSteps {
   onChangeMileage() { }
 
   equipmentChange(equipment) {
-    const {range: oldRange = undefined} = this.equipment,
-          {range: newRange} = equipment
+    const { range: oldRange = undefined } = this.equipment;
+    const { range: newRange } = equipment;
 
     this.equipment = equipment;
     this.onChangeEquipment();
@@ -67,23 +71,23 @@ class CalculatorFirstStep extends CalculatorSteps {
       this.range = 0;
       this.renderMileage();
     } else {
-      this.onChangeMileage()
+      this.onChangeMileage();
     }
   }
 
   mileageChange(e) {
-    const range = +e.target.dataset.range,
-          mileageNode = e.target.parentElement;
+    const range = +e.target.dataset.range;
+    const mileageNode = e.target.parentElement;
     this.range = range;
-    for (let child of mileageNode.childNodes) {
+    for (const child of mileageNode.childNodes) {
       const childRange = +child.dataset.range;
       child.classList.toggle('is-active', childRange === range);
     }
-    this.onChangeMileage()
+    this.onChangeMileage();
   }
 
   clearMileage() {
-    const mileageNode = this.mileageNode;
+    const { mileageNode } = this;
     while (mileageNode.firstChild) {
       mileageNode.removeChild(mileageNode.firstChild);
     }
@@ -92,16 +96,16 @@ class CalculatorFirstStep extends CalculatorSteps {
   renderMileage() {
     this.clearMileage();
 
-    const maxLen = 35,
-          mileageNode = this.mileageNode,
-          mileageOnChange = (e) => {
-            this.mileageChange(e);
-          };
+    const maxLen = 35;
+    const { mileageNode } = this;
+    const mileageOnChange = (e) => {
+      this.mileageChange(e);
+    };
     if (this.equipment) {
       for (let i = 1; i <= maxLen; i++) {
-        const wrapper = document.createElement('div'),
-              range = i * this.equipment.range;
-        wrapper.innerHTML = `<div class="cg-run__step swiper-slide" data-range="${range}">${range + 'к'}</div>`;
+        const wrapper = document.createElement('div');
+        const range = i * this.equipment.range;
+        wrapper.innerHTML = `<div class="cg-run__step swiper-slide" data-range="${range}">${`${range}к`}</div>`;
         wrapper.firstChild.addEventListener('click', mileageOnChange);
         mileageNode.append(wrapper.firstChild);
       }
@@ -110,24 +114,24 @@ class CalculatorFirstStep extends CalculatorSteps {
       nested: true,
       grabCursor: true,
       height: 60,
-      slidesPerView : 'auto',
+      slidesPerView: 'auto',
       navigation: {
         nextEl: '.cg-run__next',
         prevEl: '.cg-run__prev',
-        disabledClass: 'is-disabled'
+        disabledClass: 'is-disabled',
       },
       breakpoints: {
         760: {
           slidesOffsetBefore: 60,
           slidesOffsetAfter: 60,
-        }
-      }
-    })
+        },
+      },
+    });
   }
 
   showInvalidSelections() {
-    const equipmentUnitNode = this._node.querySelector('.costing__col-set').firstElementChild,
-          mileageUnitNode = this._node.querySelector('.costing__col-run').firstElementChild;
+    const equipmentUnitNode = this._node.querySelector('.costing__col-set').firstElementChild;
+    const mileageUnitNode = this._node.querySelector('.costing__col-run').firstElementChild;
 
     if (!this.equipment) {
       this.highlightNode(equipmentUnitNode).then(() => {});
@@ -139,8 +143,8 @@ class CalculatorFirstStep extends CalculatorSteps {
 
   clear() {
     this.clearMileage();
-    this.clearEquipment()
+    this.clearEquipment();
   }
 }
 
-export default CalculatorFirstStep
+export default CalculatorFirstStep;
