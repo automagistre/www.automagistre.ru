@@ -8,7 +8,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack -p",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint": "eslint ./assets/js",
+    "lintFix": "eslint ./assets/js --fix"
   },
   "browserslist": [
     "> 1%",
@@ -16,6 +18,8 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.11.4",
+    "@babel/eslint-parser": "^7.12.1",
+    "@babel/eslint-plugin": "^7.12.1",
     "@babel/plugin-transform-classes": "^7.10.4",
     "@babel/preset-env": "^7.11.0",
     "autoprefixer": "^9.8.6",
@@ -31,9 +35,15 @@
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
     "del": "^5.1.0",
-    "eslint": "^7.18.0",
+    "eslint-config": "^0.3.0",
+    "eslint-plugin-graphql": "^4.0.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
     "eslint-webpack-plugin": "^2.4.3",
     "file-loader": "^5.1.0",
+    "graphql-tag": "^2.11.0",
     "html-webpack-plugin": "^4.5.0",
     "imask": "^6.0.5",
     "is-email": "^1.0.0",
@@ -60,9 +70,9 @@
     "animated-scroll-to": "^2.0.10",
     "browserslist": "^4.14.0",
     "dinero.js": "^1.8.1",
+    "eslint": "^7.18.0",
     "flatpickr": "^4.6.6",
     "graphql": "^15.3.0",
-    "graphql-tag": "^2.11.0",
     "gsap": "^3.6.0",
     "install": "^0.13.0",
     "libphonenumber-js": "^1.9.6",

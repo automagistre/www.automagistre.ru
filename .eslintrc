@@ -1,0 +1,20 @@
+{
+  "extends": "eslint:recommended",
+  "parser": "@babel/eslint-parser",
+  "plugins": ["graphql", "import", "@babel"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8,
+    "sourceType": "module",
+    "allowImportExportEverywhere": true
+  },
+  "rules": {
+    "curly": "warn",
+    "no-underscore-dangle": "off",
+    "import/extensions": "off"
+  }
+}
