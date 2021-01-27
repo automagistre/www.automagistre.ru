@@ -1,19 +1,19 @@
-import Swiper, {Pagination, Navigation} from 'swiper';
-import '../../less/4_sections/sec_announces'
-import '../../less/3_blocks/block_blog-card'
+import Swiper, { Pagination, Navigation } from 'swiper';
+import '../../less/4_sections/sec_announces';
+import '../../less/3_blocks/block_blog-card';
 
 const initSlickSlider = () => {
-  Swiper.use([Pagination, Navigation])
+  Swiper.use([Pagination, Navigation]);
 
-  document.querySelectorAll('.js-announces-slider').forEach(node => {
-    const nextArrow = node.querySelector('.slick-next'),
-          prevArrow = node.querySelector('.slick-prev')
+  document.querySelectorAll('.js-announces-slider').forEach((node) => {
+    const nextArrow = node.querySelector('.slick-next');
+    const prevArrow = node.querySelector('.slick-prev');
     new Swiper(node.firstElementChild, {
       speed: 800,
       navigation: {
         nextEl: nextArrow,
         prevEl: prevArrow,
-        disabledClass: 'is-disable'
+        disabledClass: 'is-disable',
       },
       pagination: {
         el: '.swiper-pagination',
@@ -22,19 +22,19 @@ const initSlickSlider = () => {
       },
       breakpoints: {
         1024: {
-          slidesPerView: 3
+          slidesPerView: 3,
         },
         600: {
-          slidesPerView: 2
-        }
-      }
+          slidesPerView: 2,
+        },
+      },
 
-    })
-  })
+    });
+  });
 };
 
 const secAnnounces = () => {
-  initSlickSlider()
-}
+  initSlickSlider();
+};
 
 export default secAnnounces;

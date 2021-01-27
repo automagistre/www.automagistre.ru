@@ -1,9 +1,7 @@
 import ReadOnlyPropertyError from '../Errors/ReadOnlyPropertyError';
 import ReviewPopup from './Popups/ReviewPopup';
 
-
 class Review {
-
   /**
    *
    * @param {{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}|{author: string, created_at: string, model: string, id: number, source: string, publish_at: string, content: string, manufacturer: string}} review
@@ -17,31 +15,31 @@ class Review {
    */
 
   constructor(review) {
-    this._data = {...review}
+    this._data = { ...review };
   }
 
-  get author(){
-    return this._data.author || 'Неизвестный'
+  get author() {
+    return this._data.author || 'Неизвестный';
   }
 
   set author(value) {
-    throw new ReadOnlyPropertyError('author', value)
+    throw new ReadOnlyPropertyError('author', value);
   }
 
   get manufacture() {
-    return this._data.manufacturer.toLowerCase() || 'Автомобиле'
+    return this._data.manufacturer.toLowerCase() || 'Автомобиле';
   }
 
   set manufacture(value) {
-    throw new ReadOnlyPropertyError('manufacture', value)
+    throw new ReadOnlyPropertyError('manufacture', value);
   }
 
   get model() {
-    return this._data.model.toLowerCase() || ''
+    return this._data.model.toLowerCase() || '';
   }
 
   set model(value) {
-    throw new ReadOnlyPropertyError('model', value)
+    throw new ReadOnlyPropertyError('model', value);
   }
 
   get content() {
@@ -53,42 +51,41 @@ class Review {
   }
 
   set content(value) {
-    throw new ReadOnlyPropertyError('content', value)
+    throw new ReadOnlyPropertyError('content', value);
   }
 
   get source() {
-    return this._data.source.toLowerCase() || ''
+    return this._data.source.toLowerCase() || '';
   }
 
   set source(value) {
-    throw new ReadOnlyPropertyError('source', value)
+    throw new ReadOnlyPropertyError('source', value);
   }
 
   get date() {
-    return new Date(this._data.publish_at)
+    return new Date(this._data.publish_at);
   }
 
   set date(value) {
-    throw new ReadOnlyPropertyError('date', value)
+    throw new ReadOnlyPropertyError('date', value);
   }
 
   get formattedDate() {
     const d = this.date;
-    return new Intl.DateTimeFormat('ru-RU').format(d)
+    return new Intl.DateTimeFormat('ru-RU').format(d);
   }
 
-  render(options={}) {
-    const defaultOptions = {isOpen: false}
+  render(options = {}) {
+    const defaultOptions = { isOpen: false };
     Object.assign(defaultOptions, options);
-    const {isOpen} = defaultOptions;
+    const { isOpen } = defaultOptions;
     const wrapper = document.createElement('div');
-    const title = `${this.author}`,
-          review = this.contentToHTML,
-          source = `Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" width="25" height="25" alt="хм">'}`,
-          date = `${this.formattedDate}`,
-          isLong = this.content.length > 380;
-    wrapper.innerHTML =
-        `<div class="review-card ${isOpen ? 'no-limit' : ''}">
+    const title = `${this.author}`;
+    const review = this.contentToHTML;
+    const source = `Источник: ${this.source ? this.source : '<img src="/img/icons/shrug_1f937.png" width="25" height="25" alt="хм">'}`;
+    const date = `${this.formattedDate}`;
+    const isLong = this.content.length > 380;
+    wrapper.innerHTML = `<div class="review-card ${isOpen ? 'no-limit' : ''}">
             <h4 class="review-card__title">
                 ${title}
             </h4>
@@ -104,16 +101,16 @@ class Review {
             </div>
          </div>`;
     if (isLong && !isOpen) {
-      wrapper.firstElementChild.querySelectorAll('.review-card__text,.review-card__more').forEach(node => {
-        node.addEventListener('click', ()=> {
+      wrapper.firstElementChild.querySelectorAll('.review-card__text,.review-card__more').forEach((node) => {
+        node.addEventListener('click', () => {
           const popup = new ReviewPopup(this);
           popup.open();
-        })
-      })
+        });
+      });
     }
     this.node = wrapper.firstElementChild;
     return wrapper.firstElementChild;
   }
 }
 
-export default Review
+export default Review;

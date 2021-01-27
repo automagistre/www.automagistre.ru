@@ -1,5 +1,4 @@
 import Popup from './Popup';
-import {script} from '../../lib';
 
 class MapPopup extends Popup {
   renderPopupBody() {
@@ -13,4 +12,4 @@ class MapPopup extends Popup {
   }
 }
 
-export default MapPopup
+export default MapPopup;

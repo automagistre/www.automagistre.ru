@@ -1,53 +1,51 @@
-import Dinero from 'dinero.js/src/dinero'
-
+import Dinero from 'dinero.js/src/dinero';
 
 class TireService {
-
   _priceGroups = []
 
   constructor(node) {
-    this._node = node
-
+    this._node = node;
   }
 
   addPriceGroup(group) {
-    this._priceGroups.push(group)
+    this._priceGroups.push(group);
   }
 
   hide() {
-    this._node.style.display = 'none'
+    this._node.style.display = 'none';
   }
 
   show() {
-    this._node.style.display = 'block'
+    this._node.style.display = 'block';
   }
 
   updatePrice(tireSelector, carSelector) {
-    this._priceGroups.forEach(item => item.updatePrice(tireSelector, carSelector))
+    this._priceGroups.forEach((item) => item.updatePrice(tireSelector, carSelector));
   }
 
   render() {
-    this._priceGroups.forEach(group => group.render(this._node))
+    this._priceGroups.forEach((group) => group.render(this._node));
   }
 
   get totalCost() {
-    let cost = Dinero({amount: 0})
-    for (let group of this._priceGroups) {
-      cost = cost.add(group.totalCost)
+    let cost = Dinero({ amount: 0 });
+    for (const group of this._priceGroups) {
+      cost = cost.add(group.totalCost);
     }
-    return cost
+    return cost;
   }
 
   getSelected() {
-    const selectedItems = []
-    for (let group of this._priceGroups) {
-      for (let item of group.items) {
-        if (item.isChecked) selectedItems.push(item)
+    const selectedItems = [];
+    for (const group of this._priceGroups) {
+      for (const item of group.items) {
+        if (item.isChecked) {
+          selectedItems.push(item);
+        }
       }
     }
-    return selectedItems
+    return selectedItems;
   }
-
 }
 
-export default TireService
+export default TireService;

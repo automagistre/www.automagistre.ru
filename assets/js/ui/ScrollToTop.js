@@ -1,10 +1,10 @@
-import animateScrollTo from 'animated-scroll-to'
+import animateScrollTo from 'animated-scroll-to';
 
 class ScrollToTop {
   visible = false;
 
   constructor() {
-    let scrollButton = document.createElement('a');
+    const scrollButton = document.createElement('a');
     scrollButton.className = 'scroll-top';
     scrollButton.title = 'Вверх';
     scrollButton.onclick = () => animateScrollTo(0);
@@ -12,22 +12,22 @@ class ScrollToTop {
     document.body.append(scrollButton);
     this.scrollButton = scrollButton;
     this.setVisibility();
-    document.addEventListener('scroll', () => this.setVisibility())
+    document.addEventListener('scroll', () => this.setVisibility());
   }
 
   setVisibility = () => {
-    let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     if (scrollTop > 150 && this.visible === false) {
-      this.visible = !this.visible
+      this.visible = !this.visible;
     }
     if (scrollTop <= 150 && this.visible === true) {
-      this.visible = !this.visible
+      this.visible = !this.visible;
     }
     this.update();
   };
 
   update() {
-    this.scrollButton.classList.toggle('is-active', this.visible)
+    this.scrollButton.classList.toggle('is-active', this.visible);
   }
 }
 

@@ -1,8 +1,7 @@
 import CalculatorSteps from './CalculatorSteps';
-import {CalculatorForm} from '../forms';
+import { CalculatorForm } from '../forms';
 
 class calculatorThirdStep extends CalculatorSteps {
-
   _totalPrice = 0;
 
   constructor(node) {
@@ -18,16 +17,16 @@ class calculatorThirdStep extends CalculatorSteps {
   }
 
   get inputs() {
-    return this._form.inputs
+    return this._form.inputs;
   }
 
   get form() {
-    return this._form
+    return this._form;
   }
 
   set totalPrice(value) {
     this._totalPrice = value;
-    this._totalPriceNode.innerHTML = value.toFormat() + '<i class="icon-rub">a</i>';
+    this._totalPriceNode.innerHTML = `${value.toFormat()}<i class="icon-rub">a</i>`;
   }
 
   get isValid() {
@@ -35,39 +34,44 @@ class calculatorThirdStep extends CalculatorSteps {
   }
 
   getFormStatus() {
-    const status = {}
-    for (let input of this._form.inputs) {
-      status[input.name] = input
+    const status = {};
+    for (const input of this._form.inputs) {
+      status[input.name] = input;
     }
     return status;
   }
 
   showInvalidSelections() {
-    const calendarUnitNode = this._node.querySelector('.js-costing_calendar_unit'),
-          formUnitNode = this._node.querySelector('.js-costing_form_unit'),
-          formInputs = this._form.inputs
-    let isHighlightCalendar, isHighlightContacts = false
-    for (let input of formInputs) {
-      if (isHighlightCalendar && isHighlightContacts) break
+    const calendarUnitNode = this._node.querySelector('.js-costing_calendar_unit');
+    const formUnitNode = this._node.querySelector('.js-costing_form_unit');
+    const formInputs = this._form.inputs;
+    let isHighlightCalendar; let
+      isHighlightContacts = false;
+    for (const input of formInputs) {
+      if (isHighlightCalendar && isHighlightContacts) {
+        break;
+      }
 
       if (input.name === 'inline-calendar' && !input.isValid) {
-        this.highlightNode(calendarUnitNode).then(() => {})
-        isHighlightCalendar = true
+        this.highlightNode(calendarUnitNode).then(() => {});
+        isHighlightCalendar = true;
       }
 
-      if (isHighlightContacts) continue
+      if (isHighlightContacts) {
+        continue;
+      }
 
       if (input.name !== 'inline-calendar' && !input.isValid) {
-        this.highlightNode(formUnitNode).then(() => {})
-        isHighlightContacts = true
+        this.highlightNode(formUnitNode).then(() => {});
+        isHighlightContacts = true;
       }
     }
-    this._form.inputs.forEach(input => input.isTouched = true)
-    this._form.inputChangeColor()
+    this._form.inputs.forEach((input) => input.isTouched = true);
+    this._form.inputChangeColor();
   }
 
   clear() {
-    this._form.clear()
+    this._form.clear();
   }
 }
 

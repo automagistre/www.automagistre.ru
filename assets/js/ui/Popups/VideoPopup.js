@@ -1,16 +1,16 @@
+import YTplayer from 'yt-player';
 import Popup from './Popup';
-import YTplayer from 'yt-player'
 
 class VideoPopup extends Popup {
   constructor(videoId) {
     super();
-    this._videoId = videoId
+    this._videoId = videoId;
   }
 
   renderPopupBody() {
     return `<div class="popup__video">
                 <div class="popup__youtube js-popbox-youtube"></div>
-            </div>`
+            </div>`;
   }
 
   async onOpen() {
@@ -19,14 +19,13 @@ class VideoPopup extends Popup {
       height: 360,
       autoplay: true,
 
-    }
-    const wrapper = this._node.querySelector('.popup__wrap')
-    wrapper.classList.add('for_video')
-    this.player = new YTplayer(this._node.querySelector('.js-popbox-youtube'), opt)
-    await this.player.load(this._videoId)
-    this.player.play()
-
+    };
+    const wrapper = this._node.querySelector('.popup__wrap');
+    wrapper.classList.add('for_video');
+    this.player = new YTplayer(this._node.querySelector('.js-popbox-youtube'), opt);
+    await this.player.load(this._videoId);
+    this.player.play();
   }
 }
 
-export default VideoPopup
+export default VideoPopup;

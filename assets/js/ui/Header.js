@@ -1,38 +1,43 @@
-let singleton = Symbol();
-let singletonEnforcer = Symbol();
+const singleton = Symbol();
+const singletonEnforcer = Symbol();
 
 class Header {
   lastScrollY = 0;
+
   navBarHeight = 0;
+
   isScrolled = false;
+
   isVisible = true;
+
   isInit = false;
+
   isMobileMenuOpen = false;
+
   _isAlwaysHide = false;
 
-  constructor(enforcer)  {
-
-    if (enforcer !== singletonEnforcer){
-      throw "Instantiation failed: use Singleton.getInstance() instead of new.";
+  constructor(enforcer) {
+    if (enforcer !== singletonEnforcer) {
+      throw 'Instantiation failed: use Singleton.getInstance() instead of new.';
     }
 
-    this._headerNode = document.querySelector('#site-header')
+    this._headerNode = document.querySelector('#site-header');
     const header = document.getElementById('header-line');
     if (header) {
       this.header = header;
       this.navBarHeight = header.offsetHeight;
-      document.addEventListener('scroll', ()=> this._toggleHeader());
-      this.isInit = true
+      document.addEventListener('scroll', () => this._toggleHeader());
+      this.isInit = true;
       this._toggleHeader();
     }
 
-    this._initMobileMenu()
-
-  };
+    this._initMobileMenu();
+  }
 
   static get instance() {
-    if (!this[singleton])
+    if (!this[singleton]) {
       this[singleton] = new Header(singletonEnforcer);
+    }
     return this[singleton];
   }
 
@@ -58,42 +63,49 @@ class Header {
   }
 
   set isAlwaysHide(status) {
-    this.hide()
-    this._isAlwaysHide = Boolean(status)
+    this.hide();
+    this._isAlwaysHide = Boolean(status);
   }
 
   get isAlwaysHide() {
-    return this._isAlwaysHide
+    return this._isAlwaysHide;
   }
 
   _toggleHeader() {
     if (this.isAlwaysHide) {
-      if (this.isVisible) this.hide()
+      if (this.isVisible) {
+        this.hide();
+      }
       return;
     }
-    let currentScroll = window.pageYOffset || document.documentElement.scrollTop,
-        delta = 5;
-    if (Math.abs(this.lastScrollY - currentScroll) <= delta) return;
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    const delta = 5;
+
+    if (Math.abs(this.lastScrollY - currentScroll) <= delta) {
+      return;
+    }
+
     this.scrolledColor(currentScroll > 150);
     if (currentScroll > this.lastScrollY && currentScroll > this.navBarHeight * 5) {
       this.hide();
-    } else {
-      if (currentScroll + window.innerHeight  <= document.body.scrollHeight) this.show();
+    } else if (currentScroll + window.innerHeight <= document.body.scrollHeight) {
+      this.show();
     }
-    if (currentScroll + window.innerHeight + 5 >= document.body.scrollHeight) this.show();
-    this.lastScrollY = currentScroll
-  };
+    if (currentScroll + window.innerHeight + 5 >= document.body.scrollHeight) {
+      this.show();
+    }
+    this.lastScrollY = currentScroll;
+  }
 
   _initMobileMenu() {
-    if(this._headerNode) {
-      const mobileMenuButton = this._headerNode.querySelector('.js-mobmenu-toggle ')
-      mobileMenuButton.addEventListener('click', ()=>{
-        this.isMobileMenuOpen = !this.isMobileMenuOpen
-        document.body.classList.toggle('is-cut', this.isMobileMenuOpen)
-        mobileMenuButton.classList.toggle('is-open', this.isMobileMenuOpen)
-        this._headerNode.classList.toggle('is-open', this.isMobileMenuOpen)
-
-      })
+    if (this._headerNode) {
+      const mobileMenuButton = this._headerNode.querySelector('.js-mobmenu-toggle ');
+      mobileMenuButton.addEventListener('click', () => {
+        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+        document.body.classList.toggle('is-cut', this.isMobileMenuOpen);
+        mobileMenuButton.classList.toggle('is-open', this.isMobileMenuOpen);
+        this._headerNode.classList.toggle('is-open', this.isMobileMenuOpen);
+      });
     }
   }
 }

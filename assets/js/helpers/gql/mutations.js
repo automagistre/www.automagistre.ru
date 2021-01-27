@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 export const createAppealCooperation = gql`
     mutation createAppealCooperation($input: createAppealCooperationInput!) {
@@ -6,7 +6,7 @@ export const createAppealCooperation = gql`
             appealId
         }
     }
-`
+`;
 
 export const createAppealSchedule = gql`
     mutation createAppealSchedule($input: createAppealScheduleInput!) {
@@ -14,7 +14,7 @@ export const createAppealSchedule = gql`
             appealId
         }
     }
-`
+`;
 
 export const createAppealQuestion = gql`
     mutation createAppealQuestion($input: createAppealQuestionInput!) {
@@ -22,7 +22,7 @@ export const createAppealQuestion = gql`
             appealId
         }
     }
-`
+`;
 
 export const createAppealTireFitting = gql`
     mutation createAppealTireFitting($input: createAppealTireFittingInput!) {
@@ -30,14 +30,14 @@ export const createAppealTireFitting = gql`
             appealId
         }
     }
-`
+`;
 export const createAppealCalculator = gql`
     mutation createAppealCalculator($input: createAppealCalculatorInput!) {
         createAppealCalculator(input: $input) {
             appealId
         }
     }
-`
+`;
 
 export const createAppealCall = gql`
     mutation createAppealCall($input: createAppealCallInput!) {
@@ -45,4 +45,4 @@ export const createAppealCall = gql`
             appealId
         }
     }
-`
+`;

@@ -1,5 +1,5 @@
 const errorMessages = {
-  serverErrorResponse: "Ошибка соединения с сервером"
-}
+  serverErrorResponse: 'Ошибка соединения с сервером',
+};
 
-export default errorMessages
+export default errorMessages;

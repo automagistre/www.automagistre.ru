@@ -1,7 +1,6 @@
 import CalculatorSteps from './CalculatorSteps';
 
 class CalculatorFourthStep extends CalculatorSteps {
-
   constructor(node) {
     super();
     this._cgStatusNameNode = node.querySelector('.js-cg-status__name');
@@ -17,7 +16,7 @@ class CalculatorFourthStep extends CalculatorSteps {
   }
 
   get car() {
-    return this._car
+    return this._car;
   }
 
   set name(value) {
@@ -26,11 +25,13 @@ class CalculatorFourthStep extends CalculatorSteps {
   }
 
   get name() {
-    return this._name
+    return this._name;
   }
 
   set date(value) {
-    if (!value) return
+    if (!value) {
+      return;
+    }
     this._date = value;
     const d = new Date(value);
     const ye = new Intl.DateTimeFormat('ru', { year: 'numeric' }).format(d);
@@ -41,16 +42,16 @@ class CalculatorFourthStep extends CalculatorSteps {
   }
 
   get date() {
-    return this._date
+    return this._date;
   }
 
   set totalPrice(value) {
     this._totalPrice = value;
-    this._cgStatusTotalNode.innerHTML = value.toFormat() + '<i class="icon-rub">a</i>';
+    this._cgStatusTotalNode.innerHTML = `${value.toFormat()}<i class="icon-rub">a</i>`;
   }
 
   get totalPrice() {
-    return this._totalPrice
+    return this._totalPrice;
   }
 
   clear() {
@@ -59,7 +60,6 @@ class CalculatorFourthStep extends CalculatorSteps {
     this.date = new Date();
     this.total = '';
   }
-
 }
 
-export  default CalculatorFourthStep;
+export default CalculatorFourthStep;

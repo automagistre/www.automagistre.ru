@@ -1,13 +1,14 @@
 import Dinero from 'dinero.js/src/dinero';
 
 class CalcItem {
-
   constructor(item) {
     this._item = item;
-    this._isSelected = true
+    this._isSelected = true;
   }
 
-  get id() { }
+  get id() {
+    return this._item.id || '';
+  }
 
   get name() {
     return this._item.name || '';
@@ -18,30 +19,31 @@ class CalcItem {
   }
 
   get price() {
-    const {amount, currency} = this._item.price
-    return Dinero({amount: +amount, currency})
+    const { amount, currency } = this._item.price;
+    return Dinero({ amount: +amount, currency });
   }
 
-  get totalPrice() { }
+  get totalPrice() {
+    return Dinero({ amount: 0 });
+  }
 
   set isSelected(value) {
-    this._isSelected = value
+    this._isSelected = value;
     this._node.checked = value;
   }
 
   get isSelected() {
-    return this._isSelected
+    return this._isSelected;
   }
 
   toString() {
-    return `${this.totalPrice.toFormat()}`
+    return `${this.totalPrice.toFormat()}`;
   }
 
   render() {
     const wrapper = document.createElement('div');
-    const note = this.note ? `<span>${this.note}</span>` : ``
-    wrapper.innerHTML =
-        `<li class="cg-price__item">
+    const note = this.note ? `<span>${this.note}</span>` : '';
+    wrapper.innerHTML = `<li class="cg-price__item">
             <div class="cg-price__line">
                 <label class="cg-price__check">
                   <input type="checkbox">
@@ -55,7 +57,7 @@ class CalcItem {
             </div>
         </li>`;
     this._node = wrapper.querySelector('input');
-    this._node.addEventListener('click', e => this.isSelected = e.target.checked);
+    this._node.addEventListener('click', (e) => this.isSelected = e.target.checked);
     return wrapper.firstChild;
   }
 

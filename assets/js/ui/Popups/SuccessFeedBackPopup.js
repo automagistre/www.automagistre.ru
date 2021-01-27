@@ -1,12 +1,9 @@
 import Popup from './Popup';
 
-class SuccessFeedBackPopup extends Popup{
-
-  _message= '';
-
-  constructor(message='') {
+class SuccessFeedBackPopup extends Popup {
+  constructor(message = '') {
     super();
-    this.message = message
+    this.message = message;
   }
 
   set message(value) {
@@ -16,7 +13,6 @@ class SuccessFeedBackPopup extends Popup{
   get message() {
     return this._message || '';
   }
-
 
   renderPopupBody() {
     return `<h4 class="popup__title">Спасибо, что выбрали нас!</h4>
