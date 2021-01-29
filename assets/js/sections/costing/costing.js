@@ -59,9 +59,10 @@ const costingSec = () => {
         remove: ['step_04'],
       },
     };
-    const stepClasses = `${currentStep} to ${nextStep}`;
-    costingSvgNode.classList.remove(...classesMap[stepClasses].remove);
-    costingSvgNode.classList.add(...classesMap[stepClasses].add);
+    const stepClassesProp = `${currentStep} to ${nextStep}`;
+    const stepClassesMap = classesMap[stepClassesProp] || {add: [], remove: [] };
+    costingSvgNode.classList.remove(...stepClassesMap.remove);
+    costingSvgNode.classList.add(...stepClassesMap.add);
     currentStep = nextStep;
   };
 
