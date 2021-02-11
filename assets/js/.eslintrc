@@ -1,7 +1,7 @@
 {
   "extends": "eslint:recommended",
   "parser": "@babel/eslint-parser",
-  "plugins": ["graphql", "import", "@babel"],
+  "plugins": ["graphql", "import", "@babel", "react"],
   "env": {
     "browser": true,
     "es6": true,
@@ -15,6 +15,8 @@
   "rules": {
     "curly": "warn",
     "no-underscore-dangle": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }

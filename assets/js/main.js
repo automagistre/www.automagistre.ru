@@ -2,6 +2,9 @@ import './hoc/service';
 import Dinero from 'dinero.js/src/dinero';
 import { nodesObserver } from './lib';
 import inDevPopup from './ui/Popups/InDevPopup';
+import initGarage from './lk/index';
+
+initGarage();
 
 Dinero.globalLocale = 'ru-RU';
 Dinero.defaultCurrency = 'RUB';
