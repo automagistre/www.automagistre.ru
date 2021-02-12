@@ -1,7 +1,23 @@
-import React from 'react'
+import React, {Component} from 'react';
+import DummyServerData from '../../dummy-server-data';
+import { ServerDataProvider } from '../server-context';
 
-const App = () => {
-  return <div>Тут будет гараж</div>
+import Test from '../test';
+
+class App extends Component{
+
+  state = {
+    serverData: new DummyServerData(),
+    isLoaded: true
+  }
+
+  render () {
+    return (
+        <ServerDataProvider value={this.state.serverData}>
+          <Test/>
+        </ServerDataProvider>
+    )
+  }
 }
 
-export default App
+export default App;
