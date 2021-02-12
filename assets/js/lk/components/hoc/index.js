@@ -1,5 +1,9 @@
-import withServerData from './with-server-data'
+import WithServerData from './with-server-data'
+import WithData from './with-data';
+import compose from './compose';
 
 export {
-  withServerData
+  compose,
+  WithServerData,
+  WithData,
 }

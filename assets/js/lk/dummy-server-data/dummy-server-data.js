@@ -3,14 +3,14 @@ const carUuid = 'dummy_car_uuid'
 
 class DummyServerData {
 
-  getUserPhone() {
+  getUser() {
     return {
       id: userUuid,
       name: 'Иван',
       surname: 'Суходрищев',
       mobilePhone: '+79261111111',
       officePhone: '+74952222222',
-      email: 'ivan@grish.ru',
+      email: undefined,
       balance: {
         amount: -4000,
         currency: 'RUR'
@@ -18,7 +18,7 @@ class DummyServerData {
     }
   }
 
-  getCarsByUserId(uuid) {
+  getCarsByUserId() {
     return [
       {
         id: carUuid + "_1",

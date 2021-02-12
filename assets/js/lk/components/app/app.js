@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import DummyServerData from '../../dummy-server-data';
 import { ServerDataProvider } from '../server-context';
 
-import Test from '../test';
+import {LeftColumn, RightColumn} from '../columns';
 
 class App extends Component{
 
@@ -14,7 +14,8 @@ class App extends Component{
   render () {
     return (
         <ServerDataProvider value={this.state.serverData}>
-          <Test/>
+          <LeftColumn/>
+          <RightColumn/>
         </ServerDataProvider>
     )
   }

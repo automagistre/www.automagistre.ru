@@ -1,7 +1,7 @@
 import React from 'react';
 import { ServerDataConsumer } from '../server-context';
 
-const withServerData = (mapMethodsToProps) => (Wrapped) => {
+const WithServerData = (mapMethodsToProps) => (Wrapped) => {
 
   return (props) => {
     return (
@@ -20,4 +20,4 @@ const withServerData = (mapMethodsToProps) => (Wrapped) => {
   }
 };
 
-export default withServerData;
+export default WithServerData;
