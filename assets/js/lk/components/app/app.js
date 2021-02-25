@@ -1,24 +1,8 @@
-import React, {Component} from 'react';
-import DummyServerData from '../../dummy-server-data';
-import { ServerDataProvider } from '../server-context';
+import React from 'react';
+import withGarageData from '../hoc/with-garage-data';
 
-import {LeftColumn, RightColumn} from '../columns';
-
-class App extends Component{
-
-  state = {
-    serverData: new DummyServerData(),
-    isLoaded: true
-  }
-
-  render () {
-    return (
-        <ServerDataProvider value={this.state.serverData}>
-          <LeftColumn/>
-          <RightColumn/>
-        </ServerDataProvider>
-    )
-  }
+const App = () => {
+  return <div>App</div>
 }
 
-export default App;
+export default withGarageData()(App);

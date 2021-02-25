@@ -1,9 +1,9 @@
-import WithServerData from './with-server-data'
+import withGarageData from './with-garage-data'
 import WithData from './with-data';
 import compose from './compose';
 
 export {
   compose,
-  WithServerData,
+  withGarageData,
   WithData,
 }

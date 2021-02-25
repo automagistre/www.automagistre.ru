@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { WithData, WithServerData, compose } from '../hoc';
+import { WithData, withGarageData, compose } from '../hoc';
 
 class Contacts extends Component {
 
@@ -43,6 +43,6 @@ const mapMethodsToProps = (serverData) => {
 };
 
 export default compose(
-    WithServerData(mapMethodsToProps),
+    withGarageData(mapMethodsToProps),
     WithData,
 )(Contacts);

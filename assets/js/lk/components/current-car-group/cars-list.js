@@ -1,5 +1,5 @@
 import React from 'react';
-import {compose, WithData, WithServerData} from '../hoc';
+import {compose, WithData, withGarageData} from '../hoc';
 
 const CarsList = ({ data }) => {
   let cars = [];
@@ -42,6 +42,6 @@ const mapMethodsToProps = (serverData) => {
 };
 
 export default compose(
-    WithServerData(mapMethodsToProps),
+    withGarageData(mapMethodsToProps),
     WithData,
 )(CarsList);
