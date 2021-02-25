@@ -1,7 +1,10 @@
-import {USER_CARS_LOADED} from '../actions-types';
+import {
+  USER_CARS_LOADED,
+  USER_LOADED} from '../actions-types';
 
 const initialState = {
   userUuid: 'dummy_user_uuid',
+  userData: {},
   userCars: [],
   activeCar: null
 }
@@ -13,6 +16,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         userCars: action.payload
       };
+    case USER_LOADED:
+      return {
+        ...state,
+        userData: { ...action.payload }
+      }
     default:
       return state
   }

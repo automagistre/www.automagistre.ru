@@ -1,15 +1,23 @@
 import React, {Component} from 'react';
-import { WithData, withGarageData, compose } from '../hoc';
+import { connect } from 'react-redux';
+
+import {userLoaded} from '../../actions';
+import {withGarageData, compose} from '../hoc';
 
 class Contacts extends Component {
+
+  componentDidMount() {
+    const {garageData, userUuid, userLoaded} = this.props
+    garageData.getUser(userUuid).then((data) => userLoaded(data))
+  }
 
   render() {
     const {
       name,
       surname,
-      mobilePhone,
+      phone,
       email
-    } = this.props.data
+    } = this.props.userData
 
     return (
         <form className="form">
@@ -23,7 +31,7 @@ class Contacts extends Component {
           </div>
           <div className="form__line">
             <input className="form__input js-phone-mask" type="phone" name="numb"
-                   value={ mobilePhone || '' } readOnly disabled placeholder="Телефон"/>
+                   value={ phone || '' } readOnly disabled placeholder="Телефон"/>
           </div>
           <div className="form__line">
             <input className="form__input" type="text" name="mail"
@@ -36,13 +44,15 @@ class Contacts extends Component {
 }
 
 
-const mapMethodsToProps = (serverData) => {
-  return {
-    getData: serverData.getUser,
-  }
-};
+const mapStateToProps = ({userUuid, userData}) => {
+  return {userUuid, userData}
+}
+
+const mapDispatchToProps = {
+  userLoaded
+}
 
 export default compose(
-    withGarageData(mapMethodsToProps),
-    WithData,
+    withGarageData(),
+    connect(mapStateToProps, mapDispatchToProps)
 )(Contacts);

@@ -3,19 +3,16 @@ const carUuid = 'dummy_car_uuid'
 
 class DummyServerData {
 
-  getUser() {
-    return {
-      id: userUuid,
+  getUser(uuid) {
+    const users = {}
+    users[userUuid] = {
       name: 'Иван',
       surname: 'Суходрищев',
-      mobilePhone: '+79261111111',
+      phone: '+79261111111',
       officePhone: '+74952222222',
       email: undefined,
-      balance: {
-        amount: -4000,
-        currency: 'RUR'
-      },
     }
+    return new Promise(resolve => setTimeout(() =>resolve(users[uuid]), 1000))
   }
 
   getCarsByUserId() {

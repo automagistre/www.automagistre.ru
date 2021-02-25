@@ -1,3 +1,5 @@
+import {USER_LOADED} from '../actions-types';
+
 const {USER_CARS_LOADED} = require('../actions-types');
 
 const userCarsLoaded = (cars) => {
@@ -7,6 +9,14 @@ const userCarsLoaded = (cars) => {
   }
 }
 
+const userLoaded = (user) => {
+  return {
+    type: USER_LOADED,
+    payload: user
+  }
+}
+
 export {
+  userLoaded,
   userCarsLoaded
 }
