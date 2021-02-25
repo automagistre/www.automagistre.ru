@@ -1,3 +1,3 @@
-import CurrentCarGroup from './current-car-group';
+import CarsList from './cars-list';
 
-export default CurrentCarGroup;
+export default CarsList;
