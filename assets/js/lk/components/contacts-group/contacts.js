@@ -3,15 +3,27 @@ import { connect } from 'react-redux';
 
 import {userLoaded} from '../../actions';
 import {withGarageData, compose} from '../hoc';
+import {Loading} from '../server-indicators';
 
 class Contacts extends Component {
 
+  state = {
+    loading: true
+  }
+
   componentDidMount() {
     const {garageData, userUuid, userLoaded} = this.props
-    garageData.getUser(userUuid).then((data) => userLoaded(data))
+    garageData.getUser(userUuid).then((data) => {
+      userLoaded(data);
+      this.setState({loading: false}
+      )
+    })
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loading/>
+    }
     const {
       name,
       surname,
