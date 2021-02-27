@@ -1,3 +1,5 @@
-import DummyServerData from './dummy-server-data';
+import DummyServerData, {userUuid} from './dummy-server-data';
 
 export default DummyServerData;
+
+export {userUuid}

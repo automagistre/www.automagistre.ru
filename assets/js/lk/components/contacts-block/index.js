@@ -1,3 +1,3 @@
-import ContactsGroup from './contacts-block';
+import ContactsBlock from './contacts-block';
 
-export default ContactsGroup;
+export default ContactsBlock;

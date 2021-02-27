@@ -15,7 +15,7 @@ const initState = {
 
 }
 
-const contactsGroupReducer = (state, action) => {
+const contactBlockReducer = (state, action) => {
 
   if (state === undefined) {
     return { ...initState }
@@ -38,7 +38,9 @@ const contactsGroupReducer = (state, action) => {
         loading: false,
         error: true
       }
+    default:
+      return state.userContacts
   }
 }
 
-export default contactsGroupReducer
+export default contactBlockReducer

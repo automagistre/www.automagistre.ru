@@ -1,9 +1,13 @@
 import React from 'react';
 import withGarageData from '../hoc/with-garage-data';
-import ContactsGroup from '../contacts-block';
+import ContactsBlock from '../contacts-block';
+import CarsBlock from '../cars-block/cars-block';
 
 const App = () => {
-  return <ContactsGroup/>
+  return (<div>
+            <ContactsBlock/>
+            <CarsBlock/>
+          </div>)
 }
 
 export default withGarageData()(App);

@@ -16,7 +16,7 @@ class DummyServerData {
   }
 
   getCarsByUserId() {
-    return [
+    const data =[
       {
         id: carUuid + "_1",
         caseInfo: {
@@ -54,6 +54,7 @@ class DummyServerData {
         gosnomer: 'R001US05'
       }
     ]
+    return new Promise(resolve => setTimeout(() =>resolve(data), 1000))
   }
 
   getWorkByCarID(carid) {
@@ -137,3 +138,7 @@ class DummyServerData {
 }
 
 export default DummyServerData
+
+export {
+  userUuid
+}
