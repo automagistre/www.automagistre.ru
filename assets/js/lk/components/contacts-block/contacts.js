@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Contacts = props => {
-  console.log(props);
   const { name, surname, mobilePhone, email} = props.user
 
   return (

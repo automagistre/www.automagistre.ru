@@ -9,26 +9,26 @@ import {ErrorIndicator, Loading} from '../server-indicators';
 class ContactsBlock extends Component {
 
   componentDidMount() {
-    this.props.fetchContacts()
+    this.props.fetchContacts();
   }
 
   render() {
     let response;
     const {user, loading, error} = this.props;
     if (loading) {
-      response =  <Loading/>
+      response =  <Loading/>;
     } else if (error) {
-      response =  <ErrorIndicator/>
+      response =  <ErrorIndicator/>;
     } else {
-      response = <Contacts user={user} />
+      response = <Contacts user={user} />;
     }
 
     return (
         <section className="garage__block garage__contact">
           <h2 className="garage__title">Контактные данные</h2>
-          {response}
+          { response }
         </section>
-    )
+    );
   }
 }
 
