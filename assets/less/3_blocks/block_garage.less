@@ -13,15 +13,19 @@
     padding: 0 20px;
   }
 
-  &__group {
-    margin-bottom: 40px;
+  &__block {
+    border: 1px solid #f1f2f5;
+    border-radius: 20px;
+    transition: box-shadow .6s;
+
+    &:hover {
+      box-shadow: 0 20px 60px -30px rgba(0, 0, 0, .7);
+    }
   }
 
   &__contact {
     padding: 40px 40px 50px;
     background-color: #fff;
-    border: 1px solid #f1f2f5;
-    border-radius: 20px;
   }
 
   &__title {
@@ -50,11 +54,6 @@
     padding: 40px;
     background-color: #fff;
     border-radius: 20px;
-    transition: box-shadow .6s;
-
-    &:hover {
-      box-shadow: 0 20px 60px -30px rgba(0, 0, 0, .7);
-    }
   }
 
   &__add-btn {

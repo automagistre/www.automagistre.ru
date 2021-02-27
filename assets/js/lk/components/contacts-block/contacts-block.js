@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import {fetchContacts} from '../../actions';
 import {ErrorIndicator, Loading} from '../server-indicators';
 
-class ContactsGroup  extends Component {
+class ContactsBlock extends Component {
 
   componentDidMount() {
     this.props.fetchContacts()
@@ -24,7 +24,7 @@ class ContactsGroup  extends Component {
     }
 
     return (
-        <section className="garage__group garage__contact">
+        <section className="garage__block garage__contact">
           <h2 className="garage__title">Контактные данные</h2>
           {response}
         </section>
@@ -45,5 +45,5 @@ const mapDispatchToProps = (dispatch, { garageData }) => {
 export default compose(
     withGarageData(),
     connect(mapStateToProps, mapDispatchToProps)
-)(ContactsGroup);
+)(ContactsBlock);
 
