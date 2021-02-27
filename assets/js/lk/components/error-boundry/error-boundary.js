@@ -3,16 +3,17 @@ import {ErrorIndicator} from '../server-indicators';
 
 class ErrorBoundary extends Component {
   state = {
-    hasError: false
+    hasError: false,
+    errorInfo: ''
   }
 
   componentDidCatch(error, errorInfo) {
-    this.setState({hasError: true})
+    this.setState({hasError: true, errorInfo})
   }
 
   render() {
     if (this.state.hasError) {
-      return <ErrorIndicator />
+      return <ErrorIndicator error={this.state.errorInfo} />
     }
 
     return  this.props.children

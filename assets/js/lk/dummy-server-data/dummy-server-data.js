@@ -8,7 +8,7 @@ class DummyServerData {
     users[userUuid] = {
       name: 'Иван',
       surname: 'Суходрищев',
-      phone: '+79261111111',
+      mobilePhone: '+79261111111',
       officePhone: '+74952222222',
       email: undefined,
     }
