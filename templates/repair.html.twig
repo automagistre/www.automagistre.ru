@@ -6,6 +6,7 @@
 {% set features = ['suspension', 'speed', 'piggy', 'binocul'] %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'repair' %}
 
 {% block title %}
     <title>Ремонт {{ brand }} в Москве</title>

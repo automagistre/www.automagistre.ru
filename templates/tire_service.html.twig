@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'tire_service' %}
 
 {% block title %}
     <title>Шиномонтаж {{ brand }} в Москве</title>

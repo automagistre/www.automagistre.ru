@@ -5,6 +5,7 @@
 {% set features = ['suspension', 'speed', 'piggy', 'binocul',] %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'diagnostics_free' %}
 
 {% block title %}
     <title>Бесплатная диагностика {{ brand }} в Москве</title>
