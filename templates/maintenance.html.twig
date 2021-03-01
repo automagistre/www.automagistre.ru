@@ -1,7 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
-
+{% set PAGE_ID = brand|lower ~ '_'~'maintenance' %}
 {% block title %}
     <title>Калькулятор ТО {{ brand }} в Москве</title>
 {% endblock %}

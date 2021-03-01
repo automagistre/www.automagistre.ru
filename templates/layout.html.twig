@@ -43,15 +43,15 @@
         <meta property="og:description" content="Автомагистр - автосервис в Москве, магазин автозапчастей">
     {% endblock %}
     {% block meta_og_image %}
-        <meta property="og:image" content="{{ absolute_url(asset('img/og-image_1200x600.jpg')) }}">
+        <meta property="og:image" content="{{ absolute_url(asset('img/og/'~PAGE_ID|default('default')~'_1200x600.jpg')) }}">
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600">
-        <meta property="og:image" content="{{ absolute_url(asset('img/og-image_1200x1200.jpg')) }}">
+        <meta property="og:image" content="{{ absolute_url(asset('img/og/'~PAGE_ID|default('default')~'_1200x1200.jpg')) }}">
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="1200">
-        <meta property="vk:image" content="{{ absolute_url(asset('img/og-image_510x228.jpg')) }}">
+        <meta property="vk:image" content="{{ absolute_url(asset('img/og/'~PAGE_ID|default('default')~'_510x228.jpg')) }}">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:image" content="{{ absolute_url(asset('img/og-image_1200x600.jpg')) }}">
+        <meta name="twitter:image" content="{{ absolute_url(asset('img/og/'~PAGE_ID|default('default')~'_1200x600.jpg')) }}">
     {% endblock %}
     <meta property="og:url" content="{{ app.request.uri }}">
     <meta property="og:type" content="website">

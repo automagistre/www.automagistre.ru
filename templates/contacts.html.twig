@@ -1,8 +1,8 @@
 {% extends 'layout.html.twig' %}
 
 {% set white_header = true %}
-
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_contacts' %}
 
 {% block title %}
     <title>Контакты</title>

@@ -3,6 +3,7 @@
 {% set white_header = true %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'reviews' %}
 
 {% block title %}
     <title>Отзывы</title>

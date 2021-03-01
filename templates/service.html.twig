@@ -33,7 +33,7 @@
 ] %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
-
+{% set PAGE_ID = brand|lower ~ '_'~'service' %}
 {% block title %}
     <title>Автосервис {{ brand }} в Москве</title>
 {% endblock %}

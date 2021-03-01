@@ -5,6 +5,7 @@
 {% set features = ['suspension', 'success', 'speed', 'star'] %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'corporates' %}
 
 {% block title %}
     <title>Корпоративное обслуживание автопарков</title>

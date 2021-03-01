@@ -1,6 +1,7 @@
 {% extends 'layout.html.twig' %}
 
 {% set brand = app.request.attributes.get('brand')|capitalize %}
+{% set PAGE_ID = brand|lower ~ '_'~'diagnostics_comp' %}
 {% from '_sections/chunks/forms.twig' import formSubscribe %}
 
 {% from '_sections/chunks/features_items.twig' import renderFeatures %}
