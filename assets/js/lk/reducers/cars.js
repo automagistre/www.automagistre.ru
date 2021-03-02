@@ -1,6 +1,8 @@
-import { FETCH_CARS_SUCCESS,
+import {
+  FETCH_CARS_SUCCESS,
   FETCH_CARS_REQUEST,
-  FETCH_CARS_FAILURE } from '../actions-types';
+  FETCH_CARS_FAILURE, CHANGE_ACTIVE_CAR,
+} from '../actions-types';
 
 const initState = {
   cars: [],
@@ -36,4 +38,22 @@ const carsBlockReducer = (state, action) => {
   }
 }
 
-export default carsBlockReducer
+const changeActiveCarReducer = (state, action) => {
+
+  if (state === undefined) {
+    return undefined
+  }
+
+  switch (action.type) {
+    case CHANGE_ACTIVE_CAR: {
+      return action.payload
+    }
+    default:
+      return state.activeCarId
+  }
+}
+
+export {
+  carsBlockReducer,
+  changeActiveCarReducer
+}

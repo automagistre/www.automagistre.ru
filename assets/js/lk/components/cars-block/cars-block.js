@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import {withGarageData} from '../hoc'
 import Cars from './cars';
-import {fetchCars} from '../../actions';
+import {fetchCars, changeCar} from '../../actions';
 
 class CarsBlock extends Component {
 
@@ -13,13 +13,13 @@ class CarsBlock extends Component {
   }
 
   render() {
-    const {cars, loading, error} = this.props
+    const {cars, loading, error, changeCar} = this.props
 
     return (
         <div className="garage__car">
           <div className="car-info">
             <h3 className="car-info__title">Мои автомобили</h3>
-            <Cars cars={cars}/>
+            <Cars cars={cars} changeCar={changeCar} />
           </div>
         </div>
 
@@ -35,7 +35,10 @@ const mapStateToProps = (props) => {
 
 const mapDispatchToProps = (dispatch, { garageData }) => {
   return bindActionCreators(
-      {fetchCars: fetchCars(garageData)}, dispatch
+      {
+        fetchCars: fetchCars(garageData),
+        changeCar
+      }, dispatch
   )
 }
 

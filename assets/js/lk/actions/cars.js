@@ -1,6 +1,8 @@
-import { FETCH_CARS_SUCCESS,
+import {
+  FETCH_CARS_SUCCESS,
   FETCH_CARS_REQUEST,
-  FETCH_CARS_FAILURE } from '../actions-types';
+  FETCH_CARS_FAILURE, CHANGE_ACTIVE_CAR,
+} from '../actions-types';
 
 const carsRequest = () => {
   return {
@@ -22,6 +24,13 @@ const carsError = (err) => {
   }
 }
 
+const changeCar = (carId) => {
+  return {
+    type: CHANGE_ACTIVE_CAR,
+    payload: carId
+  }
+}
+
 const fetchCars = (garageData) => (userId) => (dispatch) => {
   dispatch(carsRequest());
   garageData.getCarsByUserId(userId)
@@ -30,5 +39,6 @@ const fetchCars = (garageData) => (userId) => (dispatch) => {
 }
 
 export {
-  fetchCars
+  fetchCars,
+  changeCar
 }

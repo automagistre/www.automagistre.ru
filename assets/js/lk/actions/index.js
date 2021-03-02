@@ -1,7 +1,8 @@
 import {fetchContacts} from './contacts';
-import {fetchCars} from './cars';
+import {fetchCars, changeCar} from './cars';
 
 export {
   fetchContacts,
-  fetchCars
+  fetchCars,
+  changeCar,
 }

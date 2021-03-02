@@ -1,4 +1,6 @@
-const Cars = ({cars}) => {
+import React, {Fragment} from 'react';
+
+const Cars = ({cars, changeCar}) => {
   const carsRender = cars.map(car => {
     const gosnomerNumber = car.gosnomer.slice(0, 6)
     const gosnomerRegion = car.gosnomer.slice(6)
@@ -10,7 +12,7 @@ const Cars = ({cars}) => {
           </div>
           <nav className="car-info__btns">
             <a className="car-info__btn" role="button"
-               onClick={() => console.log('Выбран авто' + car.id)}>
+               onClick={() => changeCar(car.id)}>
               Выбрать автомобиль
             </a>
           </nav>
@@ -24,7 +26,5 @@ const Cars = ({cars}) => {
       </Fragment>
   )
 }
-
-import React, {Fragment} from 'react';
 
 export default Cars
