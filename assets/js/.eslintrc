@@ -1,7 +1,14 @@
 {
-  "extends": "eslint:recommended",
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "parser": "@babel/eslint-parser",
-  "plugins": ["graphql", "import", "@babel", "react"],
+  "plugins": [
+    "graphql",
+    "import",
+    "@babel",
+    "react"],
   "env": {
     "browser": true,
     "es6": true,
