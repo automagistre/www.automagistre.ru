@@ -57,12 +57,13 @@ class DummyServerData {
     return new Promise(resolve => setTimeout(() =>resolve(data), 1000))
   }
 
-  getWorkByCarID(carid) {
+  getWorksByCarID(carid) {
     const carUuid_1 = carUuid + '_1';
     const carUuid_2 = carUuid + '_2';
     const carsWorks = {};
     carsWorks[carUuid_1] = [
       {
+        id: 'UUID_1',
         name: 'Замена масла ДВС',
         price: {
           amount: 50000,
@@ -80,6 +81,7 @@ class DummyServerData {
         mileage: 90000
       },
       {
+        id: 'UUID_2',
         name: 'Замена Воздушного фильтра',
         price: {
           amount: 0,
@@ -99,6 +101,7 @@ class DummyServerData {
     ];
     carsWorks[carUuid_2] = [
       {
+        id: 'UUID_3',
         name: 'Замена Двигателя',
         price: {
           amount: 2500000,
@@ -116,6 +119,7 @@ class DummyServerData {
         mileage: 300000
       },
       {
+        id: 'UUID_4',
         name: 'Замена дисков',
         price: {
           amount: 180000,
@@ -133,7 +137,8 @@ class DummyServerData {
         mileage: 350000
       }
     ]
-    return carsWorks[carid]
+    return new Promise(resolve => setTimeout(() =>
+        resolve(carsWorks[carid]), 700))
   }
 }
 
