@@ -57,7 +57,7 @@ class DummyServerData {
     return new Promise(resolve => setTimeout(() =>resolve(data), 1000))
   }
 
-  getWorksByCarID(carid) {
+  getWorksByCarID(carId) {
     const carUuid_1 = carUuid + '_1';
     const carUuid_2 = carUuid + '_2';
     const carsWorks = {};
@@ -138,8 +138,95 @@ class DummyServerData {
       }
     ]
     return new Promise(resolve => setTimeout(() =>
-        resolve(carsWorks[carid]), 700))
+        resolve(carsWorks[carId]), 700))
   }
+
+  getRecommendationsByCarID(carId) {
+    const carUuid_1 = carUuid + '_1';
+    const carUuid_2 = carUuid + '_2';
+    const carsRecommendations = {};
+    carsRecommendations[carUuid_1] = [
+      {
+        id: 'UUID_1',
+        name: 'Замена масла ДВС',
+        price: {
+          amount: 50000,
+          currency: "RUR"
+        },
+        parts: [
+          {
+            part: {
+              id: 'part_id_1',
+              manufacturer: {
+                id: 'manuf_id_2',
+                localizedName: 'Русское имя',
+                name: 'Nissan'
+              },
+              name: 'Фильтр масляный',
+              number: 'AN7',
+              price: {
+                amount: 40000,
+                currency: 'RUR'
+              },
+              unit: 'шт'
+            },
+            quantity: 100
+          },{
+            part: {
+              id: 'part_id_2',
+              manufacturer: {
+                id: 'manuf_id_3',
+                localizedName: 'Русское имя',
+                name: 'Nissan'
+              },
+              name: 'Масло ДВС',
+              number: 'KLE99900001',
+              price: {
+                amount: 50000,
+                currency: 'RUR'
+              },
+              unit: 'шт'
+            },
+            quantity: 500
+          }
+        ],
+        date: '01.01.2020',
+      },
+      {
+        id: 'UUID_2',
+        name: 'Замена Воздушного фильтра',
+        price: {
+          amount: 0,
+          currency: "RUR"
+        },
+        parts: [
+            {
+              part: {
+                id: 'part_id_3',
+                manufacturer: {
+                  id: 'manuf_id_1',
+                  localizedName: 'Русское имя',
+                  name: 'Nissan'
+                },
+                name: 'Фильтр воздушный',
+                number: 'AP1601',
+                price: {
+                  amount: 60000,
+                  currency: 'RUR'
+                },
+                unit: 'шт'
+              },
+              quantity: 100
+            }
+        ],
+        date: '01.01.2020',
+      }
+    ];
+    carsRecommendations[carUuid_2] = [ ]
+    return new Promise(resolve => setTimeout(() =>
+        resolve(carsRecommendations[carId]), 900))
+  }
+
 }
 
 export default DummyServerData

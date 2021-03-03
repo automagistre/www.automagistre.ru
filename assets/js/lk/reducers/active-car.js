@@ -2,9 +2,12 @@ import {
   FETCH_ACTIVE_CAR_WORKS_SUCCESS,
   FETCH_ACTIVE_CAR_WORKS_REQUEST,
   FETCH_ACTIVE_CAR_WORKS_FAILURE,
+  FETCH_ACTIVE_CAR_RECOMMENDATIONS_REQUEST,
+  FETCH_ACTIVE_CAR_RECOMMENDATIONS_SUCCESS,
+  FETCH_ACTIVE_CAR_RECOMMENDATIONS_FAILURE,
 } from '../actions-types';
 
-const initState = {
+const initStateWorks = {
   loading: true,
   error: false,
   works: []
@@ -12,12 +15,12 @@ const initState = {
 
 const worksActiveCarReducer = (state, action) => {
   if (state === undefined) {
-    return {...initState}
+    return {...initStateWorks}
   }
 
   switch (action.type) {
     case FETCH_ACTIVE_CAR_WORKS_REQUEST:
-      return {...initState};
+      return {...initStateWorks};
     case FETCH_ACTIVE_CAR_WORKS_SUCCESS:
       return {
         loading: false,
@@ -35,6 +38,39 @@ const worksActiveCarReducer = (state, action) => {
   }
 }
 
+const initStateRecommendations = {
+  loading: true,
+  error: false,
+  recommendations: []
+}
+
+const recommendationsActiveCarReducer = (state, action) => {
+  if (state === undefined) {
+    return {...initStateRecommendations}
+  }
+
+  switch (action.type) {
+    case FETCH_ACTIVE_CAR_RECOMMENDATIONS_REQUEST:
+      return {...initStateRecommendations};
+    case FETCH_ACTIVE_CAR_RECOMMENDATIONS_SUCCESS:
+      return {
+        loading: false,
+        error: false,
+        recommendations: action.payload
+      }
+    case FETCH_ACTIVE_CAR_RECOMMENDATIONS_FAILURE:
+      return {
+        loading: false,
+        error: false,
+        recommendations: []
+      }
+    default:
+      return state.activeCarRecommendations
+  }
+}
+
+
 export {
-  worksActiveCarReducer
+  worksActiveCarReducer,
+  recommendationsActiveCarReducer
 }

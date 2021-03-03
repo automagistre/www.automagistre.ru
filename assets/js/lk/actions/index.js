@@ -1,10 +1,11 @@
 import {fetchContacts} from './contacts';
 import {fetchCars, changeCar} from './cars';
-import {fetchActiveCarWorks} from './active-car'
+import {fetchActiveCarWorks, fetchActiveCarRecommendations} from './active-car'
 
 export {
   fetchContacts,
   fetchCars,
   changeCar,
-  fetchActiveCarWorks
+  fetchActiveCarWorks,
+  fetchActiveCarRecommendations
 }
