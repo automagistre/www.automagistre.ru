@@ -18,7 +18,7 @@ class ActiveCarWorksBlock extends Component {
   render() {
     const {activeCarId, works} = this.props
 
-    if (!activeCarId) {
+    if (!activeCarId || !works.length) {
       return <div/>
     }
 

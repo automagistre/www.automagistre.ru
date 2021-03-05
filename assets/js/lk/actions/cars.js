@@ -35,6 +35,11 @@ const fetchCars = (garageData) => (userId) => (dispatch) => {
   dispatch(carsRequest());
   garageData.getCarsByUserId(userId)
   .then(data => dispatch(carsLoaded(data)))
+  .then(data => {
+    if (data.payload.length) {
+      dispatch(changeCar(data.payload[0].id))
+    }
+  })
   .catch(err => dispatch(carsError(err)))
 }
 

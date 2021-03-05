@@ -18,12 +18,19 @@ class CarsBlock extends Component {
       loading,
       error,
       changeCar,
-      activeCarId } = this.props
+      activeCarId,
+      blockChangeCar
+    } = this.props
 
+    const tryChangeCar = (carId) => {
+      if (!blockChangeCar) {
+        changeCar(carId)
+      }
+    }
     return (
         <section className="garage__block garage__car">
             <h2 className="garage__title">Мои автомобили</h2>
-            <Cars cars={cars} activeCarId={activeCarId} changeCar={changeCar} />
+            <Cars cars={cars} activeCarId={activeCarId} changeCar={tryChangeCar} />
         </section>
 
     )
@@ -31,8 +38,22 @@ class CarsBlock extends Component {
 }
 
 const mapStateToProps = (props) => {
-  const {userId, activeCarId, userCars: { cars, loading, error }} = props
-  return {cars, loading, error, userId, activeCarId}
+  const {
+    userId,
+    activeCarId,
+    userCars: { cars, loading, error },
+    activeCarWorks: {loading: worksLoading},
+    activeCarRecommendations: {loading: recommendationsLoading}
+
+  } = props
+  return {
+    cars,
+    loading,
+    error,
+    userId,
+    activeCarId,
+    blockChangeCar: worksLoading || recommendationsLoading
+  }
 }
 
 const mapDispatchToProps = (dispatch, { garageData }) => {

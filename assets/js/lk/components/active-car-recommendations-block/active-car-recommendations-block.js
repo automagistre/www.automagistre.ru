@@ -9,12 +9,19 @@ import Recommendations from './recommendations';
 class ActiveCarRecommendationsBlock extends Component {
 
   componentDidUpdate(prevProps) {
+    const {fetchRecommendations, carId} = this.props
     if (prevProps.carId !== this.props.carId) {
-      this.props.fetchRecommendations(this.props.carId)
+      fetchRecommendations(carId)
     }
   }
 
   render() {
+    console.log(this.props)
+
+    if (!this.props.carId || !this.props.recommendations.length) {
+      return <div/>
+    }
+
     return <section className="garage__block garage__recommendations">
       <h2 className="garage__title">Рекомендации по автомобилю</h2>
       <Recommendations recommendations={this.props.recommendations}/>

@@ -8,7 +8,7 @@ import {
 } from '../actions-types';
 
 const initStateWorks = {
-  loading: true,
+  loading: false,
   error: false,
   works: []
 }
@@ -20,7 +20,10 @@ const worksActiveCarReducer = (state, action) => {
 
   switch (action.type) {
     case FETCH_ACTIVE_CAR_WORKS_REQUEST:
-      return {...initStateWorks};
+      return {
+        ...initStateWorks,
+        loading: true
+      };
     case FETCH_ACTIVE_CAR_WORKS_SUCCESS:
       return {
         loading: false,
@@ -30,7 +33,7 @@ const worksActiveCarReducer = (state, action) => {
     case FETCH_ACTIVE_CAR_WORKS_FAILURE:
       return {
         loading: false,
-        error: false,
+        error: true,
         works: []
       }
     default:
@@ -39,7 +42,7 @@ const worksActiveCarReducer = (state, action) => {
 }
 
 const initStateRecommendations = {
-  loading: true,
+  loading: false,
   error: false,
   recommendations: []
 }
@@ -51,7 +54,10 @@ const recommendationsActiveCarReducer = (state, action) => {
 
   switch (action.type) {
     case FETCH_ACTIVE_CAR_RECOMMENDATIONS_REQUEST:
-      return {...initStateRecommendations};
+      return {
+        ...initStateRecommendations,
+        loading: true
+      };
     case FETCH_ACTIVE_CAR_RECOMMENDATIONS_SUCCESS:
       return {
         loading: false,
@@ -61,7 +67,7 @@ const recommendationsActiveCarReducer = (state, action) => {
     case FETCH_ACTIVE_CAR_RECOMMENDATIONS_FAILURE:
       return {
         loading: false,
-        error: false,
+        error: true,
         recommendations: []
       }
     default:
