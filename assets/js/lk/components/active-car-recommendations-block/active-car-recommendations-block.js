@@ -15,7 +15,7 @@ class ActiveCarRecommendationsBlock extends Component {
   }
 
   render() {
-    return <section className="garage__block garage__contact">
+    return <section className="garage__block garage__recommendations">
       <h2 className="garage__title">Рекомендации по автомобилю</h2>
       <Recommendations recommendations={this.props.recommendations}/>
     </section>

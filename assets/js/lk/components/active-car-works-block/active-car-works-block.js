@@ -23,7 +23,7 @@ class ActiveCarWorksBlock extends Component {
     }
 
     return (
-        <section className="garage__block garage__contact">
+        <section className="garage__block garage__works">
           <h2 className="garage__title">История ремонта и обслуживания</h2>
           <Works works={works}/>
         </section>

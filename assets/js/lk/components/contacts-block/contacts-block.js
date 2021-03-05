@@ -24,7 +24,7 @@ class ContactsBlock extends Component {
     }
 
     return (
-        <section className="garage__block garage__contact">
+        <section className="garage__block garage__contacts">
           <h2 className="garage__title">Контактные данные</h2>
           { response }
         </section>

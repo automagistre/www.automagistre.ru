@@ -7,7 +7,7 @@ import ActiveCarRecommendationsBlock
   from '../active-car-recommendations-block/active-car-recommendations-block';
 
 const App = () => {
-  return (<div>
+  return (<div className="garage">
             <ContactsBlock/>
             <CarsBlock/>
             <ActiveCarRecommendationsBlock />

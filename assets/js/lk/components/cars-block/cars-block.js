@@ -16,19 +16,18 @@ class CarsBlock extends Component {
     const {cars, loading, error, changeCar} = this.props
 
     return (
-        <div className="garage__car">
+        <section className="garage__block garage__car">
           <div className="car-info">
             <h3 className="car-info__title">Мои автомобили</h3>
             <Cars cars={cars} changeCar={changeCar} />
           </div>
-        </div>
+        </section>
 
     )
   }
 }
 
 const mapStateToProps = (props) => {
-  console.log(props);
   const {userId, userCars: { cars, loading, error }} = props
   return {cars, loading, error, userId}
 }
