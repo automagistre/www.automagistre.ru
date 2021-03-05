@@ -30,7 +30,7 @@ class DummyServerData {
           type: 'Бензин',
           airIntake: undefined,
           injection: undefined,
-          capacity: 2.0
+          capacity: "2.0"
         },
         identifier: 'SJNFBNJ10U1281039',
         gosnomer: 'А001АА97'
@@ -48,7 +48,7 @@ class DummyServerData {
           type: 'Бензин',
           airIntake: undefined,
           injection: undefined,
-          capacity: 1.6
+          capacity: "1.6"
         },
         identifier: 'XJNFBNJ10U1281039',
         gosnomer: 'R001US05'

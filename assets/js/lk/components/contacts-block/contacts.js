@@ -64,7 +64,7 @@ const Contacts = props => {
                    validate:{ isEmail: value => isEmail(value) || !value }})}
           />
         </div>
-        <button type="submit" className="btn car-info__join-btn">
+        <button type="submit" className="btn garage__join-btn">
           {readOnly ? 'Изменить' : 'Сохранить'}
         </button>
       </form>

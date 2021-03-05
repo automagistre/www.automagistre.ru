@@ -13,14 +13,17 @@ class CarsBlock extends Component {
   }
 
   render() {
-    const {cars, loading, error, changeCar} = this.props
+    const {
+      cars,
+      loading,
+      error,
+      changeCar,
+      activeCarId } = this.props
 
     return (
         <section className="garage__block garage__car">
-          <div className="car-info">
-            <h3 className="car-info__title">Мои автомобили</h3>
-            <Cars cars={cars} changeCar={changeCar} />
-          </div>
+            <h2 className="garage__title">Мои автомобили</h2>
+            <Cars cars={cars} activeCarId={activeCarId} changeCar={changeCar} />
         </section>
 
     )
@@ -28,8 +31,8 @@ class CarsBlock extends Component {
 }
 
 const mapStateToProps = (props) => {
-  const {userId, userCars: { cars, loading, error }} = props
-  return {cars, loading, error, userId}
+  const {userId, activeCarId, userCars: { cars, loading, error }} = props
+  return {cars, loading, error, userId, activeCarId}
 }
 
 const mapDispatchToProps = (dispatch, { garageData }) => {

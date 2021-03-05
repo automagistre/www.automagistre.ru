@@ -25,10 +25,13 @@
 
   &__contacts {
     grid-area: contacts;
+  }
 
-    .car-info__join-btn {
-      margin: 0 0 0 auto;
-    }
+  .garage__join-btn {
+    display: block;
+    flex: 0 0 auto;
+    padding: 9px 30px 7px;
+    margin: 0 0 0 auto;
   }
 
   &__cars {
@@ -54,24 +57,94 @@
     line-height: 40px;
   }
 
-  &__prods {
-    display: flex;
-    flex-flow: row wrap;
-    margin: 0 -20px;
-    padding: 0;
-    list-style: none;
-  }
-
-  &__prod {
-    flex: 0 0 50%;
-    max-width: 50%;
-    padding: 0 20px 40px;
-  }
 
   &__add-btn {
     display: block;
     color: @dark;
     border-color: @dark;
+  }
+
+  &__car {
+
+    &__line {
+      display: grid;
+      grid-template-areas:
+        "info plate"
+        "sub-info select";
+      justify-content: space-between;
+      padding: 10px 20px;
+      border: 1px solid #FFFFFF;
+      border-radius: 20px;
+
+      &.is-active {
+        border: 1px solid @gray;
+      }
+    }
+
+    &__info {
+      grid-area: info;
+      font-size: 20px;
+      align-self: center;
+    }
+
+    &__sub-info {
+      font-size: 14px;
+      grid-area: sub-info;
+
+      &> span {
+        display: block;
+      }
+    }
+
+    &__btns {
+      grid-area: select;
+      display: flex;
+      flex-flow: row nowrap;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    &__btn {
+      display: block;
+      flex: 0 0 auto;
+      color: #858585;
+      font-size: 18px;
+      line-height: 20px;
+      border-bottom: 1px solid #858585;
+      text-align: right;
+    }
+
+    &__plate {
+      grid-area: plate;
+      display: flex;
+      position: relative;
+      flex-flow: row nowrap;
+      align-items: flex-start;
+      flex: 0 0 auto;
+      width: 172px;
+      height: 36px;
+      text-align: center;
+      font-weight: 700;
+      background: no-repeat data-uri("@{img-dir}backgrounds/bg_car-nomer.png");
+      background-size: auto 100%;
+      overflow: hidden;
+
+      &-num {
+        display: block;
+        flex: 0 0 126px;
+        padding-left: 5px;
+        font-size: 24px;
+        line-height: 40px;
+        letter-spacing: .1em;
+      }
+
+      &-reg {
+        display: block;
+        flex: 0 0 46px;
+        font-size: 22px;
+        line-height: 28px;
+      }
+    }
   }
 }
 
@@ -79,15 +152,6 @@
 @media (max-width: 1180px) {
   .garage {
     margin: 0 -10px;
-
-    &__prods {
-      margin: 0 -10px;
-    }
-
-    &__prod {
-      padding: 0 10px 20px;
-    }
-
   }
 }
 
@@ -120,25 +184,12 @@
     &__block {
       padding: 20px 20px 30px;
     }
-
-    &__prods {
-      margin: 0 -5px;
-    }
-
-    &__prod {
-      padding: 0 5px 10px;
-    }
   }
 }
 
 @media (max-width: 540px) {
   .garage {
 
-
-    &__prod {
-      flex-basis: 100%;
-      max-width: 100%;
-    }
   }
 }
 
