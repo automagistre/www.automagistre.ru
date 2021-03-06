@@ -64,6 +64,70 @@
     border-color: @dark;
   }
 
+  &__works {
+
+    &__list {
+      padding: 10px 20px;
+      border: 1px solid #f1f2f5;
+      border-radius: 20px;
+    }
+
+    &__table {
+      display: grid;
+      grid-template-columns: repeat(5, auto);
+      column-gap: 5px;
+      row-gap: 10px;
+
+      &>div {
+        align-self: center;
+        &:nth-child(6n+6) {
+          display: none;
+        }
+      }
+    }
+
+    &__info {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      background: #b7bcc0 no-repeat 50% data-uri("@{img-dir}icons/icon_question_gray.svg");
+      background-size: auto 12px;
+      border-radius: 50%;
+      align-self: center;
+
+      &>span {
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+        background-color: #fff;
+        bottom: 100%;
+        right: -1px;
+        margin-bottom: 8px;
+        border-radius: 10px 10px 10px;
+        width: 300px;
+        padding: 7px 10px;
+        box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+        font-size: 14px;
+
+        &:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 100%;
+            right: 6px;
+            border-top: 7px solid #fff;
+            border-left: 7px solid rgba(0,0,0,0);
+            border-right: 7px solid rgba(0,0,0,0);
+        }
+      }
+
+      &:hover span {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
   &__car {
 
     &__line {
@@ -187,9 +251,43 @@
   }
 }
 
-@media (max-width: 540px) {
+/* ---------- ADAPTIVE < 540 -------------------------------------------------*/
+
+
+@media (max-width: 545px) {
   .garage {
 
+    &__car {
+
+      &__line {
+        grid-template-areas:
+        "info"
+        "plate"
+        "select";
+        row-gap: 10px;
+        justify-content: center;
+      }
+
+      &__sub-info {
+        display: none;
+      }
+    }
+
+    &__works__table {
+
+      &>div {
+        &:nth-child(6n+1),
+        &:nth-child(6n+3),
+        &:nth-child(6n+5) {
+          display: none;
+        }
+
+        &:nth-child(6n+6) {
+          display: block;
+        }
+      }
+      grid-template-columns: repeat(2, auto) 28px;
+    }
   }
 }
 

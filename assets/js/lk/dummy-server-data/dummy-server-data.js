@@ -138,7 +138,7 @@ class DummyServerData {
       }
     ]
     return new Promise(resolve => setTimeout(() =>
-        resolve(carsWorks[carId]), 2000))
+        resolve(carsWorks[carId]), 500))
   }
 
   getRecommendationsByCarID(carId) {
@@ -224,7 +224,7 @@ class DummyServerData {
     ];
     carsRecommendations[carUuid_2] = [ ]
     return new Promise(resolve => setTimeout(() =>
-        resolve(carsRecommendations[carId]), 3000))
+        resolve(carsRecommendations[carId]), 500))
   }
 
 }
