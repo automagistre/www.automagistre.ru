@@ -1,0 +1,48 @@
+type Query implements Query {
+    user(userId: Uuid!): Contacts!
+    carsByUser(userId: Uuid!): [Car]!
+    worksByCar(carId: Uuid!): [OrderWork]!
+    RecommendationsByCar(carId: Uuid!): [Recommendation]!
+}
+
+type Contacts {
+    name: String!
+    surname: String
+    mobilePhone: PhoneNumber!
+    officePhone: PhoneNumber
+    email: Email
+}
+
+type Car implements Node{
+    id: ID!
+    vehicle: Vehicle!
+    engine: Engine
+    transmission: Transmission
+    wheelDrive: WheelDrive
+    year: year
+    identifier: String!
+    gosNomer: String
+}
+
+type OrderWork implements Node {
+    id: ID!
+    name: String!
+    price: Money!
+    order: Order!
+    parts: [PartItem]!
+}
+
+type Order implements Node {
+    id: ID!
+    number: Int!
+    closeDate: Date!
+    mileage: Int!
+}
+
+type Recommendation implements Node {
+    id: ID!
+    name: String!
+    price: Money!
+    date: Date!
+    parts: [PartItem]!
+}
