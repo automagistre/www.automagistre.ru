@@ -1,8 +1,12 @@
-type Query implements Query {
-    user(userId: Uuid!): Contacts!
-    carsByUser(userId: Uuid!): [Car]!
-    worksByCar(carId: Uuid!): [OrderWork]!
-    RecommendationsByCar(carId: Uuid!): [Recommendation]!
+interface Node {
+    id: ID!
+}
+
+type Query {
+    user(userId: ID!): Contacts!
+    cars(userId: ID!): [Car]!
+    works(carId: ID!): [WorkConnection]!
+    recommendations(carId: ID!): [Recommendation]!
 }
 
 type Contacts {
@@ -21,12 +25,32 @@ type Car implements Node{
     wheelDrive: WheelDrive
     year: year
     identifier: String!
-    gosNomer: String
+    gosnomer: String
 }
 
-type OrderWork implements Node {
+type Engine {
+    name: String
+    airIntake: AirIntake
+    capacity: String
+    injection: Injection
+    type: Fuel
+}
+
+type Manufacturer implements Node {
+    id: ID!
+    localizedName: String
+    name: String
+}
+
+type Money {
+    amount: String!
+    currency: String!
+}
+
+type Work implements Node {
     id: ID!
     name: String!
+    discount: Money!
     price: Money!
     order: Order!
     parts: [PartItem]!
@@ -39,6 +63,21 @@ type Order implements Node {
     mileage: Int!
 }
 
+type Part implements Node {
+    id: ID!
+    name: String!
+    number: String!
+    manufacturer: Manufacturer!
+    discount: Money!
+    price: Money!
+    unit: Unit!
+}
+
+type PartItem {
+    part: Part!
+    quantity: Int!
+}
+
 type Recommendation implements Node {
     id: ID!
     name: String!
@@ -46,3 +85,114 @@ type Recommendation implements Node {
     date: Date!
     parts: [PartItem]!
 }
+
+type Vehicle implements Node {
+    id: ID!
+    name: String!
+    caseName: String
+    localizedName: String
+    manufacturer: Manufacturer!
+}
+
+type WorkConnection {
+    nodes: [Work]
+    pageInfo: PageInfo!
+    totalCount: Int!
+}
+
+type PageInfo {
+    endCursor: String
+    hasNextPage: Boolean!
+}
+
+enum AirIntake {
+    "Атмосферный"
+    atmo
+    "Турбированный"
+    turbo
+    "Неопределён"
+    unknown
+}
+
+enum Fuel {
+    "Дизель"
+    diesel
+    "Электрический"
+    electric
+    "Этанол"
+    ethanol
+    "Гибрид"
+    hybrid
+    "Бензин"
+    petrol
+    "Неопределён"
+    unknown
+}
+
+enum Injection {
+    "Классический"
+    classic
+    "Непосредственный впрыск"
+    direct
+    "Неопределён"
+    unknown
+}
+
+enum Transmission {
+    "Робот"
+    AMT
+    "Автоматическая"
+    AT
+    "Автоматическая (5 ступеней)"
+    AT5
+    "Автоматическая (7 ступеней)"
+    AT7
+    "Вариатор"
+    CVT
+    "Механическая"
+    MT
+    "Неопределена"
+    unknown
+}
+
+enum WheelDrive {
+    "Полный"
+    AWD
+    "Передний"
+    FWD
+    "Задний"
+    RWD
+    "Неопределён"
+    unknown
+}
+
+enum Unit {
+    "Грамм"
+    gram
+    "Килограмм"
+    kilogram
+    "Литр"
+    liter
+    "Метр"
+    meter
+    "Миллилитр"
+    milliliter
+    "Миллиметр"
+    millimeter
+    "Упаковка"
+    package
+    "Штука"
+    thing
+}
+
+scalar Date
+
+scalar Uuid
+
+scalar year
+
+scalar PhoneNumber
+
+scalar MoneyInput
+
+scalar Email

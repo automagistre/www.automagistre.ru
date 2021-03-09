@@ -5,6 +5,9 @@ import {connect} from 'react-redux';
 import {withGarageData} from '../hoc'
 import Cars from './cars';
 import {fetchCars, changeCar} from '../../actions';
+import gql from 'graphql-tag';
+import {useQuery} from '@apollo/client';
+import {activeCarId} from '../../index';
 
 class CarsBlock extends Component {
 
@@ -65,7 +68,24 @@ const mapDispatchToProps = (dispatch, { garageData }) => {
   )
 }
 
-export default compose(
-    withGarageData(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(CarsBlock);
+
+
+const GET_ACTIVE_CAR_ID = gql`
+    query GetActiveCarId {
+        activeCarId @client
+    }
+`;
+function CarsBlock_v2() {
+  const { data, loading, error } = useQuery(GET_ACTIVE_CAR_ID);
+  console.log(data)
+  return <div>
+    <button type="button" onClick={()=>activeCarId("test")}>Id: {data.activeCarId}</button>
+  </div>
+}
+
+// export default compose(
+//     withGarageData(),
+//     connect(mapStateToProps, mapDispatchToProps)
+// )(CarsBlock);
+
+export default CarsBlock_v2
