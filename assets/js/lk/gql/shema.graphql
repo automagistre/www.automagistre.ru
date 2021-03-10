@@ -3,10 +3,20 @@ interface Node {
 }
 
 type Query {
-    user(userId: ID!): Contacts!
-    cars(userId: ID!): [Car]!
+    user: Contacts!
+    cars: [Car]!
     works(carId: ID!): [WorkConnection]!
     recommendations(carId: ID!): [Recommendation]!
+}
+
+type Mutation {
+    updateUser(input: updateUserInput!): Contacts!
+}
+
+input updateUserInput {
+    name: String!
+    surname: String
+    email: Email
 }
 
 type Contacts {
