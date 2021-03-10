@@ -9,10 +9,10 @@ import ActiveCarRecommendationsBlock
 const App = () => {
   return (<div className="garage">
             <ContactsBlock/>
-            <CarsBlock/>
-            <ActiveCarRecommendationsBlock />
-            <ActiveCarWorksBlock/>
+            {/*<CarsBlock/>*/}
+            {/*<ActiveCarRecommendationsBlock />*/}
+            {/*<ActiveCarWorksBlock/>*/}
           </div>)
 }
 
-export default withGarageData()(App);
+export default App;
