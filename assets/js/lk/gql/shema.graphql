@@ -7,7 +7,9 @@ type Query {
     cars: [Car]!
     works(carId: ID!): [WorkConnection]!
     recommendations(carId: ID!): [Recommendation]!
-#    Local queryes
+}
+
+extend type Query {
     activeCarId: Uuid
 }
 
