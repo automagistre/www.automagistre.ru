@@ -19,7 +19,8 @@ input updateUserInput {
     email: Email
 }
 
-type Contacts {
+type Contacts implements Node{
+    id: ID!
     name: String!
     surname: String
     mobilePhone: PhoneNumber!

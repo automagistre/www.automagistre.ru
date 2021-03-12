@@ -1,0 +1,6 @@
+import { GET_USER_CONTACTS, UPDATE_USER_CONTACTS } from './contacts'
+
+export {
+  GET_USER_CONTACTS,
+  UPDATE_USER_CONTACTS
+}

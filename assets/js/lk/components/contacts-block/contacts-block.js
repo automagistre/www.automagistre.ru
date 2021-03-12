@@ -1,49 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Contacts from './contacts';
-import {compose, withGarageData} from '../hoc';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {fetchContacts} from '../../actions';
+
 import {ErrorIndicator, Loading} from '../server-indicators';
+import { useQuery} from '@apollo/client';
+import {GET_USER_CONTACTS} from '../../gql/queries';
 
-class ContactsBlock extends Component {
+function ContactsBlock() {
+  const {data , loading, error} = useQuery(GET_USER_CONTACTS);
 
-  componentDidMount() {
-    this.props.fetchContacts();
-  }
-
-  render() {
-    let response;
-    const {user, loading, error} = this.props;
-    if (loading) {
-      response =  <Loading/>;
-    } else if (error) {
-      response =  <ErrorIndicator/>;
-    } else {
-      response = <Contacts user={user} />;
-    }
-
-    return (
-        <section className="garage__block garage__contacts">
-          <h2 className="garage__title">Контактные данные</h2>
-          { response }
-        </section>
-    );
-  }
+  return (
+      <section className="garage__block garage__contacts">
+        <h2 className="garage__title">Контактные данные</h2>
+        { loading && <Loading/> }
+        { error && <ErrorIndicator/> }
+        { data && <Contacts user={data?.user} /> }
+      </section>
+  );
 }
 
-const mapStateToProps = ({userContacts: { user, loading, error }}) => {
-  return {user, loading, error}
-}
-
-const mapDispatchToProps = (dispatch, { garageData }) => {
-  return bindActionCreators(
-      {fetchContacts: fetchContacts(garageData)}, dispatch
-  )
-}
-
-export default compose(
-    withGarageData(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(ContactsBlock);
+export default ContactsBlock;
 

@@ -1,28 +1,45 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
 import isEmail from 'is-email'
+import {useMutation} from '@apollo/client';
+import {UPDATE_USER_CONTACTS} from '../../gql/queries';
 
 const Contacts = props => {
-  const { name, surname, mobilePhone, email} = props.user
-  const defaultValues = {
-    name,
-    surname,
-    mobilePhone,
-    email
-  }
+  const [isReadOnly, setReadOnly ] = useState(true);
+
   const { register, handleSubmit, errors } = useForm({
-    defaultValues,
+    defaultValues: { ...props.user },
     mode: 'onChange',
-    reValidateMode: 'onChange'
+    reValidateMode: 'onBlur'
   });
-  const [readOnly, setReadOnly] = useState(true)
-  const onSubmit = data => {
-    if(!readOnly) {
-      console.log(data, readOnly);
+
+  const [updateUser, { loading, error }] = useMutation(UPDATE_USER_CONTACTS, {
+    update(cache, { data:{ updateUser } }) {
+      cache.modify({
+        id: cache.identify(updateUser),
+        fields:{ updateUser }
+      })
     }
-    setReadOnly(!readOnly)
-  };
-  const onErrors = errors => console.log(errors);
+  })
+
+  const onSubmit = ({name, surname, email}) => {
+
+    if (loading) {
+      return;
+    }
+    if (isReadOnly) {
+      setReadOnly(false);
+      return;
+    }
+
+    setReadOnly(true)
+    updateUser({variables:{
+        userContacts: {name, surname, email}
+      }})
+    .then(()=> setReadOnly(true))
+  }
+
+  const onErrors = () => setReadOnly(false);
 
   return (
       <form className="form" onSubmit={handleSubmit(onSubmit, onErrors)}>
@@ -30,7 +47,7 @@ const Contacts = props => {
           <input className={"form__input" + (errors.name ? " input-error" : "")}
                  type="text"
                  name="name"
-                 readOnly={readOnly}
+                 readOnly={isReadOnly}
                  placeholder="Имя"
                  ref={register({required: true, minLength: 1})}
           />
@@ -39,7 +56,7 @@ const Contacts = props => {
           <input className={"form__input" + (errors.surname ? " input-error" : "")}
                  type="text"
                  name="surname"
-                 readOnly={readOnly}
+                 readOnly={isReadOnly}
                  placeholder="Фамилия"
                  ref={register({required: true, minLength: 1})}
           />
@@ -57,16 +74,23 @@ const Contacts = props => {
           <input className={"form__input" + (errors.email ? " input-error" : "")}
                  type="text"
                  name="email"
-                 readOnly={readOnly}
+                 readOnly={isReadOnly}
                  placeholder="E-mail"
                  ref={register({
                    required: false,
                    validate:{ isEmail: value => isEmail(value) || !value }})}
           />
         </div>
+        { error && <div style={{color: 'red'}}>Не удалось сохранить</div>}
+        { errors?.name && <div style={{color: 'red'}}>Имя не может быть пустым</div>}
+        { errors?.email && <div style={{color: 'red'}}>Неверный e- mail</div>}
         <button type="submit" className="btn garage__join-btn">
-          {readOnly ? 'Изменить' : 'Сохранить'}
+          {loading ? "Сохраняем..." :
+              isReadOnly ?
+              "Изменить" : "Сохранить"
+          }
         </button>
+
       </form>
   )
 }
