@@ -7,6 +7,8 @@ type Query {
     cars: [Car]!
     works(carId: ID!): [WorkConnection]!
     recommendations(carId: ID!): [Recommendation]!
+#    Local queryes
+    activeCarId: Uuid
 }
 
 type Mutation {

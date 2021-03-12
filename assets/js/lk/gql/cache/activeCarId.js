@@ -1,6 +1,6 @@
 import { makeVar } from '@apollo/client';
 
-export const activeCarId = makeVar(undefined);
+export const activeCarId = makeVar('');
 export const activeCarPolicy = {
     read() {
       return activeCarId();
