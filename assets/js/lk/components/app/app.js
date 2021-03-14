@@ -10,7 +10,7 @@ const App = () => {
             <ContactsBlock/>
             <CarsBlock/>
             {/*<ActiveCarRecommendationsBlock />*/}
-            {/*<ActiveCarWorksBlock/>*/}
+            <ActiveCarWorksBlock/>
           </div>)
 }
 

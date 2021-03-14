@@ -5,7 +5,7 @@ interface Node {
 type Query {
     user: Contacts!
     cars: [Car]!
-    works(carId: ID!): [WorkConnection]!
+    works(carId: ID!, after: String, first: Int = 10): WorkConnection!
     recommendations(carId: ID!): [Recommendation]!
 }
 
@@ -110,7 +110,7 @@ type Vehicle implements Node {
 }
 
 type WorkConnection {
-    nodes: [Work]
+    edges: [WorkEges]!
     pageInfo: PageInfo!
     totalCount: Int!
 }
@@ -118,6 +118,10 @@ type WorkConnection {
 type PageInfo {
     endCursor: String
     hasNextPage: Boolean!
+}
+
+type WorkEges {
+    node: Work!
 }
 
 enum AirIntake {

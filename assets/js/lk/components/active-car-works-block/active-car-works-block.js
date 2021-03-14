@@ -1,50 +1,49 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 
-import {withGarageData} from '../hoc';
-import {connect} from 'react-redux';
-import {compose, bindActionCreators} from 'redux';
-import {fetchActiveCarWorks} from '../../actions';
 import Works from './Works';
+import {useQuery} from '@apollo/client';
+import {GET_ACTIVE_CAR_ID, GET_WORKS_BY_CAR_ID} from '../../gql/queries';
+import {ErrorIndicator, Loading} from '../server-indicators';
 
-class ActiveCarWorksBlock extends Component {
+function ActiveCarWorksBlock() {
 
-  componentDidUpdate(prevProps) {
-    const {fetchWorks, activeCarId} = this.props
-    if (activeCarId !== prevProps.activeCarId) {
-      fetchWorks(activeCarId)
+  let works = [];
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const {data:{activeCarId}} = useQuery(GET_ACTIVE_CAR_ID)
+  const {data, loading, error, fetchMore} = useQuery(GET_WORKS_BY_CAR_ID, {
+    variables: {
+      carId: activeCarId,
+      after: "0",
+    }
+  })
+
+  if (data) {
+    works = data.works.edges.map(work => work.node)
+  }
+
+  const onFetchMore = () => {
+    if (data.works.pageInfo.hasNextPage && !isFetchingMore) {
+      setIsFetchingMore(true)
+      fetchMore({ variables: {
+          after: data.works.pageInfo.endCursor,
+        }})
+      .then(()=> setIsFetchingMore(false))
     }
   }
 
-  render() {
-    const {activeCarId, works} = this.props
-
-    if (!activeCarId || !works.length) {
-      return <div/>
-    }
-
-    return (
-        <section className="garage__block garage__works">
-          <h2 className="garage__title">История ремонта и обслуживания</h2>
-          <Works works={works}/>
-        </section>
+  return (
+      <section className="garage__block garage__works">
+        <h2 className="garage__title">История ремонта и обслуживания</h2>
+        { loading && <Loading/> }
+        { error && <ErrorIndicator/> }
+        { data?.works && <Works works={works}/> }
+        { data?.works.pageInfo.hasNextPage &&
+          <button className="btn garage__join-btn" onClick={ onFetchMore }>
+            { isFetchingMore ? "Загрузка" : "Показать ещё" }
+          </button>
+        }
+      </section>
     )
-  }
 }
 
-const mapStateToProps = ({activeCarId, activeCarWorks: {works}}) => {
-  return {
-    activeCarId,
-    works
-  }
-}
-
-const mapDispatchToProps = (dispatch, {garageData}) => {
-  return bindActionCreators({
-    fetchWorks: fetchActiveCarWorks(garageData)
-  }, dispatch)
-}
-
-export default compose(
-    withGarageData(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(ActiveCarWorksBlock);
+export default ActiveCarWorksBlock;
