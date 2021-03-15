@@ -9,7 +9,7 @@ const App = () => {
   return (<div className="garage">
             <ContactsBlock/>
             <CarsBlock/>
-            {/*<ActiveCarRecommendationsBlock />*/}
+            <ActiveCarRecommendationsBlock />
             <ActiveCarWorksBlock/>
           </div>)
 }

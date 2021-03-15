@@ -1,53 +1,24 @@
-import React, {Component} from 'react';
-import {compose, bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
-import {withGarageData} from '../hoc';
-import {fetchActiveCarRecommendations} from '../../actions';
+import React from 'react';
 import Recommendations from './recommendations';
+import {useQuery} from '@apollo/client';
+import {
+  GET_ACTIVE_CAR_ID,
+  GET_RECOMMENDATIONS_BY_CAR_ID,
+} from '../../gql/queries';
 
-class ActiveCarRecommendationsBlock extends Component {
+function ActiveCarRecommendationsBlock()  {
 
-  componentDidUpdate(prevProps) {
-    const {fetchRecommendations, carId} = this.props
-    if (prevProps.carId !== this.props.carId) {
-      fetchRecommendations(carId)
-    }
-  }
+  const {data:{activeCarId:carId}} = useQuery(GET_ACTIVE_CAR_ID);
+  const {data, loading, error} = useQuery(GET_RECOMMENDATIONS_BY_CAR_ID,{
+    variables: { carId }
+  })
+  console.log(data);
 
-  render() {
-    console.log(this.props)
+  return <section className="garage__block garage__recommendations">
+    <h2 className="garage__title">Рекомендации по автомобилю</h2>
+    { data && <Recommendations recommendations={data.recommendations}/> }
+  </section>
 
-    if (!this.props.carId || !this.props.recommendations.length) {
-      return <div/>
-    }
-
-    return <section className="garage__block garage__recommendations">
-      <h2 className="garage__title">Рекомендации по автомобилю</h2>
-      <Recommendations recommendations={this.props.recommendations}/>
-    </section>
-  }
 }
 
-const mapStateToProps = ({activeCarId: carId,
-                          activeCarRecommendations: {
-                            loading,
-                            error,
-                            recommendations }}) => {
-  return {
-    carId,
-    loading,
-    error,
-    recommendations}
-}
-
-const mapDispatchToProps = (dispatch, {garageData}) => {
-  return bindActionCreators({
-    fetchRecommendations: fetchActiveCarRecommendations(garageData)
-  }, dispatch)
-}
-
-export default compose(
-    withGarageData(),
-    connect(mapStateToProps, mapDispatchToProps)
-)(ActiveCarRecommendationsBlock)
+export default ActiveCarRecommendationsBlock
