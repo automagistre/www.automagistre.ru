@@ -5,6 +5,7 @@ import {
   GET_ACTIVE_CAR_ID,
   GET_RECOMMENDATIONS_BY_CAR_ID,
 } from '../../gql/queries';
+import {ErrorIndicator, Loading} from '../server-indicators';
 
 function ActiveCarRecommendationsBlock()  {
 
@@ -16,7 +17,9 @@ function ActiveCarRecommendationsBlock()  {
 
   return <section className="garage__block garage__recommendations">
     <h2 className="garage__title">Рекомендации по автомобилю</h2>
-    { data && <Recommendations recommendations={data.recommendations}/> }
+    { error && <ErrorIndicator/> }
+    { loading && <Loading/> }
+    { data?.recommendations && <Recommendations recommendations={data.recommendations}/> }
   </section>
 
 }
