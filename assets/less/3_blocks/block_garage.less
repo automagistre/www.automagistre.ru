@@ -67,25 +67,47 @@
   &__works {
 
     &__list {
-      padding: 10px 20px;
       border: 1px solid #f1f2f5;
       border-radius: 20px;
       margin-bottom: 10px;
     }
 
-    &__table {
+    &__table-row {
       display: grid;
-      grid-template-columns: repeat(5, auto);
+      grid-template-columns: 1fr 1fr 1fr 3fr 1fr;
       column-gap: 5px;
-      row-gap: 10px;
 
       &>div {
         align-self: center;
-        &:nth-child(6n+6) {
+        padding: 5px;
+        margin: 0 auto;
+        &:nth-child(6) {
           display: none;
         }
+
+      }
+
+      &:nth-child(odd) {
+        background-color: #f9f9f9;
+      }
+
+      &:first-child {
+        background-color: #E5E5E5;
+        font-weight: 700;
+        font-size: 18px;
+        border-radius: 20px 20px 0 0;
+      }
+
+      &:last-child {
+        border-radius: 0 0 20px 20px;
+      }
+
+      &:hover {
+        transition: all 0.3s;
+        background-color: #E5E5E5;
       }
     }
+
 
     &__info {
       position: relative;
@@ -274,7 +296,7 @@
       }
     }
 
-    &__works__table {
+    &__works__table-row {
 
       &>div {
         &:nth-child(6n+1),

@@ -9,7 +9,9 @@ const GET_RECOMMENDATIONS_BY_CAR_ID = gql`
                 amount
             }
             date
+            isChecked @client
             parts {
+                id
                 part {
                     id
                     manufacturer {
@@ -22,6 +24,7 @@ const GET_RECOMMENDATIONS_BY_CAR_ID = gql`
                     unit
                 }
                 quantity
+                isChecked @client
             }
         }
     }

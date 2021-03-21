@@ -9,6 +9,14 @@ type Query {
     recommendations(carId: ID!): [Recommendation]!
 }
 
+extend type Recommendation {
+    isChecked: Boolean!
+}
+
+extend type PartItem {
+    isChecked: Boolean!
+}
+
 extend type Query {
     activeCarId: Uuid
 }
@@ -89,6 +97,7 @@ type Part implements Node {
 }
 
 type PartItem {
+    id: ID!
     part: Part!
     quantity: Int!
 }

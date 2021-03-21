@@ -8,13 +8,15 @@ import ErrorBoundary from './components/error-boundry';
 
 const GARAGE_SERVER_URL = "http://localhost:4000"
 
+export const apolloClient = new ApolloClient({
+  uri: GARAGE_SERVER_URL,
+  cache
+})
+
 const initGarage = () => {
 
   const root = document.getElementById('root');
-  const apolloClient = new ApolloClient({
-    uri: GARAGE_SERVER_URL,
-    cache
-  })
+
 
   if (root) {
     ReactDOM.render(

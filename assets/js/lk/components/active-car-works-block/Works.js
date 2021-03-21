@@ -4,16 +4,19 @@ const Works = ({works}) => {
   return (
       <div className="garage__works__list">
         <div className="garage__works__table">
-          <div>№ Заказа</div>
-          <div>Дата</div>
-          <div>Пробег</div>
-          <div>Работа</div>
-          <div>Цена</div>
-          <div/>
+          <div className="garage__works__table-row">
+            <div>Заказ</div>
+            <div>Дата</div>
+            <div>Пробег</div>
+            <div>Работа</div>
+            <div>Цена</div>
+            <div/>
+          </div>
+
           {
             works.map(work => {
               return (
-                  <Fragment key={work.id}>
+                  <div className="garage__works__table-row" key={work.id}>
                     <div>{work.order.number}</div>
                     <div>{work.order.closeDate}</div>
                     <div>{work.order.mileage}</div>
@@ -28,7 +31,7 @@ const Works = ({works}) => {
                         Стоимость: {work.price.amount}
                       </span>
                     </div>
-                  </Fragment>
+                  </div>
               )}
             )
           }
