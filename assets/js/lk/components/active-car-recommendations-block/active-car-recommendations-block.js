@@ -18,7 +18,7 @@ const totalCosts = (works=[]) => {
     }, totalPartCost)
     return res + +work.price.amount
   }, totalWorksCost)
-  return {totalWorksCost, totalPartCost}
+  return { totalWorksCost, totalPartCost, totalCost: totalWorksCost + totalPartCost }
 }
 
 function ActiveCarRecommendationsBlock()  {
@@ -28,8 +28,8 @@ function ActiveCarRecommendationsBlock()  {
     variables: { carId }
   })
 
-  const {totalWorksCost, totalPartCost} = totalCosts(data?.recommendations)
-  console.log(totalWorksCost, totalPartCost);
+  const { totalWorksCost, totalPartCost } = totalCosts(data?.recommendations)
+  const checkedLen = data?.recommendations.filter( work => work.isChecked).length
 
   return (
       <section className="garage__block garage__recommendations">
@@ -37,11 +37,31 @@ function ActiveCarRecommendationsBlock()  {
         { error && <ErrorIndicator/> }
         { loading && <Loading/> }
         { data?.recommendations && <Recommendations recommendations={data.recommendations}/> }
-        <div className="cg-total">
-          <div className="cg-total__note">Всего рекомендаций:</div>
-          <div className="cg-total__cost">{totalPartCost + totalWorksCost}<i
-              className="icon-rub">a</i></div>
-        </div>
+        { checkedLen > 0 &&
+            <div className="garage__recommendations-total">
+              <div className="garage__recommendations-note">
+                Всего рекомендаций выбрано:
+              </div>
+              <div className="garage__recommendations-cost">
+                {totalPartCost + totalWorksCost}<i className="icon-rub">a</i>
+              </div>
+            </div>
+        }
+        { checkedLen > 0 &&
+            <div className="garage__recommendations-total">
+              <button className="btn garage__join-btn" onClick={ ()=> console.log("Заказ отправлен") }>
+                 Заказать
+              </button>
+              <div className="garage__recommendations-btn-note">
+                *Цены на работы действуют - 1г, на запчасти 1м.
+              </div>
+            </div>
+        }
+        { data?.recommendations.length === 0 &&
+            <div className="garage__recommendations-note" style={{color:'#4E9C72'}}>
+              Похоже, что ваш автомобиль полностью исправен
+            </div>
+        }
       </section>)
 
 }

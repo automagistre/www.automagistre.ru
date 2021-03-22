@@ -151,6 +151,34 @@
     }
   }
 
+  &__recommendations {
+
+    &-total {
+      display: flex;
+      align-items: baseline;
+      font-size: 24px;
+      font-weight: 700;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+
+    &-note {
+      font-size: 20px;
+      line-height: 30px;
+    }
+
+    &-cost {
+      color: @red;
+      padding-right: 30px;
+    }
+    &-btn-note {
+      order: -1;
+      font-size: 14px;
+      font-weight: 400;
+
+    }
+  }
+
   &__car {
 
     &__line {
@@ -255,6 +283,13 @@
     &__add-btn {
       margin-bottom: 20px;
     }
+
+    &__recommendations {
+
+      &-note{
+        font-size: 16px;
+      }
+    }
   }
 }
 
@@ -278,7 +313,28 @@
 
 
 @media (max-width: 545px) {
+
   .garage {
+
+    .garage__join-btn {
+      margin: 0 auto;
+    }
+
+    &__recommendations {
+
+      &-total{
+        display: block;
+        text-align: center;
+      }
+
+      &-btn-note {
+        margin-top: 10px;
+      }
+
+      &-cost {
+        padding-right: 0;
+      }
+    }
 
     &__car {
 

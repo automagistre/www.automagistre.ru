@@ -23,6 +23,30 @@ extend type Query {
 
 type Mutation {
     updateUser(input: updateUserInput!): Contacts!
+    createAppealGarage(input: createAppealGarageInput!): createAppealOutput
+}
+
+input createAppealGarageInput {
+    carId: Uuid!
+    works: [GarageWorkInput]!
+}
+
+input GarageWorkInput {
+    id: Uuid!
+    name: String!
+    price: MoneyInput!
+    parts: [GarageWorkPartItemInput]!
+}
+
+input GarageWorkPartItemInput {
+    id: Uuid!
+    count: Int!
+    name: String!
+    price: MoneyInput!
+}
+
+type createAppealOutput {
+    appealId: Uuid!
 }
 
 input updateUserInput {
@@ -94,6 +118,7 @@ type Part implements Node {
     discount: Money!
     price: Money!
     unit: Unit!
+    inStock: Boolean!
 }
 
 type PartItem {
