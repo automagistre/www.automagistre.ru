@@ -9,7 +9,7 @@ import ErrorFeedBackPopup from '../ui/Popups/ErrorFeedBackPopup';
 const PRICE = {
   groups: [
     {
-      name: 'Комплесный Шиномонтаж',
+      name: 'Комплексный Шиномонтаж',
       services: [
         {
           id: 'ReplaceWheels',
@@ -36,11 +36,11 @@ const PRICE = {
       ],
       onlyOne: true,
     }, {
-      name: 'Допонительно',
+      name: 'Дополнительно',
       services: [
         {
           id: 'PressureSensor',
-          name: 'Шиномотаж при наличии датчиков давления',
+          name: 'Шиномонтаж при наличии датчиков давления',
         }, {
           id: 'ReplaceNipples',
           name: 'Заменить ниппеля на новые',

@@ -66,21 +66,22 @@ class FormulaPriceCalculator extends PriceCalculator {
 }
 
 class ReplaceWheelsPriceCalculator extends FormulaPriceCalculator {
-  BASE_PRICE = 600
+  BASE_PRICE = 400
 
   TIRE_EXTRA_PRICE = 0
 
   DIAMETER_EXTRA_PRICE = {
+    17: 100,
     18: 200,
-    19: 900,
-    20: 1400
+    19: 300,
+    20: 400
   }
 
   CAR_EXTRA_PRICE = {
     car: 0,
-    suv: 500,
-    minibus: 200,
-    crossover: 200,
+    suv: 200,
+    minibus: 100,
+    crossover: 100,
   }
 }
 
