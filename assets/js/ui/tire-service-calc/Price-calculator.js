@@ -36,7 +36,13 @@ class FormulaPriceCalculator extends PriceCalculator {
 
   TIRE_EXTRA_PRICE = 0
 
-  CAR_EXTRA_PRICE = {}
+  CAR_EXTRA_PRICE = {
+    default: 0
+  }
+
+  DIAMETER_EXTRA_PRICE = {
+    default: 0
+  }
 
   /** *
    *
@@ -50,22 +56,32 @@ class FormulaPriceCalculator extends PriceCalculator {
     const tireExtraPrice = Dinero({ amount: this.TIRE_EXTRA_PRICE * 100 });
     const carExtraPrice = Dinero({ amount: this.CAR_EXTRA_PRICE[carType] * 100 || 0 });
     const carBasePrice = Dinero({ amount: this.BASE_PRICE * 100 });
-
-    return carBasePrice.add(tireExtraPrice.multiply(tireDiameter - 13))
-      .add(carExtraPrice);
+    const diameterExtraPrice = Dinero({amount: this.DIAMETER_EXTRA_PRICE[tireDiameter] * 100 || 0 })
+    return carBasePrice
+      .add(tireExtraPrice
+      .multiply(tireDiameter - 13))
+      .add(carExtraPrice)
+      .add(diameterExtraPrice);
   }
 }
 
 class ReplaceWheelsPriceCalculator extends FormulaPriceCalculator {
-  BASE_PRICE = 500
+  BASE_PRICE = 400
 
   TIRE_EXTRA_PRICE = 0
+
+  DIAMETER_EXTRA_PRICE = {
+    17: 100,
+    18: 200,
+    19: 300,
+    20: 400
+  }
 
   CAR_EXTRA_PRICE = {
     car: 0,
     suv: 200,
-    minibus: 0,
-    crossover: 0,
+    minibus: 100,
+    crossover: 100,
   }
 }
 
@@ -74,24 +90,39 @@ class ReplaceBalanceWheelsPriceCalculator extends FormulaPriceCalculator {
 
   TIRE_EXTRA_PRICE = 100
 
+  DIAMETER_EXTRA_PRICE = {
+    17: 100,
+    18: 200,
+    19: 400,
+    20: 800
+  }
+
   CAR_EXTRA_PRICE = {
     car: 0,
-    suv: 400,
-    minivan: 100,
-    crossover: 100,
+    suv: 300,
+    minivan: 0,
+    crossover: 0,
   }
 }
 
 class FullReplaceWheelsPriceCalculator extends FormulaPriceCalculator {
-  BASE_PRICE = 1400
+  BASE_PRICE = 1500
 
   TIRE_EXTRA_PRICE = 200
 
+  DIAMETER_EXTRA_PRICE = {
+    16: 100,
+    17: 200,
+    18: 500,
+    19: 800,
+    20: 1500
+  }
+
   CAR_EXTRA_PRICE = {
     car: 0,
-    suv: 400,
-    minivan: 200,
-    crossover: 200,
+    suv: 800,
+    minivan: 400,
+    crossover: 400,
   }
 }
 
@@ -133,7 +164,7 @@ class WheelKeepingPriceCalculator extends ListPriceCalculator {
     16: 2500,
     17: 2500,
     18: 3500,
-    19: 3500,
+    19: 4000,
     default: 5000,
   }
 }
@@ -147,7 +178,7 @@ class FixedPriceCalculator extends PriceCalculator {
 }
 
 class ReplaceNipplesPriceCalculator extends FixedPriceCalculator {
-  PRICE = 200
+  PRICE = 400
 }
 
 class NewPackagesPriceCalculator extends FixedPriceCalculator {
@@ -155,7 +186,7 @@ class NewPackagesPriceCalculator extends FixedPriceCalculator {
 }
 
 class PressureSensorPriceCalculator extends FixedPriceCalculator {
-  PRICE = 800
+  PRICE = 1000
 }
 
 export default PriceCalculatorFactory;
