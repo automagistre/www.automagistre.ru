@@ -68,7 +68,7 @@
     "@egjs/infinitegrid": "^3.6.3",
     "ajv": "^6.12.4",
     "animated-scroll-to": "^2.0.10",
-    "browserslist": "^4.14.0",
+    "browserslist": "^4.16.5",
     "dinero.js": "^1.8.1",
     "eslint": "^7.18.0",
     "flatpickr": "^4.6.6",
