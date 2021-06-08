@@ -4,7 +4,7 @@ framework:
     trusted_hosts:   ~
     session:
         handler_id: session.handler.memcached
-        cookie_lifetime: 315360000 # year
+        cookie_lifetime: 31556952 # year
     fragments:       ~
     http_method_override: true
     assets: ~
@@ -19,7 +19,10 @@ services:
             - [ addServer, [ '%env(SESSION_MEMCACHED_HOST)%', '%env(SESSION_MEMCACHED_PORT)%' ]]
     session.handler.memcached:
         class:     Symfony\Component\HttpFoundation\Session\Storage\Handler\MemcachedSessionHandler
-        arguments: [ '@session.memcached' ]
+        arguments:
+            - '@session.memcached'
+            -
+                expiretime: 31556952 # year
 
 parameters:
     locale: ru
