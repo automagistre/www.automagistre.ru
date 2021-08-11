@@ -41,12 +41,8 @@ final class BrandListener implements EventSubscriberInterface
             return;
         }
 
-        if ('switch' === $request->attributes->get('_route')) {
-            return;
-        }
-
         $brand = $request->attributes->get('brand');
-        $brandSession = $session->get(self::BRAND_SESSION, Constants::BRANDS[0]);
+        $brandSession = $session->get(self::BRAND_SESSION);
 
         if (null !== $brand && $brandSession !== $brand) {
             $session->set(self::BRAND_SESSION, $brand);
