@@ -109,17 +109,6 @@ steps:
         depends_on:
             - install
 
-    -   name:  symfony security
-        image: automagistre/www-php:base
-        failure: ignore
-        commands:
-            - vendor/bin/security-checker security:check $APP_DIR/composer.lock
-        when:
-            branch:
-                exclude: [ master ]
-        depends_on:
-            - install
-
     -   name:  phpstan
         image: automagistre/www-php:base
         commands:

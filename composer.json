@@ -7,7 +7,6 @@
         "php": ">=7.4",
         "presta/sitemap-bundle": "^2.3",
         "sensio/framework-extra-bundle": "^5.3",
-        "sensiolabs/security-checker": "^6.0",
         "sentry/sentry-symfony": "^3.0",
         "symfony/asset": "^5.0",
         "symfony/console": "^5.0",
@@ -72,7 +71,6 @@
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
-            "security-checker security:check": "script",
             "requirements-checker": "script"
         }
     }
