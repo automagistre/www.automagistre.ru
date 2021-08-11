@@ -24,8 +24,9 @@ services:
                 - "traefik.http.routers.automagistre-www.tls.certresolver=leresolver"
                 - "traefik.http.services.automagistre-www-service.loadbalancer.server.port=80"
                 - "traefik.http.services.automagistre-www-service.loadbalancer.server.scheme=http"
+                - "traefik.http.routers.automagistre-www.middlewares=automagistre-www-redirect-to-www"
                 - "traefik.http.middlewares.automagistre-www-redirect-to-www.redirectregex.regex=^(.*)://automagistre.ru(.*)"
-                - "traefik.http.middlewares.automagistre-www-redirect-to-www.replacement=$$1://www.automagistre.ru$$2"
+                - "traefik.http.middlewares.automagistre-www-redirect-to-www.redirectregex.replacement=$$1://www.automagistre.ru$$2"
 
     php-fpm:
         image: automagistre/www-php:${DRONE_BUILD_NUMBER}
