@@ -17,6 +17,7 @@ services:
                 delay: 10s
                 order: start-first
             labels:
+                - "traefik.enable=true"
                 - "traefik.http.routers.automagistre-www.rule=Host(`www.automagistre.ru`, `automagistre.ru`)"
                 - "traefik.http.routers.automagistre-www.entrypoints=websecure"
                 - "traefik.http.routers.automagistre-www.priority=5"
