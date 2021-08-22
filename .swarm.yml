@@ -33,8 +33,7 @@ services:
             APP_SECRET: ${APP_SECRET}
             SENTRY_DSN: ${SENTRY_DSN}
             SENTRY_DSN_BROWSER: ${SENTRY_DSN_BROWSER}
-            GRAPHQL_URL: https://msk.automagistre.ru/api/www
-            API_URL: https://msk.automagistre.ru/api/v1
+            GRAPHQL_URL: https://crm.automagistre.ru/msk/api/www
         deploy:
             mode: replicated
             replicas: 1
