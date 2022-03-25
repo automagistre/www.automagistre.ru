@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     nginx:
-        image: automagistre/www-nginx:base
+        image: harbor.grachevko.ru/automagistre/www-nginx:base
         labels:
             ru.grachevko.dhu: 'www.automagistre.local'
         volumes:
@@ -11,13 +11,13 @@ services:
             - ./etc/nginx.default.conf:/etc/nginx/templates/default.conf.template
 
     node:
-        image: automagistre/www-node:base
+        image: harbor.grachevko.ru/automagistre/www-node:base
         command: webpack --watch
         volumes:
             - ./:/usr/local/app
 
     php-fpm:
-        image: automagistre/www-php:base
+        image: harbor.grachevko.ru/automagistre/www-php:base
         volumes:
             - ./:/usr/local/app
         environment:
