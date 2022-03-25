@@ -3,6 +3,8 @@ version: '3.7'
 services:
     nginx:
         image: automagistre/www-nginx:${DRONE_BUILD_NUMBER}
+        environment:
+            PHP_FPM_HOST: php-fpm
         networks:
             - default
             - traefik

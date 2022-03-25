@@ -149,7 +149,12 @@ RUN set -ex \
     && rm -rf ${tempDir} \
     && apk del .build-deps
 
+ENV PHP_FPM_HOST php-fpm
+
 FROM nginx-base AS nginx
+
+ENV NGINX_ENTRYPOINT_QUIET_LOGS 1
+ENV PHP_FPM_HOST 127.0.0.1
 
 COPY --from=node /usr/local/app/public/images images
 COPY --from=node /usr/local/app/public/img img
@@ -159,6 +164,7 @@ COPY --from=php /usr/local/app/public/robots.txt .
 COPY --from=sitemap /usr/local/app/public/sitemap.* ./
 
 COPY etc/nginx.conf /etc/nginx/nginx.conf
+COPY etc/nginx.default.conf /etc/nginx/templates/default.conf.template
 
 RUN set -ex \
     && ln -s img/favicons/favicon.ico favicon.ico \

@@ -47,4 +47,9 @@ return static function (RoutingConfigurator $routes): void {
     $routes
         ->import(__DIR__.'/../src/Service/Controller/SwitchController.php', 'annotation')
     ;
+
+    $routes
+        ->add('healthcheck', '/healthcheck')
+        ->controller(App\Healthcheck\Controller\HealthcheckAction::class)
+    ;
 };
