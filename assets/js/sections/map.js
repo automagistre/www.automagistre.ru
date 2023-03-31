@@ -3,7 +3,7 @@ import MapPopup from '../ui/Popups/MapPopup';
 import CallBackPopup from '../ui/Popups/CallBackPopup';
 
 async function createMap(sectionID) {
-  const point = [55.717355, 37.721175];
+  const point = [55.588618, 37.612632];
   const mapContainer = document.getElementById(sectionID);
   const mapsOptions = [{
     center: point,
