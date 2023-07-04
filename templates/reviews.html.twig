@@ -6,17 +6,17 @@
 {% set PAGE_ID = brand|lower ~ '_'~'reviews' %}
 
 {% block title %}
-    <title>Отзывы</title>
+    <title>Отзывы об автосервисе {{ brand }}</title>
 {% endblock %}
 
 {% block meta_seo %}
-    <meta name="keywords" content="Автомагистр, автосервис {{ brand }} в Москве, отзывы">
-    <meta name="description" content="Автомагистр — клубный автосервис {{ brand }}. Все отзывы">
+    <meta name="keywords" content="{{ brand }}, автосервис в Москве, отзывы, мнения, оценки">
+    <meta name="description" content="Все отзывы о работе автосервиса {{ brand }} в Москве, Чертаново">
 {% endblock %}
 
 {% block meta_og %}
-    <meta property="og:title" content="Автомагистр Отзывы">
-    <meta property="og:description" content="Все отзывы о работе клубного автосервиса Автомагистр">
+    <meta property="og:title" content="Отзывы об автосервисе {{ brand }}">
+    <meta property="og:description" content="Все отзывы о работе автосервиса {{ brand }} в Москве, Чертаново">
 {% endblock %}
 
 {% block content %}
