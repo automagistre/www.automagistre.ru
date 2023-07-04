@@ -1,7 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% set brand = brandString.en %}
-{% set brandRu = brandString.ru %}
+{% set brand = app.request.attributes.get('brand')|capitalize %}
 {% set PAGE_ID = brand|lower ~ '_'~'tire_service' %}
 
 {% block title %}
@@ -9,7 +8,7 @@
 {% endblock %}
 
 {% block meta_seo %}
-    <meta name="keywords" content="{{ brand }}, {{ brandRu }} , шиномонтаж, runflat, шины, диски, Чертаново, Москва">
+    <meta name="keywords" content="{{ brand }}, шиномонтаж, runflat, шины, диски, Чертаново, Москва">
     <meta name="description" content="Шиномонтаж автомобилей {{ brand }} на профессиональном оборудовании в Чертаново. Без очередей">
 {% endblock %}
 

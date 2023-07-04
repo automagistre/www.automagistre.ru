@@ -1,34 +1,5 @@
 {% set activeBrand = app.request.attributes.get('brand') %}
 
-{% set brandData = {
-    "nissan": {
-        "en": "Nissan",
-        "ru": "Ниссан"
-    },
-    "infiniti": {
-        "en": "Infiniti",
-        "ru": "Инфинити"
-    },
-    "hyundai": {
-        "en": "Hyundai",
-        "ru": "Хендай"
-    },
-    "kia": {
-        "en": "Kia",
-        "ru": "Киа"
-    },
-    "toyota": {
-        "en": "Toyota",
-        "ru": "Тойота"
-    },
-    "lexus": {
-        "en": "Lexus",
-        "ru": "Лексус"
-    }
-} %}
-
-{% set brandString = attribute(brandData, activeBrand) %}
-
 {% set brands = [
     {
         "name": "Nissan",
