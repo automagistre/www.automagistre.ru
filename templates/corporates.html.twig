@@ -8,12 +8,12 @@
 {% set PAGE_ID = brand|lower ~ '_'~'corporates' %}
 
 {% block title %}
-    <title>Корпоративное обслуживание автопарков</title>
+    <title>Корпоративное обслуживание автопарков {{ brand }}</title>
 {% endblock %}
 
 {% block meta_seo %}
-    <meta name="keywords" content="автосервис, техцентр в Москве, авторемонт, автопарки, обслуживание юридических лиц, b2b">
-    <meta name="description" content="Корпоративное обслуживание автопарков юридических лиц Москвы">
+    <meta name="keywords" content="{{ brand }}, автосервис, техцентр в Москве, авторемонт, автопарки, обслуживание юридических лиц, b2b, отсрочка">
+    <meta name="description" content="Корпоративное обслуживание автопарков {{ brand }} юридических лиц Москвы и Московской области с отсрочкой платежа">
 {% endblock %}
 
 {% block meta_og %}
@@ -28,7 +28,7 @@
             <div class="sec-intro__front">
                 <div class="container">
                     <h1 class="sec-intro__title">АВТОСЕРВИС <br> ДЛЯ БИЗНЕСА В МОСКВЕ</h1>
-                    <div class="sec-intro__lead">РЕМОНТИРУЕМ АВТОМОБИЛИ <br> СО СКОРОСТЬЮ ПИТ-СТОП ФОРМУЛЫ 1</div>
+                    <div class="sec-intro__lead">РЕМОНТИРУЕМ АВТОМОБИЛИ {{ brand|upper }} <br> С ОТРОЧКОЙ ПЛАТЕЖА</div>
 
                     {{ formSubscribe('sec-intro__form', 'cooperation', ['name', 'phone', 'license']) }}
 
