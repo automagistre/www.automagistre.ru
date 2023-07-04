@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block meta_seo %}
-    <meta name="keywords" content="шиномонтаж, runflat, шины, диски">
-    <meta name="description" content="Шиномонтаж на профессиональном оборудовании. Без очередей">
+    <meta name="keywords" content="{{ brand }}, шиномонтаж, runflat, шины, диски, Чертаново, Москва">
+    <meta name="description" content="Шиномонтаж автомобилей {{ brand }} на профессиональном оборудовании в Чертаново. Без очередей">
 {% endblock %}
 
 {% block meta_og %}
@@ -36,7 +36,7 @@
             <div class="sec-intro__front">
                 <div class="container">
                     <a class="sec-intro__type" href="{{ path('service') }}">Ремонт и обслуживание {{ brand }}</a>
-                    <h1 class="sec-intro__title">Шиномонтаж</h1>
+                    <h1 class="sec-intro__title">Шиномонтаж {{ brand }}</h1>
                     <a class="btn sec-intro__btn" data-scrollto="#tire-service" role="button">Записаться</a>
 
                     {{ renderFeatures(features, "sec-intro__features") }}
