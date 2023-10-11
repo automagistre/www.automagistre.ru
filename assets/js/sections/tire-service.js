@@ -38,14 +38,14 @@ const PRICE = {
     }, {
       name: 'Дополнительно',
       services: [
-        {
-          id: 'PressureSensor',
-          name: 'Шиномонтаж при наличии датчиков давления',
-        }, 
         // {
-        //   id: 'ReplaceNipples',
-        //   name: 'Заменить ниппеля на новые',
+        //   id: 'PressureSensor',
+        //   name: 'Шиномонтаж при наличии датчиков давления',
         // }, 
+        {
+          id: 'ReplaceNipples',
+          name: 'Заменить ниппеля на новые',
+        }, 
         {
           id: 'NewPackages',
           name: 'Комплект новых пакетов для колес',
