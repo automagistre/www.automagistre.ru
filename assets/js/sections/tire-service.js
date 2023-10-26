@@ -23,7 +23,7 @@ const PRICE = {
         },
         {
           id: 'FullReplaceWheelsRunFlat',
-          name: 'Полный шиномонтаж',
+          name: 'Полный шиномонтаж (низкий профиль)',
         },
       ],
       onlyOne: true,
