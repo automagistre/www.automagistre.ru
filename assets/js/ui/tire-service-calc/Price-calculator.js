@@ -9,6 +9,8 @@ class PriceCalculatorFactory {
         return new ReplaceBalanceWheelsPriceCalculator();
       case 'FullReplaceWheels':
         return new FullReplaceWheelsPriceCalculator();
+      case 'FullReplaceWheelsRunFlat':
+        return new FullReplaceWheelsRunFlatPriceCalculator();
       case 'TireKeeping':
         return new TireKeepingPriceCalculator();
       case 'WheelKeeping':
@@ -124,6 +126,27 @@ class FullReplaceWheelsPriceCalculator extends FormulaPriceCalculator {
   CAR_EXTRA_PRICE = {
     car: 0,
     suv: 700,
+    minivan: 0,
+    crossover: 0,
+  }
+}
+
+class FullReplaceWheelsRunFlatPriceCalculator extends FormulaPriceCalculator {
+  BASE_PRICE = 2700
+
+  TIRE_EXTRA_PRICE = 300
+
+  DIAMETER_EXTRA_PRICE = {
+    16: 200,
+    17: 300,
+    18: 700,
+    19: 1400,
+    20: 1700
+  }
+
+  CAR_EXTRA_PRICE = {
+    car: 0,
+    suv: 1000,
     minivan: 0,
     crossover: 0,
   }
